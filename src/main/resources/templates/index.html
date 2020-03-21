@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>InfoSite</title>
+</head>
+<body>
+<nav>
+    <ul class="topmenu">
+            <li  th:each="region : ${regions}" class="down">
+                <a href="" th:text="${region.region}"></a>
+                <ul  class="submenu">
+                <li th:each="address: ${region.addresses}">
+                    <a href="" th:text="${address.address}" th:href="@{/show(id=${address.idAddress})}"></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div th:if="${address}">
+<center><h2 th:text="${address.address}"></h2></center>
+<table width="49%" align="left" border="1" bordercolor="black">
+    <caption>
+        <h1>Пароли</h1>
+    </caption>
+    <tr>
+        <th>Устройство</th>
+        <th>Модель</th>
+        <th>Логин</th>
+        <th>Пароль</th>
+        <th>Заметки</th>
+    </tr>
+    <tr th:each="password : ${address.passwords}">
+        <td th:text="${password.device}"></td>
+        <td th:text="${password.model}"></td>
+        <td th:if="${password.login}" th:text="${password.login}"></td>
+        <td th:unless="${password.login}" th:text=""></td>
+        <td th:text="${password.password}"></td>
+        <td th:text="${password.notes}"></td>
+    </tr>
+</table>
+    <table width="50%" align="right" border="1" bordercolor="black">
+        <caption>
+            <h1>Изменения</h1>
+        </caption>
+        <tr>
+            <th>Время</th>
+            <th>Устройство</th>
+            <th>Описание</th>
+        </tr>
+        <tr th:each="change : ${address.changes}">
+            <td><a th:text="${change.time}" href="#" th:href="@{/change(id=${change.id})"></a></td>
+            <td th:text="${change.device}"></td>
+            <td th:text="${change.description}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
