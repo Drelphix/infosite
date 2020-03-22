@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Libre+Baskerville');
 body {
   margin: 0;
-  background-image: url(https://storge.pic2.me/c/1360x800/947/592a706e6d73d.jpg);
+  background-color: green;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
   position: relative;
 }
 body:before {
