@@ -45,13 +45,13 @@
             <h1>Изменения</h1>
         </caption>
         <tr>
-            <th>Время</th>
             <th>Устройство</th>
+            <th>Время</th>
             <th>Описание</th>
         </tr>
         <tr th:each="change : ${address.changes}">
-            <td><a th:text="${change.time}" href="#" th:href="@{/change(id=${change.id})"></a></td>
-            <td th:text="${change.device}"></td>
+            <td><a href="#"  th:href="@{/change(id=${change.idChanges})}"th:text="${change.device}" ></a></td>
+            <td th:text=${change.time}></td>
             <td th:text="${change.description}"></td>
         </tr>
     </table>
