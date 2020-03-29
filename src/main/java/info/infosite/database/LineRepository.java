@@ -2,5 +2,5 @@ package info.infosite.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PasswordRepository extends JpaRepository<Password, Integer> {
+public interface LineRepository extends JpaRepository<Line,Integer> {
 }
