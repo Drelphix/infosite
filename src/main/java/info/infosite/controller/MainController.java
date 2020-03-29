@@ -2,7 +2,6 @@ package info.infosite.controller;
 
 import info.infosite.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,36 +10,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-    private PasswordRepository passwordRepository;
-    private ChangesRepository changesRepository;
-    private RegionRepository regionRepository;
-    private AddressRepository addressRepository;
+
+    public ColRepository colRepository;
+    public LineRepository lineRepository;
+    public MenuRepository menuRepository;
+    public SubMenuRepository subMenuRepository;
+    public TableRepository tableRepository;
 
     @Autowired
-    public void SetPasswordRepository(PasswordRepository passwordRepository){ this.passwordRepository=passwordRepository; }
-    @Autowired
-    public void SetRegionRepository(RegionRepository regionRepository){
-        this.regionRepository=regionRepository;
+    public void setColRepository(ColRepository colRepository) {
+        this.colRepository = colRepository;
     }
     @Autowired
-    public void SetChangesRepository(ChangesRepository changesRepository){ this.changesRepository=changesRepository; }
+    public void setLineRepository(LineRepository lineRepository) {
+        this.lineRepository= lineRepository;
+    }
     @Autowired
-    public void SetAddressRepository(AddressRepository addressRepository){ this.addressRepository=addressRepository; }
+    public void setMenuRepository(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
+    @Autowired
+    public void setSubMenuRepository(SubMenuRepository subMenuRepository) {
+        this.subMenuRepository = subMenuRepository;
+    }
+    @Autowired
+    public void setTableRepository(TableRepository tableRepository) {
+        this.tableRepository = tableRepository;
+    }
 
- @GetMapping(value = "/")
+    @GetMapping(value = "/")
     public String IndexPage(Model model){
-        model.addAttribute("regions",regionRepository.findAll(Sort.by("region")));
+        model.addAttribute("menus",menuRepository.findAll());
      return "index";
  }
  @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam (name="id") int id){
-        model.addAttribute("regions",regionRepository.findAll(Sort.by("region")));
-        model.addAttribute("address",addressRepository.getOne(id));
+     model.addAttribute("menus",menuRepository.findAll());
+     model.addAttribute("tables",tableRepository.findTableBySubMenuId(id));
         return "index";
  }
     @GetMapping(value = "/change")
     public String ShowChange(Model model, @RequestParam (name="id") int id){
-        model.addAttribute("regions",regionRepository.findAll());
         return "index";
     }
     }

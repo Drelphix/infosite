@@ -8,54 +8,24 @@
 <body>
 <nav>
     <ul class="topmenu">
-            <li  th:each="region : ${regions}" class="down">
-                <a href="" th:text="${region.region}"></a>
+            <li  th:each="menu : ${menus}" class="down">
+                <a href="" th:text="${menu.name}"></a>
                 <ul  class="submenu">
-                <li th:each="address: ${region.addresses}">
-                    <a href="" th:text="${address.address}" th:href="@{/show(id=${address.idAddress})}"></a>
+                <li th:each="sub: ${menu.subMenuSet}">
+                    <a href="" th:text="${sub.name}" th:href="@{/show(id=${sub.idSubMenu})}"></a>
                 </li>
             </ul>
         </li>
     </ul>
 </nav>
-<div th:if="${address}">
-<center><h2 th:text="${address.address}"></h2></center>
-<table width="49%" align="left" border="1" bordercolor="black">
-    <caption>
-        <h1>Пароли</h1>
-    </caption>
-    <tr>
-        <th>Устройство</th>
-        <th>Модель</th>
-        <th>Логин</th>
-        <th>Пароль</th>
-        <th>Заметки</th>
-    </tr>
-    <tr th:each="password : ${address.passwords}">
-        <td th:text="${password.device}"></td>
-        <td th:text="${password.model}"></td>
-        <td th:if="${password.login}" th:text="${password.login}"></td>
-        <td th:unless="${password.login}" th:text=""></td>
-        <td th:text="${password.password}"></td>
-        <td th:text="${password.notes}"></td>
-    </tr>
+<div th:if="${tables}" th:each="table: ${tables}">
+<center><h2 th:text="${table.name}"></h2></center>
+<table align="center" border="1" bordercolor="black">
+    <div  th:each="col: ${table.cols}">
+    <tr><th th:text="${col.name}"></th></tr>
+    <tr th:each="line: ${col.lines}" ><td th:text="${line.data}" ></td> </tr>
+    </div>
 </table>
-    <table width="50%" align="right" border="1" bordercolor="black">
-        <caption>
-            <h1>Изменения</h1>
-        </caption>
-        <tr>
-            <th>Устройство</th>
-            <th>Время</th>
-            <th>Описание</th>
-        </tr>
-        <tr th:each="change : ${address.changes}">
-            <td><a href="#"  th:href="@{/change(id=${change.idChanges})}"th:text="${change.device}" ></a></td>
-            <td th:text=${change.time}></td>
-            <td th:text="${change.description}"></td>
-        </tr>
-    </table>
 </div>
-
 </body>
 </html>
