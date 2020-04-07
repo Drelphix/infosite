@@ -32,7 +32,6 @@ public class TableView {
                 }
                 try {
                     lineArrayList.add(col.getLines().get(i));
-                    System.out.println("Line " + i + col.getName() + " = " + col.getLines().get(i).getData());
                 } catch (Exception e) {
                     lineArrayList.add(new Line());
                 }
