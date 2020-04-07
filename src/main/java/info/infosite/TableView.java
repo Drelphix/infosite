@@ -24,6 +24,7 @@ public class TableView {
         lines = new ArrayList<>();
         int i = 0;
         int end = cols.get(0).getLines().size();
+        SortCols();
         while (i < end) {
             ArrayList<Line> lineArrayList = new ArrayList<>();
             for (Col col : this.cols) {
@@ -40,11 +41,21 @@ public class TableView {
             i++;
             lines.add(lineArrayList);
         }
-        System.out.println("Testik:");
-        for (List<Line> lines : this.lines) {
-            System.out.println("NewLine ");
-            for (Line line : lines) {
-                System.out.println(line.getData());
+
+    }
+
+    private void SortCols() {
+        Col temp = null;
+        Boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 0; i < cols.size() - 1; i++) {
+                if (cols.get(i).getIdColumn() > cols.get(i + 1).getIdColumn()) {
+                    isSorted = false;
+                    temp = cols.get(i);
+                    cols.set(i, cols.get(i + 1));
+                    cols.set(i + 1, temp);
+                }
             }
         }
     }

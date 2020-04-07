@@ -16,34 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `passwords`
+-- Table structure for table `tab`
 --
 
-DROP TABLE IF EXISTS `passwords`;
+DROP TABLE IF EXISTS `tab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `passwords` (
-  `id_pass` int NOT NULL,
-  `device` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
-  `model` varchar(255) DEFAULT NULL,
-  `notes` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `id_address` int DEFAULT NULL,
-  PRIMARY KEY (`id_pass`),
-  KEY `FKlqir01vae1m180j1hrfv3e8gm` (`id_address`),
-  CONSTRAINT `FKlqir01vae1m180j1hrfv3e8gm` FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id_address`)
+CREATE TABLE `tab` (
+  `id_table` int NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `sub_menu` int DEFAULT NULL,
+  PRIMARY KEY (`id_table`),
+  KEY `FKotq74suxlvg5r842c2lxss9je` (`sub_menu`),
+  CONSTRAINT `FKotq74suxlvg5r842c2lxss9je` FOREIGN KEY (`sub_menu`) REFERENCES `sub_menu` (`id_sub_menu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `passwords`
+-- Dumping data for table `tab`
 --
 
-LOCK TABLES `passwords` WRITE;
-/*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
-INSERT INTO `passwords` VALUES (1,'pc-1','test','PC',NULL,'010101',1);
-/*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
+LOCK TABLES `tab` WRITE;
+/*!40000 ALTER TABLE `tab` DISABLE KEYS */;
+INSERT INTO `tab` VALUES (1,'Table1',1),(2,'Table2',1),(3,'Table3',2);
+/*!40000 ALTER TABLE `tab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-22 18:56:41
+-- Dump completed on 2020-04-07 11:12:09

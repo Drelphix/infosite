@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `regions`
+-- Table structure for table `col`
 --
 
-DROP TABLE IF EXISTS `regions`;
+DROP TABLE IF EXISTS `col`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `regions` (
-  `id_region` int NOT NULL,
-  `region` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_region`)
+CREATE TABLE `col` (
+  `id_column` int NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `id_table` int DEFAULT NULL,
+  PRIMARY KEY (`id_column`),
+  KEY `FK4qbf66k5l5fnia7vfqc8j8d7n` (`id_table`),
+  CONSTRAINT `FK4qbf66k5l5fnia7vfqc8j8d7n` FOREIGN KEY (`id_table`) REFERENCES `tab` (`id_table`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `regions`
+-- Dumping data for table `col`
 --
 
-LOCK TABLES `regions` WRITE;
-/*!40000 ALTER TABLE `regions` DISABLE KEYS */;
-INSERT INTO `regions` VALUES (1,'Минск'),(2,'Витебск'),(3,'Могилев'),(4,'Брест'),(5,'Тут');
-/*!40000 ALTER TABLE `regions` ENABLE KEYS */;
+LOCK TABLES `col` WRITE;
+/*!40000 ALTER TABLE `col` DISABLE KEYS */;
+INSERT INTO `col` VALUES (1,'Col1',1),(2,'Col2',2),(3,'Col3',1),(4,'Col4',2),(5,'Col5',2),(6,'Col6',3),(7,'Col7',2);
+/*!40000 ALTER TABLE `col` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-22 18:56:41
+-- Dump completed on 2020-04-07 11:12:08

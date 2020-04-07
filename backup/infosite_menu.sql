@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `addresses`
+-- Table structure for table `menu`
 --
 
-DROP TABLE IF EXISTS `addresses`;
+DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `addresses` (
-  `id_address` int NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `id_region` int DEFAULT NULL,
-  PRIMARY KEY (`id_address`),
-  KEY `FKe19j3xus7xsxbgfr3hm3r3kvj` (`id_region`),
-  CONSTRAINT `FKe19j3xus7xsxbgfr3hm3r3kvj` FOREIGN KEY (`id_region`) REFERENCES `regions` (`id_region`)
+CREATE TABLE `menu` (
+  `id_menu` int NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_menu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `addresses`
+-- Dumping data for table `menu`
 --
 
-LOCK TABLES `addresses` WRITE;
-/*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
-INSERT INTO `addresses` VALUES (1,'Могилевская 33',1),(2,'Стариновская',1),(3,'Некрасово',1),(4,'Лазо',2),(5,'Димитрова',2),(6,'тест',3),(7,'тест',4),(8,'тест',5);
-/*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'Menu1'),(2,'Menu2'),(3,'Menu3'),(4,'Menu4');
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-22 18:56:42
+-- Dump completed on 2020-04-07 11:12:08
