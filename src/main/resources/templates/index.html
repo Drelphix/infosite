@@ -18,13 +18,14 @@
         </li>
     </ul>
 </nav>
-<table align="center" border="1" bordercolor="black" th:each="table: ${tables}" th:if="${tables}">
+<table align="center" border="1" bordercolor="black" th:each="table,tabRow: ${tables}" th:if="${tables}">
     <caption th:text="${table.name}"></caption>
     <tr>
         <td th:each="col: ${table.cols}" th:text="${col.name}">
         </th></tr>
-    <tr th:each="lineList: ${table.lines}">
-        <td th:each="line:${lineList}" th:text="${line.data}"></td>
+    <tr th:each="lineList, row: ${table.lines}">
+        <td th:each="line:${lineList}"><a href="#" th:href="@{/edit/(tab=${tabRow.index},line=${row.index})}"
+                                          th:text="${line.data}">></a></td>
     </tr>
 </table>
 </body>

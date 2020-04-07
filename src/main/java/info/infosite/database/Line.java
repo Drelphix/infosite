@@ -12,7 +12,7 @@ public class Line {
     @Column(name = "data")
     private String data;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idColumn")
     private Col col;
 

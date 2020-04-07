@@ -16,7 +16,7 @@ public class SubMenu {
     @ManyToOne(targetEntity = Menu.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "idMenu")
     private Menu menu;
-    @OneToMany(fetch = FetchType.EAGER,targetEntity = Tab.class,mappedBy = "subMenu")
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Tab.class, mappedBy = "subMenu")
     private Set<Tab> tables;
 
     public int getIdSubMenu() {
