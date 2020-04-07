@@ -22,7 +22,8 @@
     <caption th:text="${table.name}"></caption>
     <tr>
         <td th:each="col: ${table.cols}" th:text="${col.name}">
-        </th></tr>
+        </td>
+    </tr>
     <tr th:each="lineList, row: ${table.lines}">
         <td th:each="line:${lineList}"><a href="#" th:href="@{/edit/(tab=${tabRow.index},line=${row.index})}"
                                           th:text="${line.data}">></a></td>

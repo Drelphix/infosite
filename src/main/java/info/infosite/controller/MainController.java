@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -66,13 +67,13 @@ public class MainController {
         TableView tableView = tableViews.get(idTab);
         List<Line> lines = tableView.getLines().get(idLine);
         model.addAttribute("editLine", lines);
-        model.addAttribute("tableName", tableView.getName());
+        model.addAttribute("table", tableView);
         model.addAttribute("cols", tableView.getCols());
         return "add";
     }
 
     @PostMapping(value = "/edit")
-    public String Change(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
+    public String Change(Model model, @ModelAttribute List<Line> editLine) {
 
         return "index";
     }

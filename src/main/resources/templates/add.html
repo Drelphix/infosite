@@ -5,13 +5,14 @@
     <title>InfoSite</title></head>
 <body>
 <div id="content" th:if="${editLine}">
-    <center><h3 th:text="${tableName}">Станция</h3></center>
+    <center><h3 th:text="${table.name}">Станция</h3></center>
     <form action="#" class="transparent" method="post" th:action="@{/edit}" th:object="${editLine}">
         <div class="form-inner">
             <center>
-                <p th:each="line,row:${editLine}">
+                <div th:each="line,row:${editLine}">
                     <a th:text="${cols.get(row.index).name}"></a>
-                    <input th:value="${line.data}" type="text"></p>
+                    <p><input th:field="*{line.id}" th:value="${line.id}" type="hidden" type="text"></p>
+                    <p><input th:field="*{line.data}" th:value="${line.data}" type="text"></p></div>
                 <div class="form-inner"><input class="input" type="submit" value="Сохранить"/></div>
             </center>
         </div>
