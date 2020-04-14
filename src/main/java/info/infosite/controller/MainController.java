@@ -2,13 +2,11 @@ package info.infosite.controller;
 
 import info.infosite.TableView;
 import info.infosite.database.*;
+import info.infosite.wrappers.ListLineWrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,6 @@ public class MainController {
     public MenuRepository menuRepository;
     public SubMenuRepository subMenuRepository;
     public TableRepository tableRepository;
-    private List<TableView> tableViews;
 
     @Autowired
     public void setColRepository(ColRepository colRepository) {
@@ -52,7 +49,7 @@ public class MainController {
 
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id) {
-        this.tableViews = new ArrayList<TableView>();
+        List<TableView> tableViews = new ArrayList<TableView>();
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
         }
@@ -61,20 +58,25 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(value = "/edit")
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String ShowChange(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
-
-        TableView tableView = tableViews.get(idTab);
-        List<Line> lines = tableView.getLines().get(idLine);
-        model.addAttribute("editLine", lines);
-        model.addAttribute("table", tableView);
-        model.addAttribute("cols", tableView.getCols());
+        TableView tableView = new TableView(tableRepository.getOne(idTab));
+        ListLineWrap lines = new ListLineWrap(tableView.getLines().get(idLine));
+        List<String> cols = new ArrayList<>();
+        for (Col col : tableView.getCols()) {
+            cols.add(col.getName());
+        }
+        model.addAttribute("tableName", tableView.getName());
+        model.addAttribute("cols", cols);
+        model.addAttribute("lines", lines);
         return "add";
     }
 
-    @PostMapping(value = "/edit")
-    public String Change(Model model, @ModelAttribute List<Line> editLine) {
-
-        return "index";
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String Change(Model model, @ModelAttribute ListLineWrap table) {
+        for (Line line : table.getLines()) {
+            lineRepository.save(line);
+        }
+        return "redirect:/";
     }
 }

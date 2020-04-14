@@ -34,7 +34,7 @@ public class TableView {
                 try {
                     lineArrayList.add(col.getLines().get(i));
                 } catch (Exception e) {
-                    lineArrayList.add(new Line());
+                    lineArrayList.add(new Line(col));
                 }
 
             }

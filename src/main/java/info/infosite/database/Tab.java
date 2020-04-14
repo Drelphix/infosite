@@ -8,6 +8,7 @@ import java.util.Set;
 public class Tab {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idTable")
     private int idTable;
 

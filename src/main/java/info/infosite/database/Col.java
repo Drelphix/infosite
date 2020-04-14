@@ -7,6 +7,7 @@ import java.util.List;
 @Table(name = "col")
 public class Col {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idColumn")
     private int idColumn;
 

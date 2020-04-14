@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Table(name = "line")
 public class Line {
     @Id
-    @Column (name = "idLine")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idLine")
     private int idLine;
 
     @Column(name = "data")
@@ -15,6 +16,13 @@ public class Line {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idColumn")
     private Col col;
+
+    public Line() {
+    }
+
+    public Line(Col col) {
+        this.col = col;
+    }
 
     public int getIdLine() {
         return idLine;

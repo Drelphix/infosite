@@ -1,22 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/style.css}"/>
     <meta charset="UTF-8">
     <title>InfoSite</title></head>
 <body>
-<div id="content" th:if="${editLine}">
-    <center><h3 th:text="${table.name}">Станция</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/edit}" th:object="${editLine}">
-        <div class="form-inner">
-            <center>
-                <div th:each="line,row:${editLine}">
-                    <a th:text="${cols.get(row.index).name}"></a>
-                    <p><input th:field="*{line.id}" th:value="${line.id}" type="hidden" type="text"></p>
-                    <p><input th:field="*{line.data}" th:value="${line.data}" type="text"></p></div>
-                <div class="form-inner"><input class="input" type="submit" value="Сохранить"/></div>
-            </center>
-        </div>
-    </form>
-</div>
+<form action="#" method="post" th:action="@{/edit}" th:object="${lines}">
+    <center>
+        <table>
+            <caption th:text="${tableName}"></caption>
+            <tr th:each="line,itemStat: *{lines}">
+                <td>
+                    <a th:th:text="${cols.get(itemStat.index)}"></a>
+                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="hidden">
+                    <input th:field="*{lines[__${itemStat.index}__].data}" type="text">
+                    <input th:field="*{lines[__${itemStat.index}__].col}" type="hidden">
+                </td>
+            </tr>
+
+        </table>
+        <button type="submit">Сохранить</button>
+    </center>
+</form>
 </body>
 </html>

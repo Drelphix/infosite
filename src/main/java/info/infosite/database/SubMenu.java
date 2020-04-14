@@ -7,6 +7,7 @@ import java.util.Set;
 @Table (name = "subMenu")
 public class SubMenu {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idSubMenu")
     private int idSubMenu;
 
