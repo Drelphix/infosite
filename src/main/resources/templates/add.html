@@ -11,9 +11,9 @@
             <tr th:each="line,itemStat: *{lines}">
                 <td>
                     <a th:th:text="${cols.get(itemStat.index)}"></a>
-                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="hidden">
+                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="text">
                     <input th:field="*{lines[__${itemStat.index}__].data}" type="text">
-                    <input th:field="*{lines[__${itemStat.index}__].col}" type="hidden">
+                    <input th:field="*{lines[__${itemStat.index}__].col}" type="text">
                 </td>
             </tr>
 

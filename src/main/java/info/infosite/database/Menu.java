@@ -7,7 +7,7 @@ import java.util.Set;
 @Table(name = "menu")
 public class Menu {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idMenu")
     private int idMenu;
 

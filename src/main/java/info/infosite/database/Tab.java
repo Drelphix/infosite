@@ -8,7 +8,7 @@ import java.util.Set;
 public class Tab {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTable")
     private int idTable;
 
