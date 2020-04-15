@@ -18,21 +18,27 @@
         </li>
     </ul>
 </nav>
-<table align="center" border="1" bordercolor="black" th:each="table,tabRow: ${tables}" th:if="${tables}">
-    <caption><a href="#" th:href="@{/editTab(tab=${table.id})}" th:text="${table.name}"></a></caption>
-    <tr>
-        <td th:each="col: ${table.cols}" th:text="${col.name}">
-        </td>
-    </tr>
-    <tr th:each="lineList, row: ${table.lines}">
-        <td th:each="line:${lineList}">
-            <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
-               th:text="${line.data}"></a></td>
-    </tr>
+<div th:each="table,tabRow: ${tables}" th:if="${tables}">
+    <table align="center" border="1" bordercolor="black">
+        <caption><a href="#" th:href="@{/editTab(tab=${table.id})}" th:text="${table.name}"></a></caption>
+        <tr>
+            <td th:each="col: ${table.cols}" th:text="${col.name}">
+            </td>
+        </tr>
+        <tr th:each="lineList, row: ${table.lines}">
+            <td th:each="line:${lineList}">
+                <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                   th:text="${line.data}"></a>
+
+            </td>
+            <td><a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a></td>
+        </tr>
+
+    </table>
     <center>
         <a align="center" href="#" th:href="@{/add(tab=${table.id})}">Добавить строку</a>
     </center>
-</table>
+</div>
 
 </body>
 </html>

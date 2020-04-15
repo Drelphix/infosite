@@ -139,9 +139,26 @@ public class MainController {
         try {
             colRepository.delete(colRepository.getOne(idCol));
         } catch (Exception e) {
-            model.addAttribute("colDelError", e);
+            model.addAttribute("message", "При удалении столбца произошла ошибка");
+            model.addAttribute("delError", e);
             return "error";
         }
-        return "redirect:/editTab" + idTab;
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/delLine", method = RequestMethod.GET)
+    public String deleteLine(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
+        try {
+            TableView tableView = new TableView(tableRepository.getOne(idTab));
+            ListLineView lines = new ListLineView(tableView.getLines().get(idLine));
+            for (Line line : lines.getLines()) {
+                lineRepository.delete(line);
+            }
+        } catch (Exception e) {
+            model.addAttribute("message", "При удалении строки произошла ошибка");
+            model.addAttribute("delError", e);
+            return "error";
+        }
+        return "redirect:/";
     }
 }
