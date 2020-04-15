@@ -1,8 +1,8 @@
 package info.infosite.controller;
 
-import info.infosite.TableView;
 import info.infosite.database.*;
-import info.infosite.wrappers.ListLineWrap;
+import info.infosite.views.ListLineView;
+import info.infosite.views.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +61,7 @@ public class MainController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String ShowChange(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
         TableView tableView = new TableView(tableRepository.getOne(idTab));
-        ListLineWrap lines = new ListLineWrap(tableView.getLines().get(idLine));
+        ListLineView lines = new ListLineView(tableView.getLines().get(idLine));
         List<String> cols = new ArrayList<>();
         for (Col col : tableView.getCols()) {
             cols.add(col.getName());
@@ -73,7 +73,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String Change(Model model, @ModelAttribute ListLineWrap table) {
+    public String Change(Model model, @ModelAttribute ListLineView table) {
         for (Line line : table.getLines()) {
             lineRepository.save(line);
         }

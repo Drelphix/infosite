@@ -1,4 +1,4 @@
-package info.infosite;
+package info.infosite.views;
 
 import info.infosite.database.Col;
 import info.infosite.database.Line;

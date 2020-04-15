@@ -1,16 +1,16 @@
-package info.infosite.wrappers;
+package info.infosite.views;
 
 import info.infosite.database.Line;
 
 import java.util.List;
 
-public class ListLineWrap {
+public class ListLineView {
     private List<Line> lines;
 
-    public ListLineWrap() {
+    public ListLineView() {
     }
 
-    public ListLineWrap(List<Line> lines) {
+    public ListLineView(List<Line> lines) {
         this.lines = lines;
     }
 
