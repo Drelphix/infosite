@@ -2,6 +2,7 @@ package info.infosite.views;
 
 import info.infosite.database.Col;
 import info.infosite.database.Line;
+import info.infosite.database.SubMenu;
 import info.infosite.database.Tab;
 
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ public class TableView {
     private List<Col> cols;
     private int numberCols;
     private List<List<Line>> lines;
+    private SubMenu subMenu;
+
+    public TableView() {
+    }
 
     public TableView(Tab table) {
         this.id = table.getIdTable();
@@ -20,7 +25,7 @@ public class TableView {
         this.cols = new ArrayList<>();
         this.cols.addAll(table.getCols());
         this.numberCols = cols.size();
-
+        this.subMenu = table.getSubMenu();
         lines = new ArrayList<>();
         int i = 0;
         int end = cols.get(0).getLines().size();
@@ -58,6 +63,14 @@ public class TableView {
                 }
             }
         }
+    }
+
+    public SubMenu getSubMenu() {
+        return subMenu;
+    }
+
+    public void setSubMenu(SubMenu subMenu) {
+        this.subMenu = subMenu;
     }
 
     public int getId() {

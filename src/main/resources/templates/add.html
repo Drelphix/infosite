@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>InfoSite</title></head>
 <body>
-<form action="#" method="post" th:action="@{/edit}" th:object="${lines}">
+<form action="#" method="post" th:action="@{/edit}" th:if="${lines}" th:object="${lines}">
     <center>
         <table>
             <caption th:text="${tableName}"></caption>
@@ -19,6 +19,27 @@
 
         </table>
         <button type="submit">Сохранить</button>
+    </center>
+</form>
+<form action="#" method="post" th:action="@{/editTab}" th:if="${table}" th:object="${table}">
+    <center>
+        <table>
+            <input th:field="*{subMenu}" type="text">
+            <input th:field="*{id}" type="text">
+            <input th:field="*{name}" type="text">
+            <tr th:each="col,itemStat: *{cols}">
+                <td>
+                    <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="text">
+                    <input th:field="*{cols[__${itemStat.index}__].name}" type="text">
+                    <input th:field="*{cols[__${itemStat.index}__].table}" type="text">
+                    <a href="#" th:href="@{/delCol(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
+
+                </td>
+            </tr>
+            <a href="#" th:href="@{/addCol(tab=${table.id})}">Добавить столбец</a>
+        </table>
+        <button type="submit">Сохранить</button>
+
     </center>
 </form>
 </body>

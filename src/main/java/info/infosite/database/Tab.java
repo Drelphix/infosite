@@ -12,15 +12,25 @@ public class Tab {
     @Column(name = "idTable")
     private int idTable;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @ManyToOne(targetEntity = SubMenu.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = SubMenu.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "SubMenu")
     private SubMenu subMenu;
 
-    @OneToMany(fetch = FetchType.EAGER,targetEntity = Col.class,mappedBy = "table")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Col.class, mappedBy = "table")
     private Set<Col> cols;
+
+    public Tab() {
+    }
+
+    public Tab(int idTable, String name, SubMenu subMenu, Set<Col> cols) {
+        this.idTable = idTable;
+        this.name = name;
+        this.subMenu = subMenu;
+        this.cols = cols;
+    }
 
     public int getIdTable() {
         return idTable;

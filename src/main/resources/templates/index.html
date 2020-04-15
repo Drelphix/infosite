@@ -19,7 +19,7 @@
     </ul>
 </nav>
 <table align="center" border="1" bordercolor="black" th:each="table,tabRow: ${tables}" th:if="${tables}">
-    <caption th:text="${table.name}"></caption>
+    <caption><a href="#" th:href="@{/editTab(tab=${table.id})}" th:text="${table.name}"></a></caption>
     <tr>
         <td th:each="col: ${table.cols}" th:text="${col.name}">
         </td>
@@ -29,6 +29,10 @@
             <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
                th:text="${line.data}"></a></td>
     </tr>
+    <center>
+        <a align="center" href="#" th:href="@{/add(tab=${table.id})}">Добавить строку</a>
+    </center>
 </table>
+
 </body>
 </html>

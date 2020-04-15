@@ -5,6 +5,7 @@ import info.infosite.database.Line;
 import java.util.List;
 
 public class ListLineView {
+
     private List<Line> lines;
 
     public ListLineView() {
@@ -21,4 +22,5 @@ public class ListLineView {
     public void setLines(List<Line> lines) {
         this.lines = lines;
     }
+
 }

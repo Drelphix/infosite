@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -59,13 +61,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String ShowChange(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
+    public String EditLines(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
         TableView tableView = new TableView(tableRepository.getOne(idTab));
         ListLineView lines = new ListLineView(tableView.getLines().get(idLine));
         List<String> cols = new ArrayList<>();
         for (Col col : tableView.getCols()) {
             cols.add(col.getName());
         }
+        model.addAttribute("menus", menuRepository.findAll());
         model.addAttribute("tableName", tableView.getName());
         model.addAttribute("cols", cols);
         model.addAttribute("lines", lines);
@@ -73,10 +76,72 @@ public class MainController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String Change(Model model, @ModelAttribute ListLineView table) {
+    public String SaveLines(Model model, @ModelAttribute ListLineView table) {
         for (Line line : table.getLines()) {
             lineRepository.save(line);
         }
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/editTab", method = RequestMethod.GET)
+    public String EditTable(Model model, @RequestParam(name = "tab") int idTab) {
+        TableView tableView = new TableView(tableRepository.getOne(idTab));
+        model.addAttribute("table", tableView);
+        model.addAttribute("menus", menuRepository.findAll());
+        return "add";
+    }
+
+    @RequestMapping(value = "/addCol", method = RequestMethod.GET)
+    public String AddNewCol(Model model, @RequestParam(name = "tab") int idTab) {
+        Tab table = tableRepository.getOne(idTab);
+        TableView tableView = new TableView(table);
+        List<Col> cols = tableView.getCols();
+        cols.add(new Col(table));
+        model.addAttribute("table", tableView);
+        model.addAttribute("menus", menuRepository.findAll());
+        return "add";
+    }
+
+    @RequestMapping(value = "/editTab", method = RequestMethod.POST)
+    public String SaveTable(Model model, @ModelAttribute(name = "table") TableView table) {
+        Tab tab = tableRepository.getOne(table.getId());
+        Set<Col> temp = new HashSet<>();
+        temp.addAll(table.getCols());
+        tab.setCols(temp);
+        tab.setName(table.getName());
+        tab.setSubMenu(table.getSubMenu());
+        for (Col col : temp) {
+            colRepository.save(col);
+        }
+        tableRepository.save(tab);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String AddNewLine(Model model, @RequestParam(name = "tab") int idTab) {
+        TableView tableView = new TableView(tableRepository.getOne(idTab));
+        List<Line> lineList = new ArrayList<>();
+        List<String> cols = new ArrayList<>();
+        for (Col col : tableView.getCols()) {
+            cols.add(col.getName());
+            lineList.add(new Line(col));
+        }
+        ListLineView lines = new ListLineView(lineList);
+        model.addAttribute("tableName", tableView.getName());
+        model.addAttribute("cols", cols);
+        model.addAttribute("lines", lines);
+        model.addAttribute("menus", menuRepository.findAll());
+        return "add";
+    }
+
+    @RequestMapping(value = "/delCol", method = RequestMethod.GET)
+    public String deleteColumn(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "col") int idCol) {
+        try {
+            colRepository.delete(colRepository.getOne(idCol));
+        } catch (Exception e) {
+            model.addAttribute("colDelError", e);
+            return "error";
+        }
+        return "redirect:/editTab" + idTab;
     }
 }

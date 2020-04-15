@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<center>
+    <div th:if="${colDelError}">
+        <p>Невозможно удалить столбец, возможно он не пуст!</p>
+        <p>Код ошибки:</p>
+        <p th:text="${colDelError}">text</p>
+    </div>
+    <a href="#" th:href="@{/}">На главную</a>
+</center>
+</body>
+</html>

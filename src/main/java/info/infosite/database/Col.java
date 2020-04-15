@@ -11,15 +11,22 @@ public class Col {
     @Column(name = "idColumn")
     private int idColumn;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @ManyToOne(targetEntity = Tab.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Tab.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "idTable")
     private Tab table;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Line.class, mappedBy = "col")
     private List<Line> lines;
+
+    public Col() {
+    }
+
+    public Col(Tab table) {
+        this.table = table;
+    }
 
     public int getIdColumn() {
         return idColumn;
