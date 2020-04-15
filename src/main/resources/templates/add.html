@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <title>InfoSite</title></head>
 <body>
+<nav>
+    <ul class="topmenu">
+        <li class="down" th:each="menu : ${menus}">
+            <a href="" th:text="${menu.name}"></a>
+            <ul class="submenu">
+                <li th:each="sub: ${menu.subMenuSet}">
+                    <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
 <form action="#" method="post" th:action="@{/edit}" th:if="${lines}" th:object="${lines}">
     <center>
         <table>
             <caption th:text="${tableName}"></caption>
+            <input th:field="*{idSubMenu}" type="hidden">
+            <input th:field="*{idTable}" type="hidden">
             <tr th:each="line,itemStat: *{lines}">
                 <td>
                     <a th:th:text="${cols.get(itemStat.index)}"></a>
-                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="text">
+                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="hidden">
                     <input th:field="*{lines[__${itemStat.index}__].data}" type="text">
-                    <input th:field="*{lines[__${itemStat.index}__].col}" type="text">
+                    <input th:field="*{lines[__${itemStat.index}__].col}" type="hidden">
                 </td>
             </tr>
 
@@ -21,26 +36,34 @@
         <button type="submit">Сохранить</button>
     </center>
 </form>
-<form action="#" method="post" th:action="@{/editTab}" th:if="${table}" th:object="${table}">
+<div th:if="${table}" th:object="${table}">
     <center>
-        <table>
-            <input th:field="*{subMenu}" type="text">
-            <input th:field="*{id}" type="text">
-            <input th:field="*{name}" type="text">
-            <tr th:each="col,itemStat: *{cols}">
-                <td>
-                    <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="text">
-                    <input th:field="*{cols[__${itemStat.index}__].name}" type="text">
-                    <input th:field="*{cols[__${itemStat.index}__].table}" type="text">
-                    <a href="#" th:href="@{/delCol(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
+        <form action="#" method="post" th:action="@{/editTab}">
 
-                </td>
-            </tr>
-            <a href="#" th:href="@{/addCol(tab=${table.id})}">Добавить столбец</a>
-        </table>
-        <button type="submit">Сохранить</button>
+            <table>
+                <tr>
+                    <td>
+                        <input th:field="*{subMenu}" type="hidden">
+                        <input th:field="*{id}" type="hidden">
+                        <input th:field="*{name}" type="text">
 
+                    </td>
+                </tr>
+                <tr th:each="col,itemStat: *{cols}">
+                    <td>
+                        <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="hidden">
+                        <input th:field="*{cols[__${itemStat.index}__].name}" type="text">
+                        <input th:field="*{cols[__${itemStat.index}__].table}" type="hidden">
+                        <a href="#" th:href="@{/delCol(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">Сохранить</button>
+
+
+        </form>
+        <a href="#" th:href="@{/addCol(tab=${table.id})}">Добавить столбец</a>
     </center>
-</form>
+</div>
 </body>
 </html>
