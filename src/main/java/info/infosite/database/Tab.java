@@ -25,6 +25,10 @@ public class Tab {
     public Tab() {
     }
 
+    public Tab(SubMenu subMenu) {
+        this.subMenu = subMenu;
+    }
+
     public Tab(int idTable, String name, SubMenu subMenu, Set<Col> cols) {
         this.idTable = idTable;
         this.name = name;

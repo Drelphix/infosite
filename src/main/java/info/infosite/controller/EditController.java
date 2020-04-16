@@ -4,6 +4,7 @@ import info.infosite.database.*;
 import info.infosite.views.ListLineView;
 import info.infosite.views.TableView;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,15 +121,20 @@ public class EditController {
     public String SaveTable(Model model, @ModelAttribute(name = "table") TableView table) {
         Tab tab = tableRepository.getOne(table.getId());
         Set<Col> temp = new HashSet<>();
-        temp.addAll(table.getCols());
-        tab.setCols(temp);
-        tab.setName(table.getName());
-        tab.setSubMenu(table.getSubMenu());
-        for (Col col : temp) {
-            colRepository.save(col);
-        }
-        tableRepository.save(tab);
+        try {
+            temp.addAll(table.getCols());
+            tab.setCols(temp);
+            tab.setName(table.getName());
+            tab.setSubMenu(table.getSubMenu());
+            for (Col col : temp) {
+                if (col.getName() != "") {
+                    colRepository.save(col);
+                }
+            }
+            tableRepository.save(tab);
+        } catch (NullPointerException e) {
 
+        }
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
@@ -179,17 +185,38 @@ public class EditController {
         return "add";
     }
 
+    @RequestMapping(value = "/addTab", method = RequestMethod.GET)
+    public String AddNewTable(Model model, @RequestParam(name = "id") int idSub) {
+        CheckMenu();
+        SubMenu subMenu = subMenuRepository.getOne(idSub);
+        List<Tab> tables = subMenu.getTables();
+        tables.add(new Tab(subMenu));
+        subMenu.setTables(tables);
+        model.addAttribute("submenu", subMenu);
+        model.addAttribute("menus", this.menus);
+        return "add";
+    }
+
+    @RequestMapping(value = "/addTab", method = RequestMethod.POST)
+    public String SaveNewTable(Model model, @ModelAttribute SubMenu subMenu) {
+        CheckMenu();
+        for (Tab tab : subMenu.getTables()) {
+            if (tab.getName() != "") {
+                tableRepository.save(tab);
+            }
+        }
+        subMenuRepository.save(subMenu);
+        model.addAttribute("menus", this.menus);
+        return "redirect:/show?id=" + subMenu.getIdSubMenu();
+    }
+
     //Delete something
 
     @RequestMapping(value = "/delCol", method = RequestMethod.GET)
     public String DeleteColumn(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "col") int idCol) {
         CheckMenu();
         Col column = colRepository.getOne(idCol);
-        List<Line> lines = column.getLines();
-        for (Line line : lines) {
-            lineRepository.delete(line);
-        }
-        colRepository.delete(column);
+        DeleteColumn(column);
         return "redirect:/editTab?tab=" + idTab;
     }
 
@@ -209,12 +236,19 @@ public class EditController {
     public String DeleteSubMenu(Model model, @RequestParam(name = "idSub") int idSubMenu) {
         CheckMenu();
         SubMenu subMenu = subMenuRepository.getOne(idSubMenu);
-        int idMenu = subMenu.getMenu().getIdMenu();
+        Menu menu = menuRepository.getOne(subMenu.getMenu().getIdMenu());
         DeleteSubMenu(subMenu);
-        Menu menu = menuRepository.getOne(idMenu);
         model.addAttribute("menus", this.menus);
         model.addAttribute("menu", menu);
         return "add";
+    }
+
+    @RequestMapping(value = "/delTab", method = RequestMethod.GET)
+    public String DeleteTable(Model model, @RequestParam(name = "id") int idTab) {
+        CheckMenu();
+        Tab table = tableRepository.getOne(idTab);
+        DeleteTable(table);
+        return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
     private void CheckMenu() {
@@ -225,11 +259,29 @@ public class EditController {
         }
     }
 
-    public void DeleteSubMenu(SubMenu subMenu) {
+    private void DeleteSubMenu(SubMenu subMenu) {
         Session session = getSession();
-        org.hibernate.Transaction tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         session.delete(subMenu);
         tx.commit();
+        session.close();
     }
+
+    private void DeleteColumn(Col column) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(column);
+        tx.commit();
+        session.close();
+    }
+
+    private void DeleteTable(Tab table) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(table);
+        tx.commit();
+        session.close();
+    }
+
 
 }

@@ -47,6 +47,7 @@
                         <input th:field="*{subMenu}" type="hidden">
                         <input th:field="*{id}" type="hidden">
                         <input th:field="*{name}" type="text">
+                        <a href="#" th:href="@{/delTab(id=*{id})}">Удалить таблицу</a>
 
                     </td>
                 </tr>
@@ -82,6 +83,18 @@
         <p>
             <a href="#" th:href="@{/addSub(id=${menu.idMenu})}">Добавить подменю</a>
         </p>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+<div align="center" th:if="${submenu}" th:object="${submenu}">
+    <form action="#" method="post" th:action="@{/addTab}">
+        <input th:field="*{idSubMenu}" type="hidden">
+        <input th:field="*{name}" type="text">
+        <div th:each="table, itemStat:*{tables}">
+            <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
+            <input th:field="*{tables[__${itemStat.index}__].name}" type="text">
+            <input th:field="*{tables[__${itemStat.index}__].subMenu}" type="hidden">
+        </div>
         <input type="submit" value="Сохранить">
     </form>
 </div>

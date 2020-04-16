@@ -28,25 +28,26 @@ public class TableView {
         this.subMenu = table.getSubMenu();
         lines = new ArrayList<>();
         int i = 0;
-        int end = cols.get(0).getLines().size();
-        SortCols();
-        while (i < end) {
-            ArrayList<Line> lineArrayList = new ArrayList<>();
-            for (Col col : this.cols) {
-                if (end < col.getLines().size()) {
-                    end = col.getLines().size();
-                }
-                try {
-                    lineArrayList.add(col.getLines().get(i));
-                } catch (Exception e) {
-                    lineArrayList.add(new Line(col));
-                }
+        if (cols.size() != 0) {
+            int end = cols.get(0).getLines().size();
+            SortCols();
+            while (i < end) {
+                ArrayList<Line> lineArrayList = new ArrayList<>();
+                for (Col col : this.cols) {
+                    if (end < col.getLines().size()) {
+                        end = col.getLines().size();
+                    }
+                    try {
+                        lineArrayList.add(col.getLines().get(i));
+                    } catch (Exception e) {
+                        lineArrayList.add(new Line(col));
+                    }
 
+                }
+                i++;
+                lines.add(lineArrayList);
             }
-            i++;
-            lines.add(lineArrayList);
         }
-
     }
 
     private void SortCols() {

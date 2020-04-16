@@ -18,9 +18,7 @@
         </li>
     </ul>
 </nav>
-<div th:if="${tables}">
 
-</div>
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">
         <caption><a href="#" th:href="@{/editTab(tab=${table.id})}" th:text="${table.name}"></a></caption>
@@ -42,6 +40,8 @@
         <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}">Добавить строку</a>
     </center>
 </div>
-
+<div align="center" th:if="${submenu}">
+    <a href="#" th:href="@{/addTab(id=${submenu})}">Добавить таблицу</a>
+</div>
 </body>
 </html>

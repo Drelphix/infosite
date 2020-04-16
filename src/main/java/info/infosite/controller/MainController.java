@@ -65,6 +65,7 @@ public class MainController {
             tableViews.add(new TableView(tab));
         }
         model.addAttribute("menus", this.menus);
+        model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
         return "index";
     }

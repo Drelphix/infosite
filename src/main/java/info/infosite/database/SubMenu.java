@@ -1,7 +1,7 @@
 package info.infosite.database;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table (name = "subMenu")
@@ -17,8 +17,8 @@ public class SubMenu {
     @ManyToOne(targetEntity = Menu.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "idMenu")
     private Menu menu;
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Tab.class, mappedBy = "subMenu", cascade = CascadeType.REMOVE)
-    private Set<Tab> tables;
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Tab.class, mappedBy = "subMenu", cascade = CascadeType.ALL)
+    private List<Tab> tables;
 
     public SubMenu() {
     }
@@ -51,11 +51,11 @@ public class SubMenu {
         this.menu = menu;
     }
 
-    public Set<Tab> getTables() {
+    public List<Tab> getTables() {
         return tables;
     }
 
-    public void setTables(Set<Tab> tables) {
+    public void setTables(List<Tab> tables) {
         this.tables = tables;
     }
 }
