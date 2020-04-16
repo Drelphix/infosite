@@ -1,7 +1,7 @@
 package info.infosite.database;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "menu")
@@ -14,9 +14,11 @@ public class Menu {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER,targetEntity = SubMenu.class,mappedBy = "menu")
-    private Set<SubMenu> subMenuSet;
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = SubMenu.class, mappedBy = "menu", cascade = CascadeType.REMOVE)
+    private List<SubMenu> subMenuSet;
 
+    public Menu() {
+    }
 
     public int getIdMenu() {
         return idMenu;
@@ -34,11 +36,29 @@ public class Menu {
         this.name = name;
     }
 
-    public Set<SubMenu> getSubMenuSet() {
+    public List<SubMenu> getSubMenuSet() {
         return subMenuSet;
     }
 
-    public void setSubMenuSet(Set<SubMenu> subMenuSet) {
+    public void setSubMenuSet(List<SubMenu> subMenuSet) {
         this.subMenuSet = subMenuSet;
+        SortSubMenu();
+    }
+
+    public void SortSubMenu() {
+        SubMenu temp = null;
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 0; i < subMenuSet.size() - 1; i++) {
+                if (subMenuSet.get(i).getIdSubMenu() > subMenuSet.get(i + 1).getIdSubMenu()) {
+                    isSorted = false;
+                    temp = subMenuSet.get(i);
+                    subMenuSet.set(i, subMenuSet.get(i + 1));
+                    subMenuSet.set(i + 1, temp);
+                }
+            }
+        }
+
     }
 }

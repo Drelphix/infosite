@@ -14,11 +14,18 @@ public class SubMenu {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(targetEntity = Menu.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Menu.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "idMenu")
     private Menu menu;
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Tab.class, mappedBy = "subMenu")
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Tab.class, mappedBy = "subMenu", cascade = CascadeType.REMOVE)
     private Set<Tab> tables;
+
+    public SubMenu() {
+    }
+
+    public SubMenu(Menu menu) {
+        this.menu = menu;
+    }
 
     public int getIdSubMenu() {
         return idSubMenu;

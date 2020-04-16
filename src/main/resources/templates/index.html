@@ -9,7 +9,7 @@
 <nav>
     <ul class="topmenu">
             <li  th:each="menu : ${menus}" class="down">
-                <a href="" th:text="${menu.name}"></a>
+                <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:text="${menu.name}"></a>
                 <ul  class="submenu">
                 <li th:each="sub: ${menu.subMenuSet}">
                     <a href="" th:text="${sub.name}" th:href="@{/show(id=${sub.idSubMenu})}"></a>

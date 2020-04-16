@@ -19,7 +19,7 @@ public class Tab {
     @JoinColumn(name = "SubMenu")
     private SubMenu subMenu;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Col.class, mappedBy = "table")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Col.class, mappedBy = "table", cascade = CascadeType.REMOVE)
     private Set<Col> cols;
 
     public Tab() {
