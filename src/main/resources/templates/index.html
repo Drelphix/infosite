@@ -8,40 +8,46 @@
 <body>
 <nav>
     <ul class="topmenu">
-            <li  th:each="menu : ${menus}" class="down">
-                <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:text="${menu.name}"></a>
-                <ul  class="submenu">
+        <li th:each="menu : ${menus}" class="down">
+            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:text="${menu.name}"></a>
+            <ul class="submenu">
                 <li th:each="sub: ${menu.subMenuSet}">
                     <a href="" th:text="${sub.name}" th:href="@{/show(id=${sub.idSubMenu})}"></a>
                 </li>
             </ul>
         </li>
     </ul>
+    <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}">Перейти в режим редактирования</a>
+    <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}">Перейти в режим просмотра</a>
 </nav>
 
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">
-        <caption><a href="#" th:href="@{/editTab(tab=${table.id})}" th:text="${table.name}"></a></caption>
+        <caption>
+            <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
+            <a th:if="${mode==false}" th:text="${table.name}"></a>
+        </caption>
         <tr>
             <td th:each="col: ${table.cols}" th:text="${col.name}">
             </td>
         </tr>
         <tr th:each="lineList, row: ${table.lines}">
             <td th:each="line:${lineList}">
-                <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
                    th:text="${line.data}"></a>
-
+                <a th:if="${mode==false}" th:text="${line.data}"></a>
             </td>
-            <td><a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a></td>
+            <td th:if="${mode==true}"><a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить
+                строку</a></td>
         </tr>
 
     </table>
     <center>
-        <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}">Добавить строку</a>
+        <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить строку</a>
     </center>
 </div>
 <div align="center" th:if="${submenu}">
-    <a href="#" th:href="@{/addTab(id=${submenu})}">Добавить таблицу</a>
+    <a href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
 </div>
 </body>
 </html>

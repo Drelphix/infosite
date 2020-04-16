@@ -147,6 +147,7 @@ public class EditController {
         List<SubMenu> subMenuList = menu.getSubMenuSet();
         subMenuList.add(new SubMenu(menu));
         menu.setSubMenuSet(subMenuList);
+        this.menus = menuRepository.findAll();
         model.addAttribute("menus", this.menus);
         model.addAttribute("menu", menu);
         return "add";
@@ -233,11 +234,12 @@ public class EditController {
     }
 
     @RequestMapping(value = "/delSub", method = RequestMethod.GET)
-    public String DeleteSubMenu(Model model, @RequestParam(name = "idSub") int idSubMenu) {
+    public String DeleteSubMenu(Model model, @RequestParam(name = "id") int idSubMenu) {
         CheckMenu();
         SubMenu subMenu = subMenuRepository.getOne(idSubMenu);
-        Menu menu = menuRepository.getOne(subMenu.getMenu().getIdMenu());
         DeleteSubMenu(subMenu);
+        Menu menu = menuRepository.getOne(subMenu.getMenu().getIdMenu());
+        this.menus = menuRepository.findAll();
         model.addAttribute("menus", this.menus);
         model.addAttribute("menu", menu);
         return "add";
@@ -264,7 +266,6 @@ public class EditController {
         Transaction tx = session.beginTransaction();
         session.delete(subMenu);
         tx.commit();
-        session.close();
     }
 
     private void DeleteColumn(Col column) {
@@ -272,7 +273,6 @@ public class EditController {
         Transaction tx = session.beginTransaction();
         session.delete(column);
         tx.commit();
-        session.close();
     }
 
     private void DeleteTable(Tab table) {
@@ -280,7 +280,6 @@ public class EditController {
         Transaction tx = session.beginTransaction();
         session.delete(table);
         tx.commit();
-        session.close();
     }
 
 

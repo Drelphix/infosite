@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MainController {
     public SubMenuRepository subMenuRepository;
     public TableRepository tableRepository;
     private List<Menu> menus;
+    boolean editMode = false;
 
     @Autowired
     public void setColRepository(ColRepository colRepository) {
@@ -50,16 +52,14 @@ public class MainController {
     public String IndexPage(Model model) {
         this.menus = menuRepository.findAll();
         model.addAttribute("menus", this.menus);
+        model.addAttribute("mode", this.editMode);
         return "index";
     }
 
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id) {
-        try {
-            menus.isEmpty();
-        } catch (NullPointerException e) {
-            menus = menuRepository.findAll();
-        }
+
+        this.menus = menuRepository.findAll();
         List<TableView> tableViews = new ArrayList<TableView>();
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
@@ -67,6 +67,14 @@ public class MainController {
         model.addAttribute("menus", this.menus);
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
+        model.addAttribute("mode", this.editMode);
         return "index";
+    }
+
+    @GetMapping(value = "/mode")
+    public String EditingMode(Model model, @RequestParam(name = "mode") boolean mode, HttpServletRequest request) {
+        this.editMode = mode;
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 }

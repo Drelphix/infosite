@@ -45,8 +45,8 @@
                 <tr>
                     <td>
                         <input th:field="*{subMenu}" type="hidden">
-                        <input th:field="*{id}" type="hidden">
-                        <input th:field="*{name}" type="text">
+                        <input th:field="*{id}" type="text">
+                        <input th:field="*{name}" type="hidden">
                         <a href="#" th:href="@{/delTab(id=*{id})}">Удалить таблицу</a>
 
                     </td>
@@ -69,15 +69,15 @@
     <form action="#" method="post" th:action="@{/editMenu}">
         <p>
         <p>Меню</p>
-        <input th:field="*{idMenu}" type="hidden">
+        <input th:field="*{idMenu}" type="text">
         <input th:field="*{name}" type="text">
         </p>
         <p>Подменю</p>
         <div th:each="subMenu, itemStat:*{subMenuSet}">
-            <input th:field="*{subMenuSet[__${itemStat.index}__].idSubMenu}" type="hidden">
+            <input th:field="*{subMenuSet[__${itemStat.index}__].idSubMenu}" type="text">
             <input th:field="*{subMenuSet[__${itemStat.index}__].name}" type="text">
-            <input th:field="*{subMenuSet[__${itemStat.index}__].menu}" type="hidden">
-            <a href="#" th:href="@{/delSub(idSub=*{subMenuSet[__${itemStat.index}__].idSubMenu},id=${menu.idMenu})}">Удалить
+            <input th:field="*{subMenuSet[__${itemStat.index}__].menu}" type="text">
+            <a href="#" th:href="@{/delSub(id=*{subMenuSet[__${itemStat.index}__].idSubMenu})}">Удалить
                 подменю</a>
         </div>
         <p>
@@ -88,7 +88,7 @@
 </div>
 <div align="center" th:if="${submenu}" th:object="${submenu}">
     <form action="#" method="post" th:action="@{/addTab}">
-        <input th:field="*{idSubMenu}" type="hidden">
+        <input th:field="*{idSubMenu}" type="text">
         <input th:field="*{name}" type="text">
         <div th:each="table, itemStat:*{tables}">
             <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
