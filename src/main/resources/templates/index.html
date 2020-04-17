@@ -7,9 +7,10 @@
 </head>
 <body>
 <nav>
-    <ul class="topmenu">
+    <ul class="topmenu" th:if="${menus}">
         <li th:each="menu : ${menus}" class="down">
-            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:text="${menu.name}"></a>
+            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}" th:text="${menu.name}"></a>
+            <a th:if="${mode==false}" th:text="${menu.name}"></a>
             <ul class="submenu">
                 <li th:each="sub: ${menu.subMenuSet}">
                     <a href="" th:text="${sub.name}" th:href="@{/show(id=${sub.idSubMenu})}"></a>
@@ -20,8 +21,13 @@
     <div align="right">
         <a href="#" th:href="@{/export}">Скачать в формате Excel</a>
     </div>
-    <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}">Перейти в режим редактирования</a>
-    <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}">Перейти в режим просмотра</a>
+    <div>
+        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}">Перейти в режим редактирования</a>
+        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}">Перейти в режим просмотра</a>
+    </div>
+    <div>
+        <a href="#" th:href="@{/addMenu}" th:if="${mode==true}">Добавить пункт меню</a>
+    </div>
 </nav>
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">

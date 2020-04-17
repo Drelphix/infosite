@@ -198,6 +198,22 @@ public class EditController {
         return "add";
     }
 
+    @RequestMapping(value = "/addMenu", method = RequestMethod.GET)
+    public String AddNewMenu(Model model) {
+        CheckMenu();
+        model.addAttribute("newmenu", new Menu());
+        model.addAttribute("menus", this.menus);
+        return "add";
+    }
+
+    @RequestMapping(value = "/saveMenu", method = RequestMethod.POST)
+    public String AddNewMenu(Model model, @ModelAttribute Menu menu) {
+        menuRepository.save(menu);
+        this.menus = menuRepository.findAll();
+        model.addAttribute("menus", this.menus);
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/addTab", method = RequestMethod.POST)
     public String SaveNewTable(Model model, @ModelAttribute SubMenu subMenu) {
         CheckMenu();
@@ -253,6 +269,14 @@ public class EditController {
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
+    @RequestMapping(value = "/delMenu", method = RequestMethod.GET)
+    public String DeleteMenu(Model model, @RequestParam(name = "id") int idMenu) {
+        CheckMenu();
+        Menu menu = menuRepository.getOne(idMenu);
+        DeleteMenu(menu);
+        return "redirect:/";
+    }
+
     private void CheckMenu() {
         try {
             menus.isEmpty();
@@ -279,6 +303,13 @@ public class EditController {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
         session.delete(table);
+        tx.commit();
+    }
+
+    private void DeleteMenu(Menu menu) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(menu);
         tx.commit();
     }
 
