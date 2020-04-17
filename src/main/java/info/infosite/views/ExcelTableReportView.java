@@ -9,7 +9,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,21 +18,16 @@ public class ExcelTableReportView {
     Object[] objects;
     private String path;
 
-    public XSSFWorkbook CreateNew(List<Menu> menus) throws IOException {
-        //Create blank workbook
+    public XSSFWorkbook CreateNew(List<Menu> menus) {
         XSSFWorkbook workbook = new XSSFWorkbook();
-
-        //Create a blank sheet
         for (Menu menu : menus) {
             for (SubMenu subMenu : menu.getSubMenuSet()) {
                 XSSFSheet spreadsheet = workbook.createSheet(menu.getName() + "." + subMenu.getName());
-                //Create row object
                 XSSFRow row;
                 int id = 0;
                 int max = 0;
-                //This data needs to be written (Object[])
                 Map<String, Object[]> empinfo =
-                        new TreeMap<String, Object[]>();
+                        new TreeMap<>();
                 for (Tab tab : subMenu.getTables()) {
                     TableView tableView = new TableView(tab);
                     empinfo.put(Integer.toString(id), new Object[]{"Название таблицы : ", tableView.getName()});
@@ -55,11 +49,7 @@ public class ExcelTableReportView {
                         empinfo.put(Integer.toString(id), this.objects);
                         id++;
                     }
-                    for (int i = 0; i <= max; i++) {
-                        spreadsheet.autoSizeColumn(i);
-                    }
 
-                    //Iterate over data and write to sheet
                     Set<String> keyid = empinfo.keySet();
                     int rowid = 0;
                     for (String key : keyid) {
@@ -72,6 +62,9 @@ public class ExcelTableReportView {
                             cell.setCellValue((String) obj);
                         }
                     }
+                }
+                for (int i = 0; i <= max; i++) {
+                    spreadsheet.autoSizeColumn(i);
                 }
             }
         }
