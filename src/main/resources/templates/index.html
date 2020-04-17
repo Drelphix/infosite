@@ -17,10 +17,12 @@
             </ul>
         </li>
     </ul>
+    <div align="right">
+        <a href="#" th:href="@{/export}">Скачать в формате Excel</a>
+    </div>
     <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}">Перейти в режим редактирования</a>
     <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}">Перейти в режим просмотра</a>
 </nav>
-
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">
         <caption>

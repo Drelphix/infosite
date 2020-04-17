@@ -1,7 +1,9 @@
 package info.infosite.controller;
 
 import info.infosite.database.*;
+import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.TableView;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -49,8 +56,9 @@ public class MainController {
     }
 
     @GetMapping(value = "/")
-    public String IndexPage(Model model) {
+    public String IndexPage(Model model) throws IOException {
         this.menus = menuRepository.findAll();
+        new ExcelTableReportView().CreateNew(this.menus);
         model.addAttribute("menus", this.menus);
         model.addAttribute("mode", this.editMode);
         return "index";
@@ -76,5 +84,21 @@ public class MainController {
         this.editMode = mode;
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
+    }
+
+    @GetMapping(value = "/export")
+    public String DownloadExcel(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        this.menus = menuRepository.findAll();
+        //Write the workbook in file system
+        String pattern = "MM-dd-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        response.setContentType("application/xls");
+        response.setHeader("Content-Disposition",
+                "attachment;filename=" + simpleDateFormat.format(new Date()) + ".xlsx");
+        OutputStream os = response.getOutputStream();
+        XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(this.menus);
+        workbook.write(os);
+        os.close();
+        return "redirect:/";
     }
 }
