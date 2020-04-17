@@ -21,10 +21,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /*http.authorizeRequests()
-                .antMatchers("/","/**").authenticated() // только для зарегистрированных
-                .antMatchers( "/static/**").permitAll() // общий доступ
-                .anyRequest().authenticated() // только для зарегистрированных
+        http.authorizeRequests()
+                .antMatchers("/*", "*").authenticated() // только для зарегистрированных
+                .antMatchers("/resources/**").permitAll() // общий доступ
                 .and();
         http.formLogin()
                 .loginPage("/login")
@@ -34,10 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
-*/
 
     }
 
