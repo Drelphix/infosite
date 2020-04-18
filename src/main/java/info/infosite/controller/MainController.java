@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -173,21 +175,24 @@ public class MainController {
     @RequestMapping(value = "/editTab", method = RequestMethod.POST)
     public String SaveTable(Model model, @ModelAttribute(name = "table") TableView table) {
         Tab tab = tableRepository.getOne(table.getId());
-        Set<Col> temp = new HashSet<>();
-        try {
-            temp.addAll(table.getCols());
-            tab.setCols(temp);
-            tab.setName(table.getName());
-            tab.setSubMenu(table.getSubMenu());
-            for (Col col : temp) {
-                if (col.getName() != "") {
-                    colRepository.save(col);
+        int max = 0;
+        tab.setName(table.getName());
+        tab.setSubMenu(table.getSubMenu());
+        for (Col col : table.getCols()) {
+            if (col.getName() != "") {
+                colRepository.save(col);
+                if (col.getLines().size() == 0) {
+                    for (int i = 0; i < max; i++) {
+                        lineRepository.save(new Line(col));
+                    }
+                } else {
+                    if (max < col.getLines().size())
+                        max = col.getLines().size();
                 }
             }
+            }
             tableRepository.save(tab);
-        } catch (NullPointerException e) {
 
-        }
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
@@ -213,7 +218,6 @@ public class MainController {
         TableView tableView = new TableView(table);
         List<Col> cols = tableView.getCols();
         cols.add(new Col(table));
-
         model.addAttribute("table", tableView);
         model.addAttribute("menus", this.menus);
         return "add";

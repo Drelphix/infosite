@@ -55,7 +55,6 @@ public class Col {
     public List<Line> getLines() {
         return lines;
     }
-
     public void setLines(List<Line> lines) {
         this.lines = lines;
     }

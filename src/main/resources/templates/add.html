@@ -62,6 +62,7 @@
                         <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="hidden">
                         <input th:field="*{cols[__${itemStat.index}__].name}" type="text">
                         <input th:field="*{cols[__${itemStat.index}__].table}" type="hidden">
+                        <input th:field="*{cols[__${itemStat.index}__].lines}" type="hidden">
                         <a href="#" th:href="@{/delCol(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
                     </td>
                 </tr>

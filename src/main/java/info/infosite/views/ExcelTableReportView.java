@@ -22,7 +22,7 @@ public class ExcelTableReportView {
         XSSFWorkbook workbook = new XSSFWorkbook();
         for (Menu menu : menus) {
             for (SubMenu subMenu : menu.getSubMenuSet()) {
-                XSSFSheet spreadsheet = workbook.createSheet(menu.getName() + "." + subMenu.getName());
+                XSSFSheet spreadsheet = workbook.createSheet(menu.getName() + "." + subMenu.getName() + "-" + subMenu.getIdSubMenu());
                 XSSFRow row;
                 int id = 0;
                 int max = 0;

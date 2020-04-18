@@ -21,6 +21,7 @@ public class Line {
     }
 
     public Line(Col col) {
+        this.setData("");
         this.col = col;
     }
 

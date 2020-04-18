@@ -1,7 +1,7 @@
 package info.infosite.database;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table (name = "tab")
@@ -20,7 +20,7 @@ public class Tab {
     private SubMenu subMenu;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Col.class, mappedBy = "table", cascade = CascadeType.REMOVE)
-    private Set<Col> cols;
+    private List<Col> cols;
 
     public Tab() {
     }
@@ -29,11 +29,12 @@ public class Tab {
         this.subMenu = subMenu;
     }
 
-    public Tab(int idTable, String name, SubMenu subMenu, Set<Col> cols) {
+    public Tab(int idTable, String name, SubMenu subMenu, List<Col> cols) {
         this.idTable = idTable;
         this.name = name;
         this.subMenu = subMenu;
         this.cols = cols;
+        SortCols();
     }
 
     public int getIdTable() {
@@ -60,11 +61,28 @@ public class Tab {
         this.subMenu = subMenu;
     }
 
-    public Set<Col> getCols() {
+    public List<Col> getCols() {
         return cols;
     }
 
-    public void setCols(Set<Col> cols) {
+    public void setCols(List<Col> cols) {
         this.cols = cols;
+    }
+
+
+    public void SortCols() {
+        Col temp = null;
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 0; i < cols.size() - 1; i++) {
+                if (cols.get(i).getIdColumn() > cols.get(i + 1).getIdColumn()) {
+                    isSorted = false;
+                    temp = cols.get(i);
+                    cols.set(i, cols.get(i + 1));
+                    cols.set(i + 1, temp);
+                }
+            }
+        }
     }
 }
