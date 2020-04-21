@@ -31,4 +31,8 @@ public class SubMenu {
         this.menu = menu;
     }
 
+    public void AddNewTable(Tab table) {
+        this.tables.add(table);
+    }
+
 }

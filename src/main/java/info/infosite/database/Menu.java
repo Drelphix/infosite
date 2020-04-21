@@ -20,6 +20,10 @@ public class Menu {
     @OneToMany(fetch = FetchType.EAGER, targetEntity = SubMenu.class, mappedBy = "menu", cascade = CascadeType.REMOVE)
     private List<SubMenu> subMenuSet;
 
+    public void AddSubMenu(SubMenu subMenu) {
+        this.subMenuSet.add(subMenu);
+    }
+
     public void setSubMenuSet(List<SubMenu> subMenuSet) {
         this.subMenuSet = subMenuSet;
         SortSubMenu();

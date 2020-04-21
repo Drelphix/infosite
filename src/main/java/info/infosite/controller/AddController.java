@@ -30,9 +30,7 @@ public class AddController {
     public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
-        List<SubMenu> subMenuList = menu.getSubMenuSet();
-        subMenuList.add(new SubMenu(menu));
-        menu.setSubMenuSet(subMenuList);
+        menu.AddSubMenu(new SubMenu(menu));
         menuService.menus = menuRepository.findAll();
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("menu", menu);
@@ -75,9 +73,7 @@ public class AddController {
     public String AddNewTable(Model model, @RequestParam(name = "id") int idSub) {
         menuService.CheckMenu();
         SubMenu subMenu = subMenuRepository.getOne(idSub);
-        List<Tab> tables = subMenu.getTables();
-        tables.add(new Tab(subMenu));
-        subMenu.setTables(tables);
+        subMenu.AddNewTable(new Tab(subMenu));
         model.addAttribute("submenu", subMenu);
         model.addAttribute("menus", menuService.menus);
         return "add";
