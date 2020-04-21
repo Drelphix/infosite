@@ -1,12 +1,15 @@
 package info.infosite.database;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "line")
-@Data
+@Getter
+@Setter
 public class Line {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

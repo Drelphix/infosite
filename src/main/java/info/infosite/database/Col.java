@@ -1,13 +1,16 @@
 package info.infosite.database;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "col")
-@Data
+@Getter
+@Setter
 public class Col {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
