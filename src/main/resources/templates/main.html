@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="#" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/linearicons.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/magnific-popup.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/jquery-ui.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/nice-select.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/animate.min.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/owl.carousel.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
+
     <meta charset="UTF-8">
+
     <title>InfoSite</title>
 </head>
 <body>
-<nav th:if="${menus}">
-    <ul class="topmenu">
-        <li class="down" th:each="menu : ${menus}">
-            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}" th:text="${menu.name}"></a>
-            <a th:if="${mode==false}" th:text="${menu.name}"></a>
-            <ul class="submenu">
-                <li th:each="sub: ${menu.subMenuSet}">
-                    <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <div align="right">
-        <a href="#" th:href="@{/export}">Скачать в формате Excel</a>
+<header id="header">
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="index.html"><img src="/images/logo.png" alt="" title="" /></a>
+            </div>
+            <nav id="nav-menu-container" th:if="${menus}">
+                <ul class="nav-menu">
+                    <li class="menu-has-children" th:each="menu : ${menus}">
+                        <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}" th:text="${menu.name}"></a>
+                        <a th:if="${mode==false}" th:text="${menu.name}"></a>
+                        <ul th:if="${not #lists.isEmpty(menu.subMenuSet)}">
+                            <li th:each="sub: ${menu.subMenuSet}">
+                                <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img src="#" th:src="@{/images/addnew.png}" alt="Добавить пункт меню" title="" /></a></li>
+                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img src="#" th:src="@{/images/gear.png}" alt="Перейти в режим редактирования" title="" /></a></li>
+                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img src="#" th:src="@{/images/show.png}" alt="Перейти в режим просмотра" title="" /></a></li>
+                    <li><a href="#" th:href="@{/export}"><img src="#" th:src="@{/images/excel.png}" alt="" title="" /></a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-    <div>
-        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}">Перейти в режим редактирования</a>
-        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}">Перейти в режим просмотра</a>
-    </div>
-    <div>
-        <a href="#" th:href="@{/addMenu}" th:if="${mode==true}">Добавить пункт меню</a>
-    </div>
-</nav>
+</header>
+
+<section class="popular-destination-area section-gap">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content pb-70 col-lg-8">
+                    <div class="title text-center">
+                        //Пусто, но это под меню
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">
         <caption>
