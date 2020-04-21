@@ -3003,11 +3003,6 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 0px;
 }
 
-.about-banner {
-  background: url(../images/top-banner.jpg) center;
-  background-size: cover;
-}
-
 .about-banner .overlay-bg {
   background: rgba(4, 9, 30, 0.4);
 }
