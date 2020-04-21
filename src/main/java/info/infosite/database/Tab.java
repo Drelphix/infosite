@@ -1,10 +1,13 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "tab")
+@Table(name = "tab")
+@Data
 public class Tab {
 
     @Id
@@ -36,39 +39,6 @@ public class Tab {
         this.cols = cols;
         SortCols();
     }
-
-    public int getIdTable() {
-        return idTable;
-    }
-
-    public void setIdTable(int idTable) {
-        this.idTable = idTable;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public SubMenu getSubMenu() {
-        return subMenu;
-    }
-
-    public void setSubMenu(SubMenu subMenu) {
-        this.subMenu = subMenu;
-    }
-
-    public List<Col> getCols() {
-        return cols;
-    }
-
-    public void setCols(List<Col> cols) {
-        this.cols = cols;
-    }
-
 
     public void SortCols() {
         Col temp = null;

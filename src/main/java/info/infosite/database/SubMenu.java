@@ -1,10 +1,13 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "subMenu")
+@Table(name = "subMenu")
+@Data
 public class SubMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,35 +31,4 @@ public class SubMenu {
         this.menu = menu;
     }
 
-    public int getIdSubMenu() {
-        return idSubMenu;
-    }
-
-    public void setIdSubMenu(int idSubMenu) {
-        this.idSubMenu = idSubMenu;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public List<Tab> getTables() {
-        return tables;
-    }
-
-    public void setTables(List<Tab> tables) {
-        this.tables = tables;
-    }
 }

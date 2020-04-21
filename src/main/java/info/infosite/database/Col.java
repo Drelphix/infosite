@@ -1,10 +1,13 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "col")
+@Data
 public class Col {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,34 +31,4 @@ public class Col {
         this.table = table;
     }
 
-    public int getIdColumn() {
-        return idColumn;
-    }
-
-    public void setIdColumn(int idColumn) {
-        this.idColumn = idColumn;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Tab getTable() {
-        return table;
-    }
-
-    public void setTable(Tab table) {
-        this.table = table;
-    }
-
-    public List<Line> getLines() {
-        return lines;
-    }
-    public void setLines(List<Line> lines) {
-        this.lines = lines;
-    }
 }

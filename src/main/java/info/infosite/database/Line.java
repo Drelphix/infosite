@@ -1,9 +1,12 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "line")
+@Data
 public class Line {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,30 +25,6 @@ public class Line {
 
     public Line(Col col) {
         this.setData("");
-        this.col = col;
-    }
-
-    public int getIdLine() {
-        return idLine;
-    }
-
-    public void setIdLine(int idLine) {
-        this.idLine = idLine;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Col getCol() {
-        return col;
-    }
-
-    public void setCol(Col col) {
         this.col = col;
     }
 }

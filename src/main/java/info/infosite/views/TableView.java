@@ -28,6 +28,7 @@ public class TableView {
         this.subMenu = table.getSubMenu();
         lines = new ArrayList<>();
         int i = 0;
+        //generating line to display
         if (cols.size() != 0) {
             int end = cols.get(0).getLines().size();
             while (i < end) {

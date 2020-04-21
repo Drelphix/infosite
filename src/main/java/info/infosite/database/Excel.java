@@ -1,9 +1,12 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "excel")
+@Data
 public class Excel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,19 +14,4 @@ public class Excel {
     @Column(name = "path")
     private String path;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

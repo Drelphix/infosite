@@ -11,7 +11,6 @@ public class ListLineView {
 
     public ListLineView() {
     }
-
     public ListLineView(List<Line> lines) {
         this.lines = lines;
     }

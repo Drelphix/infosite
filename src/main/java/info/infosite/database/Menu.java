@@ -1,10 +1,13 @@
 package info.infosite.database;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "menu")
+@Data
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,29 +19,6 @@ public class Menu {
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = SubMenu.class, mappedBy = "menu", cascade = CascadeType.REMOVE)
     private List<SubMenu> subMenuSet;
-
-    public Menu() {
-    }
-
-    public int getIdMenu() {
-        return idMenu;
-    }
-
-    public void setIdMenu(int idMenu) {
-        this.idMenu = idMenu;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<SubMenu> getSubMenuSet() {
-        return subMenuSet;
-    }
 
     public void setSubMenuSet(List<SubMenu> subMenuSet) {
         this.subMenuSet = subMenuSet;
