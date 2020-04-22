@@ -41,8 +41,8 @@ public class MenuService {
             File[] arrFiles = dir.listFiles();
             File[] lst = arrFiles;
             for (File file : lst) {
-                xmlSubPaths.add(file.toString().substring(0, file.toString().length() - 4));
-                xmlSubMenus.add(file.getName());
+                xmlSubPaths.add(file.toString());
+                xmlSubMenus.add(file.getName().substring(0, file.getName().length() - 4));
             }
             xmlMenu.setSubs(xmlSubMenus);
             xmlMenu.setPaths(xmlSubPaths);
