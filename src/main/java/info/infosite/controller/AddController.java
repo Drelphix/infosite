@@ -64,6 +64,7 @@ public class AddController {
         model.addAttribute("cols", tableView.getCols());
         model.addAttribute("lines", lines);
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         return "add";
     }
 
@@ -74,6 +75,7 @@ public class AddController {
         subMenu.AddNewTable(new Tab(subMenu));
         model.addAttribute("submenu", subMenu);
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         return "add";
     }
 
@@ -82,6 +84,7 @@ public class AddController {
         menuService.CheckMenu();
         model.addAttribute("newmenu", new Menu());
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         return "add";
     }
 
@@ -90,6 +93,7 @@ public class AddController {
         menuRepository.save(menu);
         menuService.menus = menuRepository.findAll();
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         return "redirect:/";
     }
 
@@ -103,6 +107,7 @@ public class AddController {
         }
         subMenuRepository.save(subMenu);
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         return "redirect:/show?id=" + subMenu.getIdSubMenu();
     }
 }

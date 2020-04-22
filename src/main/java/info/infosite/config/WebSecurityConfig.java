@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/*", "*").authenticated() // только для зарегистрированных
+                .antMatchers("/*", "*", "/**").authenticated() // только для зарегистрированных
                 .antMatchers("/resources/**","/resources/*","/resources/***").permitAll() // общий доступ
                 .and();
         http.formLogin()

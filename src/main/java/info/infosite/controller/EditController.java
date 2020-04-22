@@ -42,6 +42,7 @@ public class EditController {
             cols.add(col.getName());
         }
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("tableName", tableView.getName());
         model.addAttribute("cols", cols);
         model.addAttribute("lines", lines);
@@ -60,6 +61,7 @@ public class EditController {
     public String EditMenu(Model model, @RequestParam(name = "id") int idMenu) {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("menu", menu);
         return "add";
@@ -84,6 +86,7 @@ public class EditController {
         menuService.CheckMenu();
         TableView tableView = new TableView(tableRepository.getOne(idTab));
         model.addAttribute("table", tableView);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("menus", menuService.menus);
         return "add";
     }

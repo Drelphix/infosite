@@ -7,11 +7,14 @@ import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.TableView;
+import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.xml.sax.SAXException;
 
@@ -37,15 +40,15 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String IndexPage(Model model) throws IOException {
-        menuService.menus = menuRepository.findAll();
+        menuService.CheckMenu();
         model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("mode", this.editMode);
         return "main";
     }
 
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id) {
-
         menuService.CheckMenu();
         List<TableView> tableViews = new ArrayList<TableView>();
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
@@ -54,6 +57,7 @@ public class MainController {
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("mode", this.editMode);
         return "main";
     }
@@ -92,7 +96,35 @@ public class MainController {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
+        model.addAttribute("mode", this.editMode);
+        model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("computer", xmlReader.getComputer());
+        return "computer";
+    }
+
+    @RequestMapping(value = "/info/{name}")
+    public String ShowDiskInfo(Model model, @PathVariable(name = "name") String name, @RequestParam(name = "id") int id) {
+        menuService.CheckMenu();
+        for (XmlMenuView xmlMenuView : menuService.xmlMenus) {
+            if (xmlMenuView.getName().equals(name)) {
+                String path = xmlMenuView.getPaths().get(id);
+                XMLReader xmlReader = null;
+                try {
+                    xmlReader = new XMLReader(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+                model.addAttribute("mode", this.editMode);
+                model.addAttribute("menus", menuService.menus);
+                model.addAttribute("xmls", menuService.xmlMenus);
+                model.addAttribute("computer", xmlReader.getComputer());
+            }
+        }
         return "computer";
     }
 }

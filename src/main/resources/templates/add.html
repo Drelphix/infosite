@@ -1,22 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link href="#" rel="stylesheet" th:href="@{/css/style.css}"/>
-    <meta charset="UTF-8">
-    <title>InfoSite</title></head>
+<head th:insert="main::head">
+</head>
 <body>
+<header id="header" th:insert="main::menu"></header>
 
-<nav>
-    <ul class="topmenu" th:if="${menus}">
-        <li class="down" th:each="menu : ${menus}">
-            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:text="${menu.name}"></a>
-            <ul class="submenu">
-                <li th:each="sub: ${menu.subMenuSet}">
-                    <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</nav>
 <form action="#" method="post" th:action="@{/saveMenu}" th:if="${newmenu}" th:object="${newmenu}">
     <center>
         <input th:field="*{name}" type="text">

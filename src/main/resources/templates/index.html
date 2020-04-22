@@ -1,7 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstra.css}"/>
-
     <title>
         Авторизация
     </title>
@@ -14,11 +12,9 @@
             <div th:if="${param.error}">Неверно введен логин или пароль</div>
             <p style="color:white">Логин: <input name="username" required type="text"/></p>
             <p style="color:white">Пароль: <input name="password" required type="password"/></p>
-            <form action="#" class="transparent" method="post" th:action="@{/login}">
                 <div class="form-inner">
                     <input class="input" type="submit" value="Войти"/>
                 </div>
-            </form>
         </div>
     </form>
 </center>

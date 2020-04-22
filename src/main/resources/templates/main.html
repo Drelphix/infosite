@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="head">
     <link href="#" rel="stylesheet" th:href="@{/css/linearicons.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
@@ -16,16 +16,25 @@
     <title>InfoSite</title>
 </head>
 <body>
-<header id="header">
-    <div class="container main-menu">
+<header id="header" th:fragment="menu">
+    <div class="container main-menu" th:fragment="menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-                <a href="#" th:href="@{/}"><img src="/images/logo.png" alt="" title="" /></a>
+                <a href="#" th:href="@{/}"><img alt="" src="/images/logo.png" title=""/></a>
             </div>
             <nav id="nav-menu-container" th:if="${menus}">
                 <ul class="nav-menu">
+                    <li class="menu-has-children" th:each="xml : ${xmls}">
+                        <a th:text="${xml.name}"></a>
+                        <ul th:if="${not #lists.isEmpty(xml.subs)}">
+                            <li th:each="sub,itemStat: ${xml.subs}">
+                                <a href="" th:href="@{'/info/'+${xml.name}(id=${itemStat.index})}" th:text="${sub}"></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-has-children" th:each="menu : ${menus}">
-                        <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}" th:text="${menu.name}"></a>
+                        <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
+                           th:text="${menu.name}"></a>
                         <a th:if="${mode==false}" th:text="${menu.name}"></a>
                         <ul th:if="${not #lists.isEmpty(menu.subMenuSet)}">
                             <li th:each="sub: ${menu.subMenuSet}">
@@ -33,10 +42,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img src="#" th:src="@{/images/addnew.png}" alt="Добавить пункт меню" title="" /></a></li>
-                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img src="#" th:src="@{/images/gear.png}" alt="Перейти в режим редактирования" title="" /></a></li>
-                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img src="#" th:src="@{/images/show.png}" alt="Перейти в режим просмотра" title="" /></a></li>
-                    <li><a href="#" th:href="@{/export}"><img src="#" th:src="@{/images/excel.png}" alt="" title="" /></a></li>
+                    <li><a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню"
+                                                                                     src="#"
+                                                                                     th:src="@{/images/addnew.png}"
+                                                                                     title=""/></a></li>
+                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
+                            alt="Перейти в режим редактирования"
+                            src="#"
+                            th:src="@{/images/gear.png}"
+                            title=""/></a></li>
+                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
+                            alt="Перейти в режим просмотра"
+                            src="#"
+                            th:src="@{/images/show.png}"
+                            title=""/></a></li>
+                    <li><a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
+                                                              title=""/></a></li>
+
+
                 </ul>
             </nav>
         </div>
