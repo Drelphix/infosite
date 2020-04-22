@@ -54,16 +54,14 @@ public class AddController {
         menuService.CheckMenu();
         TableView tableView = new TableView(tableRepository.getOne(idTab));
         List<Line> lineList = new ArrayList<>();
-        List<String> cols = new ArrayList<>();
         for (Col col : tableView.getCols()) {
-            cols.add(col.getName());
             lineList.add(new Line(col));
         }
         ListLineView lines = new ListLineView(lineList);
         lines.setIdTable(tableView.getId());
         lines.setIdSubMenu(tableView.getSubMenu().getIdSubMenu());
         model.addAttribute("tableName", tableView.getName());
-        model.addAttribute("cols", cols);
+        model.addAttribute("cols", tableView.getCols());
         model.addAttribute("lines", lines);
         model.addAttribute("menus", menuService.menus);
         return "add";

@@ -1,0 +1,320 @@
+<root>
+    <NameComp>TITANM-SERV</NameComp>
+    <Time>12:58:00</Time>
+    <Date>21.04.2020</Date>
+    <Disks>
+        <C>
+            <VolumeName></VolumeName>
+            <TotalSize>104751689728</TotalSize>
+            <FreeSpace>46228611072</FreeSpace>
+        </C>
+        <D>
+            <VolumeName></VolumeName>
+            <TotalSize>895342342144</TotalSize>
+            <FreeSpace>266241495040</FreeSpace>
+        </D>
+    </Disks>
+    <Backup>
+        <paths0>
+            <itempaths>D:\backup</itempaths>
+            <files0>
+                <Name>titanm_backup_2020_04_16_060003_2185526.bak</Name>
+                <DateLastModified>16.04.2020 6:48:40</DateLastModified>
+                <Size>32031588352</Size>
+            </files0>
+            <files2>
+                <Name>titanm_backup_2020_04_17_060002_2569004.bak</Name>
+                <DateLastModified>17.04.2020 6:49:43</DateLastModified>
+                <Size>32166117376</Size>
+            </files2>
+            <files4>
+                <Name>titanm_backup_2020_04_18_060002_5125008.bak</Name>
+                <DateLastModified>18.04.2020 6:46:56</DateLastModified>
+                <Size>32068050944</Size>
+            </files4>
+            <files6>
+                <Name>titanm_backup_2020_04_19_060003_1049526.bak</Name>
+                <DateLastModified>19.04.2020 6:55:29</DateLastModified>
+                <Size>32292839424</Size>
+            </files6>
+            <files8>
+                <Name>titanm_backup_2020_04_20_060003_0915831.bak</Name>
+                <DateLastModified>20.04.2020 6:49:42</DateLastModified>
+                <Size>32240717824</Size>
+            </files8>
+            <files10>
+                <Name>titanm_backup_2020_04_21_060002_8208939.bak</Name>
+                <DateLastModified>21.04.2020 6:47:51</DateLastModified>
+                <Size>32697729024</Size>
+            </files10>
+        </paths0>
+        <paths1>
+            <itempaths>D:\backup\dif</itempaths>
+            <files0>
+                <Name>titanm_backup_2020_04_16_080002_2099970.bak</Name>
+                <DateLastModified>16.04.2020 8:02:39</DateLastModified>
+                <Size>618196992</Size>
+            </files0>
+            <files2>
+                <Name>titanm_backup_2020_04_16_090002_8835212.bak</Name>
+                <DateLastModified>16.04.2020 9:03:12</DateLastModified>
+                <Size>733147136</Size>
+            </files2>
+            <files4>
+                <Name>titanm_backup_2020_04_16_100002_6834439.bak</Name>
+                <DateLastModified>16.04.2020 10:03:22</DateLastModified>
+                <Size>813830144</Size>
+            </files4>
+            <files6>
+                <Name>titanm_backup_2020_04_16_110002_3585664.bak</Name>
+                <DateLastModified>16.04.2020 11:03:33</DateLastModified>
+                <Size>883044352</Size>
+            </files6>
+            <files8>
+                <Name>titanm_backup_2020_04_16_120002_1272891.bak</Name>
+                <DateLastModified>16.04.2020 12:04:03</DateLastModified>
+                <Size>997482496</Size>
+            </files8>
+            <files10>
+                <Name>titanm_backup_2020_04_16_130002_8632134.bak</Name>
+                <DateLastModified>16.04.2020 13:04:06</DateLastModified>
+                <Size>1086033920</Size>
+            </files10>
+            <files12>
+                <Name>titanm_backup_2020_04_16_140002_5071359.bak</Name>
+                <DateLastModified>16.04.2020 14:04:21</DateLastModified>
+                <Size>1190481920</Size>
+            </files12>
+            <files14>
+                <Name>titanm_backup_2020_04_16_150002_3070586.bak</Name>
+                <DateLastModified>16.04.2020 15:04:40</DateLastModified>
+                <Size>1304043520</Size>
+            </files14>
+            <files16>
+                <Name>titanm_backup_2020_04_16_160002_0757812.bak</Name>
+                <DateLastModified>16.04.2020 16:05:09</DateLastModified>
+                <Size>1403174912</Size>
+            </files16>
+            <files18>
+                <Name>titanm_backup_2020_04_16_170002_8429057.bak</Name>
+                <DateLastModified>16.04.2020 17:05:40</DateLastModified>
+                <Size>1492779008</Size>
+            </files18>
+            <files20>
+                <Name>titanm_backup_2020_04_16_180002_4556280.bak</Name>
+                <DateLastModified>16.04.2020 18:05:50</DateLastModified>
+                <Size>1581731840</Size>
+            </files20>
+            <files22>
+                <Name>titanm_backup_2020_04_16_190002_2399507.bak</Name>
+                <DateLastModified>16.04.2020 19:05:35</DateLastModified>
+                <Size>1638703104</Size>
+            </files22>
+            <files24>
+                <Name>titanm_backup_2020_04_17_080002_5275470.bak</Name>
+                <DateLastModified>17.04.2020 8:02:38</DateLastModified>
+                <Size>655466496</Size>
+            </files24>
+            <files26>
+                <Name>titanm_backup_2020_04_17_090002_0934693.bak</Name>
+                <DateLastModified>17.04.2020 9:03:24</DateLastModified>
+                <Size>795435008</Size>
+            </files26>
+            <files28>
+                <Name>titanm_backup_2020_04_17_100002_7981936.bak</Name>
+                <DateLastModified>17.04.2020 10:03:33</DateLastModified>
+                <Size>888786944</Size>
+            </files28>
+            <files30>
+                <Name>titanm_backup_2020_04_17_110002_6449164.bak</Name>
+                <DateLastModified>17.04.2020 11:04:14</DateLastModified>
+                <Size>995864576</Size>
+            </files30>
+            <files32>
+                <Name>titanm_backup_2020_04_17_120002_3356389.bak</Name>
+                <DateLastModified>17.04.2020 12:05:37</DateLastModified>
+                <Size>1098829824</Size>
+            </files32>
+            <files34>
+                <Name>titanm_backup_2020_04_17_130002_1667617.bak</Name>
+                <DateLastModified>17.04.2020 13:04:58</DateLastModified>
+                <Size>1264484352</Size>
+            </files34>
+            <files36>
+                <Name>titanm_backup_2020_04_17_140001_9510844.bak</Name>
+                <DateLastModified>17.04.2020 14:05:02</DateLastModified>
+                <Size>1352097792</Size>
+            </files36>
+            <files38>
+                <Name>titanm_backup_2020_04_17_150002_7026088.bak</Name>
+                <DateLastModified>17.04.2020 15:05:03</DateLastModified>
+                <Size>1445457920</Size>
+            </files38>
+            <files40>
+                <Name>titanm_backup_2020_04_17_160002_3933313.bak</Name>
+                <DateLastModified>17.04.2020 16:05:37</DateLastModified>
+                <Size>1566171136</Size>
+            </files40>
+            <files42>
+                <Name>titanm_backup_2020_04_17_170002_2868542.bak</Name>
+                <DateLastModified>17.04.2020 17:06:14</DateLastModified>
+                <Size>1763110912</Size>
+            </files42>
+            <files44>
+                <Name>titanm_backup_2020_04_17_180001_9151766.bak</Name>
+                <DateLastModified>17.04.2020 18:06:11</DateLastModified>
+                <Size>1839423488</Size>
+            </files44>
+            <files46>
+                <Name>titanm_backup_2020_04_17_190002_5887009.bak</Name>
+                <DateLastModified>17.04.2020 19:06:06</DateLastModified>
+                <Size>1916403712</Size>
+            </files46>
+            <files48>
+                <Name>titanm_backup_2020_04_18_080002_0187461.bak</Name>
+                <DateLastModified>18.04.2020 8:02:59</DateLastModified>
+                <Size>673280000</Size>
+            </files48>
+            <files50>
+                <Name>titanm_backup_2020_04_18_090002_6142702.bak</Name>
+                <DateLastModified>18.04.2020 9:03:12</DateLastModified>
+                <Size>728793088</Size>
+            </files50>
+            <files52>
+                <Name>titanm_backup_2020_04_18_100002_3361927.bak</Name>
+                <DateLastModified>18.04.2020 10:03:17</DateLastModified>
+                <Size>797454336</Size>
+            </files52>
+            <files54>
+                <Name>titanm_backup_2020_04_18_110002_0425153.bak</Name>
+                <DateLastModified>18.04.2020 11:04:07</DateLastModified>
+                <Size>918822912</Size>
+            </files54>
+            <files56>
+                <Name>titanm_backup_2020_04_18_120002_8096397.bak</Name>
+                <DateLastModified>18.04.2020 12:04:22</DateLastModified>
+                <Size>1057447936</Size>
+            </files56>
+            <files58>
+                <Name>titanm_backup_2020_04_18_130002_5783624.bak</Name>
+                <DateLastModified>18.04.2020 13:05:01</DateLastModified>
+                <Size>1142853632</Size>
+            </files58>
+            <files60>
+                <Name>titanm_backup_2020_04_18_140002_2222848.bak</Name>
+                <DateLastModified>18.04.2020 14:06:14</DateLastModified>
+                <Size>1246642176</Size>
+            </files60>
+            <files62>
+                <Name>titanm_backup_2020_04_18_150002_0066075.bak</Name>
+                <DateLastModified>18.04.2020 15:05:19</DateLastModified>
+                <Size>1310932992</Size>
+            </files62>
+            <files64>
+                <Name>titanm_backup_2020_04_18_160002_6957318.bak</Name>
+                <DateLastModified>18.04.2020 16:05:24</DateLastModified>
+                <Size>1351036928</Size>
+            </files64>
+            <files66>
+                <Name>titanm_backup_2020_04_18_170002_5112545.bak</Name>
+                <DateLastModified>18.04.2020 17:05:23</DateLastModified>
+                <Size>1393659904</Size>
+            </files66>
+            <files68>
+                <Name>titanm_backup_2020_04_18_180002_1707770.bak</Name>
+                <DateLastModified>18.04.2020 18:05:32</DateLastModified>
+                <Size>1401397248</Size>
+            </files68>
+            <files70>
+                <Name>titanm_backup_2020_04_18_190002_9691014.bak</Name>
+                <DateLastModified>18.04.2020 19:05:32</DateLastModified>
+                <Size>1471582208</Size>
+            </files70>
+            <files72>
+                <Name>titanm_backup_2020_04_19_080002_8139982.bak</Name>
+                <DateLastModified>19.04.2020 8:01:50</DateLastModified>
+                <Size>561811456</Size>
+            </files72>
+            <files74>
+                <Name>titanm_backup_2020_04_19_090002_4735207.bak</Name>
+                <DateLastModified>19.04.2020 9:02:31</DateLastModified>
+                <Size>584491008</Size>
+            </files74>
+            <files76>
+                <Name>titanm_backup_2020_04_19_100002_1798432.bak</Name>
+                <DateLastModified>19.04.2020 10:02:21</DateLastModified>
+                <Size>639119360</Size>
+            </files76>
+            <files78>
+                <Name>titanm_backup_2020_04_19_110001_9641659.bak</Name>
+                <DateLastModified>19.04.2020 11:02:19</DateLastModified>
+                <Size>657772544</Size>
+            </files78>
+            <files80>
+                <Name>titanm_backup_2020_04_19_120002_7312903.bak</Name>
+                <DateLastModified>19.04.2020 12:02:31</DateLastModified>
+                <Size>702611456</Size>
+            </files80>
+            <files82>
+                <Name>titanm_backup_2020_04_19_130002_3596127.bak</Name>
+                <DateLastModified>19.04.2020 13:02:34</DateLastModified>
+                <Size>720089088</Size>
+            </files82>
+            <files84>
+                <Name>titanm_backup_2020_04_19_140002_1439354.bak</Name>
+                <DateLastModified>19.04.2020 14:02:25</DateLastModified>
+                <Size>739151872</Size>
+            </files84>
+            <files86>
+                <Name>titanm_backup_2020_04_19_150002_7862596.bak</Name>
+                <DateLastModified>19.04.2020 15:02:36</DateLastModified>
+                <Size>760700928</Size>
+            </files86>
+            <files88>
+                <Name>titanm_backup_2020_04_19_160002_6641825.bak</Name>
+                <DateLastModified>19.04.2020 16:02:35</DateLastModified>
+                <Size>775757824</Size>
+            </files88>
+            <files90>
+                <Name>titanm_backup_2020_04_19_170002_4173051.bak</Name>
+                <DateLastModified>19.04.2020 17:03:37</DateLastModified>
+                <Size>965914624</Size>
+            </files90>
+            <files92>
+                <Name>titanm_backup_2020_04_19_180002_0612276.bak</Name>
+                <DateLastModified>19.04.2020 18:03:06</DateLastModified>
+                <Size>984887296</Size>
+            </files92>
+            <files94>
+                <Name>titanm_backup_2020_04_19_190002_7503518.bak</Name>
+                <DateLastModified>19.04.2020 19:03:09</DateLastModified>
+                <Size>1018818560</Size>
+            </files94>
+            <files96>
+                <Name>titanm_backup_2020_04_21_080002_1399388.bak</Name>
+                <DateLastModified>21.04.2020 8:02:26</DateLastModified>
+                <Size>708890624</Size>
+            </files96>
+            <files98>
+                <Name>titanm_backup_2020_04_21_090002_7510630.bak</Name>
+                <DateLastModified>21.04.2020 9:03:58</DateLastModified>
+                <Size>843378688</Size>
+            </files98>
+            <files100>
+                <Name>titanm_backup_2020_04_21_100002_5197856.bak</Name>
+                <DateLastModified>21.04.2020 10:05:48</DateLastModified>
+                <Size>1027522560</Size>
+            </files100>
+            <files102>
+                <Name>titanm_backup_2020_04_21_110002_4133085.bak</Name>
+                <DateLastModified>21.04.2020 11:04:51</DateLastModified>
+                <Size>1156595712</Size>
+            </files102>
+            <files104>
+                <Name>titanm_backup_2020_04_21_120003_0400327.bak</Name>
+                <DateLastModified>21.04.2020 12:04:57</DateLastModified>
+                <Size>1250770944</Size>
+            </files104>
+        </paths1>
+    </Backup>
+</root>

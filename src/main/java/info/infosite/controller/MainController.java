@@ -4,6 +4,7 @@ import info.infosite.database.MenuRepository;
 import info.infosite.database.Tab;
 import info.infosite.database.TableRepository;
 import info.infosite.functions.MenuService;
+import info.infosite.functions.XMLReader;
 import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.TableView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -75,5 +78,21 @@ public class MainController {
         workbook.write(os);
         os.close();
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/xml")
+    public String ShowXmlData(Model model) {
+        XMLReader xmlReader = null;
+        try {
+            xmlReader = new XMLReader("src/main/resources/xml/titanm_serv.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("computer", xmlReader.getComputer());
+        return "computer";
     }
 }

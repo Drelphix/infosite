@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
+<table th:if="${computer.disks}">
+    <caption>Информация о дисках</caption>
+    <tr>
+        <td>Диск</td>
+        <td>Имя</td>
+        <td>Размер</td>
+        <td>Свободное место</td>
+    </tr>
+    <tr th:each="disk : ${computer.disks}">
+        <td th:text="${disk.getLetter()}">te</td>
+        <td th:text="${disk.getName()}">te</td>
+        <td th:text="${disk.getTotalSize()}">te</td>
+        <td th:text="${disk.getFreeSpace()}">te</td>
+    </tr>
+</table>
+<h3>Последние файлы</h3>
+<table>
+    <tr>
+        <td>Имя файла</td>
+        <td>Имя файла</td>
+        <td>Размер</td>
+        <td>Дата</td>
+    <tr>
+    <tr th:each="backup : ${computer.backups}">
+        <td th:text="${backup.getPath()}"></td>
+        <td th:text="${backup.files[0].name}"></td>
+        <td th:text="${backup.files[0].size}"></td>
+        <td th:text="${backup.files[0].lastDate}"></td>
+    </tr>
+    </tr>
+</table>
+<h3>Информация о файлах</h3>
+<table th:each="backup : ${computer.backups}">
+    <tr>
+        <td align="center" th:text="${backup.getPath()}"></td>
+    </tr>
+    <tr>
+        <td>Имя файла</td>
+        <td>Размер</td>
+        <td>Дата</td>
+    <tr>
+    <tr th:each="file: ${backup.files}">
+        <td th:text="${file.name}"></td>
+        <td th:text="${file.size}"></td>
+        <td th:text="${file.lastDate}"></td>
+    </tr>
+    </tr>
+</table>
+</body>
+</html>
