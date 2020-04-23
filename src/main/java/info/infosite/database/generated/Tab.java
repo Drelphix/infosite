@@ -1,6 +1,5 @@
-package info.infosite.database;
+package info.infosite.database.generated;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

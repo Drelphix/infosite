@@ -1,6 +1,5 @@
-package info.infosite.database;
+package info.infosite.database.auth;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

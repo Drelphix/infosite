@@ -1,6 +1,6 @@
-package info.infosite.database;
+package info.infosite.database.generated;
 
-import lombok.Data;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +19,10 @@ public class Col {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "hidden")
+    @NotNull
+    private boolean hidden;
 
     @ManyToOne(targetEntity = Tab.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "idTable")

@@ -1,9 +1,9 @@
 package info.infosite.views;
 
-import info.infosite.database.Col;
-import info.infosite.database.Line;
-import info.infosite.database.SubMenu;
-import info.infosite.database.Tab;
+import info.infosite.database.generated.Col;
+import info.infosite.database.generated.Line;
+import info.infosite.database.generated.SubMenu;
+import info.infosite.database.generated.Tab;
 
 import java.util.ArrayList;
 import java.util.List;

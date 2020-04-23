@@ -1,4 +1,4 @@
-package info.infosite.database;
+package info.infosite.database.generated;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

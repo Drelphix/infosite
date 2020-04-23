@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:fragment="head">
     <link href="#" rel="stylesheet" th:href="@{/css/linearicons.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
@@ -10,10 +11,10 @@
     <link href="#" rel="stylesheet" th:href="@{/css/animate.min.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/owl.carousel.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
-
     <meta charset="UTF-8">
-
     <title>InfoSite</title>
+    <script>
+    </script>
 </head>
 <body>
 <header id="header" th:fragment="menu">
@@ -42,23 +43,23 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню"
-                                                                                     src="#"
+                    <li>
+                        <a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню" src="#"
                                                                                      th:src="@{/images/addnew.png}"
-                                                                                     title=""/></a></li>
-                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
-                            alt="Перейти в режим редактирования"
-                            src="#"
-                            th:src="@{/images/gear.png}"
-                            title=""/></a></li>
-                    <li><a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
-                            alt="Перейти в режим просмотра"
-                            src="#"
-                            th:src="@{/images/show.png}"
-                            title=""/></a></li>
-                    <li><a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
-                                                              title=""/></a></li>
-
+                                                                                     title=""/></a>
+                    </li>
+                    <li>
+                        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
+                                alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
+                    </li>
+                    <li>
+                        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
+                                alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
+                    </li>
+                    <li>
+                        <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
+                                                              title=""/></a>
+                    </li>
 
                 </ul>
             </nav>
@@ -67,17 +68,16 @@
 </header>
 
 <section class="popular-destination-area section-gap">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="menu-content pb-70 col-lg-8">
-                    <div class="title text-center">
-                        //Пусто, но это под меню
-                    </div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    //Пусто, но это под меню
                 </div>
             </div>
         </div>
+    </div>
 </section>
-
 
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <table align="center" border="1" bordercolor="black">
@@ -86,17 +86,25 @@
             <a th:if="${mode==false}" th:text="${table.name}"></a>
         </caption>
         <tr>
-            <td th:each="col: ${table.cols}" th:text="${col.name}">
-            </td>
+            <td th:each="col: ${table.cols}" th:text="${col.name}"></td>
         </tr>
         <tr th:each="lineList, row: ${table.lines}">
             <td th:each="line:${lineList}">
+                <!--Отображение, если нет # вначале - обычное поле -->
                 <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
-                   th:text="${line.data}"></a>
-                <a th:if="${mode==false}" th:text="${line.data}"></a>
+                   th:text="${line.data}" th:unless="${#strings.substring(line.data,0,1).equals('#')}"></a>
+                <a th:if="${mode==false}" th:text="${line.data}"
+                   th:unless="${#strings.substring(line.data,0,1).equals('#')}"></a>
+                <!--Отображение, если # вначале - скрытое поле -->
+                <input disabled th:id="${col.name+row.index}" th:if="${#strings.substring(line.data,0,1).equals('#')}"
+                       th:value="${#strings.substring(line.data,1,#strings.length(line.data))}" type="password">
+                <input onclick="#" th:if="${#strings.substring(line.data,0,1).equals('#')}" type="button">
             </td>
-            <td th:if="${mode==true}"><a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить
-                строку</a></td>
+
+            <td th:if="${mode==true}">
+                <a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить
+                    строку</a>
+            </td>
         </tr>
 
     </table>
@@ -108,4 +116,5 @@
     <a href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
 </div>
 </body>
+
 </html>

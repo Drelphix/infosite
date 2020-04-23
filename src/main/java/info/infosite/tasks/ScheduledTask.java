@@ -2,7 +2,7 @@ package info.infosite.tasks;
 
 import info.infosite.database.Excel;
 import info.infosite.database.ExcelRepository;
-import info.infosite.database.MenuRepository;
+import info.infosite.database.generated.MenuRepository;
 import info.infosite.views.ExcelTableReportView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;

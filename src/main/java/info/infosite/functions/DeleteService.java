@@ -1,9 +1,9 @@
 package info.infosite.functions;
 
-import info.infosite.database.Col;
-import info.infosite.database.Menu;
-import info.infosite.database.SubMenu;
-import info.infosite.database.Tab;
+import info.infosite.database.generated.Col;
+import info.infosite.database.generated.Menu;
+import info.infosite.database.generated.SubMenu;
+import info.infosite.database.generated.Tab;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;

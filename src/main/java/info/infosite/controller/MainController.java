@@ -1,8 +1,8 @@
 package info.infosite.controller;
 
-import info.infosite.database.MenuRepository;
-import info.infosite.database.Tab;
-import info.infosite.database.TableRepository;
+import info.infosite.database.generated.MenuRepository;
+import info.infosite.database.generated.Tab;
+import info.infosite.database.generated.TableRepository;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.views.ExcelTableReportView;

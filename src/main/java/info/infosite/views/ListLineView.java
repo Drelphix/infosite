@@ -1,6 +1,6 @@
 package info.infosite.views;
 
-import info.infosite.database.Line;
+import info.infosite.database.generated.Line;
 
 import java.util.List;
 

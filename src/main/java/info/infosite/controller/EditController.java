@@ -1,6 +1,6 @@
 package info.infosite.controller;
 
-import info.infosite.database.*;
+import info.infosite.database.generated.*;
 import info.infosite.functions.MenuService;
 import info.infosite.views.ListLineView;
 import info.infosite.views.TableView;

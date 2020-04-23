@@ -1,9 +1,9 @@
 package info.infosite.views;
 
-import info.infosite.database.Line;
-import info.infosite.database.Menu;
-import info.infosite.database.SubMenu;
-import info.infosite.database.Tab;
+import info.infosite.database.generated.Line;
+import info.infosite.database.generated.Menu;
+import info.infosite.database.generated.SubMenu;
+import info.infosite.database.generated.Tab;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

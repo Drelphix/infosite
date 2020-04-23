@@ -1,9 +1,9 @@
 package info.infosite.functions;
 
-import info.infosite.database.Menu;
-import info.infosite.database.MenuRepository;
 import info.infosite.database.Xml;
 import info.infosite.database.XmlRepository;
+import info.infosite.database.generated.Menu;
+import info.infosite.database.generated.MenuRepository;
 import info.infosite.views.XmlMenuView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
