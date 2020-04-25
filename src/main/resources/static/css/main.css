@@ -92,7 +92,7 @@ $black			: #222;
 }
 
 body {
-  color: #000000;
+  color: rgba(150, 0, 0, 1);
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   line-height: 1.625em;
@@ -2092,7 +2092,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #f8b600;
   padding: 9px 26px;
 }
-
+/*Цвет шапки*/
 .main-menu {
   padding-bottom: 10px;
   padding-top: 10px;
@@ -2160,10 +2160,6 @@ h1, h2, h3, h4, h5, h6 {
   right: 100%;
 }
 
-.nav-menu ul li {
-  min-width: 180px;
-}
-
 /* Nav Menu Arrows */
 .sf-arrows .sf-with-ul {
   padding-right: 30px;
@@ -2182,26 +2178,18 @@ h1, h2, h3, h4, h5, h6 {
   content: "\f105";
 }
 
-/* Nav Meu Container */
-@media (max-width: 768px) {
-  #nav-menu-container {
-    display: none;
-  }
-}
-
 /* Nav Meu Styling */
 .nav-menu a {
   padding: 0 8px 0px 8px;
   text-decoration: none;
   display: inline-block;
-  color: black;
   font-weight: 500;
   text-transform: uppercase;
   outline: none;
 }
 
 .nav-menu li:hover > a {
-  color: #f8b600;
+  color: rgba(150, 0, 0, 1);
 }
 
 .nav-menu > li {
@@ -2219,16 +2207,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu ul li a {
-  padding: 5px 10px;
-  color: #333;
   transition: 0.3s;
-  display: block;
   font-size: 12px;
-  text-transform: none;
 }
 
 .nav-menu ul li:hover > a {
-  color: #f8b600;
+  color: rgba(150, 0, 0, 1);
 }
 
 .nav-menu ul ul {
@@ -2261,6 +2245,19 @@ h1, h2, h3, h4, h5, h6 {
 
 #nav-menu-container {
   padding-right: 15px;
+}
+
+#nav-menu-container a {
+      height: 35px;
+      text-transform: uppercase;
+      font-weight: bold;
+      display: block;
+      display:table-cell;
+      vertical-align:middle;
+}
+/*Цвет hover*/
+#nav-menu-container a:hover {
+    color: rgba(0, 0, 150, 1);
 }
 
 .primary-btn {
@@ -2318,11 +2315,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .primary-btn.white:hover {
   background: #fff;
-  color: #f8b600;
+  color: #ffffff;
 }
 
 .primary-btn.white:hover span {
-  color: #f8b600;
+  color: #ffffff;
 }
 
 .primary-btn.wh {
