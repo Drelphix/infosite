@@ -114,11 +114,7 @@ public class MainController {
                 XMLReader xmlReader = null;
                 try {
                     xmlReader = new XMLReader(path);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (ParserConfigurationException e) {
+                } catch (IOException | SAXException | ParserConfigurationException e) {
                     e.printStackTrace();
                 }
                 model.addAttribute("mode", this.editMode);

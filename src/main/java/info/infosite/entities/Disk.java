@@ -8,4 +8,5 @@ public class Disk {
     private String name;
     private String totalSize;
     private String freeSpace;
+    private double freeSpaceGb;
 }
