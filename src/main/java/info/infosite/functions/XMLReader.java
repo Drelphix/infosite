@@ -51,8 +51,8 @@ public class XMLReader {
                     if (nodeDisk.getNodeType() == Node.ELEMENT_NODE) {
                         Element elementDiskName = (Element) xmlDisk;
                         disk.setName(GetFirstElement("VolumeName", elementDiskName));
-                        disk.setTotalSize(GetFirstElement("TotalSize", elementDiskName));
-                        disk.setFreeSpace(GetFirstElement("FreeSpace", elementDiskName));
+                        disk.setTotalSize(CalcSize(GetFirstElement("TotalSize", elementDiskName)));
+                        disk.setFreeSpace(CalcSize(GetFirstElement("FreeSpace", elementDiskName)));
                     }
                 }
                 disks.add(disk);
@@ -86,7 +86,7 @@ public class XMLReader {
                                     } else if (nodeFile.getNodeName().equals("DateLastModified")) {
                                         file.setLastDate(nodeFile.getFirstChild().getTextContent());
                                     } else if (nodeFile.getNodeName().equals("Size")) {
-                                        file.setSize(nodeFile.getFirstChild().getTextContent());
+                                        file.setSize(CalcSize(nodeFile.getFirstChild().getTextContent()));
                                     }
                                 }
                             }
@@ -109,8 +109,20 @@ public class XMLReader {
         return element.getElementsByTagName(param).item(0).getTextContent();
     }
 
-    public String GetElement(String param, Element element, int index) {
-        return element.getElementsByTagName(param).item(index).getTextContent();
+    private String CalcSize(String size) {
+
+        long byteSize = Long.parseLong(size);
+        double sizeKb = byteSize / 1024;
+        double sizeMb = sizeKb / 1024;
+        double sizeGb = sizeMb / 1024;
+        if (byteSize <= 1024) {
+            size = byteSize / 1024 + " кб";
+        } else if (sizeKb >= 1024 && sizeMb <= 1024) {
+            size = Math.round(sizeMb * 100) / 100 + " мб";
+        } else if (sizeMb >= 1024) {
+            size = Double.valueOf(Math.round(sizeGb * 100)) / 100 + " гб";
+        }
+        return size;
     }
 }
 
