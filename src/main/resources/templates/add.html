@@ -33,7 +33,6 @@
 <div th:if="${table}" th:object="${table}">
     <center>
         <form action="#" method="post" th:action="@{/editTab}">
-
             <table>
                 <p>Название таблицы</p>
                 <tr>
@@ -42,7 +41,6 @@
                         <input th:field="*{id}" type="hidden">
                         <input th:field="*{name}" type="text">
                         <a href="#" th:href="@{/delTab(id=*{id})}">Удалить таблицу</a>
-
                     </td>
                 </tr>
                 <tr th:each="col,itemStat: *{cols}">

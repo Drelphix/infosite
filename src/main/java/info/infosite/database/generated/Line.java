@@ -18,6 +18,8 @@ public class Line {
     @Column(name = "data")
     private String data;
 
+    private boolean hidden;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idColumn")
     private Col col;

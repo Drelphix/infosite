@@ -38,6 +38,15 @@ public class TableView {
                         end = col.getLines().size();
                     }
                     try {
+                        if (col.isHidden()) {
+                            for (Line line : col.getLines()) {
+                                line.setHidden(true);
+                            }
+                        } else {
+                            for (Line line : col.getLines()) {
+                                line.setHidden(false);
+                            }
+                        }
                         lineArrayList.add(col.getLines().get(i));
                     } catch (Exception e) {
                         lineArrayList.add(new Line(col));

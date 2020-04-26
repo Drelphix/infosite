@@ -52,7 +52,7 @@ public class XMLReader {
                         Element elementDiskName = (Element) xmlDisk;
                         disk.setName(GetFirstElement("VolumeName", elementDiskName));
                         disk.setTotalSize(CalcSize(GetFirstElement("TotalSize", elementDiskName)));
-                        disk.setFreeSpaceGb(Double.parseDouble(GetFirstElement("FreeSpace", elementDiskName)) / 1024 / 1024);
+                        disk.setFreeSpaceGb(Math.round(Double.parseDouble(GetFirstElement("FreeSpace", elementDiskName)) / 1024 / 1024) / 100 * 100);
                         disk.setFreeSpace(CalcSize(GetFirstElement("FreeSpace", elementDiskName)));
 
                     }
@@ -117,8 +117,8 @@ public class XMLReader {
         double sizeKb = byteSize / 1024;
         double sizeMb = sizeKb / 1024;
         double sizeGb = sizeMb / 1024;
-        if (byteSize <= 1024) {
-            size = byteSize / 1024 + " кб";
+        if (sizeKb <= 1024) {
+            size = sizeKb + " кб";
         } else if (sizeKb >= 1024 && sizeMb <= 1024) {
             size = Math.round(sizeMb * 100) / 100 + " мб";
         } else if (sizeMb >= 1024) {

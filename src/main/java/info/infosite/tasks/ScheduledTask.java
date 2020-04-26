@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,11 +22,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
 @EnableScheduling
+@Component
 public class ScheduledTask {
     @Autowired
     public ExcelRepository excelRepository;
@@ -51,19 +54,22 @@ public class ScheduledTask {
         }
     }
 
-    @Scheduled(cron = "0 0/30 * * *")
+    @Scheduled(cron = "0 0/30 0 * * ?")
     public void CheckFreeSpace() {
+        menuService.CheckMenu();
         for (XmlMenuView xmlMenuView : menuService.xmlMenus) {
             for (String path : xmlMenuView.getPaths()) {
                 try {
                     XMLReader reader = new XMLReader(path);
-                    LocalDateTime dateTime = LocalDateTime.parse(reader.getComputer().getDate() + "T" + reader.getComputer().getTime());
-                    if (dateTime.minus(5, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
-                        mailService.SendEmail("Info about " + reader.getComputer().getName(), "Information about " + reader.getComputer().getName() + " didn't update since " + dateTime);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+                    LocalDateTime dateTime = LocalDateTime.parse(reader.getComputer().getDate() + " " + reader.getComputer().getTime(), formatter);
+                    //Time of data aging
+                    if (dateTime.minus(6, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
+                        mailService.SendEmail("Info about " + reader.getComputer().getName(), "Information about " + reader.getComputer().getName() + " didn't update since " + dateTime.toLocalDate() + " " + dateTime.toLocalTime());
                     }
                     for (Disk disk : reader.getComputer().getDisks()) {
                         if (disk.getFreeSpaceGb() <= 5.0) {
-                            mailService.SendEmail("ALARM DISK SIZE AT " + reader.getComputer().getName(), "There are " + disk.getFreeSpaceGb() + " at disk " + disk.getLetter() + " at " + reader.getComputer().getName());
+                            mailService.SendEmail("ALARM DISK SIZE AT " + reader.getComputer().getName(), "There are " + disk.getFreeSpaceGb() + "Gb at disk " + disk.getLetter() + " at " + reader.getComputer().getName());
                         }
                     }
                 } catch (IOException | SAXException | ParserConfigurationException e) {

@@ -98,18 +98,21 @@ public class EditController {
         int max = 0;
         tab.setName(table.getName());
         tab.setSubMenu(table.getSubMenu());
-        for (Col col : table.getCols()) {
-            if (col.getName() != "") {
-                colRepository.save(col);
-                if (col.getLines().size() == 0) {
-                    for (int i = 0; i < max; i++) {
-                        lineRepository.save(new Line(col));
+        try {
+            for (Col col : table.getCols()) {
+                if (col.getName() != "") {
+                    colRepository.save(col);
+                    if (col.getLines().size() == 0) {
+                        for (int i = 0; i < max; i++) {
+                            lineRepository.save(new Line(col));
+                        }
+                    } else {
+                        if (max < col.getLines().size())
+                            max = col.getLines().size();
                     }
-                } else {
-                    if (max < col.getLines().size())
-                        max = col.getLines().size();
                 }
             }
+        } catch (NullPointerException ignored) {
         }
         tableRepository.save(tab);
 
