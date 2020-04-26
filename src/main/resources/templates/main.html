@@ -13,8 +13,6 @@
     <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
     <meta charset="UTF-8">
     <title>InfoSite</title>
-    <script>
-    </script>
 </head>
 <body>
 <header id="header" th:fragment="menu">
@@ -29,7 +27,7 @@
                         <a th:text="${xml.name}"></a>
                         <ul th:if="${not #lists.isEmpty(xml.subs)}">
                             <li th:each="sub,itemStat: ${xml.subs}">
-                                <a href="" th:href="@{'/info/'+${xml.name}(id=${itemStat.index})}" th:text="${sub}"></a>
+                                <a href="" th:href="@{'/'+${xml.name}(id=${itemStat.index})}" th:text="${sub}"></a>
                             </li>
                         </ul>
                     </li>

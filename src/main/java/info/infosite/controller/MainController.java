@@ -89,11 +89,7 @@ public class MainController {
         XMLReader xmlReader = null;
         try {
             xmlReader = new XMLReader("src/main/resources/xml/titanm_serv.xml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
         model.addAttribute("mode", this.editMode);
@@ -103,7 +99,7 @@ public class MainController {
         return "computer";
     }
 
-    @RequestMapping(value = "/info/{name}")
+    @RequestMapping(value = "/{name}")
     public String ShowDiskInfo(Model model, @PathVariable(name = "name") String name, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
         for (XmlMenuView xmlMenuView : menuService.xmlMenus) {

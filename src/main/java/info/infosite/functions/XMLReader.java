@@ -21,7 +21,6 @@ import java.util.List;
 
 @Getter
 public class XMLReader {
-
     Document doc;
     private Computer computer;
 
