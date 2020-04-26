@@ -7,8 +7,8 @@
         <div class="form-inner">
             <center><h3>Авторизация</h3></center>
             <div th:if="${param.error}">Неверно введен логин или пароль</div>
-            <p style="color:white"><input id="username" name="username" placeholder="Логин" required type="text"/></p>
-            <p style="color:white"><input id="password" name="password" placeholder="Пароль" required type="password"/>
+            <p style="color:white"><input name="username" placeholder="Логин" required type="text"/></p>
+            <p style="color:white"><input name="password" placeholder="Пароль" required type="password"/>
             </p>
             <div class="form-inner">
                 <input class="input" type="submit" value="Войти"/>

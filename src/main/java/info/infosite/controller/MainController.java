@@ -47,6 +47,12 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping(value = "/login")
+    public String LoginPage(Model model) {
+        return "login";
+    }
+
+
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
