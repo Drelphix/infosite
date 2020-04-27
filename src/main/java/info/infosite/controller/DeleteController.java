@@ -73,6 +73,7 @@ public class DeleteController {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
         deleteService.DeleteMenu(menu);
+        menuService.menus = menuRepository.findAll();
         return "redirect:/";
     }
 }

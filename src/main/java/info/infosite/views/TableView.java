@@ -22,8 +22,7 @@ public class TableView {
     public TableView(Tab table) {
         this.id = table.getIdTable();
         this.name = table.getName();
-        this.cols = new ArrayList<>();
-        this.cols.addAll(table.getCols());
+        this.cols = table.getCols();
         this.numberCols = cols.size();
         this.subMenu = table.getSubMenu();
         lines = new ArrayList<>();

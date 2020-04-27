@@ -28,7 +28,7 @@ public class Col {
     @JoinColumn(name = "idTable")
     private Tab table;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Line.class, mappedBy = "col", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Line.class, mappedBy = "col", cascade = CascadeType.REMOVE)
     private List<Line> lines;
 
     public Col() {

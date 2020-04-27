@@ -82,7 +82,7 @@
                     <li class="menu-has-children" th:each="menu : ${menus}">
                         <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
                            th:text="${menu.name}"></a>
-                        <a th:if="${mode==false}" th:text="${menu.name}"></a>
+                        <a th:if="${mode!=true}" th:text="${menu.name}"></a>
                         <ul th:if="${not #lists.isEmpty(menu.subMenuSet)}">
                             <li th:each="sub: ${menu.subMenuSet}">
                                 <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>

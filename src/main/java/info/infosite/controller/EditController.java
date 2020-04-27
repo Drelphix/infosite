@@ -74,9 +74,10 @@ public class EditController {
                 subMenuRepository.save(subMenu);
             }
             menuRepository.save(menu);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
 
         }
+        menuService.menus = menuRepository.findAll();
         return "redirect:/";
     }
 
@@ -100,7 +101,7 @@ public class EditController {
         tab.setSubMenu(table.getSubMenu());
         try {
             for (Col col : table.getCols()) {
-                if (col.getName() != "") {
+                if (!col.getName().equals("")) {
                     colRepository.save(col);
                     if (col.getLines().size() == 0) {
                         for (int i = 0; i < max; i++) {
