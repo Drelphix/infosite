@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="main::head">
-</head>
+<head th:insert="main::head"></head>
 <body>
 <header id="header" th:insert="main::menu"></header>
+<section class="popular-destination-area section-gap" th:fragment="section">
+    <div class="container" th:fragment="menu" section>
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
 <p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
-<table th:if="${not #lists.isEmpty(computer.disks)}">
-    <caption>Информация о дисках</caption>
+<table th:if="${not #lists.isEmpty(computer.disks)}" class="infodisk" id="infodisk">
+    <tr>
+        <td colspan="4">Информация о дисках</td>
+    </tr>
     <tr>
         <td>Диск</td>
         <td>Имя</td>
@@ -20,8 +26,11 @@
         <td th:text="${disk.getFreeSpace()}">te</td>
     </tr>
 </table>
-<h3>Последние файлы</h3>
-<table>
+
+<table class="lastfile" id="lastfile">
+    <tr>
+        <td colspan="4">Последние файлы</td>
+    </tr>
     <tr>
         <td>Имя файла</td>
         <td>Имя файла</td>
@@ -38,10 +47,11 @@
     </tr>
     </tr>
 </table>
-<h3>Информация о файлах</h3>
-<table th:each="backup : ${computer.backups}">
+    <br><br>
+    <h3>Информация о файлах</h3>
+<table th:each="backup : ${computer.backups}" class="infofile" id="infofile">
     <tr>
-        <td align="center" th:text="${backup.getPath()}"></td>
+        <td align="center" th:text="${backup.getPath()}" colspan="3"></td>
     </tr>
     <tr>
         <td>Имя файла</td>
@@ -54,6 +64,12 @@
         <td th:text="${file.lastDate}"></td>
     </tr>
     </tr>
-</table>
+
+</table><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

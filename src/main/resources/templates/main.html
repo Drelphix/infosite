@@ -12,6 +12,40 @@
     <link href="#" rel="stylesheet" th:href="@{/css/owl.carousel.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
     <meta charset="UTF-8">
+    <style>
+    html{
+    overflow-x: hidden;
+    }
+
+    #infodisk{
+    width: 45%;
+    table-layout: fixed;
+    display: inline;
+    }
+    #lastfile{
+    width: 65%;
+    table-layout: fixed;
+    display: inline;
+    }
+    #infofile{
+    width: 95%;
+    table-layout: fixed;
+    margin: auto;
+    }
+
+    td {
+    text-align: center;
+    border: 1px solid blue;
+    padding: 5px;
+    }
+
+    tr {
+    text-align: center;
+    border: 1px solid blue;
+    padding: 5px;
+    }
+
+    </style>
     <script>
     function GetData(copyText) {
 
@@ -79,12 +113,12 @@
     </div>
 </header>
 
-<section class="popular-destination-area section-gap">
-    <div class="container">
+<section class="popular-destination-area section-gap" th:fragment="section">
+    <div class="container" th:fragment="menu" section>
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    //Пусто, но это под меню
+                    <!-- Пусто, но это под меню -->
                 </div>
             </div>
         </div>

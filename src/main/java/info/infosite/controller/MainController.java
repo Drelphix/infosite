@@ -65,7 +65,7 @@ public class MainController {
         model.addAttribute("tables", tableViews);
         model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("mode", this.editMode);
-        return "index";
+        return "main";
     }
     @GetMapping(value = "/mode")
     public String EditingMode(Model model, @RequestParam(name = "mode") boolean mode, HttpServletRequest request) {
