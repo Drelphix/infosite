@@ -8,58 +8,69 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-<p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
-<table th:if="${not #lists.isEmpty(computer.disks)}" class="infodisk" id="infodisk">
-    <tr>
-        <td colspan="4">Информация о дисках</td>
-    </tr>
-    <tr>
-        <td>Диск</td>
-        <td>Имя</td>
-        <td>Размер</td>
-        <td>Свободное место</td>
-    </tr>
-    <tr th:each="disk : ${computer.disks}">
-        <td th:text="${disk.getLetter()}">te</td>
-        <td th:text="${disk.getName()}">te</td>
-        <td th:text="${disk.getTotalSize()}">te</td>
-        <td th:text="${disk.getFreeSpace()}">te</td>
-    </tr>
-</table>
+                    <p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
+                    <table>
+                        <tr>
+                            <td>
+                                <table class="infodisk" id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
+                                    <tr>
+                                        <td colspan="4">Информация о дисках</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Диск</td>
+                                        <td>Имя</td>
+                                        <td>Размер</td>
+                                        <td>Свободное место</td>
+                                    </tr>
+                                    <tr th:each="disk : ${computer.disks}">
+                                        <td th:text="${disk.getLetter()}">te</td>
+                                        <td th:text="${disk.getName()}">te</td>
+                                        <td th:text="${disk.getTotalSize()}">te</td>
+                                        <td th:text="${disk.getFreeSpace()}">te</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="lastfile" id="lastfile">
+                                    <tr>
+                                        <td colspan="4">Последние файлы</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Имя файла</td>
+                                        <td>Имя файла</td>
+                                        <td>Размер</td>
+                                        <td>Дата</td>
+                                    <tr>
+                                    <tr th:each="backup : ${computer.backups}"
+                                        th:if="${not #lists.isEmpty(computer.backups)}">
+                                        <td th:text="${backup.getPath()}"></td>
+                                        <td th:if="${not #lists.isEmpty(backup.files)}"
+                                            th:text="${backup.files[0].name}"></td>
+                                        <td th:if="${not #lists.isEmpty(backup.files)}"
+                                            th:text="${backup.files[0].size}"></td>
+                                        <td th:if="${not #lists.isEmpty(backup.files)}"
+                                            th:text="${backup.files[0].lastDate}"></td>
+                                        <td colspan="3" th:unless="${not #lists.isEmpty(backup.files)}">Нет данных</td>
 
-<table class="lastfile" id="lastfile">
-    <tr>
-        <td colspan="4">Последние файлы</td>
-    </tr>
-    <tr>
-        <td>Имя файла</td>
-        <td>Имя файла</td>
-        <td>Размер</td>
-        <td>Дата</td>
-    <tr>
-    <tr th:each="backup : ${computer.backups}" th:if="${not #lists.isEmpty(computer.backups)}">
-        <td th:text="${backup.getPath()}"></td>
-        <td th:if="${not #lists.isEmpty(backup.files)}" th:text="${backup.files[0].name}"></td>
-        <td th:if="${not #lists.isEmpty(backup.files)}" th:text="${backup.files[0].size}"></td>
-        <td th:if="${not #lists.isEmpty(backup.files)}" th:text="${backup.files[0].lastDate}"></td>
-        <td colspan="3" th:unless="${not #lists.isEmpty(backup.files)}">Нет данных</td>
-
-    </tr>
-    </tr>
-</table>
-    <br><br>
-    <h3>Информация о файлах</h3>
-<table th:each="backup : ${computer.backups}" class="infofile" id="infofile">
-    <tr>
-        <td align="center" th:text="${backup.getPath()}" colspan="3"></td>
-    </tr>
-    <tr>
-        <td>Имя файла</td>
-        <td>Размер</td>
-        <td>Дата</td>
-    <tr>
-    <tr th:each="file: ${backup.files}">
-        <td th:text="${file.name}"></td>
+                                    </tr>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <h3>Информация о файлах</h3>
+                    <table class="infofile" id="infofile" th:each="backup : ${computer.backups}">
+                        <tr>
+                            <td align="center" th:text="${backup.getPath()}" colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td>Имя файла</td>
+                            <td>Размер</td>
+                            <td>Дата</td>
+                        <tr>
+                        <tr th:each="file: ${backup.files}">
+                            <td th:text="${file.name}"></td>
         <td th:text="${file.size}"></td>
         <td th:text="${file.lastDate}"></td>
     </tr>

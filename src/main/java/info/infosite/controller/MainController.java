@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.xml.sax.SAXException;
 
@@ -39,12 +38,9 @@ public class MainController {
     boolean editMode = false;
 
     @GetMapping(value = "/")
-    public String IndexPage(Model model) throws IOException {
+    public String IndexPage(Model model) {
         menuService.CheckMenu();
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
-        model.addAttribute("mode", this.editMode);
-        return "main";
+        return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
     }
 
     @GetMapping(value = "/login")
@@ -56,7 +52,7 @@ public class MainController {
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
-        List<TableView> tableViews = new ArrayList<TableView>();
+        List<TableView> tableViews = new ArrayList<>();
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
         }
@@ -105,7 +101,7 @@ public class MainController {
         return "computer";
     }
 
-    @RequestMapping(value = "/{name}")
+    @GetMapping(value = "/{name}")
     public String ShowDiskInfo(Model model, @PathVariable(name = "name") String name, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
         for (XmlMenuView xmlMenuView : menuService.xmlMenus) {
