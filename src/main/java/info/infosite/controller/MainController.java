@@ -51,6 +51,7 @@ public class MainController {
         }
     }
 
+
     @GetMapping(value = "/login")
     public String LoginPage(Model model) {
         return "login";
