@@ -29,4 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
-src/resources/application.properties
+src/main/resources/application.properties
+/src/main/java/info/infosite/ServletInitializer.java
