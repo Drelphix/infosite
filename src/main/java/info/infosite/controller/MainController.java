@@ -40,7 +40,15 @@ public class MainController {
     @GetMapping(value = "/")
     public String IndexPage(Model model) {
         menuService.CheckMenu();
-        return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
+        try {
+            return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            menuService.CheckMenu();
+            model.addAttribute("xmls", menuService.xmlMenus);
+            model.addAttribute("menus", menuService.menus);
+            model.addAttribute("mode", this.editMode);
+            return "main";
+        }
     }
 
     @GetMapping(value = "/login")

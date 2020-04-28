@@ -12,6 +12,7 @@
                 <div class="title text-center">
                     <form action="#" method="post" th:action="@{/saveMenu}" th:if="${newmenu}" th:object="${newmenu}">
                         <center>
+                            <p>Название меню:</p>
                             <input th:field="*{name}" type="text">
                             <button type="submit">Сохранить</button>
                         </center>
@@ -35,6 +36,7 @@
                             <button type="submit">Сохранить</button>
                         </center>
                     </form>
+                    <!--Редактирование таблицы-->
                     <div th:if="${table}" th:object="${table}">
                         <center>
                             <form action="#" method="post" th:action="@{/editTab}">
@@ -47,6 +49,9 @@
                                             <input th:field="*{name}" type="text">
                                             <a href="#" th:href="@{/delTab(id=*{id})}">Удалить таблицу</a>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>Список стоблцов:</p></td>
                                     </tr>
                                     <tr th:each="col,itemStat: *{cols}">
                                         <td>
@@ -64,6 +69,7 @@
                             <a href="#" th:href="@{/addCol(tab=${table.id})}">Добавить столбец</a>
                         </center>
                     </div>
+                    <!--Редактирование меню-->
                     <div align="center" th:if="${menu}" th:object="${menu}">
                         <form action="#" method="post" th:action="@{/editMenu}">
                             <p>
@@ -72,7 +78,7 @@
                             <input th:field="*{name}" type="text">
                             <a href="#" th:href="@{/delMenu(id=*{idMenu})}">Удалить меню</a>
                             </p>
-                            <p>Подменю</p>
+                            <p>Список подменю:</p>
                             <div th:each="subMenu, itemStat:*{subMenuSet}">
                                 <input th:field="*{subMenuSet[__${itemStat.index}__].idSubMenu}" type="hidden">
                                 <input th:field="*{subMenuSet[__${itemStat.index}__].name}" type="text">
@@ -86,11 +92,14 @@
                             <input type="submit" value="Сохранить">
                         </form>
                     </div>
+                    <!--Добавление таблицы-->
                     <div align="center" th:if="${submenu}" th:object="${submenu}">
                         <form action="#" method="post" th:action="@{/addTab}">
                             <input th:field="*{menu}" type="hidden">
                             <input th:field="*{idSubMenu}" type="hidden">
+                            <p>Название подменю:</p>
                             <input th:field="*{name}" type="text">
+                            <p>Список таблиц:</p>
                             <div th:each="table, itemStat:*{tables}">
                                 <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
                                 <input th:field="*{tables[__${itemStat.index}__].name}" type="text">
