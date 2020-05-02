@@ -8,6 +8,7 @@
         <p>Пользователь:<a th:text="${user.username}"></a></p>
         <p>Активация:<a th:text="${user.active}?'Активен':'Неактивен'"></a></p>
         <a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a>
+        <a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a>
     </div>
     <a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
 </div>

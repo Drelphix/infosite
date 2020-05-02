@@ -19,7 +19,7 @@
         <p th:text="${error}"></p>
         <input th:field="*{id}" type="hidden">
         <p>Логин: <input required th:field="*{username}" type="text"/></p>
-        <p>Пароль: <input required th:field="*{password}" type="password"/></p>
+        <p>Пароль: <input th:field="*{password}" type="password"/></p>
         <p th:if="${edit}">Активен:<input th:field="*{active}" type="checkbox">
         <p><input class="input" type="submit" value="Сохранить"/></p>
     </div>

@@ -79,7 +79,7 @@ public class MainController {
             user.setRole("admin");
             userRepository.save(user);
         }
-        return "redirect:/";
+        return "redirect:/manage";
     }
 
     @GetMapping(value = "/manage")

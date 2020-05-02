@@ -127,8 +127,14 @@ public class EditController {
 
     @PostMapping(value = "/edituser")
     public String EditUser(Model model, @ModelAttribute User user) {
+        User base = userRepository.findUserByUsername(user.getUsername());
         user.setRole("admin");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        try {
+            user.getPassword().isEmpty();
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } catch (NullPointerException e) {
+            user.setPassword(base.getPassword());
+        }
         userRepository.save(user);
         return "redirect:/manage";
     }

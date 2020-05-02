@@ -1,5 +1,6 @@
 package info.infosite.controller;
 
+import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.*;
 import info.infosite.functions.DeleteService;
 import info.infosite.functions.MenuService;
@@ -15,15 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DeleteController {
     @Autowired
-    public ColRepository colRepository;
+    ColRepository colRepository;
     @Autowired
-    public LineRepository lineRepository;
+    LineRepository lineRepository;
     @Autowired
-    public MenuRepository menuRepository;
+    MenuRepository menuRepository;
     @Autowired
-    public SubMenuRepository subMenuRepository;
+    SubMenuRepository subMenuRepository;
     @Autowired
-    public TableRepository tableRepository;
+    TableRepository tableRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     MenuService menuService;
     @Autowired
@@ -75,5 +78,11 @@ public class DeleteController {
         deleteService.DeleteMenu(menu);
         menuService.menus = menuRepository.findAll();
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
+    public String DeleteUser(Model model, @RequestParam int id) {
+        userRepository.deleteById(id);
+        return "redirect:/manage";
     }
 }
