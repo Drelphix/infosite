@@ -1,16 +1,16 @@
 package info.infosite.controller;
 
+import info.infosite.database.auth.User;
+import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.*;
 import info.infosite.functions.MenuService;
 import info.infosite.views.ListLineView;
 import info.infosite.views.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class EditController {
@@ -26,6 +26,10 @@ public class EditController {
     public TableRepository tableRepository;
     @Autowired
     MenuService menuService;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String EditLines(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
@@ -111,5 +115,21 @@ public class EditController {
         tableRepository.save(tab);
 
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
+    }
+
+    @RequestMapping(value = "/edituser")
+    public String EditUser(Model model, @RequestParam int id) {
+        User user = userRepository.getOne(id);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", true);
+        return "registration";
+    }
+
+    @PostMapping(value = "/edituser")
+    public String EditUser(Model model, @ModelAttribute User user) {
+        user.setRole("admin");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "redirect:/manage";
     }
 }

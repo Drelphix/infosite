@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head">
+</head>
+<body>
+<form action="#" class="transparent" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
+
+    <div align="center" class="form-inner">
+        <h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3>
+        <p th:text="${error}"></p>
+        <p>Логин: <input required th:field="*{username}" type="text"/></p>
+        <p>Пароль: <input required th:field="*{password}" type="password"/></p>
+        <p th:if="${edit}">Активен:<input th:field="*{active}" type="checkbox">
+        <p><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/></p>
+    </div>
+</form>
+<form action="#" class="transparent" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
+    <div align="center" class="form-inner">
+        <h3>Изменение записи</h3>
+        <p th:text="${error}"></p>
+        <input th:field="*{id}" type="hidden">
+        <p>Логин: <input required th:field="*{username}" type="text"/></p>
+        <p>Пароль: <input required th:field="*{password}" type="password"/></p>
+        <p th:if="${edit}">Активен:<input th:field="*{active}" type="checkbox">
+        <p><input class="input" type="submit" value="Сохранить"/></p>
+    </div>
+</form>
+
+</body>
+</html>

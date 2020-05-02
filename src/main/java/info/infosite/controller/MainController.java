@@ -1,5 +1,7 @@
 package info.infosite.controller;
 
+import info.infosite.database.auth.User;
+import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.MenuRepository;
 import info.infosite.database.generated.Tab;
 import info.infosite.database.generated.TableRepository;
@@ -10,12 +12,11 @@ import info.infosite.views.TableView;
 import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,11 @@ public class MainController {
     @Autowired
     public TableRepository tableRepository;
     @Autowired
+    public UserRepository userRepository;
+    @Autowired
     MenuService menuService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/")
     public String IndexPage(Model model, HttpSession httpSession) {
@@ -54,12 +59,39 @@ public class MainController {
         }
     }
 
-
-    @GetMapping(value = "/login")
-    public String LoginPage(Model model) {
-        return "login";
+    @GetMapping(value = "/user/reg")
+    public String Registration(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("repeat", "");
+        return "registration";
     }
 
+    @PostMapping(value = "/user/reg")
+    public String Registration(Model model, @ModelAttribute User user, @ModelAttribute String repeat) {
+        try {
+            User test = userRepository.findUserByUsername(user.getUsername());
+            test.toString();
+            model.addAttribute("error", "Имя пользователя занято");
+            return "registration";
+        } catch (NullPointerException e) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setActive(false);
+            user.setRole("admin");
+            userRepository.save(user);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/manage")
+    public String ManageUsers(Model model, HttpSession httpSession) {
+        menuService.CheckMenu();
+        model.addAttribute("xmls", menuService.xmlMenus);
+        model.addAttribute("menus", menuService.menus);
+        CheckMode(httpSession);
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        model.addAttribute("users", userRepository.findAll(Sort.by(Sort.Direction.ASC, "username")));
+        return "management";
+    }
 
     @GetMapping(value = "/show")
     public String ShowTables(Model model, @RequestParam(name = "id") int id, HttpSession httpSession) {
@@ -101,7 +133,7 @@ public class MainController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/{name}")
+    @GetMapping(value = "/xml/{name}")
     public String ShowDiskInfo(Model model, @PathVariable(name = "name") String name, @RequestParam(name = "id") int id, HttpSession httpSession) {
         menuService.CheckMenu();
         for (XmlMenuView xmlMenuView : menuService.xmlMenus) {

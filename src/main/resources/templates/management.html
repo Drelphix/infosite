@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head">
+</head>
+<body>
+<header id="header" th:insert="main::menu"></header>
+<div th:if="${users}" th:object="${users}">
+    <div th:each="user:${users}">
+        <p>Пользователь:<a th:text="${user.username}"></a></p>
+        <p>Активация:<a th:text="${user.active}?'Активен':'Неактивен'"></a></p>
+        <a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a>
+    </div>
+    <a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
+</div>
+</body>
+</html>
