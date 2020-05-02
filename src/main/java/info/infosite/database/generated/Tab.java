@@ -24,7 +24,7 @@ public class Tab {
     @JoinColumn(name = "SubMenu")
     private SubMenu subMenu;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Col.class, mappedBy = "table", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Col.class, mappedBy = "table", cascade = CascadeType.ALL)
     private List<Col> cols;
 
     public Tab() {

@@ -2,6 +2,7 @@ package info.infosite.tasks;
 
 import info.infosite.database.Excel;
 import info.infosite.database.ExcelRepository;
+import info.infosite.database.generated.Menu;
 import info.infosite.database.generated.MenuRepository;
 import info.infosite.entities.Disk;
 import info.infosite.functions.MenuService;
@@ -12,7 +13,6 @@ import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
@@ -39,13 +39,14 @@ public class ScheduledTask {
     @Autowired
     MailService mailService;
 
-    @Scheduled(cron = "0 0 12 * * ?")
+    //@Scheduled(cron = "0 0 23 * * ?")
     public void ExcelCopy() throws IOException {
         String path;
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         List<Excel> excels = excelRepository.findAll();
-        XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(menuRepository.findAll());
+        List<Menu> menus = menuRepository.findAll();//Переписать
+        XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(menus);
         for (Excel excel : excels) {
             path = excel.getPath();
             FileOutputStream out = new FileOutputStream(new File(path + simpleDateFormat.format(new Date()) + ".xlsx"));
@@ -54,7 +55,7 @@ public class ScheduledTask {
         }
     }
 
-    @Scheduled(cron = "0 0/30 0 * * ?")
+    //@Scheduled(cron = "0 0/30 0 * * ?")
     public void CheckFreeSpace() {
         menuService.CheckMenu();
         for (XmlMenuView xmlMenuView : menuService.xmlMenus) {

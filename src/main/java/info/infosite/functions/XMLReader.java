@@ -5,12 +5,15 @@ import info.infosite.entities.Backup;
 import info.infosite.entities.Computer;
 import info.infosite.entities.Disk;
 import lombok.Getter;
+import org.hibernate.Session;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,9 +25,12 @@ import java.util.List;
 @Getter
 public class XMLReader {
     Document doc;
-    private Computer computer;
+    private final Computer computer;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public XMLReader(String path) throws IOException, SAXException, ParserConfigurationException {
+
         File inputFile = new File(path);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -101,6 +107,10 @@ public class XMLReader {
             }
         }
         computer.setBackups(backups);
+    }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
     }
 
     public String GetFirstElement(String param) {
