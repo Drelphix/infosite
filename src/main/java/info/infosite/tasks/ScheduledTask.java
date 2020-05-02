@@ -11,11 +11,15 @@ import info.infosite.mail.MailService;
 import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,14 +42,26 @@ public class ScheduledTask {
     MenuService menuService;
     @Autowired
     MailService mailService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    //@Scheduled(cron = "0 0 23 * * ?")
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
+    }
+
+    @Scheduled(cron = "0 46 10 * * ?")
     public void ExcelCopy() throws IOException {
+        Session session;
         String path;
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         List<Excel> excels = excelRepository.findAll();
-        List<Menu> menus = menuRepository.findAll();//Переписать
+        try {
+            session = getSession();
+        } catch (NullPointerException e) {
+
+        }
+        List<Menu> menus = menuRepository.findAll();//Переписать, ошибка сессии
         XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(menus);
         for (Excel excel : excels) {
             path = excel.getPath();

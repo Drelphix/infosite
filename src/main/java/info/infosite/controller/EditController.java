@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class EditController {
     @Autowired
@@ -37,14 +34,10 @@ public class EditController {
         ListLineView lines = new ListLineView(tableView.getLines().get(idLine));
         lines.setIdSubMenu(tableView.getSubMenu().getIdSubMenu());
         lines.setIdTable(tableView.getId());
-        List<String> cols = new ArrayList<>();
-        for (Col col : tableView.getCols()) {
-            cols.add(col.getName());
-        }
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("xmls", menuService.xmlMenus);
         model.addAttribute("tableName", tableView.getName());
-        model.addAttribute("cols", cols);
+        model.addAttribute("cols", tableView.getCols());
         model.addAttribute("lines", lines);
         return "add";
     }

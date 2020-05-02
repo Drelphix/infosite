@@ -18,7 +18,7 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setFrom("Infosite");
-        message.setTo("alexeydemeshko@gmail.com");
+        message.setTo("admin@autospace.by");
         message.setSubject(title);
         message.setText(text);
 
