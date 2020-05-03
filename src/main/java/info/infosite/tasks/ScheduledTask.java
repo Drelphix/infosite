@@ -79,14 +79,14 @@ public class ScheduledTask {
                     LocalDateTime dateTime = LocalDateTime.parse(reader.getComputer().getDate() + " " + reader.getComputer().getTime(), formatter);
                     //Time of data aging
                     if (dateTime.minus(6, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
-                        mailService.SendEmail("Внимание, на " + reader.getComputer().getName(), "Информация о " + reader.getComputer().getName() + " не обновлялась с " + dateTime.toLocalDate());
+                        mailService.SendEmail("Внимание, на " + reader.getComputer().getName() + " проблемы с обновлением", "Информация о " + reader.getComputer().getName() + " не обновлялась с " + dateTime.toLocalDate());
                     }
                     //Checking last backup
 
                     for (Backup backup : reader.getComputer().getBackups()) {
                         dateTime = LocalDateTime.parse(backup.getFiles().get(0).getLastDate() + " " + reader.getComputer().getTime(), formatter);
                         if (dateTime.minus(1, ChronoUnit.DAYS).isBefore(LocalDateTime.now())) {
-                            mailService.SendEmail("Внимание, на " + reader.getComputer().getName(), "Бэкап на " + reader.getComputer().getName() + " не обновлялся более суток. Название: " + backup.getFiles().get(0).getName() + " Время: " + backup.getFiles().get(0).getLastDate());
+                            mailService.SendEmail("Внимание, на " + reader.getComputer().getName() + " проблемы с бэкапом", "Бэкап на " + reader.getComputer().getName() + " не обновлялся более суток. Название: " + backup.getFiles().get(0).getName() + " Время: " + backup.getFiles().get(0).getLastDate());
                         }
                     }
                     //Checking free space

@@ -1,10 +1,12 @@
 package info.infosite.controller;
 
-import info.infosite.database.auth.User;
 import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.MenuRepository;
 import info.infosite.database.generated.Tab;
 import info.infosite.database.generated.TableRepository;
+import info.infosite.entities.inventory.InventoryRepository;
+import info.infosite.entities.inventory.ItemRepository;
+import info.infosite.entities.inventory.PlaceRepository;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.views.ExcelTableReportView;
@@ -13,10 +15,12 @@ import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +46,11 @@ public class MainController {
     @Autowired
     MenuService menuService;
     @Autowired
-    PasswordEncoder passwordEncoder;
+    InventoryRepository inventoryRepository;
+    @Autowired
+    ItemRepository itemRepository;
+    @Autowired
+    PlaceRepository placeRepository;
 
     @GetMapping(value = "/")
     public String IndexPage(Model model, HttpSession httpSession) {
@@ -51,42 +59,17 @@ public class MainController {
             return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             menuService.CheckMenu();
-            model.addAttribute("xmls", menuService.xmlMenus);
-            model.addAttribute("menus", menuService.menus);
+            model = addMenu(model);
             CheckMode(httpSession);
             model.addAttribute("mode", httpSession.getAttribute("mode"));
             return "main";
         }
     }
 
-    @GetMapping(value = "/user/reg")
-    public String Registration(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("repeat", "");
-        return "registration";
-    }
-
-    @PostMapping(value = "/user/reg")
-    public String Registration(Model model, @ModelAttribute User user, @ModelAttribute String repeat) {
-        try {
-            User test = userRepository.findUserByUsername(user.getUsername());
-            test.toString();
-            model.addAttribute("error", "Имя пользователя занято");
-            return "registration";
-        } catch (NullPointerException e) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setActive(false);
-            user.setRole("admin");
-            userRepository.save(user);
-        }
-        return "redirect:/manage";
-    }
-
     @GetMapping(value = "/manage")
     public String ManageUsers(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
-        model.addAttribute("xmls", menuService.xmlMenus);
-        model.addAttribute("menus", menuService.menus);
+        model = addMenu(model);
         CheckMode(httpSession);
         model.addAttribute("mode", httpSession.getAttribute("mode"));
         model.addAttribute("users", userRepository.findAll(Sort.by(Sort.Direction.ASC, "username")));
@@ -100,10 +83,9 @@ public class MainController {
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
         }
-        model.addAttribute("menus", menuService.menus);
+        model = addMenu(model);
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
-        model.addAttribute("xmls", menuService.xmlMenus);
         CheckMode(httpSession);
         model.addAttribute("mode", httpSession.getAttribute("mode"));
         return "main";
@@ -118,7 +100,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/export")
-    public String DownloadExcel(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String DownloadExcel(HttpServletResponse response) throws IOException {
         menuService.menus = menuRepository.findAll();
         //Write the workbook in file system
         String pattern = "MM-dd-yyyy";
@@ -146,13 +128,36 @@ public class MainController {
                     e.printStackTrace();
                 }
                 CheckMode(httpSession);
+                model = addMenu(model);
                 model.addAttribute("mode", httpSession.getAttribute("mode"));
-                model.addAttribute("menus", menuService.menus);
-                model.addAttribute("xmls", menuService.xmlMenus);
                 model.addAttribute("computer", xmlReader.getComputer());
             }
         }
         return "computer";
+    }
+
+    @GetMapping(value = "/inventory")
+    public String ShowInventory(Model model) {
+        model.addAttribute("invents", inventoryRepository.findAll(Sort.by(Sort.Direction.ASC, "item")));
+        return "inventory";
+    }
+
+    @GetMapping(value = "/items")
+    public String ShowItems(Model model) {
+        model.addAttribute("items", itemRepository.findAll(Sort.by(Sort.Direction.ASC, "item")));
+        return "inventory";
+    }
+
+    @GetMapping(value = "/places")
+    public String ShowPlaces(Model model) {
+        model.addAttribute("places", placeRepository.findAll(Sort.by(Sort.Direction.ASC, "place")));
+        return "inventory";
+    }
+
+    private Model addMenu(Model model) {
+        model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
+        return model;
     }
 
     private void CheckMode(HttpSession httpSession) {
