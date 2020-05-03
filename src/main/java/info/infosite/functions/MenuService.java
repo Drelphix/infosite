@@ -40,12 +40,16 @@ public class MenuService {
             File dir = new File(xml.getPath());
             File[] arrFiles = dir.listFiles();
             File[] lst = arrFiles;
-            for (File file : lst) {
-                xmlSubPaths.add(file.toString());
-                xmlSubMenus.add(file.getName().substring(0, file.getName().length() - 4));
+            try {
+                for (File file : lst) {
+                    xmlSubPaths.add(file.toString());
+                    xmlSubMenus.add(file.getName().substring(0, file.getName().length() - 4));
+                }
+                xmlMenu.setSubs(xmlSubMenus);
+                xmlMenu.setPaths(xmlSubPaths);
+            } catch (NullPointerException e) {
+
             }
-            xmlMenu.setSubs(xmlSubMenus);
-            xmlMenu.setPaths(xmlSubPaths);
             this.xmlMenus.add(xmlMenu);
         }
     }

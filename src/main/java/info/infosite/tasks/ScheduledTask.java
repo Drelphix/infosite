@@ -4,7 +4,8 @@ import info.infosite.database.Excel;
 import info.infosite.database.ExcelRepository;
 import info.infosite.database.generated.Menu;
 import info.infosite.database.generated.MenuRepository;
-import info.infosite.entities.Disk;
+import info.infosite.entities.xml.Backup;
+import info.infosite.entities.xml.Disk;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.mail.MailService;
@@ -20,6 +21,7 @@ import org.xml.sax.SAXException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,18 +51,13 @@ public class ScheduledTask {
         return entityManager.unwrap(Session.class);
     }
 
-    @Scheduled(cron = "0 46 10 * * ?")
+    @Scheduled(cron = "0 0 23 * * ?")
+    @Transactional
     public void ExcelCopy() throws IOException {
-        Session session;
         String path;
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         List<Excel> excels = excelRepository.findAll();
-        try {
-            session = getSession();
-        } catch (NullPointerException e) {
-
-        }
         List<Menu> menus = menuRepository.findAll();//Переписать, ошибка сессии
         XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(menus);
         for (Excel excel : excels) {
@@ -82,13 +79,23 @@ public class ScheduledTask {
                     LocalDateTime dateTime = LocalDateTime.parse(reader.getComputer().getDate() + " " + reader.getComputer().getTime(), formatter);
                     //Time of data aging
                     if (dateTime.minus(6, ChronoUnit.HOURS).isBefore(LocalDateTime.now())) {
-                        mailService.SendEmail("Info about " + reader.getComputer().getName(), "Information about " + reader.getComputer().getName() + " didn't update since " + dateTime.toLocalDate() + " " + dateTime.toLocalTime());
+                        mailService.SendEmail("Внимание, на " + reader.getComputer().getName(), "Информация о " + reader.getComputer().getName() + " не обновлялась с " + dateTime.toLocalDate());
                     }
-                    for (Disk disk : reader.getComputer().getDisks()) {
-                        if (disk.getFreeSpaceGb() <= 5.0) {
-                            mailService.SendEmail("ALARM DISK SIZE AT " + reader.getComputer().getName(), "There are " + disk.getFreeSpaceGb() + "Gb at disk " + disk.getLetter() + " at " + reader.getComputer().getName());
+                    //Checking last backup
+
+                    for (Backup backup : reader.getComputer().getBackups()) {
+                        dateTime = LocalDateTime.parse(backup.getFiles().get(0).getLastDate() + " " + reader.getComputer().getTime(), formatter);
+                        if (dateTime.minus(1, ChronoUnit.DAYS).isBefore(LocalDateTime.now())) {
+                            mailService.SendEmail("Внимание, на " + reader.getComputer().getName(), "Бэкап на " + reader.getComputer().getName() + " не обновлялся более суток. Название: " + backup.getFiles().get(0).getName() + " Время: " + backup.getFiles().get(0).getLastDate());
                         }
                     }
+                    //Checking free space
+                    for (Disk disk : reader.getComputer().getDisks()) {
+                        if (disk.getFreeSpaceGb() <= 5.0) {
+                            mailService.SendEmail("Мало места на " + reader.getComputer().getName(), "Осталось " + disk.getFreeSpaceGb() + "Гб на диске " + disk.getLetter() + " на " + reader.getComputer().getName());
+                        }
+                    }
+
                 } catch (IOException | SAXException | ParserConfigurationException e) {
                     e.printStackTrace();
                 }

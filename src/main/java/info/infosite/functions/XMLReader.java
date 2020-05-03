@@ -1,9 +1,9 @@
 package info.infosite.functions;
 
 
-import info.infosite.entities.Backup;
-import info.infosite.entities.Computer;
-import info.infosite.entities.Disk;
+import info.infosite.entities.xml.Backup;
+import info.infosite.entities.xml.Computer;
+import info.infosite.entities.xml.Disk;
 import lombok.Getter;
 import org.hibernate.Session;
 import org.w3c.dom.Document;
@@ -76,7 +76,7 @@ public class XMLReader {
                 Backup backup = new Backup();
                 //Path name analysis
                 NodeList xmlPath = nodeBackup.getChildNodes();
-                List<info.infosite.entities.File> files = new ArrayList<>();
+                List<info.infosite.entities.xml.File> files = new ArrayList<>();
                 for (int j = 0; j < xmlPath.getLength(); j++) {
                     Node nodePath = xmlPath.item(j);
                     if (nodePath.getNodeType() == Node.ELEMENT_NODE) {
@@ -85,7 +85,7 @@ public class XMLReader {
                         } else {
                             //Files name analysis
                             NodeList xmlFiles = nodePath.getChildNodes();
-                            info.infosite.entities.File file = new info.infosite.entities.File();
+                            info.infosite.entities.xml.File file = new info.infosite.entities.xml.File();
                             for (int k = 0; k < xmlFiles.getLength(); k++) {
                                 Node nodeFile = xmlFiles.item(k);
                                 if (nodeFile.getNodeType() == Node.ELEMENT_NODE) {

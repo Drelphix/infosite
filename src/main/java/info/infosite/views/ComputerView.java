@@ -1,8 +1,8 @@
 package info.infosite.views;
 
-import info.infosite.entities.Backup;
-import info.infosite.entities.Computer;
-import info.infosite.entities.Disk;
+import info.infosite.entities.xml.Backup;
+import info.infosite.entities.xml.Computer;
+import info.infosite.entities.xml.Disk;
 import lombok.Getter;
 import lombok.Setter;
 

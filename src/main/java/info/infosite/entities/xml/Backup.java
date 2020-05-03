@@ -1,4 +1,4 @@
-package info.infosite.entities;
+package info.infosite.entities.xml;
 
 import lombok.Data;
 
