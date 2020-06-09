@@ -3,14 +3,34 @@
 </head>
 <body>
 <header id="header" th:insert="main::menu"></header>
+<center>
 <div th:if="${users}" th:object="${users}">
     <div th:each="user:${users}">
-        <p>Пользователь:<a th:text="${user.username}"></a></p>
-        <p>Активация:<a th:text="${user.active}?'Активен':'Неактивен'"></a></p>
-        <a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a>
-        <a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a>
+
+        <table border="1">
+            <tbody>
+            <tr>
+                <td colspan="3">Профиль</td>
+            </tr>
+            <tr>
+                <td>Пользователь:</td>
+                <td><a th:text="${user.username}"></a></td>
+                <td rowspan="2"><a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a></td>
+            </tr>
+            <tr>
+                <td>Активация:</td>
+                <td><a th:text="${user.active}?'Активен':'Неактивен'"></a></td>
+            </tr>
+            <tr>
+                <td colspan="3"><a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a></td>
+            </tr>
+            <tr>
+                <td colspan="3"><a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
 </div>
+</center>
 </body>
 </html>

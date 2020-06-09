@@ -167,13 +167,11 @@
                                 <tr>
                                     Список таблиц:
                                 </tr>
-                                <tr>
-                                    <td th:each="table, itemStat:*{tables}">
+                                    <tr th:each="table, itemStat:*{tables}">
                                         <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
-                                        <input th:field="*{tables[__${itemStat.index}__].name}" required type="text">
+                                        <td><input th:field="*{tables[__${itemStat.index}__].name}" required type="text"></td>
                                         <input th:field="*{tables[__${itemStat.index}__].subMenu}" type="hidden">
-                                    </td>
-                                </tr>
+                                    </tr>
                             </table>
                             <br>
                             <input style="width: 202px;" type="submit" value="Сохранить">
