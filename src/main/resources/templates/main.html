@@ -67,6 +67,7 @@
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
                 <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" height="35px" title=""/></a>
+                <!--Исправит логаут со второг раза -->
                 <a href="#" th:href="@{/logout}"><span th:text="'Welcome, '+${#authentication.name}"></span></a>
             </div>
             <nav id="nav-menu-container" th:if="${menus}">

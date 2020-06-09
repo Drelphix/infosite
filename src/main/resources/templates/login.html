@@ -13,16 +13,19 @@
             <tr>
                 <td>Логин:</td>
                 <td><input name="username" placeholder="Логин" required type="text"/></td>
-                <td rowspan="3"><input name="submit" type="submit" style="height: 94px;" value="Войти"/></td>
+                <!-- Если не отображается ошобка измениь значение rowspan 2, иначе 3 -->
+                <td rowspan="2"><input name="submit" type="submit" style="height: 94px;" value="Войти"/></td>
             </tr>
             <tr>
                 <td>Пароль:</td>
                 <td><input name="password" placeholder="Пароль" required type="password"/></td>
             </tr>
+            <!-- Скрыть если не отображается -->
             <tr>
                 <td colspan="2" height="30"><div th:if="${param.error}">Неверно введен логин или пароль</div></td>
             </tr>
             <tr>
+                <!-- Если не отображается ошобка измениь значение rowspan 2, иначе 3 -->
                 <td colspan="3"><a href="" th:href="@{/user/reg}">Регистрация</a></td>
             </tr>
             </tbody>
