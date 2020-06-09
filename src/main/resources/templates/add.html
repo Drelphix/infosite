@@ -97,8 +97,6 @@
                     <!--Редактирование меню-->
                     <div align="center" th:if="${menu}" th:object="${menu}">
                         <form action="#" method="post" th:action="@{/editMenu}">
-
-
                             <input th:field="*{idMenu}" type="hidden">
                             <table border="1">
                                 <tbody>
@@ -163,19 +161,17 @@
                                 </tbody>
                             </table>
                             <br>
-                            <table border="1">
-                                <tbody>
+                            <table  border="1" about="bls">
                                 <tr>
                                     Список таблиц:
                                 </tr>
                                 <tr>
-                                    <div th:each="table, itemStat:*{tables}">
+                                    <td th:each="table, itemStat:*{tables}">
                                         <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
                                         <input th:field="*{tables[__${itemStat.index}__].name}" required type="text">
                                         <input th:field="*{tables[__${itemStat.index}__].subMenu}" type="hidden">
-                                    </div>
+                                    </td>
                                 </tr>
-                                </tbody>
                             </table>
                             <br>
                             <input style="width: 202px;" type="submit" value="Сохранить">
