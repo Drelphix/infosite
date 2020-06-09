@@ -10,19 +10,25 @@
         <tr>
             <td colspan="3"><h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3></td>
         </tr>
+        <tr th:if="${error}">
+            <td  colspan="3" height="30" th:text="${error}"></td>
+        </tr>
         <tr>
             <td>Логин:</td>
             <td><input required th:field="*{username}" type="text"/></td>
-            <td rowspan="3"><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" style="height: 94px;" type="submit"/></td>
+            <td rowspan="2"><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" style="height: 94px;" type="submit"/></td>
         </tr>
         <tr>
             <td>Пароль:</td>
             <td><input required th:field="*{password}" type="password"/></td>
         </tr>
-        <tr>
-            <td th:unless="${edit}" colspan="2" height="30" th:text="${error}"></td>
-            <td th:if="${edit}">Активен</td>
-            <td th:if="${edit}"><input th:field="*{active}" type="checkbox"></td>
+        <tr th:unless="${edit}">
+            <td  colspan="3" height="30" ><a th:href="@{/login}">Вернуться назад</td>
+        </tr>
+
+        <tr th:if="${edit}">
+            <td >Активен</td>
+            <td ><input th:field="*{active}" type="checkbox"></td>
         </tr>
         </tbody>
     </table>

@@ -129,12 +129,10 @@ public class EditController {
     public String EditUser(Model model, @ModelAttribute User user) {
         User base = userRepository.findUserByUsername(user.getUsername());
         user.setRole("admin");
-        try {
-            user.getPassword().isEmpty();
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } catch (NullPointerException e) {
+        if(user.getPassword().equals("")) {
             user.setPassword(base.getPassword());
-        }
+
+        } else user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/manage";
     }

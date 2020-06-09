@@ -132,18 +132,10 @@
 
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
     <center>
-    <table align="center" border="1" bordercolor="black">
-        <tbody>
-        <tr>
-            <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
-        </tr>
-        </tbody>
-        <tbody>
-        <tr th:if="${mode==false}">
-            <a th:text="${table.name}"></a>
-        </tr>
-        </tbody>
-        <tbody>
+        <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
+        <a th:if="${mode==false}" th:text="${table.name}"></a>
+    <table align="center" border="1" bordercolor="black" th:if="${not #lists.isEmpty(table.cols)}">
+        <tbody th:if="${not #lists.isEmpty(table.cols)}">
         <tr>
             <th th:each="col: ${table.cols}" th:text="${col.name}"></th>
         </tr>
