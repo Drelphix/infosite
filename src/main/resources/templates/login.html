@@ -4,14 +4,30 @@
 <body>
 <center>
     <form action="login" class="transparent" method="post">
-        <center><h3>Авторизация</h3></center>
-        <div th:if="${param.error}">Неверно введен логин или пароль</div>
-        <p>Логин:<input name="username" placeholder="Логин" required type="text"/></p>
-        <p>Пароль:<input name="password" placeholder="Пароль" required type="password"/>
-        </p>
-        <input class="input" name="submit" type="submit" value="Войти"/>
+
+        <table border="1">
+            <tbody>
+            <tr>
+                <td colspan="3"><h3>Авторизация</h3></td>
+            </tr>
+            <tr>
+                <td>Логин:</td>
+                <td><input name="username" placeholder="Логин" required type="text"/></td>
+                <td rowspan="3"><input name="submit" type="submit" style="height: 94px;" value="Войти"/></td>
+            </tr>
+            <tr>
+                <td>Пароль:</td>
+                <td><input name="password" placeholder="Пароль" required type="password"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" height="30"><div th:if="${param.error}">Неверно введен логин или пароль</div></td>
+            </tr>
+            <tr>
+                <td colspan="3"><a href="" th:href="@{/user/reg}">Регистрация</a></td>
+            </tr>
+            </tbody>
+        </table>
     </form>
-    <a href="" th:href="@{/user/reg}">Регистрация</a>
 </center>
 </body>
 </html>

@@ -67,7 +67,7 @@
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
                 <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" height="35px" title=""/></a>
-                <span th:text="'Welcome, '+${#authentication.name}"></span>
+                <a href="#" th:href="@{/logout}"><span th:text="'Welcome, '+${#authentication.name}"></span></a>
             </div>
             <nav id="nav-menu-container" th:if="${menus}">
                 <ul class="nav-menu">
@@ -130,11 +130,19 @@
 </section>
 
 <div th:each="table,tabRow: ${tables}" th:if="${tables}">
+    <center>
     <table align="center" border="1" bordercolor="black">
-        <CAPTION>
+        <tbody>
+        <tr>
             <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
-            <a th:if="${mode==false}" th:text="${table.name}"></a>
-        </CAPTION>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr th:if="${mode==false}">
+            <a th:text="${table.name}"></a>
+        </tr>
+        </tbody>
+        <tbody>
         <tr>
             <th th:each="col: ${table.cols}" th:text="${col.name}"></th>
         </tr>
@@ -154,12 +162,12 @@
             </td>
 
             <td th:if="${mode==true}">
-                <a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить
-                    строку</a>
+                <a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
             </td>
         </tr>
-
+        </tbody>
     </table>
+    </center>
     <center th:if="${not #lists.isEmpty(table.cols)}">
         <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить строку</a>
     </center>

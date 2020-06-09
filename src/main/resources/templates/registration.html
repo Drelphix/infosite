@@ -2,16 +2,30 @@
 <head th:insert="main::head">
 </head>
 <body>
+<center>
 <form action="#" class="transparent" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
 
-    <div align="center" class="form-inner">
-        <h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3>
-        <p th:text="${error}"></p>
-        <p>Логин: <input required th:field="*{username}" type="text"/></p>
-        <p>Пароль: <input required th:field="*{password}" type="password"/></p>
-        <p th:if="${edit}">Активен:<input th:field="*{active}" type="checkbox">
-        <p><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/></p>
-    </div>
+    <table>
+        <tbody>
+        <tr>
+            <td colspan="3"><h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3></td>
+        </tr>
+        <tr>
+            <td>Логин:</td>
+            <td><input required th:field="*{username}" type="text"/></td>
+            <td rowspan="3"><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" style="height: 94px;" type="submit"/></td>
+        </tr>
+        <tr>
+            <td>Пароль:</td>
+            <td><input required th:field="*{password}" type="password"/></td>
+        </tr>
+        <tr>
+            <td th:unless="${edit}" colspan="2" height="30" th:text="${error}"></td>
+            <td th:if="${edit}">Активен</td>
+            <td th:if="${edit}"><input th:field="*{active}" type="checkbox"></td>
+        </tr>
+        </tbody>
+    </table>
 </form>
 <form action="#" class="transparent" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
     <div align="center" class="form-inner">
@@ -24,6 +38,6 @@
         <p><input class="input" type="submit" value="Сохранить"/></p>
     </div>
 </form>
-
+</center>
 </body>
 </html>
