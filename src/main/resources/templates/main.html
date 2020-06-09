@@ -108,7 +108,7 @@
                     </li>
                     <li>
                         <a href="#" th:href="@{/manage}">Управление</a>
-                        <a href="#" th:href="@{/inventory}">Предметы</a>
+                        <!--<a href="#" th:href="@{/inventory}">Предметы</a>-->
                     </li>
 
                 </ul>
@@ -133,7 +133,7 @@
     <center>
         <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
         <a th:if="${mode==false}" th:text="${table.name}"></a>
-    <table align="center" border="1" bordercolor="black" th:if="${not #lists.isEmpty(table.cols)}">
+    <table align="center" border="1" class="table table-striped table-inverse" th:if="${not #lists.isEmpty(table.cols)}">
         <tbody th:if="${not #lists.isEmpty(table.cols)}">
         <tr>
             <th th:each="col: ${table.cols}" th:text="${col.name}"></th>

@@ -6,8 +6,10 @@
 <center>
 <div th:if="${users}" th:object="${users}">
     <div th:each="user:${users}">
-
-        <table border="1">
+<table border="1" class="table table-striped table-inverse">
+    <tbody>
+    <tr>
+        <table border="1" class="table table-striped table-inverse">
             <tbody>
             <tr>
                 <td colspan="3">Профиль</td>
@@ -24,13 +26,15 @@
             <tr>
                 <td colspan="3"><a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a></td>
             </tr>
-            <tr>
-                <td colspan="3"><a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a></td>
-            </tr>
             </tbody>
         </table>
+    </tr>
+    <br>
+    </tbody>
+</table>
     </div>
 </div>
+    <a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
 </center>
 </body>
 </html>

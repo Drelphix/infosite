@@ -9,10 +9,8 @@
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
                     <p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
-                    <table>
-                        <tr>
-                            <td>
-                                <table class="infodisk" id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
+                    <center>
+                                <table id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
                                     <tr>
                                         <td colspan="4">Информация о дисках</td>
                                     </tr>
@@ -29,9 +27,8 @@
                                         <td th:text="${disk.getFreeSpace()}">te</td>
                                     </tr>
                                 </table>
-                            </td>
-                            <td>
-                                <table class="lastfile" id="lastfile">
+
+                                <table id="lastfile">
                                     <tr>
                                         <td colspan="4">Последние файлы</td>
                                     </tr>
@@ -55,10 +52,8 @@
                                     </tr>
                                     </tr>
                                 </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <br><br>
+                    </center>
+                    <br>
                     <h3>Информация о файлах</h3>
                     <table class="infofile" id="infofile" th:each="backup : ${computer.backups}">
                         <tr>
