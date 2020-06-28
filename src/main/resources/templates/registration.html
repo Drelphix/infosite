@@ -5,7 +5,7 @@
 <center>
 <form action="#" class="transparent" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
 
-    <table>
+    <table border="1" class="table table-striped table-inverse" >
         <tbody>
         <tr>
             <td colspan="3"><h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3></td>
@@ -23,7 +23,7 @@
             <td><input required th:field="*{password}" type="password"/></td>
         </tr>
         <tr th:unless="${edit}">
-            <td  colspan="3" height="30" ><a th:href="@{/login}">Вернуться назад</td>
+            <td  colspan="3" height="30" ><a th:href="@{/login}">Вернуться назад</a></td>
         </tr>
 
         <tr th:if="${edit}">
@@ -35,13 +35,28 @@
 </form>
 <form action="#" class="transparent" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
     <div align="center" class="form-inner">
-        <h3>Изменение записи</h3>
-        <p th:text="${error}"></p>
-        <input th:field="*{id}" type="hidden">
-        <p>Логин: <input required th:field="*{username}" type="text"/></p>
-        <p>Пароль: <input th:field="*{password}" type="password"/></p>
-        <p th:if="${edit}">Активен:<input th:field="*{active}" type="checkbox">
-        <p><input class="input" type="submit" value="Сохранить"/></p>
+
+        <table border="1" class="table table-striped table-inverse">
+            <tbody>
+            <tr>
+                <td colspan="3"><h3>Изменение записи</h3></td>
+            </tr>
+            <tr>
+                <input th:field="*{id}" type="hidden">
+                <td>Логин:</td>
+                <td><input required th:field="*{username}" type="text"/></td>
+                <td rowspan="3"><input class="input" style="height: 94px" type="submit" value="Сохранить"/></td>
+            </tr>
+            <tr>
+                <td>Пароль:</td>
+                <td><input th:field="*{password}" type="password"/></td>
+            </tr>
+            <tr>
+                <td th:if="${edit}">Активен:</td>
+                <td><input th:field="*{active}" type="checkbox"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </form>
 </center>
