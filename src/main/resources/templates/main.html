@@ -16,35 +16,39 @@
     html{
     overflow-x: hidden;
     }
+    #maintable{
+    border-color: white;
+    width: 95%;
 
+    }
     #infodisk{
-    width: 45%;
-    table-layout: fixed;
-    display: inline;
+    width: 100%;
+    border: 2px blue groove;
     }
     #lastfile{
-    width: 65%;
-    table-layout: fixed;
-    display: inline;
+    width: 100%;
+    border: 2px blue groove;
     }
     #infofile{
-    width: 95%;
+    width: 100%;
     table-layout: fixed;
     margin: auto;
-    }
+   border: 2px blue groove;
 
-    td {
+    }
+    td{
     text-align: center;
-    border: 1px solid blue;
+    }
+    .tdm {
     padding: 5px;
+    border-collapse: inherited;
+    border: 1px blue groove;
     }
 
-    tr {
-    text-align: center;
-    border: 1px solid blue;
-    padding: 5px;
-    }
+    tbody {
+    vertical-align: top;
 
+}
     </style>
     <script>
     function GetData(copyText) {

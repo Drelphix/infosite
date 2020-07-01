@@ -92,7 +92,7 @@ $black			: #222;
 }
 
 body {
-  color: rgba(150, 0, 0, 1);
+  color: rgb(37, 20, 177);
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   line-height: 1.625em;
@@ -904,7 +904,7 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 2px solid #f8b600;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 100%) {
   .progress-table-wrap {
     overflow-x: scroll;
   }
@@ -930,7 +930,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .progress-table .percentage {
-  width: 40.36%;
+  width: 100%;
   padding-right: 50px;
 }
 

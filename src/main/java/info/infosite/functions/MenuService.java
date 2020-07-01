@@ -47,7 +47,7 @@ public class MenuService {
                 }
                 xmlMenu.setSubs(xmlSubMenus);
                 xmlMenu.setPaths(xmlSubPaths);
-            } catch (NullPointerException e) {
+            } catch (NullPointerException ignored) {
 
             }
             this.xmlMenus.add(xmlMenu);
