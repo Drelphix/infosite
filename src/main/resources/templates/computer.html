@@ -8,7 +8,7 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    <p th:text="${computer.getName()}+' '+${computer.getDate()}+' '+${computer.getTime()}"></p>
+                    <p th:text="'Сервер: '+${computer.getName()}+' Дата: '+${computer.getDate()}+' Время: '+${computer.getTime()}"></p>
                     <center>
                         <table id="maintable">
                             <tr>
