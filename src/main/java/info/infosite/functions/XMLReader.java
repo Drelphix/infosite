@@ -128,7 +128,7 @@ public class XMLReader {
         double sizeMb = sizeKb / 1024;
         double sizeGb = sizeMb / 1024;
         if (sizeKb <= 1024) {
-            size = sizeKb + " кб";
+            size = sizeKb + " кб ";
         } else if (sizeKb >= 1024 && sizeMb <= 1024) {
             size = Math.round(sizeMb * 100) / 100 + " мб";
         } else if (sizeMb >= 1024) {

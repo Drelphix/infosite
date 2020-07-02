@@ -8,5 +8,6 @@ import lombok.Setter;
 public class File {
     private String name;
     private String lastDate;
+    private boolean expired;
     private String size;
 }
