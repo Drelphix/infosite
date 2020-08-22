@@ -4,9 +4,6 @@ import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.MenuRepository;
 import info.infosite.database.generated.Tab;
 import info.infosite.database.generated.TableRepository;
-import info.infosite.entities.inventory.InventoryRepository;
-import info.infosite.entities.inventory.ItemRepository;
-import info.infosite.entities.inventory.PlaceRepository;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.views.ExcelTableReportView;
@@ -45,12 +42,6 @@ public class MainController {
     public UserRepository userRepository;
     @Autowired
     MenuService menuService;
-    @Autowired
-    InventoryRepository inventoryRepository;
-    @Autowired
-    ItemRepository itemRepository;
-    @Autowired
-    PlaceRepository placeRepository;
 
     @GetMapping(value = "/")
     public String IndexPage(Model model, HttpSession httpSession) {
@@ -136,23 +127,6 @@ public class MainController {
         return "computer";
     }
 
-    @GetMapping(value = "/inventory")
-    public String ShowInventory(Model model) {
-        model.addAttribute("invents", inventoryRepository.findAll(Sort.by(Sort.Direction.ASC, "item")));
-        return "inventory";
-    }
-
-    @GetMapping(value = "/items")
-    public String ShowItems(Model model) {
-        model.addAttribute("items", itemRepository.findAll(Sort.by(Sort.Direction.ASC, "item")));
-        return "inventory";
-    }
-
-    @GetMapping(value = "/places")
-    public String ShowPlaces(Model model) {
-        model.addAttribute("places", placeRepository.findAll(Sort.by(Sort.Direction.ASC, "place")));
-        return "inventory";
-    }
 
     private Model addMenu(Model model) {
         model.addAttribute("menus", menuService.menus);

@@ -59,6 +59,22 @@ $black			: #222;
   color: #fff;
 }
 
+/* login form*/
+input.button_success {
+background-color:rgb(138,200,88);
+box-sizing:border-box;
+font-size:12px;
+outline-color:rgb(255,255,255);
+width:100%;
+}
+div.auth{
+width:25%;
+align:center;
+}
+td.delLine{
+width:150px;
+border:none;
+}
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
   color: #777777;
@@ -92,7 +108,7 @@ $black			: #222;
 }
 
 body {
-  color: rgb(136, 4, 16);
+  color: #222;
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   line-height: 1.625em;
@@ -1785,10 +1801,12 @@ h1, h2, h3, h4, h5, h6 {
 .main-menu {
   padding-bottom: 10px;
   padding-top: 10px;
-  background: rgba(198, 177, 105, 1);
+  background: #8ac858;
   padding-left: 15px;
   padding-right: 15px;
 }
+
+
 
 #header {
   position: fixed;
@@ -1931,6 +1949,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #nav-menu-container {
   padding-right: 15px;
+
 }
 
 #nav-menu-container a {
@@ -1940,10 +1959,15 @@ h1, h2, h3, h4, h5, h6 {
       display: block;
       display:table-cell;
       vertical-align:middle;
+      color:white;
+}
+#child a {
+color:black;
+height: 30px;
 }
 /*Цвет hover*/
 #nav-menu-container a:hover {
-    color: rgba(0, 0, 150, 1);
+    color: grey;
 }
 
 .primary-btn {

@@ -78,17 +78,17 @@
                     <li class="menu-has-children" th:each="xml : ${xmls}">
                         <a th:text="${xml.name}"></a>
                         <ul th:if="${not #lists.isEmpty(xml.subs)}">
-                            <li th:each="sub,itemStat: ${xml.subs}">
+                            <li class="child" th:each="sub,itemStat: ${xml.subs}">
                                 <a href="" th:href="@{'/xml/'+${xml.name}(id=${itemStat.index})}" th:text="${sub}"></a>
                             </li>
                         </ul>
                     </li>
                     <li class="menu-has-children" th:each="menu : ${menus}">
-                        <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
+                        <a class="child" href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
                            th:text="${menu.name}"></a>
                         <a th:if="${mode!=true}" th:text="${menu.name}"></a>
                         <ul th:if="${not #lists.isEmpty(menu.subMenuSet)}">
-                            <li th:each="sub: ${menu.subMenuSet}">
+                            <li class="child" th:each="sub: ${menu.subMenuSet}">
                                 <a href="" th:href="@{/show(id=${sub.idSubMenu})}" th:text="${sub.name}"></a>
                             </li>
                         </ul>
@@ -157,7 +157,7 @@
                 </div>
             </td>
 
-            <td th:if="${mode==true}">
+            <td class="delLine" th:if="${mode==true}">
                 <a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
             </td>
         </tr>

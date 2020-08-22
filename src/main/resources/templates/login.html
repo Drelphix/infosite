@@ -5,28 +5,20 @@
 <center>
     <form action="login" class="transparent" method="post">
 
-        <table border="1" class="table table-striped table-inverse">
-            <tbody>
-            <tr>
-                <td colspan="3"><h3>Авторизация</h3></td>
-            </tr>
-            <tr>
-                <td>Логин:</td>
-                <td><input name="username" placeholder="Логин" required type="text"/></td>
-                <td rowspan="2"><input name="submit" type="submit" style="height: 94px;" value="Войти"/></td>
-            </tr>
-            <tr>
-                <td>Пароль:</td>
-                <td><input name="password" placeholder="Пароль" required type="password"/></td>
-            </tr>
-            <tr th:if="${param.error}">
-                <td colspan="2" height="30"><div >Неверно введен логин или пароль</div></td>
-            </tr>
-            <tr>
-                <td colspan="3"><a href="" th:href="@{/user/reg}">Регистрация</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div border="1" class="auth">
+            <div>
+                <h2>Авторизация</h2>
+                <input autocomplete="username" class="username" name="username" required type="text"/>
+                <input autocomplete="password" class="password" name="password" required type="password"/>
+                <div><input class="button_success" name="submit" style="height: 94px;" type="submit" value="Войти"/>
+                </div>
+                <div th:if="${param.error}">
+                    <a colspan="2" height="30">Неверно введен логин или пароль</a>
+                </div>
+                <div colspan="3"><a href="" th:href="@{/user/reg}">Регистрация</a></div>
+            </div>
+        </div>
+        </div>
     </form>
 </center>
 </body>
