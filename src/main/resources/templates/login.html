@@ -5,12 +5,12 @@
 <center>
     <form action="login" class="transparent" method="post">
 
-        <div border="1" class="auth">
-            <div>
+        <div>
+            <div class="auth">
                 <h2>Авторизация</h2>
                 <input autocomplete="username" class="username" name="username" required type="text"/>
                 <input autocomplete="password" class="password" name="password" required type="password"/>
-                <div><input class="button_success" name="submit" style="height: 94px;" type="submit" value="Войти"/>
+                <div><input class="button_success" name="submit" type="submit" value="Войти"/>
                 </div>
                 <div th:if="${param.error}">
                     <a height="30">Неверно введен логин или пароль</a>
