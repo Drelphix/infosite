@@ -2,70 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="main::head"></head>
 <body>
-<header id="header" th:insert="main::menu"></header>
-<section class="popular-destination-area section-gap" th:fragment="section">
-    <div class="container" th:fragment="menu">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-70 col-lg-8">
-                <div class="title text-center">
-                    <p th:text="'Сервер: '+${computer.getName()}+' Дата: '+${computer.getDate()}+' Время: '+${computer.getTime()}"></p>
+<div id="header" th:insert="main::menu"></div>
+<section th:fragment="section">
+    <div th:fragment="menu">
+        <div style="align:center; width:100%;">
+            <div>
+                <div>
+                    <p class="name"
+                       th:text="'Сервер: '+${computer.getName()}+' Дата: '+${computer.getDate()}+' Время: '+${computer.getTime()}"></p>
                     <center>
-                        <table id="maintable">
+                        <table class="maincomp" id="maintable">
                             <tr>
-                                <td>
-                                    <table id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
+                                <td style="vertical-align:top">
+                                    <table class="comp" id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
                                         <tr>
-                                            <td class="tdm" colspan="4">Информация о дисках</td>
+                                            <td class="cell" colspan="4">Информация о дисках</td>
                                         </tr>
                                         <tr>
-                                            <td class="tdm">Диск</td>
-                                            <td class="tdm"> Имя</td>
-                                            <td class="tdm">Размер</td>
-                                            <td class="tdm">Свободное место</td>
+                                            <td class="cell">Диск</td>
+                                            <td class="cell"> Имя</td>
+                                            <td class="cell">Размер</td>
+                                            <td class="cell">Свободное место</td>
                                         </tr>
                                         <tr th:each="disk : ${computer.disks}">
-                                            <td class="tdm" th:text="${disk.getLetter()}"
-                                                th:unless="${disk.getFreeSpaceGb()}<=5"></td>
-                                            <td class="tdm" th:text="${disk.getName()}"
-                                                th:unless="${disk.getFreeSpaceGb()}<=5"></td>
-                                            <td class="tdm" th:text="${disk.getTotalSize()}"
-                                                th:unless="${disk.getFreeSpaceGb()}<=5"></td>
-                                            <td class="tdm" th:text="${disk.getFreeSpace()}"
-                                                th:unless="${disk.getFreeSpaceGb()}<=5"></td>
-                                            <td bgcolor="salmon" class="tdm" th:if="${disk.getFreeSpaceGb()}<=5"
-                                                th:text="${disk.getLetter()}"></td>
-                                            <td bgcolor="salmon" class="tdm" th:if="${disk.getFreeSpaceGb()}<=5"
-                                                th:text="${disk.getName()}"></td>
-                                            <td bgcolor="salmon" class="tdm" th:if="${disk.getFreeSpaceGb()}<=5"
-                                                th:text="${disk.getTotalSize()}"></td>
-                                            <td bgcolor="salmon" class="tdm" th:if="${disk.getFreeSpaceGb()}<=5"
-                                                th:text="${disk.getFreeSpace()}"></td>
+                                            <div th:if="${disk.getFreeSpaceGb()}>=5">
+                                                <td class="cell" th:text="${disk.getLetter()}"
+                                                ></td>
+                                                <td class="cell" th:text="${disk.getName()}"></td>
+                                                <td class="cell" th:text="${disk.getTotalSize()}"></td>
+                                                <td class="cell" th:text="${disk.getFreeSpace()}"></td>
+                                            </div>
+                                            <div th:if="${disk.getFreeSpaceGb()}<=5">
+                                                <td bgcolor="salmon"
+                                                    th:text="${disk.getLetter()}"></td>
+                                                <td bgcolor="salmon"
+                                                    th:text="${disk.getName()}"></td>
+                                                <td bgcolor="salmon"
+                                                    th:text="${disk.getTotalSize()}"></td>
+                                                <td bgcolor="salmon"
+                                                    th:text="${disk.getFreeSpace()}"></td>
+                                            </div>
                                         </tr>
                                     </table>
                                 </td>
-                                <td>
-                                    <table id="lastfile">
+                                <td style="vertical-align:top">
+                                    <table class="comp" id="lastfile">
                                         <tr>
-                                            <td class="tdm" colspan="4">Последние файлы</td>
+                                            <td class="tdm cell" colspan="4">Последние файлы</td>
                                         </tr>
                                         <tr>
-                                            <td class="tdm">Имя файла</td>
-                                            <td class="tdm">Имя файла</td>
-                                            <td class="tdm">Размер</td>
-                                            <td class="tdm">Дата</td>
-                                            <td>test</td>
-                                            <td>test</td>
+                                            <td class="cell">Путь файла</td>
+                                            <td class="cell">Имя файла</td>
+                                            <td class="cell">Размер</td>
+                                            <td class="cell">Дата</td>
+
                                         <tr>
                                         <tr th:each="backup : ${computer.backups}"
                                             th:if="${not #lists.isEmpty(computer.backups)}">
-                                            <td class="tdm" th:text="${backup.getPath()}"></td>
-                                            <td bgcolor="salmon" class="tdm" colspan="3"
+                                            <td class="cell" th:text="${backup.getPath()}"></td>
+                                            <td bgcolor="salmon" class="cell" colspan="3"
                                                 th:unless="${not #lists.isEmpty(backup.files)}">
                                                 Нет данных
                                             </td>
-                                            <td class="tdm" th:text="${backup.files[0].name}"></td>
-                                            <td class="tdm" th:text="${backup.files[0].size}"></td>
-                                            <td class="tdm" th:text="${backup.files[0].lastDate}"></td>
+                                            <td class="cell" th:text="${backup.files[0].name}"></td>
+                                            <td class="cell" th:text="${backup.files[0].size}"></td>
+                                            <td class="cell" th:text="${backup.files[0].lastDate}"></td>
                                         </tr>
                                         </tr>
                                     </table>
@@ -73,21 +74,21 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <br>Информация о файлах
-                                    <table class="infofile" id="infofile" th:each="backup : ${computer.backups}">
+                                    <p class="name">Информация о файлах</p>
+                                    <table class="comp" id="infofile" th:each="backup : ${computer.backups}">
                                         <tr>
-                                            <td align="center" class="tdm" colspan="3"
+                                            <td align="center" class="cell" colspan="3"
                                                 th:text="${backup.getPath()}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="tdm">Имя файла</td>
-                                            <td class="tdm"> Размер</td>
-                                            <td class="tdm">Дата</td>
+                                            <td class="cell">Имя файла</td>
+                                            <td class="cell"> Размер</td>
+                                            <td class="cell">Дата</td>
                                         <tr>
                                         <tr th:each="file: ${backup.files}">
-                                            <td class="tdm" th:text="${file.name}"></td>
-                                            <td class="tdm" th:text="${file.size}"></td>
-                                            <td class="tdm" th:text="${file.lastDate}"></td>
+                                            <td class="cell" th:text="${file.name}"></td>
+                                            <td class="cell" th:text="${file.size}"></td>
+                                            <td class="cell" th:text="${file.lastDate}"></td>
                                         </tr>
                                         </tr>
                                     </table>

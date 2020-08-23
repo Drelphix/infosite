@@ -2,7 +2,7 @@
 <head th:insert="main::head">
 </head>
 <body>
-<header id="header" th:insert="main::menu"></header>
+<div id="header" th:insert="main::menu"></div>
 <center>
 <div th:if="${users}" th:object="${users}">
     <div th:each="user:${users}">

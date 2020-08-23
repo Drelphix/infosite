@@ -2,103 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
-    <link href="#" rel="stylesheet" th:href="@{/css/linearicons.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/magnific-popup.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/jquery-ui.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/nice-select.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/animate.min.css}"/>
-    <link href="#" rel="stylesheet" th:href="@{/css/owl.carousel.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/tables.css}"/>
     <meta charset="UTF-8">
-    <style>
-    html{
-    overflow-x: hidden;
-    }
-    #maintable{
-    border-color: white;
-    width: 95%;
-
-    }
-    #infodisk{
-    width: 100%;
-    border: 2px blue groove;
-    }
-    #lastfile{
-    width: 100%;
-    border: 2px blue groove;
-    }
-    #infofile{
-    width: 100%;
-    table-layout: fixed;
-    margin: auto;
-   border: 2px blue groove;
-
-    }
-    td{
-    text-align: center;
-    }
-    .tdm {
-    padding: 5px;
-
-    border: 1px blue groove;
-    }
-
-    tbody {
-    vertical-align: top;
-
-}
-    </style>
-    <script>
-    function GetData(copyText) {
-
-    copyText.select();
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
-
-    /* Alert the copied text */
-    alert("Copied the text: " + copyText.value);
-    }
-
-    </script>
     <title>InfoSite</title>
 </head>
 <body>
-<header id="header" th:fragment="menu">
-    <div class="container main-menu" th:fragment="menu">
-        <div class="row align-items-center justify-content-between d-flex">
-            <div id="logo">
-                <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" height="35px" title=""/></a>
-                <a href="#" th:href="@{/logout}"><span th:text="'Welcome, '+${#authentication.name}"></span></a>
-            </div>
-            <nav id="nav-menu-container" th:if="${menus}">
-                <ul class="nav-menu">
-                    <li class="menu-has-children" th:each="xml : ${xmls}">
-                        <a class="menu" th:text="${xml.name}"></a>
-                        <ul th:if="${not #lists.isEmpty(xml.subs)}">
-                            <li th:each="sub,itemStat: ${xml.subs}">
-                                <a class="child" href="" th:href="@{'/xml/'+${xml.name}(id=${itemStat.index})}"
-                                   th:text="${sub}"></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children" th:each="menu : ${menus}">
-                        <a class="menu" href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
-                           th:text="${menu.name}"></a>
-                        <a class="menu" th:if="${mode!=true}" th:text="${menu.name}"></a>
-                        <ul th:if="${not #lists.isEmpty(menu.subMenuSet)}">
-                            <li th:each="sub: ${menu.subMenuSet}">
-                                <a class="child" href="" th:href="@{/show(id=${sub.idSubMenu})}"
-                                   th:text="${sub.name}"></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню" src="#"
-                                                                                     th:src="@{/images/addnew.png}"
-                                                                                     title=""/></a>
+<div th:fragment="menu">
+    <header>
+        <div>
+            <div class="d-flex">
+                <div class="logo">
+                    <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" height="35px"
+                                                    title=""/></a>
+                    <a href="#" th:href="@{/logout}"><span th:text="'Welcome, '+${#authentication.name}"></span></a>
+                </div>
+                <nav th:if="${menus}">
+                    <ul class="topmenu">
+                        <li th:each="xml : ${xmls}">
+                            <a th:text="${xml.name}"></a>
+                            <ul class="submenu" th:if="${not #lists.isEmpty(xml.subs)}">
+                                <li th:each="sub,itemStat: ${xml.subs}">
+                                    <a href="" th:href="@{'/xml/'+${xml.name}(id=${itemStat.index})}"
+                                       th:text="${sub}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li th:each="menu : ${menus}">
+                            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
+                               th:text="${menu.name}"></a>
+                            <a th:if="${mode!=true}" th:text="${menu.name}"></a>
+                            <ul class="submenu" th:if="${not #lists.isEmpty(menu.subMenuSet)}">
+                                <li th:each="sub: ${menu.subMenuSet}">
+                                    <a href="" th:href="@{/show(id=${sub.idSubMenu})}"
+                                       th:text="${sub.name}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню"
+                                                                                         src="#"
+                                                                                         th:src="@{/images/addnew.png}"
+                                                                                         title=""/></a>
                     </li>
                     <li>
                         <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
@@ -112,49 +57,41 @@
                         <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
                                                               title=""/></a>
                     </li>
-                    <li>
-                        <a class="menu" href="#" th:href="@{/manage}">Управление</a>
-                    </li>
-
-                </ul>
-            </nav>
-        </div>
-    </div>
-</header>
-
-<section class="popular-destination-area section-gap" th:fragment="section">
-    <div class="container" th:fragment="menu" section>
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-70 col-lg-8">
-                <div class="title text-center">
-                    <!-- Пусто, но это под меню -->
-                </div>
+                        <li>
+                            <a class="menu" href="#" th:href="@{/manage}">Управление</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </div>
-</section>
 
-<div th:each="table,tabRow: ${tables}" th:if="${tables}">
+    </header>
+    <div style="width: 100%;height: 30px;background-color: transparent;">
+        <a>a</a>
+    </div>
+</div>
+
+<div class="tables" th:each="table,tabRow: ${tables}" th:if="${tables}">
     <center>
         <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
         <a th:if="${mode==false}" th:text="${table.name}"></a>
-    <table align="center" border="1" class="table table-striped table-inverse" th:if="${not #lists.isEmpty(table.cols)}">
-        <tbody th:if="${not #lists.isEmpty(table.cols)}">
-        <tr>
-            <th th:each="col: ${table.cols}" th:text="${col.name}"></th>
-        </tr>
-        <tr th:each="lineList, row: ${table.lines}">
-            <td th:each="line:${lineList}" th:switch="${line.hidden}">
-                <!--Отображение обычного поля -->
-                <div th:case="false">
-                    <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
-                       th:text="${line.data}"></a>
-                    <a th:if="${mode==false}" th:text="${line.data}"></a>
-                </div>
-                <!--Отображение скрытого поля Не работает -->
-                <div th:case="true">
-                    <input disabled th:id="pass+${row.index}" th:value="${line.data}" type="password">
-                    <input onclick="getData(this.getAttribute('data1'))" th:data1="${line.data}" type="button">
+        <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
+            <tbody th:if="${not #lists.isEmpty(table.cols)}">
+            <tr>
+                <th class="cell" th:each="col: ${table.cols}" th:text="${col.name}"></th>
+            </tr>
+            <tr th:each="lineList, row: ${table.lines}">
+                <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
+                    <!--Отображение обычного поля -->
+                    <div th:case="false">
+                        <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
+                           th:text="${line.data}"></a>
+                        <a th:if="${mode==false}" th:text="${line.data}"></a>
+                    </div>
+                    <!--Отображение скрытого поля Не работает -->
+                    <div th:case="true">
+                        <input disabled th:id="pass+${row.index}" th:value="${line.data}" type="password">
+                        <input onclick="getData(this.getAttribute('data1'))" th:data1="${line.data}" type="button">
                 </div>
             </td>
 
@@ -168,7 +105,6 @@
     <center th:if="${not #lists.isEmpty(table.cols)}">
         <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить строку</a>
     </center>
-    <br>
 </div>
 <div align="center" th:if="${submenu}">
     <a href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
