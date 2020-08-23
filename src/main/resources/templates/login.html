@@ -13,9 +13,9 @@
                 <div><input class="button_success" name="submit" style="height: 94px;" type="submit" value="Войти"/>
                 </div>
                 <div th:if="${param.error}">
-                    <a colspan="2" height="30">Неверно введен логин или пароль</a>
+                    <a height="30">Неверно введен логин или пароль</a>
                 </div>
-                <div colspan="3"><a href="" th:href="@{/user/reg}">Регистрация</a></div>
+                <div><a href="" th:href="@{/user/reg}">Регистрация</a></div>
             </div>
         </div>
         </div>

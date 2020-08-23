@@ -1952,7 +1952,7 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-#nav-menu-container a {
+a.menu {
       height: 35px;
       text-transform: uppercase;
       font-weight: bold;
@@ -1961,7 +1961,8 @@ h1, h2, h3, h4, h5, h6 {
       vertical-align:middle;
       color:white;
 }
-#child a {
+a.child
+{
 color:black;
 height: 30px;
 }
