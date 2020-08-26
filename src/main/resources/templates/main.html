@@ -14,9 +14,10 @@
         <div>
             <div class="d-flex">
                 <div class="logo">
-                    <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" height="35px"
+                    <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" style="height:35px"
                                                     title=""/></a>
-                    <a href="#" th:href="@{/logout}"><span th:text="'Welcome, '+${#authentication.name}"></span></a>
+                    <a href="#" th:href="@{/logout}"><span style="color:white"
+                                                           th:text="'Welcome, '+${#authentication.name}"></span></a>
                 </div>
                 <nav th:if="${menus}">
                     <ul class="topmenu">
@@ -65,7 +66,6 @@
                 </nav>
             </div>
         </div>
-
     </header>
     <div style="width: 100%;height: 30px;background-color: transparent;">
         <a>a</a>
@@ -74,12 +74,12 @@
 
 <div class="tables" th:each="table,tabRow: ${tables}" th:if="${tables}">
     <center>
-        <a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a>
-        <a th:if="${mode==false}" th:text="${table.name}"></a>
+        <h3><a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
+        <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
         <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
             <tbody th:if="${not #lists.isEmpty(table.cols)}">
             <tr>
-                <th class="cell" th:each="col: ${table.cols}" th:text="${col.name}"></th>
+                <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
             </tr>
             <tr th:each="lineList, row: ${table.lines}">
                 <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
@@ -87,7 +87,7 @@
                     <div th:case="false">
                         <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
                            th:text="${line.data}"></a>
-                        <a th:if="${mode==false}" th:text="${line.data}"></a>
+                        <span th:if="${mode==false}" th:text="${line.data}"></span>
                     </div>
                     <!--Отображение скрытого поля Не работает -->
                     <div th:case="true">
@@ -107,7 +107,7 @@
         <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить строку</a>
     </center>
 </div>
-<div align="center" th:if="${submenu}">
+<div align="center" style="padding-top:5px" th:if="${submenu}">
     <a href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
 </div>
 </body>

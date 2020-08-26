@@ -11,7 +11,8 @@ ul.topmenu > li >a {
 color:white}
 
 ul.topmenu > li >a:hover {
-color:grey}
+color:grey;}
+
 body:before {
   position: absolute;
   left: 0;
@@ -20,7 +21,6 @@ body:before {
   width: 100%;
 }
 nav {
-
    text-align:end;
 }
 nav ul {
@@ -28,7 +28,6 @@ nav ul {
   margin: 0;
   padding: 0;
   margin-right:13px;
-
 }
 nav a {
   color: #222;
@@ -45,8 +44,7 @@ nav a {
   padding:3px;
   font-weight:bold;
   font-family: "Poppins", sans-serif;
-  font-size: 13;
-    appearance:auto;
+   appearance:auto;
 }
 .topmenu > li > a:before {
   position: absolute;
@@ -62,6 +60,7 @@ nav a {
 }
 .topmenu li:hover a:before {
   transform: translate(-50%, 0);
+  color:grey;
   opacity: 1;
 }
 .submenu {
@@ -80,19 +79,22 @@ nav a {
   transform: translate(-50%, 20px);
   text-align-last:center;
 }
+
 .topmenu > li:hover .submenu {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, 0);
 }
 .submenu a {
-  padding:3px;
+  padding-top:3px;
+  padding-bottom:3px;
   font-family: "Poppins", sans-serif;
-  font-size: 13;
+  width:100%;
+  display:block;
 }
 .submenu a:hover {
-width:100%;
-background: #e8e8e8;}
+background: #e8e8e8;
+}
 
 /*Логотип*/
 div.logo{
@@ -115,3 +117,6 @@ top:0;
 right:0;
 z-index:997;
 }
+.name{
+text-align-last:center;
+margin-bottom:0;}

@@ -1,6 +1,5 @@
 div.tables{
 margin-top:15px;
-
 }
 table.info{
 background-color:#8ac858;
@@ -32,4 +31,10 @@ width:95%;
 p.name {
 text-align:center;
 font-weight:bold;
+}
+a:hover{
+color:red;
+}
+span{
+color:black;
 }

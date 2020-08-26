@@ -2,63 +2,35 @@
 <head th:insert="main::head">
 </head>
 <body>
-<center>
-<form action="#" class="transparent" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
-
-    <table border="1" class="info">
-        <tbody>
-        <tr>
-            <td colspan="3"><h3 th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3></td>
-        </tr>
-        <tr th:if="${error}">
-            <td colspan="3" height="30" th:text="${error}"></td>
-        </tr>
-        <tr>
-            <td>Логин:</td>
-            <td><input required th:field="*{username}" type="text"/></td>
-            <td rowspan="2"><input class="input" th:value="${edit}?'Сохранить':'Зарегистрировать'" style="height: 94px;" type="submit"/></td>
-        </tr>
-        <tr>
-            <td>Пароль:</td>
-            <td><input required th:field="*{password}" type="password"/></td>
-        </tr>
-        <tr th:unless="${edit}">
-            <td  colspan="3" height="30" ><a th:href="@{/login}">Вернуться назад</a></td>
-        </tr>
-
-        <tr th:if="${edit}">
-            <td >Активен</td>
-            <td ><input th:field="*{active}" type="checkbox"></td>
-        </tr>
-        </tbody>
-    </table>
-</form>
-<form action="#" class="transparent" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
-    <div align="center" class="form-inner">
-
-        <table border="1" class="table table-striped table-inverse">
-            <tbody>
-            <tr>
-                <td colspan="3"><h3>Изменение записи</h3></td>
-            </tr>
-            <tr>
-                <input th:field="*{id}" type="hidden">
-                <td>Логин:</td>
-                <td><input required th:field="*{username}" type="text"/></td>
-                <td rowspan="3"><input class="input" style="height: 94px" type="submit" value="Сохранить"/></td>
-            </tr>
-            <tr>
-                <td>Пароль:</td>
-                <td><input th:field="*{password}" type="password"/></td>
-            </tr>
-            <tr>
-                <td th:if="${edit}">Активен:</td>
-                <td><input th:field="*{active}" type="checkbox"></td>
-            </tr>
-            </tbody>
-        </table>
+<form action="#" class="center" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
+    <div class="auth">
+        <h3 style="padding-top:10%;" th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3>
+        <span th:if="${error}" th:text="${error}"></span>
+        <span class="text">Логин:</span>
+        <input class="username" required th:field="*{username}" type="text"/>
+        <br><span class="text">Пароль</span>
+        <input class="password" required th:field="*{password}" type="password"/>
+        <input class="button_success" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/>
+        <span class="register" th:href="@{/login}">Вернуться назад</span>
+        <div th:if="${edit}">
+            <span class="text">Активен</span>
+            <input th:field="*{active}" type="checkbox">
+        </div>
     </div>
 </form>
-</center>
+
+<form action="#" class="center" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
+    <div align="center" class="auth">
+        <h3 style="padding-top:10%;">Изменение записи</h3>
+        <input th:field="*{id}" type="hidden">
+        <span class="text">Логин:</span>
+        <input class="username" required th:field="*{username}" type="text"/>
+        <br><span class="text">Пароль</span>
+        <input class="password" th:field="*{password}" type="password"/>
+        <br><span>Активен:</span>
+        <input class="username" th:field="*{active}" type="checkbox">
+        <input class="button_success" th:value="Сохранить" type="submit"/>
+    </div>
+</form>
 </body>
 </html>

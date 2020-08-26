@@ -2,34 +2,33 @@
 <head th:insert="main::head">
 </head>
 <body>
-<div id="header" th:insert="main::menu"></div>
-<center>
-<div th:if="${users}" th:object="${users}">
-    <div th:each="user:${users}">
-        <table border="2" class="table table-striped table-inverse">
+<div th:replace="main::menu"></div>
+<div style="text-align: -webkit-center" th:if="${users}" th:object="${users}">
+    <h2>Управление пользователями</h2>
+    <div class="tables" th:each="user:${users}">
+        <table align="center" border="2" class="info management" style="width:auto">
             <tbody>
             <tr>
-                <td colspan="3">Профиль</td>
+                <td class="cell" colspan="3"><span>Профиль</span></td>
             </tr>
             <tr>
-                <td>Пользователь:</td>
-                <td><a th:text="${user.username}"></a></td>
-                <td rowspan="2"><a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a></td>
+                <td class="cell"><span>Пользователь:</span></td>
+                <td class="cell"><span th:text="${user.username}"></span></td>
+                <td class="cell" rowspan="2"><a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a></td>
             </tr>
             <tr>
-                <td>Активация:</td>
-                <td><a th:text="${user.active}?'Активен':'Неактивен'"></a></td>
+                <td class="cell"><span>Активация:</span></td>
+                <td class="cell"><span th:text="${user.active}?'Активен':'Неактивен'"></span></td>
             </tr>
             <tr>
-                <td colspan="3"><a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a></td>
+                <td class="cell" colspan="3"><a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a></td>
             </tr>
             </tbody>
         </table>
     <br>
-
     </div>
+    <a href="#" th:href="@{/user/reg}"><span>Добавить нового пользователя</span></a>
 </div>
-    <a href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
-</center>
+
 </body>
 </html>
