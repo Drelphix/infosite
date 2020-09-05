@@ -6,12 +6,13 @@ body {
 a {
 text-decoration: none;
 vertical-align:middle;
+color:blue;
 }
 ul.topmenu > li >a {
 color:white}
 
 ul.topmenu > li >a:hover {
-color:grey;}
+color:#073ed8;}
 
 body:before {
   position: absolute;
@@ -45,6 +46,7 @@ nav a {
   font-weight:bold;
   font-family: "Poppins", sans-serif;
    appearance:auto;
+   font-size:16px;
 }
 .topmenu > li > a:before {
   position: absolute;
@@ -60,7 +62,7 @@ nav a {
 }
 .topmenu li:hover a:before {
   transform: translate(-50%, 0);
-  color:grey;
+  color:#073ed8;
   opacity: 1;
 }
 .submenu {
@@ -91,9 +93,10 @@ nav a {
   font-family: "Poppins", sans-serif;
   width:100%;
   display:block;
+  font-size:large;
 }
 .submenu a:hover {
-background: #e8e8e8;
+background: #fff363;
 }
 
 /*Логотип*/
@@ -120,3 +123,6 @@ z-index:997;
 .name{
 text-align-last:center;
 margin-bottom:0;}
+a.link:hover{
+text-align:center;
+color:red;}

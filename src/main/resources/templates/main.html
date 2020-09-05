@@ -16,8 +16,8 @@
                 <div class="logo">
                     <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" style="height:35px"
                                                     title=""/></a>
-                    <a href="#" th:href="@{/logout}"><span style="color:white"
-                                                           th:text="'Welcome, '+${#authentication.name}"></span></a>
+                    <a class="link" href="#" th:href="@{/logout}"><span style="color:white"
+                                                                        th:text="'Welcome, '+${#authentication.name}"></span></a>
                 </div>
                 <nav th:if="${menus}">
                     <ul class="topmenu">
@@ -74,7 +74,8 @@
 
 <div class="tables" th:each="table,tabRow: ${tables}" th:if="${tables}">
     <center>
-        <h3><a href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
+        <h3><a class="link" href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}"
+               th:text="${table.name}"></a></h3>
         <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
         <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
             <tbody th:if="${not #lists.isEmpty(table.cols)}">
@@ -85,7 +86,8 @@
                 <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
                     <div th:case="false">
-                        <a href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}"
+                        <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                           th:if="${mode==true}"
                            th:text="${line.data}"></a>
                         <span th:if="${mode==false}" th:text="${line.data}"></span>
                     </div>
@@ -97,18 +99,19 @@
             </td>
 
             <td class="delLine" th:if="${mode==true}">
-                <a href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
+                <a class="link" href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
             </td>
         </tr>
         </tbody>
     </table>
     </center>
     <center th:if="${not #lists.isEmpty(table.cols)}">
-        <a align="center" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить строку</a>
+        <a align="center" class="link" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить
+            строку</a>
     </center>
 </div>
 <div align="center" style="padding-top:5px" th:if="${submenu}">
-    <a href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
+    <a class="link" href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
 </div>
 </body>
 

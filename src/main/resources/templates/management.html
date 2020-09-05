@@ -14,20 +14,22 @@
             <tr>
                 <td class="cell"><span>Пользователь:</span></td>
                 <td class="cell"><span th:text="${user.username}"></span></td>
-                <td class="cell" rowspan="2"><a href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a></td>
+                <td class="cell" rowspan="2"><a class="link" href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a>
+                </td>
             </tr>
             <tr>
                 <td class="cell"><span>Активация:</span></td>
                 <td class="cell"><span th:text="${user.active}?'Активен':'Неактивен'"></span></td>
             </tr>
             <tr>
-                <td class="cell" colspan="3"><a href="" th:href="@{/edituser(id=${user.id})}">Изменить</a></td>
+                <td class="cell" colspan="3"><a class="link" href="" th:href="@{/edituser(id=${user.id})}">Изменить</a>
+                </td>
             </tr>
             </tbody>
         </table>
     <br>
     </div>
-    <a href="#" th:href="@{/user/reg}"><span>Добавить нового пользователя</span></a>
+    <a class="link" href="#" th:href="@{/user/reg}">Добавить нового пользователя</a>
 </div>
 
 </body>

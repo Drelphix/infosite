@@ -58,7 +58,7 @@ public class ScheduledTask {
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         List<Excel> excels = excelRepository.findAll();
-        List<Menu> menus = menuRepository.findAll();//Переписать, ошибка сессии
+        List<Menu> menus = menuRepository.findAll();
         XSSFWorkbook workbook = new ExcelTableReportView().CreateNew(menus);
         for (Excel excel : excels) {
             path = excel.getPath();
