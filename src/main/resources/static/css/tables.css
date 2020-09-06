@@ -2,26 +2,25 @@ div.tables{
 margin-top:15px;
 }
 table.info{
-background-color:#43880b;
-border:0;
+border-collapse: collapse;
+border:green solid 2px;
 width:95%;
 text-align:center;
 margin:10px;
 }
 .cell {
-background-color:white;
-border:none;
+border:1px solid green;
 height:25px;
 }
 .delLine{
-background-color:white;
-border:none;
+border:1px solid green;
 height:25px;
 width:130px;
 text-align:center;
 }
 table.comp {
-background-color:#43880b;
+border-collapse: collapse;
+border:green solid 2px;
 width:100%;
 text-align:center;
 margin:10px;
@@ -40,29 +39,35 @@ color:#073ed8;
 span{
 color:black;
 }
-tr.line:hover{
-background-color:#43b94a !important;
-}
+
 table.edit{
-border:0;
+border-collapse: collapse;
+border:green solid 2px;
+width:30%;
+text-align:center;
 }
 center.tables{
 margin-top:20px;
 }
+tr:hover{
+background-color:#7ef27e;
+}
+input{
+background-color:unset;
+border:solid 1px green;
+color:#1d2b12;}
+input:focus{
+background-color:unset;
+border:solid 1px green;
+outline:none;
+}
 input.edit{
-outline:none;
-border:0;
-text-align:center;
-width:100%;
-height:100%;
+width:100%;}
+tr.none:hover{
+background-color:white;
 }
-input.edit:focus{
-outline:none;
-border-color:black;
-border:1;
+td.low{
+background-color: salmon;
+border:solid 1px green;
 }
-.border{
-border-top:1px solid #c4dcc1;
-border-bottom:1px solid #c4dcc1;
-border-left:1px solid #c4dcc1;
-}
+

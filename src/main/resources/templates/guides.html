@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Инструкции</title>
+</head>
+<body>
+<div id="header" th:insert="main::menu"></div>
+<table>
+    <tr class="none">
+        <td>
+            <div class="widget">
+                <h3 class="widget-title">Список инструкций:</h3>
+                <ul class="widget-list">
+                    <li th:each="guide:${guides}">
+                        <a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a>
+                    </li>
+                    <li th:if="${mode==true}">
+                        <a th:href="@{/guide/add}">Добавить инструкцию</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+        <td class="guide" th:if="${currentGuide}">
+            <h1 th:text="${currentGuide.title}"></h1>
+            <span th:text="${currentGuide.text}"></span>
+        </td>
+
+    </tr>
+</table>
+</div>
+</body>
+</html>

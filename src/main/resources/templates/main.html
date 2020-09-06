@@ -5,6 +5,7 @@
     <link href="#" rel="stylesheet" th:href="@{/css/main.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/tables.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/guide.css}"/>
     <meta charset="UTF-8">
     <title>InfoSite</title>
 </head>
@@ -42,14 +43,20 @@
                             </ul>
                         </li>
                         <li>
+                            <a class="menu" href="#" th:href="@{/guides}">Гайды</a>
+                        </li>
+                        <li>
+                            <a class="menu" href="#" th:href="@{/manage}">Управление</a>
+                        </li>
+                        <li>
                             <a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню"
                                                                                          src="#"
                                                                                          th:src="@{/images/addnew.png}"
                                                                                          title=""/></a>
-                    </li>
-                    <li>
-                        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
-                                alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
+                        </li>
+                        <li>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
+                                    alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
                     </li>
                     <li>
                         <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
@@ -59,9 +66,8 @@
                         <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
                                                               title=""/></a>
                     </li>
-                        <li>
-                            <a class="menu" href="#" th:href="@{/manage}">Управление</a>
-                        </li>
+
+
                     </ul>
                 </nav>
             </div>
@@ -81,6 +87,7 @@
             <tbody th:if="${not #lists.isEmpty(table.cols)}">
             <tr>
                 <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
+                <th th:if="${mode==true}"><span>Действие</span></th>
             </tr>
             <tr th:each="lineList, row: ${table.lines}">
                 <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">

@@ -3,7 +3,7 @@
 </head>
 <body>
 <div th:replace="main::menu"></div>
-<div style="text-align: -webkit-center" th:if="${users}" th:object="${users}">
+<div style="text-align: -webkit-center; margin-top:15px" th:if="${users}" th:object="${users}">
     <h2>Управление пользователями</h2>
     <div class="tables" th:each="user:${users}">
         <table align="center" border="2" class="info management" style="width:auto">

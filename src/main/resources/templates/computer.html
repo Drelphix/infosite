@@ -12,7 +12,7 @@
                         th:text="'Сервер: '+${computer.getName()}+' Дата: '+${computer.getDate()}+' Время: '+${computer.getTime()}"></h3>
                     <center>
                         <table class="maincomp" id="maintable">
-                            <tr>
+                            <tr class="none">
                                 <td style="vertical-align:top">
                                     <table class="comp" id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
                                         <tr>
@@ -32,13 +32,13 @@
                                                 <td class="cell" th:text="${disk.getFreeSpace()}"></td>
                                             </div>
                                             <div th:if="${disk.getFreeSpaceGb()}<=5">
-                                                <td bgcolor="salmon"
+                                                <td class="low"
                                                     th:text="${disk.getLetter()}"></td>
-                                                <td bgcolor="salmon"
+                                                <td class="low"
                                                     th:text="${disk.getName()}"></td>
-                                                <td bgcolor="salmon"
+                                                <td class="low"
                                                     th:text="${disk.getTotalSize()}"></td>
-                                                <td bgcolor="salmon"
+                                                <td class="low"
                                                     th:text="${disk.getFreeSpace()}"></td>
                                             </div>
                                         </tr>
@@ -59,7 +59,7 @@
                                         <tr class="line" th:each="backup : ${computer.backups}"
                                             th:if="${not #lists.isEmpty(computer.backups)}">
                                             <td class="cell" th:text="${backup.getPath()}"></td>
-                                            <td bgcolor="salmon" class="cell" colspan="3"
+                                            <td class="low" colspan="3"
                                                 th:unless="${not #lists.isEmpty(backup.files)}">
                                                 Нет данных
                                             </td>
@@ -71,7 +71,7 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="none">
                                 <td colspan="2">
                                     <p class="name">Информация о файлах</p>
                                     <table class="comp" id="infofile" th:each="backup : ${computer.backups}">

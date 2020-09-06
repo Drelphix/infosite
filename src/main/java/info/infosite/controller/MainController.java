@@ -1,5 +1,6 @@
 package info.infosite.controller;
 
+import info.infosite.database.GuideRepository;
 import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.MenuRepository;
 import info.infosite.database.generated.Tab;
@@ -40,6 +41,8 @@ public class MainController {
     public TableRepository tableRepository;
     @Autowired
     public UserRepository userRepository;
+    @Autowired
+    public GuideRepository guideRepository;
     @Autowired
     MenuService menuService;
 
@@ -104,6 +107,27 @@ public class MainController {
         workbook.write(os);
         os.close();
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/guides")
+    public String ShowGuides(Model model, HttpSession httpSession) {
+        menuService.CheckMenu();
+        model.addAttribute("guides", guideRepository.findAll());
+        model = addMenu(model);
+        CheckMode(httpSession);
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        return "guides";
+    }
+
+    @GetMapping(value = "/guide")
+    public String ShowGuide(Model model, HttpSession httpSession, @RequestParam(name = "id") int id) {
+        menuService.CheckMenu();
+        model.addAttribute("guides", guideRepository.findAll());
+        model = addMenu(model);
+        CheckMode(httpSession);
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        model.addAttribute("currentGuide", guideRepository.getOne(id));
+        return "guides";
     }
 
     @GetMapping(value = "/xml/{name}")
