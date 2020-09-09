@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<div class="tables" th:each="table,tabRow: ${tables}" th:if="${tables}">
+<div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
     <center>
         <h3><a class="link" href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}"
                th:text="${table.name}"></a></h3>

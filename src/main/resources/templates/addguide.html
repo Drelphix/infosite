@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head"></head>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${guide.getTitle()}"></title>
+</head>
+<body>
+<div id="header" th:insert="main::menu"></div>
+<center>
+    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guideadd}" th:object="${guide}">
+        <span>Введите заголовок инструкции</span>
+        <input th:field="*{title}" type="text">
+
+        <textarea class="code" th:field="*{text}">
+
+            </textarea>
+        <input class="button_success" type="submit" value="Сохранить">
+
+    </form>
+</center>
+</body>
+</html>

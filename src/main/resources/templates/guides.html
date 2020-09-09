@@ -7,9 +7,9 @@
 </head>
 <body>
 <div id="header" th:insert="main::menu"></div>
-<table>
+<table style="margin-top:20px;width:100%">
     <tr class="none">
-        <td>
+        <td style="vertical-align: -webkit-baseline-middle;">
             <div class="widget">
                 <h3 class="widget-title">Список инструкций:</h3>
                 <ul class="widget-list">
@@ -17,17 +17,22 @@
                         <a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a>
                     </li>
                     <li th:if="${mode==true}">
-                        <a th:href="@{/guide/add}">Добавить инструкцию</a>
+                        <a th:href="@{/guideadd}">Добавить инструкцию</a>
                     </li>
                 </ul>
             </div>
         </td>
-        <td class="guide" th:if="${currentGuide}">
+        <td th:if="${currentGuide}">
             <h1 th:text="${currentGuide.title}"></h1>
-            <span th:text="${currentGuide.text}"></span>
+            <input th:field="${currentGuide.id}" type="hidden">
+            <span>Created by <span th:text="${currentGuide.username}"></span> at <span
+                    th:text="${currentGuide.date}"></span></span>
+            <div th:utext="${currentGuide.text}"></div>
         </td>
-
-    </tr>
+        <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}"><a class="link"
+                                                                                              th:href="@{/delguide(id=${currentGuide.id})}">Удалить
+            инструкцию</a>
+        </td>
 </table>
 </div>
 </body>

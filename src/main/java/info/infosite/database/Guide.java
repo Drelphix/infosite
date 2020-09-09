@@ -16,7 +16,15 @@ public class Guide {
     @Column
     private String title;
 
+    @Lob
     @Column
     private String text;
+
+    @Column
+    private String date;
+
+    @Column
+    private String username;
+
 
 }

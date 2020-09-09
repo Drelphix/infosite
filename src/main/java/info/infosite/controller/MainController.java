@@ -130,6 +130,7 @@ public class MainController {
         return "guides";
     }
 
+
     @GetMapping(value = "/xml/{name}")
     public String ShowDiskInfo(Model model, @PathVariable(name = "name") String name, @RequestParam(name = "id") int id, HttpSession httpSession) {
         menuService.CheckMenu();

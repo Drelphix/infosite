@@ -70,4 +70,14 @@ td.low{
 background-color: salmon;
 border:solid 1px green;
 }
+td.code{
+width:50%;
+height:100%;
+}
+textarea.code{
+width:100%;
+height:700px;
+resize:none;
+margin-top:20px;
+}
 

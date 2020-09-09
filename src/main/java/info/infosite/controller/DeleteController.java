@@ -1,5 +1,6 @@
 package info.infosite.controller;
 
+import info.infosite.database.GuideRepository;
 import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.*;
 import info.infosite.functions.DeleteService;
@@ -31,6 +32,8 @@ public class DeleteController {
     MenuService menuService;
     @Autowired
     DeleteService deleteService;
+    @Autowired
+    GuideRepository guideRepository;
 
     @RequestMapping(value = "/delCol", method = RequestMethod.GET)
     public String DeleteColumn(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "col") int idCol) {
@@ -84,5 +87,11 @@ public class DeleteController {
     public String DeleteUser(Model model, @RequestParam int id) {
         userRepository.deleteById(id);
         return "redirect:/manage";
+    }
+
+    @RequestMapping(value = "/delguide", method = RequestMethod.GET)
+    public String DeleteGuide(Model model, @RequestParam int id) {
+        guideRepository.deleteById(id);
+        return "redirect:/guides";
     }
 }

@@ -1,10 +1,13 @@
 package info.infosite.controller;
 
+import info.infosite.database.Guide;
+import info.infosite.database.GuideRepository;
 import info.infosite.database.generated.*;
 import info.infosite.functions.MenuService;
 import info.infosite.views.ListLineView;
 import info.infosite.views.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,19 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class AddController {
     @Autowired
-    public MenuRepository menuRepository;
+    private MenuRepository menuRepository;
     @Autowired
-    public SubMenuRepository subMenuRepository;
+    private SubMenuRepository subMenuRepository;
     @Autowired
-    public TableRepository tableRepository;
+    private TableRepository tableRepository;
     @Autowired
     MenuService menuService;
+    @Autowired
+    private GuideRepository guideRepository;
 
     @RequestMapping(value = "/addSub", method = RequestMethod.GET)
     public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
@@ -109,5 +116,30 @@ public class AddController {
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("xmls", menuService.xmlMenus);
         return "redirect:/show?id=" + subMenu.getIdSubMenu();
+    }
+
+    @RequestMapping(value = "/guideadd", method = RequestMethod.GET)
+    public String AddNewGuide(Model model, HttpSession httpSession) {
+        Guide guide = new Guide();
+
+        System.out.println(guide.getUsername());
+        menuService.CheckMenu();
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        model.addAttribute("menus", menuService.menus);
+        model.addAttribute("xmls", menuService.xmlMenus);
+        model.addAttribute("guide", guide);
+        return "addguide";
+    }
+
+
+    @RequestMapping(value = "/guideadd", method = RequestMethod.POST)
+    public String SaveNewGuide(Model model, @ModelAttribute Guide guide) {
+        guide.setDate(LocalDate.now().toString());
+        guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (guide.getTitle().equals("")) {
+            guide.setTitle("Вы забыли про название");
+        }
+        guideRepository.save(guide);
+        return "redirect:/guides";
     }
 }
