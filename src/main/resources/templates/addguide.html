@@ -8,8 +8,23 @@
 <body>
 <div id="header" th:insert="main::menu"></div>
 <center>
-    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guideadd}" th:object="${guide}">
+    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guideadd}" th:object="${guide}"
+          th:unless="${edit}">
+        <h1>Добавление инструкции</h1>
         <span>Введите заголовок инструкции</span>
+        <input th:field="*{title}" type="text">
+
+        <textarea class="code" th:field="*{text}">
+
+            </textarea>
+        <input class="button_success" type="submit" value="Сохранить">
+
+    </form>
+    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guide/edit}" th:if="${edit}"
+          th:object="${guide}">
+        <h1>Редактирование инструкции</h1>
+        <span>Введите заголовок инструкции</span>
+        <input th:field="*{id}" type="hidden">
         <input th:field="*{title}" type="text">
 
         <textarea class="code" th:field="*{text}">

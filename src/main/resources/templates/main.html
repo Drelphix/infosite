@@ -57,15 +57,15 @@
                         <li>
                             <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
                                     alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
-                    </li>
-                    <li>
-                        <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
-                                alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
-                    </li>
-                    <li>
-                        <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
-                                                              title=""/></a>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
+                                    alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
+                        </li>
+                        <li>
+                            <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
+                                                                  title=""/></a>
+                        </li>
 
 
                     </ul>
@@ -85,11 +85,11 @@
         <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
         <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
             <tbody th:if="${not #lists.isEmpty(table.cols)}">
-            <tr>
+            <tr class="line">
                 <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
                 <th th:if="${mode==true}"><span>Действие</span></th>
             </tr>
-            <tr th:each="lineList, row: ${table.lines}">
+            <tr class="line" th:each="lineList, row: ${table.lines}">
                 <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
                     <div th:case="false">
@@ -102,15 +102,15 @@
                     <div th:case="true">
                         <input disabled th:id="pass+${row.index}" th:value="${line.data}" type="password">
                         <input onclick="getData(this.getAttribute('data1'))" th:data1="${line.data}" type="button">
-                </div>
-            </td>
+                    </div>
+                </td>
 
-            <td class="delLine" th:if="${mode==true}">
-                <a class="link" href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <td class="delLine" th:if="${mode==true}">
+                    <a class="link" href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </center>
     <center th:if="${not #lists.isEmpty(table.cols)}">
         <a align="center" class="link" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить

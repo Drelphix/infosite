@@ -1,5 +1,7 @@
 package info.infosite.controller;
 
+import info.infosite.database.Guide;
+import info.infosite.database.GuideRepository;
 import info.infosite.database.auth.User;
 import info.infosite.database.auth.UserRepository;
 import info.infosite.database.generated.*;
@@ -24,6 +26,8 @@ public class EditController {
     public SubMenuRepository subMenuRepository;
     @Autowired
     public TableRepository tableRepository;
+    @Autowired
+    public GuideRepository guideRepository;
     @Autowired
     MenuService menuService;
     @Autowired
@@ -129,11 +133,25 @@ public class EditController {
     public String EditUser(Model model, @ModelAttribute User user) {
         User base = userRepository.findUserByUsername(user.getUsername());
         user.setRole("admin");
-        if(user.getPassword().equals("")) {
+        if (user.getPassword().equals("")) {
             user.setPassword(base.getPassword());
 
         } else user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/manage";
+    }
+
+    @RequestMapping(value = "/guide/edit")
+    public String EditGuide(Model model, @RequestParam int id) {
+        Guide guide = guideRepository.getOne(id);
+        model.addAttribute("guide", guide);
+        model.addAttribute("edit", true);
+        return "addguide";
+    }
+
+    @PostMapping(value = "/guide/edit")
+    public String EditGuide(Model model, @ModelAttribute Guide guide) {
+        guideRepository.save(guide);
+        return "redirect:/guides";
     }
 }

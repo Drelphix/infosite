@@ -52,10 +52,8 @@ public class MainController {
         try {
             return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
         } catch (IndexOutOfBoundsException | NullPointerException e) {
-            menuService.CheckMenu();
-            model = addMenu(model);
             CheckMode(httpSession);
-            model.addAttribute("mode", httpSession.getAttribute("mode"));
+            model = addMenu(model, httpSession);
             return "main";
         }
     }
@@ -63,9 +61,8 @@ public class MainController {
     @GetMapping(value = "/manage")
     public String ManageUsers(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
-        model = addMenu(model);
         CheckMode(httpSession);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        model = addMenu(model, httpSession);
         model.addAttribute("users", userRepository.findAll(Sort.by(Sort.Direction.ASC, "username")));
         return "management";
     }
@@ -77,20 +74,17 @@ public class MainController {
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
         }
-        model = addMenu(model);
+        model = addMenu(model, httpSession);
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
-        CheckMode(httpSession);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
         return "main";
     }
 
     @GetMapping(value = "/mode")
-    public String EditingMode(Model model, @RequestParam(name = "mode") boolean mode, HttpServletRequest request, HttpSession httpSession) {
+    public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request, HttpSession httpSession) {
         httpSession.setAttribute("mode", mode);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
-        String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
+        model.addAttribute("mode", mode);
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping(value = "/export")
@@ -112,10 +106,8 @@ public class MainController {
     @GetMapping(value = "/guides")
     public String ShowGuides(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
+        model = addMenu(model, httpSession);
         model.addAttribute("guides", guideRepository.findAll());
-        model = addMenu(model);
-        CheckMode(httpSession);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
         return "guides";
     }
 
@@ -123,9 +115,7 @@ public class MainController {
     public String ShowGuide(Model model, HttpSession httpSession, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
         model.addAttribute("guides", guideRepository.findAll());
-        model = addMenu(model);
-        CheckMode(httpSession);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        model = addMenu(model, httpSession);
         model.addAttribute("currentGuide", guideRepository.getOne(id));
         return "guides";
     }
@@ -144,8 +134,7 @@ public class MainController {
                     e.printStackTrace();
                 }
                 CheckMode(httpSession);
-                model = addMenu(model);
-                model.addAttribute("mode", httpSession.getAttribute("mode"));
+                model = addMenu(model, httpSession);
                 model.addAttribute("computer", xmlReader.getComputer());
             }
         }
@@ -153,9 +142,11 @@ public class MainController {
     }
 
 
-    private Model addMenu(Model model) {
+    private Model addMenu(Model model, HttpSession httpSession) {
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("xmls", menuService.xmlMenus);
+        CheckMode(httpSession);
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
         return model;
     }
 

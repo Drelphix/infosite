@@ -14,7 +14,13 @@
                 <h3 class="widget-title">Список инструкций:</h3>
                 <ul class="widget-list">
                     <li th:each="guide:${guides}">
-                        <a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a>
+                        <table>
+                            <tr style="">
+                                <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a></td>
+                                <td><a style="color:red" th:href="@{/guide/edit(id=${guide.id})}" th:if="${mode==true}">Редактирование</a>
+                                </td>
+                            </tr>
+                        </table>
                     </li>
                     <li th:if="${mode==true}">
                         <a th:href="@{/guideadd}">Добавить инструкцию</a>
@@ -29,9 +35,10 @@
                     th:text="${currentGuide.date}"></span></span>
             <div th:utext="${currentGuide.text}"></div>
         </td>
-        <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}"><a class="link"
-                                                                                              th:href="@{/delguide(id=${currentGuide.id})}">Удалить
-            инструкцию</a>
+        <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}">
+            <a class="link"
+               th:href="@{/delguide(id=${currentGuide.id})}">Удалить
+                инструкцию</a>
         </td>
 </table>
 </div>

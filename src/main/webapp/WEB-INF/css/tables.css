@@ -49,7 +49,7 @@ text-align:center;
 center.tables{
 margin-top:20px;
 }
-tr:hover{
+tr.line:hover{
 background-color:#7ef27e;
 }
 input{
