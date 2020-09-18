@@ -48,18 +48,18 @@
                         <li>
                             <a class="menu" href="#" th:href="@{/manage}">Управление</a>
                         </li>
-                        <li>
-                            <a href="#" th:href="@{/addMenu}" th:if="${mode==true}"><img alt="Добавить пункт меню"
-                                                                                         src="#"
-                                                                                         th:src="@{/images/addnew.png}"
-                                                                                         title=""/></a>
+                        <li th:if="${mode==true}">
+                            <a href="#" th:href="@{/addMenu}"><img alt="Добавить пункт меню"
+                                                                   src="#"
+                                                                   th:src="@{/images/addnew.png}"
+                                                                   title=""/></a>
                         </li>
-                        <li>
-                            <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==false}"><img
+                        <li th:if="${mode==false}">
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img
                                     alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
                         </li>
-                        <li>
-                            <a href="#" th:href="@{/mode(mode=${!mode})}" th:if="${mode==true}"><img
+                        <li th:if="${mode==true}">
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img
                                     alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
                         </li>
                         <li>

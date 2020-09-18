@@ -81,8 +81,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/mode")
-    public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request, HttpSession httpSession) {
-        httpSession.setAttribute("mode", mode);
+    public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request) {
         model.addAttribute("mode", mode);
         return "redirect:" + request.getHeader("Referer");
     }
