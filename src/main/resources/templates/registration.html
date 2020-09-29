@@ -10,8 +10,10 @@
         <input class="username" required th:field="*{username}" type="text"/>
         <br><span class="text">Пароль</span>
         <input class="password" required th:field="*{password}" type="password"/>
+        <br><span class="text">ФИО</span>
+        <input class="password" required th:field="*{fio}" type="text"/>
         <input class="button_success" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/>
-        <span class="register" th:href="@{/login}">Вернуться назад</span>
+        <a class="register" th:href="@{/}">Вернуться назад</a>
         <div th:if="${edit}">
             <span class="text">Активен</span>
             <input th:field="*{active}" type="checkbox">
@@ -27,6 +29,10 @@
         <input class="username" required th:field="*{username}" type="text"/>
         <br><span class="text">Пароль</span>
         <input class="password" th:field="*{password}" type="password"/>
+        <br><span class="text">Ip-адрес:</span>
+        <input class="password" th:field="*{ip}" type="text"/>
+        <br><span class="text">ФИО:</span>
+        <input class="password" th:field="*{fio}" type="text"/>
         <br><span>Активен:</span>
         <input class="username" th:field="*{active}" type="checkbox">
         <input class="button_success" th:value="Сохранить" type="submit"/>

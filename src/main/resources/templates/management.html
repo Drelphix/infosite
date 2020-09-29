@@ -14,8 +14,16 @@
             <tr>
                 <td class="cell"><span>Пользователь:</span></td>
                 <td class="cell"><span th:text="${user.username}"></span></td>
-                <td class="cell" rowspan="2"><a class="link" href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a>
+                <td class="cell" rowspan="4"><a class="link" href="" th:href="@{/deleteuser(id=${user.id})}">Удалить</a>
                 </td>
+            </tr>
+            <tr>
+                <td class="cell"><span>IP:</span></td>
+                <td class="cell"><span th:text="${user.ip}"></span></td>
+            </tr>
+            <tr>
+                <td class="cell"><span>Ф.И.О.:</span></td>
+                <td class="cell"><span th:text="${user.fio}"></span></td>
             </tr>
             <tr>
                 <td class="cell"><span>Активация:</span></td>

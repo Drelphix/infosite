@@ -7,6 +7,7 @@ import info.infosite.database.generated.Tab;
 import info.infosite.database.generated.TableRepository;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
+import info.infosite.functions.messaging.Messaging;
 import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.TableView;
 import info.infosite.views.XmlMenuView;
@@ -157,5 +158,11 @@ public class MainController {
         } catch (NullPointerException e) {
             httpSession.setAttribute("mode", false);
         }
+    }
+
+    @GetMapping(value = "/test")
+    public String TestSendMessage() {
+        new Messaging().SendMessage("TestMessage", "192.168.10.9");
+        return "redirect:/";
     }
 }
