@@ -1,5 +1,6 @@
 package info.infosite.controller;
 
+import info.infosite.database.auth.RoleRepository;
 import info.infosite.database.auth.User;
 import info.infosite.database.auth.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,17 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    RoleRepository roleRepository;
 
-    @GetMapping(value = "/user/reg")
+    @GetMapping(value = "/registration")
     public String Registration(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("repeat", "");
         return "registration";
     }
 
-    @PostMapping(value = "/user/reg")
+    @PostMapping(value = "/registration")
     public String Registration(Model model, @ModelAttribute User user, @ModelAttribute String repeat) {
         try {
             User test = userRepository.findUserByUsername(user.getUsername());
@@ -34,7 +37,7 @@ public class UserController {
         } catch (NullPointerException e) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setActive(false);
-            user.setRole("admin");
+            user.setRole(roleRepository.findRoleByRole("User"));
             userRepository.save(user);
         }
         return "redirect:/manage";

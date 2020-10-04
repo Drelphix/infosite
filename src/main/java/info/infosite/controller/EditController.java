@@ -50,7 +50,7 @@ public class EditController {
         return "add";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/line/edit", method = RequestMethod.POST)
     public String SaveLines(Model model, @ModelAttribute ListLineView table) {
         for (Line line : table.getLines()) {
             lineRepository.save(line);
@@ -58,7 +58,7 @@ public class EditController {
         return "redirect:/show?id=" + table.getIdSubMenu();
     }
 
-    @RequestMapping(value = "/editMenu", method = RequestMethod.GET)
+    @RequestMapping(value = "/menu/edit", method = RequestMethod.GET)
     public String EditMenu(Model model, @RequestParam(name = "id") int idMenu) {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
@@ -68,7 +68,7 @@ public class EditController {
         return "add";
     }
 
-    @RequestMapping(value = "/editMenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/menu/edit", method = RequestMethod.POST)
     public String SaveMenu(Model model, @ModelAttribute Menu menu) {
         try {
             for (SubMenu subMenu : menu.getSubMenuSet()) {
@@ -83,7 +83,7 @@ public class EditController {
     }
 
 
-    @RequestMapping(value = "/editTab", method = RequestMethod.GET)
+    @RequestMapping(value = "/table/edit", method = RequestMethod.GET)
     public String EditTable(Model model, @RequestParam(name = "tab") int idTab) {
         menuService.CheckMenu();
         TableView tableView = new TableView(tableRepository.getOne(idTab));
@@ -94,7 +94,7 @@ public class EditController {
     }
 
 
-    @RequestMapping(value = "/editTab", method = RequestMethod.POST)
+    @RequestMapping(value = "/table/edit", method = RequestMethod.POST)
     public String SaveTable(Model model, @ModelAttribute(name = "table") TableView table) {
         Tab tab = tableRepository.getOne(table.getId());
         int max = 0;
@@ -121,7 +121,7 @@ public class EditController {
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
-    @RequestMapping(value = "/edituser")
+    @RequestMapping(value = "/user/edit")
     public String EditUser(Model model, @RequestParam int id) {
         User user = userRepository.getOne(id);
         model.addAttribute("user", user);
@@ -129,10 +129,9 @@ public class EditController {
         return "registration";
     }
 
-    @PostMapping(value = "/edituser")
+    @PostMapping(value = "/user/edit")
     public String EditUser(Model model, @ModelAttribute User user) {
         User base = userRepository.findUserByUsername(user.getUsername());
-        user.setRole("admin");
         if (user.getPassword().equals("")) {
             user.setPassword(base.getPassword());
 

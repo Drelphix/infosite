@@ -21,7 +21,7 @@
                                                                         th:text="'Welcome, '+${#authentication.name}"></span></a>
                 </div>
                 <nav th:if="${menus}">
-                    <ul class="topmenu">
+                    <ul class="topmenu" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
                         <li th:each="xml : ${xmls}">
                             <a th:text="${xml.name}"></a>
                             <ul class="submenu" th:if="${not #lists.isEmpty(xml.subs)}">
@@ -77,18 +77,18 @@
         <a>a</a>
     </div>
 </div>
-
-<div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
-    <center>
-        <h3><a class="link" href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}"
-               th:text="${table.name}"></a></h3>
-        <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
-        <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
-            <tbody th:if="${not #lists.isEmpty(table.cols)}">
-            <tr class="line">
-                <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
-                <th th:if="${mode==true}"><span>Действие</span></th>
-            </tr>
+<div th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
+    <div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
+        <center>
+            <h3><a class="link" href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}"
+                   th:text="${table.name}"></a></h3>
+            <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
+            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
+                <tbody th:if="${not #lists.isEmpty(table.cols)}">
+                <tr class="line">
+                    <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
+                    <th th:if="${mode==true}"><span>Действие</span></th>
+                </tr>
             <tr class="line" th:each="lineList, row: ${table.lines}">
                 <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
@@ -117,8 +117,9 @@
             строку</a>
     </center>
 </div>
-<div align="center" style="padding-top:5px" th:if="${submenu}">
-    <a class="link" href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
+    <div align="center" style="padding-top:5px" th:if="${submenu}">
+        <a class="link" href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
+    </div>
 </div>
 </body>
 

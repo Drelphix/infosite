@@ -7,7 +7,6 @@ import info.infosite.database.generated.Tab;
 import info.infosite.database.generated.TableRepository;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
-import info.infosite.functions.messaging.Messaging;
 import info.infosite.views.ExcelTableReportView;
 import info.infosite.views.TableView;
 import info.infosite.views.XmlMenuView;
@@ -59,7 +58,7 @@ public class MainController {
         }
     }
 
-    @GetMapping(value = "/manage")
+    @GetMapping(value = "/management")
     public String ManageUsers(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
         CheckMode(httpSession);
@@ -141,6 +140,33 @@ public class MainController {
         return "computer";
     }
 
+    @GetMapping(value = "/requests")
+    public String showRequests(Model model) {
+
+        return "request";
+    }
+
+    //Новая заявка
+    @GetMapping(value = "/request/new")
+    public String addNewRequest(Model model) {
+
+        return "request";
+    }
+
+    //Подтверждение заявки
+    @GetMapping(value = "/request/confirm")
+    public String confirmRequest(Model model) {
+
+        return "request";
+    }
+
+    //Отметка о выполнении заявки
+    @GetMapping(value = "/request/complete")
+    public String completeRequest(Model model) {
+
+        return "request";
+    }
+
 
     private Model addMenu(Model model, HttpSession httpSession) {
         model.addAttribute("menus", menuService.menus);
@@ -160,9 +186,5 @@ public class MainController {
         }
     }
 
-    @GetMapping(value = "/test")
-    public String TestSendMessage() {
-        new Messaging().SendMessage("TestMessage", "192.168.10.9");
-        return "redirect:/";
-    }
+
 }

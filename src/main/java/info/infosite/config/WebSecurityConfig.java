@@ -23,8 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/*", "/xml/*").authenticated() // только для зарегистрированных
+
+                .antMatchers("/*").authenticated() // только для зарегистрированных
                 .antMatchers("/user/reg").permitAll()// общий доступ
+                .antMatchers("/manage", "/xml/*", "/show", "/guide", "/guides", "/export", "/mode").hasRole("admin")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -40,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/styles/**")
                 .antMatchers("/images/**")
-                .antMatchers("/pics/**");
+                .antMatchers("/pics/**")
+                .antMatchers("/registration");
     }
 
     @Override
@@ -49,6 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder)
                 .usersByUsernameQuery("select username, password, active from users where username=?")
-                .authoritiesByUsernameQuery("select username, role from users where username=?");
+                .authoritiesByUsernameQuery("select a.username, b.role from users a inner join dbo.role b ON a.role_id=b.id where a.username=?");
     }
 }

@@ -3,7 +3,7 @@ package info.infosite.functions.messaging;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-
+//Don't work net send
 @Service
 public class Messaging {
     public void SendMessage(String message, String destination) {

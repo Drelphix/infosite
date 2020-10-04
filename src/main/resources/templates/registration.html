@@ -2,7 +2,7 @@
 <head th:insert="main::head">
 </head>
 <body>
-<form action="#" class="center" method="post" th:action="@{/user/reg}" th:object="${user}" th:unless="${edit}">
+<form action="#" class="center" method="post" th:action="@{/registration}" th:object="${user}" th:unless="${edit}">
     <div class="auth">
         <h3 style="padding-top:10%;" th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3>
         <span th:if="${error}" th:text="${error}"></span>

@@ -75,7 +75,7 @@ public class AddController {
         return "add";
     }
 
-    @RequestMapping(value = "/addTab", method = RequestMethod.GET)
+    @RequestMapping(value = "/table/new", method = RequestMethod.GET)
     public String AddNewTable(Model model, @RequestParam(name = "id") int idSub) {
         menuService.CheckMenu();
         SubMenu subMenu = subMenuRepository.getOne(idSub);
@@ -86,7 +86,7 @@ public class AddController {
         return "add";
     }
 
-    @RequestMapping(value = "/addMenu", method = RequestMethod.GET)
+    @RequestMapping(value = "/menu/new", method = RequestMethod.GET)
     public String AddNewMenu(Model model) {
         menuService.CheckMenu();
         model.addAttribute("newmenu", new Menu());
@@ -95,7 +95,7 @@ public class AddController {
         return "add";
     }
 
-    @RequestMapping(value = "/saveMenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/menu/save", method = RequestMethod.POST)
     public String AddNewMenu(Model model, @ModelAttribute Menu menu) {
         menuRepository.save(menu);
         menuService.menus = menuRepository.findAll();
@@ -104,7 +104,7 @@ public class AddController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/addTab", method = RequestMethod.POST)
+    @RequestMapping(value = "/table/new", method = RequestMethod.POST)
     public String SaveNewTable(Model model, @ModelAttribute SubMenu subMenu) {
         menuService.CheckMenu();
         for (Tab tab : subMenu.getTables()) {
@@ -118,7 +118,7 @@ public class AddController {
         return "redirect:/show?id=" + subMenu.getIdSubMenu();
     }
 
-    @RequestMapping(value = "/guideadd", method = RequestMethod.GET)
+    @RequestMapping(value = "/guide/new", method = RequestMethod.GET)
     public String AddNewGuide(Model model, HttpSession httpSession) {
         Guide guide = new Guide();
 
@@ -132,7 +132,7 @@ public class AddController {
     }
 
 
-    @RequestMapping(value = "/guideadd", method = RequestMethod.POST)
+    @RequestMapping(value = "/guide/save", method = RequestMethod.POST)
     public String SaveNewGuide(Model model, @ModelAttribute Guide guide) {
         guide.setDate(LocalDate.now().toString());
         guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());

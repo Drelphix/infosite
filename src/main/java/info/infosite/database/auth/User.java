@@ -24,13 +24,14 @@ public class User {
     @Column
     private boolean active;
 
-    @Column
-    private String role;
-
-    @Column
-    private String ip;
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Role role;
 
     @Column
     private String fio;
+
+    @Column
+    private String chatId;
 
 }

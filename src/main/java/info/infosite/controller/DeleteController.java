@@ -35,7 +35,7 @@ public class DeleteController {
     @Autowired
     GuideRepository guideRepository;
 
-    @RequestMapping(value = "/delCol", method = RequestMethod.GET)
+    @RequestMapping(value = "/column/delete", method = RequestMethod.GET)
     public String DeleteColumn(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "col") int idCol) {
         Col column = colRepository.getOne(idCol);
         deleteService.DeleteColumn(column);
@@ -43,7 +43,7 @@ public class DeleteController {
     }
 
 
-    @RequestMapping(value = "/delLine", method = RequestMethod.GET)
+    @RequestMapping(value = "/line/delete", method = RequestMethod.GET)
     public String DeleteLine(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "line") int idLine) {
         menuService.CheckMenu();
         TableView tableView = new TableView(tableRepository.getOne(idTab));
@@ -54,7 +54,7 @@ public class DeleteController {
         return "redirect:/show?id=" + tableView.getSubMenu().getIdSubMenu();
     }
 
-    @RequestMapping(value = "/delSub", method = RequestMethod.GET)
+    @RequestMapping(value = "/submenu/delete", method = RequestMethod.GET)
     public String DeleteSubMenu(Model model, @RequestParam(name = "id") int idSubMenu) {
         menuService.CheckMenu();
         SubMenu subMenu = subMenuRepository.getOne(idSubMenu);
@@ -66,7 +66,7 @@ public class DeleteController {
         return "add";
     }
 
-    @RequestMapping(value = "/delTab", method = RequestMethod.GET)
+    @RequestMapping(value = "/table/delete", method = RequestMethod.GET)
     public String DeleteTable(Model model, @RequestParam(name = "id") int idTab) {
         menuService.CheckMenu();
         Tab table = tableRepository.getOne(idTab);
@@ -74,7 +74,7 @@ public class DeleteController {
         return "redirect:/show?id=" + table.getSubMenu().getIdSubMenu();
     }
 
-    @RequestMapping(value = "/delMenu", method = RequestMethod.GET)
+    @RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
     public String DeleteMenu(Model model, @RequestParam(name = "id") int idMenu) {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
@@ -83,13 +83,13 @@ public class DeleteController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/delete", method = RequestMethod.GET)
     public String DeleteUser(Model model, @RequestParam int id) {
         userRepository.deleteById(id);
         return "redirect:/manage";
     }
 
-    @RequestMapping(value = "/delguide", method = RequestMethod.GET)
+    @RequestMapping(value = "/guide/delete", method = RequestMethod.GET)
     public String DeleteGuide(Model model, @RequestParam int id) {
         guideRepository.deleteById(id);
         return "redirect:/guides";
