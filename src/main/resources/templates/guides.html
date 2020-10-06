@@ -29,17 +29,23 @@
             </div>
         </td>
         <td th:if="${currentGuide}">
-            <h1 th:text="${currentGuide.title}"></h1>
+            <h1 th:text="${currentGuide.title}"></h1>   <span>Created by <span
+                th:text="${currentGuide.username}"></span> at <span
+                th:text="${currentGuide.date}"></span></span>
             <input th:field="${currentGuide.id}" type="hidden">
-            <span>Created by <span th:text="${currentGuide.username}"></span> at <span
-                    th:text="${currentGuide.date}"></span></span>
+
+            <span th:if="${currentGuide.lastEditDate}">Last edited by <span
+                    th:text="${currentGuide.lastEditUsername}"></span> at <span
+                    th:text="${currentGuide.lastEditDate}"></span></span>
             <div th:utext="${currentGuide.text}"></div>
         </td>
-        <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}">
-            <a class="link"
-               th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить
-                инструкцию</a>
-        </td>
+        <div th:if="${currentGuide}">
+            <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}">
+                <a class="link"
+                   th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить
+                    инструкцию</a>
+            </td>
+        </div>
 </table>
 </div>
 </body>

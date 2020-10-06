@@ -26,5 +26,8 @@ public class Guide {
     @Column
     private String username;
 
-
+    @Column
+    private String lastEditUsername;
+    @Column
+    private String lastEditDate;
 }
