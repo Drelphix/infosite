@@ -23,7 +23,7 @@
                         </table>
                     </li>
                     <li th:if="${mode==true}">
-                        <a th:href="@{/guideadd}">Добавить инструкцию</a>
+                        <a th:href="@{/guide/new}">Добавить инструкцию</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
         </td>
         <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}">
             <a class="link"
-               th:href="@{/delguide(id=${currentGuide.id})}">Удалить
+               th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить
                 инструкцию</a>
         </td>
 </table>

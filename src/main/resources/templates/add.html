@@ -5,7 +5,7 @@
 <body>
 <div id="header" th:replace="main::menu"></div>
 <center class="tables">
-    <form action="#" method="post" th:action="@{/saveMenu}" th:if="${newmenu}" th:object="${newmenu}">
+    <form action="#" method="post" th:action="@{/menu/save}" th:if="${newmenu}" th:object="${newmenu}">
         <table class="edit">
             <tr>
                 <td class="cell">
@@ -17,7 +17,7 @@
         <input class="button_success" type="submit" value="Сохранить">
     </form>
     <!--Редактирование строки-->
-    <form action="#" method="post" th:action="@{/edit}" th:if="${lines}" th:object="${lines}">
+    <form action="#" method="post" th:action="@{/line/edit}" th:if="${lines}" th:object="${lines}">
         <table class="edit">
             <tr>
                 <th class="cell" colspan="2"><span th:text="${tableName}"></span></th>
@@ -39,7 +39,7 @@
     </form>
     <!--Редактирование таблицы-->
     <div th:if="${table}" th:object="${table}">
-        <form action="#" method="post" th:action="@{/editTab}">
+        <form action="#" method="post" th:action="@{/table/edit}">
             <table class="edit">
                 <tr>
                     <th colspan="2">
@@ -51,7 +51,7 @@
                         <input th:field="*{subMenu}" type="hidden">
                         <input th:field="*{id}" type="hidden">
                         <input class="edit" required th:field="*{name}" type="text"></td>
-                    <td class="delLine "><a class="link" href="#" th:href="@{/delTab(id=*{id})}">Удалить
+                    <td class="delLine "><a class="link" href="#" th:href="@{/table/delete(id=*{id})}">Удалить
                         таблицу</a></td>
 
                 </tr>
@@ -71,11 +71,11 @@
                     <input th:field="*{cols[__${itemStat.index}__].table}" type="hidden">
                     <input th:field="*{cols[__${itemStat.index}__].lines}" type="hidden">
                     <td class="delLine"><a class="link" href="#"
-                                           th:href="@{/delCol(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
+                                           th:href="@{/column/delete(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
                     </td>
                 </tr>
                 <tr>
-                    <td class="delLine" colspan="3"><a class="link" href="#" th:href="@{/addCol(tab=${table.id})}">Добавить
+                    <td class="delLine" colspan="3"><a class="link" href="#" th:href="@{/column/new(tab=${table.id})}">Добавить
                         столбец</a></td>
                 </tr>
             </table>
@@ -98,7 +98,7 @@
                         <input class="edit" th:field="*{name}" type="text">
                     </td>
                     <td class="delLine ">
-                        <a class="link" href="#" th:href="@{/delMenu(id=*{idMenu})}">Удалить меню</a>
+                        <a class="link" href="#" th:href="@{/menu/delete(id=*{idMenu})}">Удалить меню</a>
                     </td>
                 </tr>
             </table>
@@ -125,7 +125,7 @@
                 </tr>
                 <tr>
                     <td class="cell" colspan="2">
-                        <a class="link" href="#" th:href="@{/addSub(id=${menu.idMenu})}">Добавить подменю</a>
+                        <a class="link" href="#" th:href="@{/submenu/new(id=${menu.idMenu})}">Добавить подменю</a>
                     </td>
                 </tr>
             </table>
@@ -134,7 +134,7 @@
     </div>
     <!--Добавление таблицы-->
     <div align="center" th:if="${submenu}" th:object="${submenu}">
-        <form action="#" method="post" th:action="@{/addTab}">
+        <form action="#" method="post" th:action="@{/table/new}">
             <input th:field="*{menu}" type="hidden">
             <input th:field="*{idSubMenu}" type="hidden">
             <table class="edit">

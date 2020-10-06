@@ -25,8 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers("/*").authenticated() // только для зарегистрированных
-                .antMatchers("/user/reg").permitAll()// общий доступ
-                .antMatchers("/manage", "/xml/*", "/show", "/guide", "/guides", "/export", "/mode").hasRole("admin")
                 .and()
                 .formLogin()
                 .loginPage("/login")

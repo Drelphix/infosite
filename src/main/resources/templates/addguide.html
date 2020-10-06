@@ -8,7 +8,7 @@
 <body>
 <div id="header" th:insert="main::menu"></div>
 <center>
-    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guideadd}" th:object="${guide}"
+    <form method="post" style="width:50%;margin-top:40px;" th:action="@{/guide/save}" th:object="${guide}"
           th:unless="${edit}">
         <h1>Добавление инструкции</h1>
         <span>Введите заголовок инструкции</span>

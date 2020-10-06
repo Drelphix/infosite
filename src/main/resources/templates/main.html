@@ -32,7 +32,7 @@
                             </ul>
                         </li>
                         <li th:each="menu : ${menus}">
-                            <a href="#" th:href="@{/editMenu(id=${menu.idMenu})}" th:if="${mode==true}"
+                            <a href="#" th:href="@{/menu/edit(id=${menu.idMenu})}" th:if="${mode==true}"
                                th:text="${menu.name}"></a>
                             <a th:if="${mode!=true}" th:text="${menu.name}"></a>
                             <ul class="submenu" th:if="${not #lists.isEmpty(menu.subMenuSet)}">
@@ -46,13 +46,13 @@
                             <a class="menu" href="#" th:href="@{/guides}">Гайды</a>
                         </li>
                         <li>
-                            <a class="menu" href="#" th:href="@{/manage}">Управление</a>
+                            <a class="menu" href="#" th:href="@{/management}">Управление</a>
                         </li>
                         <li th:if="${mode==true}">
-                            <a href="#" th:href="@{/addMenu}"><img alt="Добавить пункт меню"
-                                                                   src="#"
-                                                                   th:src="@{/images/addnew.png}"
-                                                                   title=""/></a>
+                            <a href="#" th:href="@{/menu/add}"><img alt="Добавить пункт меню"
+                                                                    src="#"
+                                                                    th:src="@{/images/addnew.png}"
+                                                                    title=""/></a>
                         </li>
                         <li th:if="${mode==false}">
                             <a href="#" th:href="@{/mode(mode=${!mode})}"><img
@@ -80,7 +80,7 @@
 <div th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
     <div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
         <center>
-            <h3><a class="link" href="#" th:href="@{/editTab(tab=${table.id})}" th:if="${mode==true}"
+            <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"
                    th:text="${table.name}"></a></h3>
             <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
             <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
@@ -118,7 +118,7 @@
     </center>
 </div>
     <div align="center" style="padding-top:5px" th:if="${submenu}">
-        <a class="link" href="#" th:href="@{/addTab(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
+        <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
     </div>
 </div>
 </body>

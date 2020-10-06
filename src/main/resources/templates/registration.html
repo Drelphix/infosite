@@ -21,7 +21,7 @@
     </div>
 </form>
 
-<form action="#" class="center" method="post" th:action="@{/edituser}" th:if="${edit}" th:object="${user}">
+<form action="#" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
     <div align="center" class="auth">
         <h3 style="padding-top:10%;">Изменение записи</h3>
         <input th:field="*{id}" type="hidden">
