@@ -1,5 +1,6 @@
 package info.infosite.database.auth;
 
+import info.infosite.database.ChatId;
 import info.infosite.database.Request;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,18 +31,21 @@ public class User {
     @JoinColumn
     private Role role;
 
-    @Column
-    private String fio;
+    @Column(name = "fio")
+    private String info;
 
     @Column
     String region;
 
-    @Column
     @OneToMany(fetch = FetchType.LAZY, targetEntity = Request.class)
     @JoinColumn
     private List<Request> requests;
 
     @Column
     private String userKey;
+
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = ChatId.class)
+    @JoinColumn
+    private List<ChatId> chatId;
 
 }
