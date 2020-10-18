@@ -1,9 +1,11 @@
 package info.infosite.database.auth;
 
+import info.infosite.database.Request;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +34,14 @@ public class User {
     private String fio;
 
     @Column
-    private String chatId;
+    String region;
+
+    @Column
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Request.class)
+    @JoinColumn
+    private List<Request> requests;
+
+    @Column
+    private String userKey;
 
 }
