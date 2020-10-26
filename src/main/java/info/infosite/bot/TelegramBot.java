@@ -1,6 +1,6 @@
 package info.infosite.bot;
 
-import info.infosite.database.ChatId;
+import info.infosite.database.Chat;
 import info.infosite.database.ChatIdRepository;
 import info.infosite.database.auth.User;
 import info.infosite.database.auth.UserRepository;
@@ -19,16 +19,16 @@ import java.util.List;
 @Component
 @EnableAsync
 public class TelegramBot extends TelegramLongPollingBot {
+    private static final String IF_COMMAND = "/";
+    private static final String START_MESSAGE = "Добро пожаловать. Для продолжения пожалуйста введите уникальный идентификатор." +
+            "В случае его отсутствия обратитесь к системным администраторам.";
+    private static final String NEW_REQUEST_MESSAGE = "Пожалуйста опишите вашу проблему как можно точнее";
+    private static final String NO_KEY_MESSAGE = "Извините, но этот код неверный. Обратитесь к системным администраторам";
+    private static final String ERROR_MESSAGE = "Извините, но во время выполнения последней команды произошла ошибка.";
     @Autowired
     UserRepository userRepository;
     @Autowired
     ChatIdRepository chatIdRepository;
-
-    private static final String IF_COMMAND = "/";
-    private static final String START_MESSAGE = "Добро пожаловать. Для продолжения пожалуйста введите уникальный идентификатор." +
-            "В случае его отсутствия обратитесь к системным администраторам.";
-    private static final String NEW_REQUEST_MESSAGE = "Пожалуйста опишите проблему как можно точнее";
-    private static final String NO_KEY_MESSAGE = "Извините, но этот код неверный. Обратитесь к системным администраторам";
     List<UserRequest> userRequests = new ArrayList<>();
 
     @Override
@@ -57,12 +57,11 @@ public class TelegramBot extends TelegramLongPollingBot {
                             break;
                         }
                     }
+                    sendMessage(update, START_MESSAGE);
+                    userRequests.add(new UserRequest(update.getMessage().getChatId(), "/start"));
+                    break;
                 }
-
-                sendMessage(update, START_MESSAGE);
-                userRequests.add(new UserRequest(update.getMessage().getChatId(), "/start"));
-                break;
-            case "/new":
+            case "/order":
                 sendMessage(update, NEW_REQUEST_MESSAGE);
                 break;
             default:
@@ -70,6 +69,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                 switch (text) {
                     case "/start":
                         CheckUserKey(update);
+                        break;
+                    case "/order": {
+                        try {
+
+                        } catch (NullPointerException e) {
+                            sendMessage(update, ERROR_MESSAGE);
+                        }
+                    }
                 }
                 break;
         }
@@ -106,7 +113,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         for (UserRequest userRequest : userRequests) {
             try {
                 sendMessage(update, "Добро пожаловать, " + helloMessage(text));
-                chatIdRepository.save(new ChatId(update.getMessage().getChatId()));
+                chatIdRepository.save(new Chat(update.getMessage().getChatId(), getUserByCode(text)));
                 return;
             } catch (NullPointerException e) {
                 if (userRequest.getChatId().equals(update.getMessage().getChatId())) {
@@ -119,12 +126,13 @@ public class TelegramBot extends TelegramLongPollingBot {
             userRequest.addMessage(text);
             userRequest.setUserKey(text);
             sendMessage(update, "Добро пожаловать " + helloMessage(update.getMessage().getChatId()));
-            chatIdRepository.save(new ChatId(update.getMessage().getChatId()));
+            chatIdRepository.save(new Chat(update.getMessage().getChatId(), getUserByCode(text)));
         } catch (Exception e) {
             sendMessage(update, NO_KEY_MESSAGE);
             e.printStackTrace();
         }
     }
+
 
     private String helloMessage(String key) {
         User user = userRepository.findUserByUserKey(key);
@@ -132,7 +140,12 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private String helloMessage(Long chatId) {
-        User user = userRepository.findUserByChatId(chatId);
+        User user = userRepository.findUserByChat(chatId);
         return user.getInfo();
+    }
+
+    private User getUserByCode(String code) {
+        User user = userRepository.findUserByUserKey(code);
+        return user;
     }
 }

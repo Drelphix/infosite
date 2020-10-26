@@ -1,6 +1,6 @@
 package info.infosite.database.auth;
 
-import info.infosite.database.ChatId;
+import info.infosite.database.Chat;
 import info.infosite.database.Request;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,8 +44,8 @@ public class User {
     @Column
     private String userKey;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = ChatId.class)
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Chat.class)
     @JoinColumn
-    private List<ChatId> chatId;
+    private List<Chat> chats;
 
 }
