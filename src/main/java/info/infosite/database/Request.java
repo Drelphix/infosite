@@ -12,13 +12,25 @@ import javax.persistence.*;
 @Setter
 public class Request {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne(targetEntity = User.class)
-    private User userKey;
+    private User user;
 
     @Column
+    private String Status;
+    @Column
     private String requestMessage;
+
+    public Request() {
+    }
+
+    public Request(String requestMessage, User user) {
+        this.requestMessage = requestMessage;
+        this.user = user;
+    }
 
 
 }

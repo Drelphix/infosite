@@ -3,6 +3,7 @@ package info.infosite.database;
 import info.infosite.database.auth.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ public class Chat {
 
     @Column
     @NotNull
+    @Unique
     private Long chatId;
     @ManyToOne
     @NotNull

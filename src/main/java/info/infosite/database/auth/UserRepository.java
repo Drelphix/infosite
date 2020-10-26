@@ -14,6 +14,6 @@
 
         User findUserByUserKey(String userKey);
 
-        @Query("select u from User u left join Role r on u.role=r where r.role='admin'")
-        List<User> findAdmin();
+        @Query("select u from User u left join Role r on u.role=r where r.role=:role")
+        List<User> findUsersByGroup(@Param("role") String role);
     }
