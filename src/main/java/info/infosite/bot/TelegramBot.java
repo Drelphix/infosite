@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.transaction.TransactionalException;
 import java.util.ArrayList;
@@ -121,6 +123,30 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
+    private void sendMessage(Long chatId, String message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(message);
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String checkLastCommand(Update update) {
+        Long chatId = update.getMessage().getChatId();
+        for (UserRequest userRequest : userRequests) {
+            if (userRequest.getChatId().equals(chatId)) {
+                for (int i = userRequest.chat.size() - 1; i >= 0; i--) {
+                    if (userRequest.chat.get(i).startsWith(IF_COMMAND)) {
+                        return userRequest.chat.get(i);
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     private void CheckUserKey(Update update) {
         String text = update.getMessage().getText();
