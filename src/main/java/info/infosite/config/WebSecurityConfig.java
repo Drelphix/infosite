@@ -24,7 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
 
-                .antMatchers("/*").authenticated() // только для зарегистрированных
+                //.antMatchers("/*").authenticated() // только для зарегистрированных
+                .antMatchers("/registration").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -38,10 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/styles/**")
-                .antMatchers("/images/**")
-                .antMatchers("/pics/**")
-                .antMatchers("/registration");
+                .antMatchers("/styles/**", "/images/**", "/pics/**", "/registration/");
     }
 
     @Override

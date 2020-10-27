@@ -11,7 +11,7 @@
         <br><span class="text">Пароль</span>
         <input class="password" required th:field="*{password}" type="password"/>
         <br><span class="text">ФИО</span>
-        <input class="password" required th:field="*{fio}" type="text"/>
+        <input class="password" required th:field="*{info}" type="text"/>
         <input class="button_success" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/>
         <a class="register" th:href="@{/}">Вернуться назад</a>
         <div th:if="${edit}">
@@ -32,7 +32,7 @@
         <br><span class="text">Ip-адрес:</span>
         <input class="password" th:field="*{ip}" type="text"/>
         <br><span class="text">ФИО:</span>
-        <input class="password" th:field="*{fio}" type="text"/>
+        <input class="password" th:field="*{info}" type="text"/>
         <br><span>Активен:</span>
         <input class="username" th:field="*{active}" type="checkbox">
         <input class="button_success" th:value="Сохранить" type="submit"/>
