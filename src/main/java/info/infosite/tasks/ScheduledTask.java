@@ -1,16 +1,16 @@
 package info.infosite.tasks;
 
-import info.infosite.database.Excel;
-import info.infosite.database.ExcelRepository;
-import info.infosite.database.generated.Menu;
-import info.infosite.database.generated.MenuRepository;
+import info.infosite.entities.excel.Excel;
+import info.infosite.entities.excel.ExcelRepository;
+import info.infosite.entities.gentable.Menu;
+import info.infosite.entities.gentable.MenuRepository;
+import info.infosite.entities.views.ExcelTableReportView;
+import info.infosite.entities.views.XmlMenuView;
 import info.infosite.entities.xml.Backup;
 import info.infosite.entities.xml.Disk;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
 import info.infosite.mail.MailService;
-import info.infosite.views.ExcelTableReportView;
-import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;

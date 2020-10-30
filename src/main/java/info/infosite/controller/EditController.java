@@ -1,13 +1,13 @@
 package info.infosite.controller;
 
-import info.infosite.database.Guide;
-import info.infosite.database.GuideRepository;
-import info.infosite.database.auth.User;
-import info.infosite.database.auth.UserRepository;
-import info.infosite.database.generated.*;
+import info.infosite.entities.auth.User;
+import info.infosite.entities.auth.UserRepository;
+import info.infosite.entities.gentable.*;
+import info.infosite.entities.guide.Guide;
+import info.infosite.entities.guide.GuideRepository;
+import info.infosite.entities.views.ListLineView;
+import info.infosite.entities.views.TableView;
 import info.infosite.functions.MenuService;
-import info.infosite.views.ListLineView;
-import info.infosite.views.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -1,15 +1,17 @@
 package info.infosite.controller;
 
-import info.infosite.database.GuideRepository;
-import info.infosite.database.auth.UserRepository;
-import info.infosite.database.generated.MenuRepository;
-import info.infosite.database.generated.Tab;
-import info.infosite.database.generated.TableRepository;
+import info.infosite.entities.auth.UserRepository;
+import info.infosite.entities.gentable.MenuRepository;
+import info.infosite.entities.gentable.Tab;
+import info.infosite.entities.gentable.TableRepository;
+import info.infosite.entities.guide.GuideRepository;
+import info.infosite.entities.request.RequestRepository;
+import info.infosite.entities.request.Status;
+import info.infosite.entities.views.ExcelTableReportView;
+import info.infosite.entities.views.TableView;
+import info.infosite.entities.views.XmlMenuView;
 import info.infosite.functions.MenuService;
 import info.infosite.functions.XMLReader;
-import info.infosite.views.ExcelTableReportView;
-import info.infosite.views.TableView;
-import info.infosite.views.XmlMenuView;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -43,6 +45,8 @@ public class MainController {
     public UserRepository userRepository;
     @Autowired
     public GuideRepository guideRepository;
+    @Autowired
+    public RequestRepository requestRepository;
     @Autowired
     MenuService menuService;
 
@@ -78,6 +82,34 @@ public class MainController {
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
         return "main";
+    }
+
+    @GetMapping(value = "/orders")
+    public String ShowUnmarkedOrders(Model model, HttpSession httpSession) {
+        menuService.CheckMenu();
+        model = addMenu(model, httpSession);
+        model.addAttribute("orders", requestRepository.findAllByStatusNot(Status.Completed));
+        return "requests";
+    }
+
+    @GetMapping(value = "/order")
+    public String ShowOrder(Model model, @RequestParam String show, HttpSession httpSession) {
+        menuService.CheckMenu();
+        model = addMenu(model, httpSession);
+        if (show.equals("all")) {
+            model.addAttribute("orders", requestRepository.findAll());
+            return "requests";
+        } else {
+            try {
+                int id = Integer.getInteger(show);
+                model.addAttribute("orders", requestRepository.findById(id));
+                return "request";
+            } catch (Exception e) {
+                model.addAttribute("orders", requestRepository.findAll());
+                return "requests";
+            }
+        }
+
     }
 
     @GetMapping(value = "/mode")

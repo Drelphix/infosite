@@ -1,8 +1,8 @@
 package info.infosite.controller;
 
-import info.infosite.database.auth.RoleRepository;
-import info.infosite.database.auth.User;
-import info.infosite.database.auth.UserRepository;
+import info.infosite.entities.auth.RoleRepository;
+import info.infosite.entities.auth.User;
+import info.infosite.entities.auth.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

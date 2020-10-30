@@ -19,8 +19,20 @@
                 </td>
             </tr>
             <tr>
-                <td class="cell"><span>Ф.И.О.:</span></td>
+                <td class="cell"><span>Информация:</span></td>
                 <td class="cell"><span th:text="${user.info}"></span></td>
+            </tr>
+            <tr>
+                <td class="cell"><span>Адрес:</span></td>
+                <td class="cell"><span th:text="${user.region}"></span></td>
+            </tr>
+            <tr>
+                <td class="cell"><span>Телефон:</span></td>
+                <td class="cell"><span th:text="${user.tel}"></span></td>
+            </tr>
+            <tr>
+                <td class="cell"><span>Роль:</span></td>
+                <td class="cell"><span th:text="${user.role.getRole()}"></span></td>
             </tr>
             <tr>
                 <td class="cell"><span>Активация:</span></td>

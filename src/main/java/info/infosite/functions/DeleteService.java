@@ -1,9 +1,9 @@
 package info.infosite.functions;
 
-import info.infosite.database.generated.Col;
-import info.infosite.database.generated.Menu;
-import info.infosite.database.generated.SubMenu;
-import info.infosite.database.generated.Tab;
+import info.infosite.entities.gentable.Col;
+import info.infosite.entities.gentable.Menu;
+import info.infosite.entities.gentable.SubMenu;
+import info.infosite.entities.gentable.Tab;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;

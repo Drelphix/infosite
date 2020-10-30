@@ -1,11 +1,12 @@
 package info.infosite.bot;
 
-import info.infosite.database.Chat;
-import info.infosite.database.ChatIdRepository;
-import info.infosite.database.Request;
-import info.infosite.database.RequestRepository;
-import info.infosite.database.auth.User;
-import info.infosite.database.auth.UserRepository;
+import info.infosite.entities.auth.User;
+import info.infosite.entities.auth.UserRepository;
+import info.infosite.entities.bot.Chat;
+import info.infosite.entities.bot.ChatIdRepository;
+import info.infosite.entities.request.Request;
+import info.infosite.entities.request.RequestRepository;
+import info.infosite.entities.request.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -17,6 +18,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.transaction.TransactionalException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -33,6 +35,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     private static final String UNKNOWN_USER_MESSAGE = "Извините, мы вас не знаем";
     private static final String HELP_MESSAGE = "Этот бот - часть хелпдеск системы, призванный к упрощению помощи пользователям и повышению реагирования" +
             "на проблемы в работе. Создан @Drelphix";
+    private static final String CANCEL_MESSAGE = "Создание заявки отменено.";
+    private static final String WAITING_MESSAGE = "Ожидаю команду...";
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -48,7 +53,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "1308591163:AAFxENlXd6urBpEY4fj-VpoHfyJhVculU74";
+        return "1308591163:AAGL6PLLIlUKsSzK30cBesWuXx-angys28A";
     }
 
     @Override
@@ -85,6 +90,9 @@ public class TelegramBot extends TelegramLongPollingBot {
             case "/help":
                 sendMessage(chatId, HELP_MESSAGE);
                 break;
+            case "/cancel":
+                sendMessage(chatId, CANCEL_MESSAGE);
+                break;
             default:
                 text = checkLastCommand(update);
                 switch (text) {
@@ -104,9 +112,16 @@ public class TelegramBot extends TelegramLongPollingBot {
                         } catch (NullPointerException e) {
                             sendMessage(chatId, ERROR_MESSAGE);
                         }
+                        break;
                     }
+                    case "/cancel":
+                        sendMessage(chatId, WAITING_MESSAGE);
+                        break;
+                    default:
+                        sendMessage(chatId, ERROR_MESSAGE);
+                        break;
                 }
-                break;
+
         }
     }
 
@@ -182,6 +197,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (update.getMessage().getText().startsWith(IF_COMMAND)) return null;
         else {
             Request request = new Request(update.getMessage().getText(), getUserByChat(update.getMessage().getChatId()));
+            request.setDate(new Date().toString());
+            request.setStatus(Status.Active);
             requestRepository.save(request);
             return request;
         }
