@@ -6,11 +6,14 @@
 <div>
     <br>
     <br>
-    <div th:unless="${#httpServletRequest.requestURI == '/order?show=all'}">
-        <a th:href="@{/order?show=all}">Показать все</a>
+    <div th:unless="${#httpServletRequest.getQueryString() == 'show=all'}">
+        <a th:href="@{/order?show=all}">Все заявки</a>
     </div>
-    <div th:if="${#httpServletRequest.requestURI == '/order?show=all'}">
-        <a th:href="@{/order(show=${status.active})}">Показать активные</a>
+    <div th:unless="${#httpServletRequest.getQueryString() == 'show=active'}">
+        <a th:href="@{/order?show=active}">Заявки со статусом "Активна"</a>
+    </div>
+    <div th:unless="${#httpServletRequest.getQueryString() == 'show=inwork'}">
+        <a th:href="@{/order?show=inwork}">Заявки со статусом "В работе"</a>
     </div>
     <table>
         <tr>
@@ -22,19 +25,15 @@
             <th>Дата</th>
             <th>Статус заявки</th>
         </tr>
-        <tr th:each="order : ${orders}">
+        <tr th:each="order,rowStat : ${orders}">
             <td th:field="${order.id}"><a th:href="@{/order(show=${order.id})}" th:text="${order.id}"></a></td>
             <td th:field="${order.user.getRegion()}" th:text="${order.user.getRegion()}"></td>
             <td th:field="${order.user.getInfo()}" th:text="${order.user.getInfo()}"></td>
             <td th:field="${order.user.getTel()}" th:text="${order.user.getTel()}"></td>
             <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
             <td th:field="${order.date}" th:text="${order.date}"></td>
-            <!--<td> Надо заставить заработать
-                <select name="status">
-                    <option th:each="status : ${info.infosite.entities.request.Status}"
-                            th:value="${status}" th:selected="${order.getStatus()}" th:text="${status.displayValue}"></option>
-                </select>
-            </td>-->
+            <td th:field="${order.status}" th:text="${order.status.displayValue}">
+            </td>
         </tr>
     </table>
 </div>

@@ -88,7 +88,7 @@ public class MainController {
     public String ShowUnmarkedOrders(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
         model = addMenu(model, httpSession);
-        model.addAttribute("orders", requestRepository.findAllByStatusNot(Status.Completed));
+        model.addAttribute("orders", requestRepository.findAllByStatusNot(Status.COMPLETED));
         return "requests";
     }
 
@@ -96,21 +96,27 @@ public class MainController {
     public String ShowOrder(Model model, @RequestParam String show, HttpSession httpSession) {
         menuService.CheckMenu();
         model = addMenu(model, httpSession);
-        if (show.equals("all")) {
-            model.addAttribute("orders", requestRepository.findAll());
-            return "requests";
-        } else {
-            try {
-                int id = Integer.getInteger(show);
-                model.addAttribute("orders", requestRepository.findById(id));
-                return "request";
-            } catch (Exception e) {
+        try {
+            if (show.equals("all")) {
                 model.addAttribute("orders", requestRepository.findAll());
+                model.addAttribute("selStatus", "");
                 return "requests";
+            } else {
+                if (show.equals("active")) {
+                    model.addAttribute("orders", requestRepository.findAllByStatus(Status.ACTIVE));
+                    return "requests";
+                } else {
+                    model.addAttribute("orders", requestRepository.findAllByStatus(Status.IN_WORK));
+                }
             }
+        } catch (Exception e) {
+            model.addAttribute("orders", requestRepository.findAll());
+            model.addAttribute("selStatus", "");
+            return "requests";
         }
-
+        return "requests";
     }
+
 
     @GetMapping(value = "/mode")
     public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request) {

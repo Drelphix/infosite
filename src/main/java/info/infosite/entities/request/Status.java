@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-    Completed("Выполнена"),
-    InWork("В работе"),
-    Active("Активна");
+    COMPLETED("Выполнена"),
+    IN_WORK("В работе"),
+    ACTIVE("Активна");
 
     private final String displayValue;
 

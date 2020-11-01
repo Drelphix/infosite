@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findAllByStatusNot(Status status);
+
+    List<Request> findAllByStatus(Status status);
 }
