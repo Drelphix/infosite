@@ -24,16 +24,20 @@
             <th>Описание проблемы</th>
             <th>Дата</th>
             <th>Статус заявки</th>
+            <th>Изменить статус</th>
         </tr>
         <tr th:each="order,rowStat : ${orders}">
-            <td th:field="${order.id}"><a th:href="@{/order(show=${order.id})}" th:text="${order.id}"></a></td>
+            <td th:field="${order.id}" th:text="${order.id}"></td>
             <td th:field="${order.user.getRegion()}" th:text="${order.user.getRegion()}"></td>
             <td th:field="${order.user.getInfo()}" th:text="${order.user.getInfo()}"></td>
             <td th:field="${order.user.getTel()}" th:text="${order.user.getTel()}"></td>
             <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
             <td th:field="${order.date}" th:text="${order.date}"></td>
-            <td th:field="${order.status}" th:text="${order.status.displayValue}">
-            </td>
+            <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
+            <!-- Пофиксить ссылку
+            <td th:if="${order.status == T(info.infosite.entities.request.Status).ACTIVE}"><a th:href="@{/order/{id}(id=${order.id})(status=${'active'})}" th:text="${'Обработать заявку'}"></a> </td>
+            <td th:if="${order.status == T(info.infosite.entities.request.Status).IN_WORK}"><a th:text="${'Закрыть заявку'}"></a> </td>
+            -->
         </tr>
     </table>
 </div>
