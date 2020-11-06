@@ -89,6 +89,7 @@ public class MainController {
         menuService.CheckMenu();
         model = addMenu(model, httpSession);
         model.addAttribute("orders", requestRepository.findAllByStatusNot(Status.COMPLETED));
+        model.addAttribute("status", "");
         return "requests";
     }
 

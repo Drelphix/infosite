@@ -34,10 +34,17 @@
             <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
             <td th:field="${order.date}" th:text="${order.date}"></td>
             <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
-            <!-- Пофиксить ссылку
-            <td th:if="${order.status == T(info.infosite.entities.request.Status).ACTIVE}"><a th:href="@{/order/{id}(id=${order.id})(status=${'active'})}" th:text="${'Обработать заявку'}"></a> </td>
-            <td th:if="${order.status == T(info.infosite.entities.request.Status).IN_WORK}"><a th:text="${'Закрыть заявку'}"></a> </td>
-            -->
+            <td>
+                <form th:action="@{/order/{id}/{status}(id = ${order.id},status = ${status})}" th:object="${status}">
+                    <select th:field="${status}">
+                        <option th:each="state: ${T(info.infosite.entities.request.Status).values()}"
+                                th:text="${state.displayValue}"
+                                th:value="${state}"></option>
+                    </select>
+                    <input type="submit">
+                </form>
+            </td>
+
         </tr>
     </table>
 </div>
