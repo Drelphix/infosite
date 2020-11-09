@@ -2,18 +2,32 @@
 <head th:insert="main::head">
 </head>
 <body>
-    <form action="login" class="center" method="post">
+    <form id="login" action="login" class="center" method="post">
 
-        <div class="auth">
-            <h2 style="padding-top:10%;">Авторизация</h2>
-            <span class="text">Логин:</span>
-            <input autocomplete="username" class="username" name="username" required type="text"/>
-            <br><span class="text">Пароль</span>
-            <input autocomplete="password" class="password" name="password" required type="password"/>
-            <div><input class="button_success" name="submit" type="submit" value="Войти"/>
+        <div class="loginform">
+            <div class="title">
+                Авторизация
             </div>
-            <span th:if="${param.error}">Неверно введен логин или пароль</span>
-            <a class="register" href="" th:href="@{/registration}">Регистрация</a>
+            <div class="input-form username">
+                <input type="text" class="input" name="username" placeholder="Логин">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-form password">
+                <input type="password" class="input" name="password" placeholder="Пароль">
+                <i class="fas fa-key"></i>
+            </div>
+            <div>
+                <center><span th:if="${param.error}">Неверно введен логин или пароль</span></center>
+                    <br>
+            </div>
+            <div class="btn">
+                <center><a href="#" onclick="document.getElementById('login').submit()">Войти</a></center>
+            </div>
+
+            <br>
+            <div class="btn">
+                <center><a href="#" th:href="@{/registration}">Регистрация</a></center>
+            </div>
         </div>
     </form>
 </body>

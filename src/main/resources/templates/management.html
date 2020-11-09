@@ -3,14 +3,11 @@
 </head>
 <body>
 <div th:replace="main::menu"></div>
-<div style="text-align: -webkit-center; margin-top:15px" th:if="${users}" th:object="${users}">
+<div style="text-align: -webkit-center; margin-top:45px" th:if="${users}" th:object="${users}">
     <h2>Управление пользователями</h2>
     <div class="tables" th:each="user:${users}">
         <table align="center" border="2" class="info management" style="width:auto">
             <tbody>
-            <tr>
-                <td class="cell" colspan="3"><span>Профиль</span></td>
-            </tr>
             <tr>
                 <td class="cell"><span>Пользователь:</span></td>
                 <td class="cell"><span th:text="${user.username}"></span></td>

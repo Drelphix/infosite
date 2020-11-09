@@ -1,52 +1,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="main::head">
-</head>
+<head th:insert="main::head"></head>
 <body>
 <div th:replace="main::menu"></div>
-<div>
+<div style="padding: 40px 30px">
     <br>
-    <br>
-    <div th:unless="${#httpServletRequest.getQueryString() == 'show=all'}">
-        <a th:href="@{/order?show=all}">Все заявки</a>
-    </div>
-    <div th:unless="${#httpServletRequest.getQueryString() == 'show=active'}">
-        <a th:href="@{/order?show=active}">Заявки со статусом "Активна"</a>
-    </div>
-    <div th:unless="${#httpServletRequest.getQueryString() == 'show=inwork'}">
-        <a th:href="@{/order?show=inwork}">Заявки со статусом "В работе"</a>
-    </div>
-    <table>
-        <tr>
-            <th>Номер заявки</th>
-            <th>Регион</th>
-            <th>О пользователе</th>
-            <th>Контактный телефон</th>
-            <th>Описание проблемы</th>
-            <th>Дата</th>
-            <th>Статус заявки</th>
-            <th>Изменить статус</th>
-        </tr>
-        <tr th:each="order,rowStat : ${orders}">
-            <td th:field="${order.id}" th:text="${order.id}"></td>
-            <td th:field="${order.user.getRegion()}" th:text="${order.user.getRegion()}"></td>
-            <td th:field="${order.user.getInfo()}" th:text="${order.user.getInfo()}"></td>
-            <td th:field="${order.user.getTel()}" th:text="${order.user.getTel()}"></td>
-            <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
-            <td th:field="${order.date}" th:text="${order.date}"></td>
-            <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
-            <td>
-                <form th:action="@{/order/{id}/{status}(id = ${order.id},status = ${status})}" th:object="${status}">
-                    <select th:field="${status}">
-                        <option th:each="state: ${T(info.infosite.entities.request.Status).values()}"
-                                th:text="${state.displayValue}"
-                                th:value="${state}"></option>
-                    </select>
-                    <input type="submit">
-                </form>
-            </td>
 
-        </tr>
-    </table>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th>
+                    <div class="btno" th:unless="${#httpServletRequest.getQueryString() == 'show=all'}">
+                        <a th:href="@{/order?show=all}">Все заявки</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="btno" th:unless="${#httpServletRequest.getQueryString() == 'show=active'}">
+                        <a th:href="@{/order?show=active}">Заявки со статусом "Активна"</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="btno" th:unless="${#httpServletRequest.getQueryString() == 'show=inwork'}">
+                        <a th:href="@{/order?show=inwork}">Заявки со статусом "В работе"</a>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Регион</th>
+                <th>О пользователе</th>
+                <th>Контактный телефон</th>
+                <th>Описание проблемы</th>
+                <th>Дата</th>
+                <th>Статус заявки</th>
+                <th>Изменить статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order,rowStat : ${orders}">
+                <td th:field="${order.id}" th:text="${order.id}"></td>
+                <td th:field="${order.user.getRegion()}" th:text="${order.user.getRegion()}"></td>
+                <td th:field="${order.user.getInfo()}" th:text="${order.user.getInfo()}"></td>
+                <td th:field="${order.user.getTel()}" th:text="${order.user.getTel()}"></td>
+                <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
+                <td th:field="${order.date}" th:text="${order.date}"></td>
+                <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
+                <td>
+                    <form th:action="@{/order/{id}/{status}(id = ${order.id},status = ${status})}"
+                          th:object="${status}">
+                        <select th:field="${status}">
+                            <option th:each="state: ${T(info.infosite.entities.request.Status).values()}"
+                                    th:text="${state.displayValue}"
+                                    th:value="${state}"></option>
+                        </select>
+                        <input type="submit">
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

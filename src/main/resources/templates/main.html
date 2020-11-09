@@ -6,6 +6,8 @@
     <link href="#" rel="stylesheet" th:href="@{/css/tables.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/login.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/guide.css}"/>
+    <link rel="stylesheet" type="text/css" href="fontawesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     <meta charset="UTF-8">
     <title>InfoSite</title>
 </head>
@@ -13,8 +15,8 @@
 <div th:fragment="menu">
     <header>
         <div>
-            <div class="d-flex">
-                <div class="logo">
+            <div class="d-flex" style="height: 45px;">
+                <div class="logo" style="height: 40px;">
                     <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" style="height:35px"
                                                     title=""/></a>
                     <a class="link" href="#" th:href="@{/logout}"><span style="color:white"
@@ -76,9 +78,6 @@
             </div>
         </div>
     </header>
-    <div style="width: 100%;height: 30px;background-color: transparent;">
-        <a>a</a>
-    </div>
 </div>
 <div th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
     <div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
