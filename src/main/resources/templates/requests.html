@@ -24,6 +24,16 @@
                         <a th:href="@{/order?show=inwork}">Заявки со статусом "В работе"</a>
                     </div>
                 </th>
+                <th>
+                    <div class="btno" th:unless="${#httpServletRequest.getQueryString() == 'show=completed'}">
+                        <a th:href="@{/order?show=completed}">Заявки со статусом "Завершена"</a>
+                    </div>
+                </th>
+                <th>
+                    <div class="btno">
+                        <a th:href="@{/report}">Отчеты</a>
+                    </div>
+                </th>
             </tr>
             </thead>
         </table>
@@ -51,18 +61,17 @@
                 <td th:field="${order.requestMessage}" th:text="${order.requestMessage}"></td>
                 <td th:field="${order.date}" th:text="${order.date}"></td>
                 <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
-                <td>
-                    <form th:action="@{/order/{id}/{status}(id = ${order.id},status = ${status})}"
-                          th:object="${status}">
-                        <select th:field="${status}">
-                            <option th:each="state: ${T(info.infosite.entities.request.Status).values()}"
-                                    th:text="${state.displayValue}"
-                                    th:value="${state}"></option>
-                        </select>
-                        <input type="submit">
+                <td th:object="${status}">
+                    <form th:action="@{/order/{id}(id = ${order.id})}" method="post">
+                    <select id="status" name="status">
+                            <option value="">Выберите статус</option>
+                            <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
+                                    th:text="${status.displayValue}"
+                                    th:value="${status}"></option>
+                    </select>
+                        <input type="submit" value="Изменить статус">
                     </form>
                 </td>
-
             </tr>
             </tbody>
         </table>

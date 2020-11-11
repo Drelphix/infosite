@@ -17,7 +17,7 @@
         <div>
             <div class="d-flex" style="height: 45px;">
                 <div class="logo" style="height: 40px;">
-                    <a href="#" th:href="@{/}"><img alt="" src="https://auto1.by/img/svg/logo.svg" style="height:35px"
+                    <a href="#" th:href="@{/}"><img alt="" src="/images/logo.svg" style="height:35px"
                                                     title=""/></a>
                     <a class="link" href="#" th:href="@{/logout}"><span style="color:white"
                                                                         th:text="'Welcome, '+${#authentication.name}"></span></a>
@@ -51,7 +51,7 @@
                             <a class="menu" href="#" th:href="@{/management}">Управление</a>
                         </li>
                         <li>
-                            <a class="menu" href="#" th:href="@{/orders}">Заявки</a>
+                            <a class="menu" href="#" th:href="@{/order?show=all}">Заявки</a>
                         </li>
                         <li th:if="${mode==true}">
                             <a href="#" th:href="@{/menu/add}"><img alt="Добавить пункт меню"

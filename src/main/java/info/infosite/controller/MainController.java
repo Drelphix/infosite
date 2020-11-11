@@ -45,8 +45,7 @@ public class MainController {
     public UserRepository userRepository;
     @Autowired
     public GuideRepository guideRepository;
-    @Autowired
-    public RequestRepository requestRepository;
+
     @Autowired
     MenuService menuService;
 
@@ -56,8 +55,8 @@ public class MainController {
         try {
             return "redirect:/show?id=" + menuService.menus.get(0).getSubMenuSet().get(0).getIdSubMenu();
         } catch (IndexOutOfBoundsException | NullPointerException e) {
-            CheckMode(httpSession);
-            model = addMenu(model, httpSession);
+            menuService.CheckMode(httpSession);
+            model = menuService.addMenu(model, httpSession);
             return "main";
         }
     }
@@ -65,8 +64,8 @@ public class MainController {
     @GetMapping(value = "/management")
     public String ManageUsers(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
-        CheckMode(httpSession);
-        model = addMenu(model, httpSession);
+        menuService.CheckMode(httpSession);
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("users", userRepository.findAll(Sort.by(Sort.Direction.ASC, "username")));
         return "management";
     }
@@ -78,46 +77,11 @@ public class MainController {
         for (Tab tab : tableRepository.findTableBySubMenuId(id)) {
             tableViews.add(new TableView(tab));
         }
-        model = addMenu(model, httpSession);
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("submenu", id);
         model.addAttribute("tables", tableViews);
         return "main";
     }
-
-    @GetMapping(value = "/orders")
-    public String ShowUnmarkedOrders(Model model, HttpSession httpSession) {
-        menuService.CheckMenu();
-        model = addMenu(model, httpSession);
-        model.addAttribute("orders", requestRepository.findAllByStatusNot(Status.COMPLETED));
-        model.addAttribute("status", "");
-        return "requests";
-    }
-
-    @GetMapping(value = "/order")
-    public String ShowOrder(Model model, @RequestParam String show, HttpSession httpSession) {
-        menuService.CheckMenu();
-        model = addMenu(model, httpSession);
-        try {
-            if (show.equals("all")) {
-                model.addAttribute("orders", requestRepository.findAll());
-                model.addAttribute("selStatus", "");
-                return "requests";
-            } else {
-                if (show.equals("active")) {
-                    model.addAttribute("orders", requestRepository.findAllByStatus(Status.ACTIVE));
-                    return "requests";
-                } else {
-                    model.addAttribute("orders", requestRepository.findAllByStatus(Status.IN_WORK));
-                }
-            }
-        } catch (Exception e) {
-            model.addAttribute("orders", requestRepository.findAll());
-            model.addAttribute("selStatus", "");
-            return "requests";
-        }
-        return "requests";
-    }
-
 
     @GetMapping(value = "/mode")
     public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request) {
@@ -144,7 +108,7 @@ public class MainController {
     @GetMapping(value = "/guides")
     public String ShowGuides(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
-        model = addMenu(model, httpSession);
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("guides", guideRepository.findAll());
         return "guides";
     }
@@ -153,7 +117,7 @@ public class MainController {
     public String ShowGuide(Model model, HttpSession httpSession, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
         model.addAttribute("guides", guideRepository.findAll());
-        model = addMenu(model, httpSession);
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("currentGuide", guideRepository.getOne(id));
         return "guides";
     }
@@ -171,59 +135,18 @@ public class MainController {
                 } catch (IOException | SAXException | ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                CheckMode(httpSession);
-                model = addMenu(model, httpSession);
+                menuService.CheckMode(httpSession);
+                model = menuService.addMenu(model, httpSession);
                 model.addAttribute("computer", xmlReader.getComputer());
             }
         }
         return "computer";
     }
 
-    @GetMapping(value = "/requests")
-    public String showRequests(Model model) {
-
-        return "request";
-    }
-
-    //Новая заявка
-    @GetMapping(value = "/request/new")
-    public String addNewRequest(Model model) {
-
-        return "request";
-    }
-
-    //Подтверждение заявки
-    @GetMapping(value = "/request/confirm")
-    public String confirmRequest(Model model) {
-
-        return "request";
-    }
-
-    //Отметка о выполнении заявки
-    @GetMapping(value = "/request/complete")
-    public String completeRequest(Model model) {
-
-        return "request";
-    }
 
 
-    private Model addMenu(Model model, HttpSession httpSession) {
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
-        CheckMode(httpSession);
-        model.addAttribute("mode", httpSession.getAttribute("mode"));
-        return model;
-    }
 
-    private void CheckMode(HttpSession httpSession) {
-        try {
-            if (!httpSession.getAttribute("mode").equals(true)) {
-                httpSession.setAttribute("mode", false);
-            }
-        } catch (NullPointerException e) {
-            httpSession.setAttribute("mode", false);
-        }
-    }
+
 
 
 }

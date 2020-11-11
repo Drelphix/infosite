@@ -7,7 +7,9 @@ import info.infosite.entities.xml.Xml;
 import info.infosite.entities.xml.XmlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,23 @@ public class MenuService {
 
             }
             this.xmlMenus.add(xmlMenu);
+        }
+    }
+    public Model addMenu(Model model, HttpSession httpSession) {
+        model.addAttribute("menus", this.menus);
+        model.addAttribute("xmls", this.xmlMenus);
+        CheckMode(httpSession);
+        model.addAttribute("mode", httpSession.getAttribute("mode"));
+        return model;
+    }
+
+    public void CheckMode(HttpSession httpSession) {
+        try {
+            if (!httpSession.getAttribute("mode").equals(true)) {
+                httpSession.setAttribute("mode", false);
+            }
+        } catch (NullPointerException e) {
+            httpSession.setAttribute("mode", false);
         }
     }
 }

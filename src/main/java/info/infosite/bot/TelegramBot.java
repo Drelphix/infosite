@@ -198,7 +198,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         else {
             Request request = new Request(update.getMessage().getText(), getUserByChat(update.getMessage().getChatId()));
             request.setDate(new Date().toString());
-            request.setStatus(Status.ACTIVE);
+            request.setStatus(Status.active);
             requestRepository.save(request);
             return request;
         }
