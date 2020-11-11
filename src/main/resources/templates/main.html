@@ -6,8 +6,8 @@
     <link href="#" rel="stylesheet" th:href="@{/css/tables.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/login.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/guide.css}"/>
-    <link rel="stylesheet" type="text/css" href="fontawesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link href="#" rel="stylesheet" th:href="@{/css/fontawesome.min.css}"/>
+    <link href="#" rel="stylesheet" th:href="@{/css/all.css}"/>
     <meta charset="UTF-8">
     <title>InfoSite</title>
 </head>
@@ -84,8 +84,7 @@
         <center>
             <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"
                    th:text="${table.name}"></a></h3>
-            <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
-            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
+            <h3 th:if="${mode==false}" th:text="${table.name}"></h3>            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
                 <tbody th:if="${not #lists.isEmpty(table.cols)}">
                 <tr class="line">
                     <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
