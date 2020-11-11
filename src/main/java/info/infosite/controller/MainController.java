@@ -66,6 +66,9 @@ public class MainController {
         menuService.CheckMenu();
         menuService.CheckMode(httpSession);
         model = menuService.addMenu(model, httpSession);
+        List<String> roles = new ArrayList<>();
+        model.addAttribute("roles",menuService.getRolesByRole(roles));
+        model.addAttribute("role", "");
         model.addAttribute("users", userRepository.findAll(Sort.by(Sort.Direction.ASC, "username")));
         return "management";
     }

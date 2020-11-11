@@ -1,5 +1,7 @@
 package info.infosite.controller;
 
+import info.infosite.entities.auth.Role;
+import info.infosite.entities.auth.RoleRepository;
 import info.infosite.entities.gentable.*;
 import info.infosite.entities.guide.Guide;
 import info.infosite.entities.guide.GuideRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLDataException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,8 @@ public class AddController {
     MenuService menuService;
     @Autowired
     private GuideRepository guideRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @RequestMapping(value = "/addSub", method = RequestMethod.GET)
     public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
@@ -141,5 +146,14 @@ public class AddController {
         }
         guideRepository.save(guide);
         return "redirect:/guides";
+    }
+    @RequestMapping(value = "/role/new",method = RequestMethod.POST)
+    public String AddNewRole(Model model,@RequestParam String role){
+        if (roleRepository.findRoleByRole(role) == null) {
+            Role newRole = new Role();
+            newRole.setRole(role);
+            roleRepository.save(newRole);
+        }
+        return "redirect:/management";
     }
 }

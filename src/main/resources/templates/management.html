@@ -45,6 +45,23 @@
     </div>
     <a class="link" href="#" th:href="@{/registration}">Добавить нового пользователя</a>
 </div>
+<div align="left">
+    <h1>Список ролей:</h1>
+    <table>
+        <tr th:each="role,count:${roles}" >
+            <td><span th:text="${count.index}"></span></td>
+            <td><span th:text="${role}"></span></td>
+        </tr>
+    </table>
+    <!--При нажатии на ссылку делает поле видимым, Возможно так? -->
+    <a> Добавить новую роль</a>
+    <form th:action="@{/role/new}" method="post">
+    <input type="text" name="role">
+        <input type="submit">
+    </form>
 
+
+
+</div>
 </body>
 </html>

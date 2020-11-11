@@ -10,14 +10,14 @@
         <input class="username" required th:field="*{username}" type="text"/>
         <br><span class="text">Пароль</span>
         <input class="password" required th:field="*{password}" type="password"/>
-        <br><span class="text">ФИО</span>
-        <input class="password" required th:field="*{info}" type="text"/>
+        <br><span class="text">Информация</span>
+        <input class="text" required th:field="*{info}" type="text"/>
+        <br><span class="text">Адрес</span>
+        <input class="text" required th:field="*{region}" type="text"/>
+        <br><span class="text">Телефон</span>
+        <input class="text" required th:field="*{tel}" type="text"/>
         <input class="button_success" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/>
         <a class="register" th:href="@{/}">Вернуться назад</a>
-        <div th:if="${edit}">
-            <span class="text">Активен</span>
-            <input th:field="*{active}" type="checkbox">
-        </div>
     </div>
 </form>
 
@@ -29,10 +29,20 @@
         <input class="username" required th:field="*{username}" type="text"/>
         <br><span class="text">Пароль</span>
         <input class="password" th:field="*{password}" type="password"/>
-        <br><span class="text">Ip-адрес:</span>
-        <input class="password" th:field="*{ip}" type="text"/>
-        <br><span class="text">ФИО:</span>
-        <input class="password" th:field="*{info}" type="text"/>
+        <br><span class="text">Информация:</span>
+        <input class="text" required th:field="*{info}" type="text"/>
+        <br><span class="text">Адрес</span>
+        <input class="text" required th:field="*{region}" type="text"/>
+        <br><span class="text">Телефон</span>
+        <input class="text" required th:field="*{tel}" type="text"/>
+        <br><span class="text">Роль</span>
+        <input type="hidden" th:field="*{role}">
+        <select name="role">
+                <option value="">Выберите роль</option>
+                <option th:each="role: ${roles}"
+                        th:value="${role}"
+                        th:text="${role}"></option>
+        </select>
         <br><span>Активен:</span>
         <input class="username" th:field="*{active}" type="checkbox">
         <input class="button_success" th:value="Сохранить" type="submit"/>

@@ -37,7 +37,6 @@ public class UserController {
         } catch (NullPointerException e) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setActive(false);
-            user.setRole(roleRepository.findRoleByRole("User"));
             userRepository.save(user);
         }
         return "redirect:/management";

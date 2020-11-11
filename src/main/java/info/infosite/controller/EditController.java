@@ -1,5 +1,7 @@
 package info.infosite.controller;
 
+import info.infosite.entities.auth.Role;
+import info.infosite.entities.auth.RoleRepository;
 import info.infosite.entities.auth.User;
 import info.infosite.entities.auth.UserRepository;
 import info.infosite.entities.gentable.*;
@@ -13,6 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class EditController {
@@ -28,6 +34,8 @@ public class EditController {
     public TableRepository tableRepository;
     @Autowired
     public GuideRepository guideRepository;
+    @Autowired
+    public RoleRepository roleRepository;
     @Autowired
     MenuService menuService;
     @Autowired
@@ -125,19 +133,26 @@ public class EditController {
     public String EditUser(Model model, @RequestParam int id) {
         User user = userRepository.getOne(id);
         model.addAttribute("user", user);
+        List<String> roles =new ArrayList<>();
+        model.addAttribute("roles",menuService.getRolesByRole(roles));
         model.addAttribute("edit", true);
         return "registration";
     }
 
     @PostMapping(value = "/user/edit")
-    public String EditUser(Model model, @ModelAttribute User user) {
+    public String EditUser(Model model, @ModelAttribute User user,@Valid String role) {
         User base = userRepository.findUserByUsername(user.getUsername());
         if (user.getPassword().equals("")) {
             user.setPassword(base.getPassword());
 
         } else user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(!role.equals("1,")){
+            user.setRole(roleRepository.findRoleByRole(role.substring(2)));
+            System.out.println(user.getRole());
+        }
+        user.setChats(base.getChats());
         userRepository.save(user);
-        return "redirect:/manage";
+        return "redirect:/management";
     }
 
     @RequestMapping(value = "/guide/edit")

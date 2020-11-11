@@ -46,7 +46,7 @@ public class User {
     @Column
     private String userKey;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Chat.class)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Chat.class)
     @JoinColumn
     private List<Chat> chats;
 

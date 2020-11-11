@@ -1,10 +1,13 @@
 package info.infosite.functions;
 
+import info.infosite.entities.auth.Role;
+import info.infosite.entities.auth.RoleRepository;
 import info.infosite.entities.gentable.Menu;
 import info.infosite.entities.gentable.MenuRepository;
 import info.infosite.entities.views.XmlMenuView;
 import info.infosite.entities.xml.Xml;
 import info.infosite.entities.xml.XmlRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import java.util.List;
 public class MenuService {
     public List<Menu> menus;
     public List<XmlMenuView> xmlMenus;
+    @Autowired
+    RoleRepository roleRepository;
     @Autowired
     MenuRepository menuRepository;
     @Autowired
@@ -71,5 +76,12 @@ public class MenuService {
         } catch (NullPointerException e) {
             httpSession.setAttribute("mode", false);
         }
+    }
+
+    public List<String>getRolesByRole(List<String> roles){
+        for(Role role:roleRepository.findAll()){
+            roles.add(role.getRole());
+        }
+        return roles;
     }
 }
