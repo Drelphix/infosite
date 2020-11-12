@@ -38,7 +38,7 @@ public class AddController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @RequestMapping(value = "/addSub", method = RequestMethod.GET)
+    @RequestMapping(value = "/submenu/new", method = RequestMethod.GET)
     public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
         menuService.CheckMenu();
         Menu menu = menuRepository.getOne(idMenu);
@@ -49,7 +49,7 @@ public class AddController {
         return "add";
     }
 
-    @RequestMapping(value = "/addCol", method = RequestMethod.GET)
+    @RequestMapping(value = "/column/new", method = RequestMethod.GET)
     public String AddNewCol(Model model, @RequestParam(name = "tab") int idTab) {
         menuService.CheckMenu();
         Tab table = tableRepository.getOne(idTab);
@@ -61,7 +61,7 @@ public class AddController {
         return "add";
     }
 
-    @RequestMapping(value = "/addLine", method = RequestMethod.GET)
+    @RequestMapping(value = "/line/new", method = RequestMethod.GET)
     public String AddNewLine(Model model, @RequestParam(name = "tab") int idTab) {
         menuService.CheckMenu();
         TableView tableView = new TableView(tableRepository.getOne(idTab));

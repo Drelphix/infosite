@@ -85,7 +85,7 @@
     </div>
     <!--Редактирование меню-->
     <div align="center" th:if="${menu}" th:object="${menu}">
-        <form action="#" method="post" th:action="@{/editMenu}">
+        <form action="#" method="post" th:action="@{/menu/edit}">
             <input th:field="*{idMenu}" type="hidden">
             <table class="edit">
                 <tr>

@@ -207,16 +207,22 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String helloMessage(String key) {
         User user = userRepository.findUserByUserKey(key);
+        user.setUserKey("");
+        userRepository.save(user);
         return user.getInfo();
     }
 
     private String helloMessage(Long chatId) {
         User user = userRepository.findUserByChat(chatId);
+        user.setUserKey("");
+        userRepository.save(user);
         return user.getInfo();
     }
 
     private User getUserByCode(String code) {
         User user = userRepository.findUserByUserKey(code);
+        user.setUserKey("");
+        userRepository.save(user);
         return user;
     }
 

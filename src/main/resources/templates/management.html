@@ -11,9 +11,9 @@
             <tr>
                 <td class="cell"><span>Пользователь:</span></td>
                 <td class="cell"><span th:text="${user.username}"></span></td>
-                <td class="cell" rowspan="3"><a class="link" href=""
+                <td class="cell" rowspan="6"><a class="link" href=""
                                                 th:href="@{/user/delete(id=${user.id})}">Удалить</a>
-                </td>
+
             </tr>
             <tr>
                 <td class="cell"><span>Информация:</span></td>
@@ -29,15 +29,22 @@
             </tr>
             <tr>
                 <td class="cell"><span>Роль:</span></td>
-                <td class="cell"><span th:text="${user.role.getRole()}"></span></td>
+                <td class="cell"><span th:text="${user.role} ? ${user.role.role}:'Не выбрана роль'"></span></td>
             </tr>
             <tr>
                 <td class="cell"><span>Активация:</span></td>
                 <td class="cell"><span th:text="${user.active}?'Активен':'Неактивен'"></span></td>
             </tr>
             <tr>
+                <td class="cell"><span>Код</span></td>
+                <td class="cell"><span th:text="${user.userKey}"></span></td>
+                <td class="cell"><a class="link" th:href="@{/user/generate(id=${user.id})}">Сгенерировать</a></td>
+                </td>
+            </tr>
+            <tr>
                 <td class="cell" colspan="3"><a class="link" href="" th:href="@{/user/edit(id=${user.id})}">Изменить</a>
                 </td>
+
             </tr>
             </tbody>
         </table>

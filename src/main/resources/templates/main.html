@@ -54,7 +54,7 @@
                             <a class="menu" href="#" th:href="@{/order?show=all}">Заявки</a>
                         </li>
                         <li th:if="${mode==true}">
-                            <a href="#" th:href="@{/menu/add}"><img alt="Добавить пункт меню"
+                            <a href="#" th:href="@{/menu/new}"><img alt="Добавить пункт меню"
                                                                     src="#"
                                                                     th:src="@{/images/addnew.png}"
                                                                     title=""/></a>
@@ -107,14 +107,14 @@
                 </td>
 
                 <td class="delLine" th:if="${mode==true}">
-                    <a class="link" href="#" th:href="@{/delLine(tab=${table.id},line=${row.index})}">Удалить строку</a>
+                    <a class="link" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить строку</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </center>
     <center th:if="${not #lists.isEmpty(table.cols)}">
-        <a align="center" class="link" href="#" th:href="@{/addLine(tab=${table.id})}" th:if="${mode==true}">Добавить
+        <a align="center" class="link" href="#" th:href="@{/line/new(tab=${table.id})}" th:if="${mode==true}">Добавить
             строку</a>
     </center>
 </div>
