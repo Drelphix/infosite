@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLDataException;
@@ -126,9 +123,9 @@ public class AddController {
     @RequestMapping(value = "/guide/new", method = RequestMethod.GET)
     public String AddNewGuide(Model model, HttpSession httpSession) {
         Guide guide = new Guide();
-
         System.out.println(guide.getUsername());
         menuService.CheckMenu();
+        model.addAttribute("currentGuide",guide);
         model.addAttribute("mode", httpSession.getAttribute("mode"));
         model.addAttribute("menus", menuService.menus);
         model.addAttribute("xmls", menuService.xmlMenus);
@@ -136,6 +133,13 @@ public class AddController {
         return "addguide";
     }
 
+    @PostMapping(value = "/guide/show")
+    public String showTempGuide(Model model,@ModelAttribute Guide guide){
+        guide.setDate(LocalDate.now().toString());
+        guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentGuide",guide);
+        return "addguide";
+    }
 
     @RequestMapping(value = "/guide/save", method = RequestMethod.POST)
     public String SaveNewGuide(Model model, @ModelAttribute Guide guide) {

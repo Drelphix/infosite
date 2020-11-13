@@ -158,6 +158,7 @@ public class EditController {
     @RequestMapping(value = "/guide/edit")
     public String EditGuide(Model model, @RequestParam int id) {
         Guide guide = guideRepository.getOne(id);
+        model.addAttribute("currentGuide",guide);
         model.addAttribute("guide", guide);
         model.addAttribute("edit", true);
         return "addguide";
