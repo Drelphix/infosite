@@ -8,7 +8,7 @@
 }
 
 
-.loginform, .registrationform {
+.loginform, .registrationform, .edituserform {
     background: #e1ddf3;
     position: absolute;
     top: 50%;
@@ -18,12 +18,12 @@
     width: 100%;
     height: auto;
     border-radius: 5px;
-    padding: 10px 10px 10px 10px;
+    padding: 6px 10px 24px 10px;
     box-shadow: 0px 0px 48px #1a1342;
     border: 2px solid #a79f9f;
 }
 
-.loginform .title, .registrationform .title {
+.loginform .title, .registrationform .title, .edituserform .title {
     font-size: 29px;
     text-transform: uppercase;
     font-weight: bold;
@@ -39,7 +39,6 @@
 
 .input-form .input {
     width: 100%;
-    padding: 15px;
     padding: 15px 0 15px 55px;
     font-size: 18px;
     border: transparent;
@@ -61,23 +60,84 @@
   background: #000000;
 }
 
-.btn {
+.btnl {
     width: 100%;
-    background: #8ac858;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 4px;
-    padding: 11px;
-    box-shadow: 0px 2px 2px #1c1738;
-    cursor: pointer;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     box-shadow: 0px 2px 2px #000000;
+     /* cursor: pointer; */
+     padding: 1rem 12rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size: 25px;
+     /* cursor: pointer; */
 }
 
-.btn a{
-  color: #eeedef;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 25px;
-  cursor: pointer;
+.btnl {
+    width: 100%;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     box-shadow: 0px 2px 2px #000000;
+     /* cursor: pointer; */
+     padding: 6px 12rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size: 25px;
+     /* cursor: pointer; */
+}
+
+.btnr {
+    width: 100%;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     box-shadow: 0px 2px 2px #000000;
+     /* cursor: pointer; */
+     padding: 6px 9.27rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size: 25px;
+     /* cursor: pointer; */
+}
+
+.btnz {
+    width: 100%;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     box-shadow: 0px 2px 2px #000000;
+     /* cursor: pointer; */
+     padding: 6px 7rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size: 25px;
+     /* cursor: pointer; */
+}
+
+.btnb {
+    width: 100%;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     box-shadow: 0px 2px 2px #000000;
+     /* cursor: pointer; */
+     padding: 6px 7.7rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size: 25px;
+     /* cursor: pointer; */
 }
 
 .btno {
@@ -100,7 +160,7 @@
 .input-form .fas{
   position: absolute;
   top: 17px;
-  left: 15px;
+  left: 14px;
   font-size: 19px;
   color: #fff;
 }

@@ -17,16 +17,16 @@
                 <i class="fas fa-key"></i>
             </div>
             <div>
-                <center><span th:if="${param.error}">Неверно введен логин или пароль</span></center>
-                    <br>
-            </div>
-            <div class="btn">
-                <center><a href="#" onclick="document.getElementById('login').submit()">Войти</a></center>
+            <center><span th:if="${param.error}">Неверно введен логин или пароль</span></center>
+            <br>
+        </div>
+            <div>
+                <center><a href="#" onclick="document.getElementById('login').submit()" class="btnl">Войти</a></center>
             </div>
 
             <br>
-            <div class="btn">
-                <center><a href="#" th:href="@{/registration}">Регистрация</a></center>
+            <div>
+                <center><a href="#" th:href="@{/registration}" class="btnr">Регистрация</a></center>
             </div>
         </div>
     </form>

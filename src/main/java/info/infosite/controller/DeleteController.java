@@ -86,7 +86,7 @@ public class DeleteController {
     @RequestMapping(value = "/user/delete", method = RequestMethod.GET)
     public String DeleteUser(Model model, @RequestParam int id) {
         userRepository.deleteById(id);
-        return "redirect:/manage";
+        return "redirect:/management";
     }
 
     @RequestMapping(value = "/guide/delete", method = RequestMethod.GET)

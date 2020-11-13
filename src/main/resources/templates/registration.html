@@ -2,22 +2,44 @@
 <head th:insert="main::head">
 </head>
 <body>
-<form action="#" class="center" method="post" th:action="@{/registration}" th:object="${user}" th:unless="${edit}">
-    <div class="auth">
-        <h3 style="padding-top:10%;" th:text="${edit}?'Изменение учетной записи':'Регистрация'"></h3>
-        <span th:if="${error}" th:text="${error}"></span>
-        <span class="text">Логин:</span>
-        <input class="username" required th:field="*{username}" type="text"/>
-        <br><span class="text">Пароль</span>
-        <input class="password" required th:field="*{password}" type="password"/>
-        <br><span class="text">Информация</span>
-        <input class="text" required th:field="*{info}" type="text"/>
-        <br><span class="text">Адрес</span>
-        <input class="text" required th:field="*{region}" type="text"/>
-        <br><span class="text">Телефон</span>
-        <input class="text" required th:field="*{tel}" type="text"/>
-        <input class="button_success" th:value="${edit}?'Сохранить':'Зарегистрировать'" type="submit"/>
-        <a class="register" th:href="@{/}">Вернуться назад</a>
+
+<form id="registration" action="registration" class="center" method="post" th:object="${user}" th:unless="${edit}">
+    <div class="registrationform">
+        <div class="title">
+            Регистрация
+        </div>
+        <div class="input-form username">
+            <input type="text" th:field="*{username}" class="input" name="username" placeholder="Логин" required>
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input-form password">
+            <input type="password" th:field="*{password}" class="input" name="password" placeholder="Пароль" required>
+            <i class="fas fa-key"></i>
+        </div>
+        <div class="input-form text">
+            <input type="text" th:field="*{info}" class="input" name="text" placeholder="Информация" required>
+            <i class="fas fa-address-card"></i>
+        </div>
+        <div class="input-form text">
+            <input type="text" th:field="*{region}" class="input" name="text" placeholder="Адрес" required>
+            <i class="fas fa-map-marked"></i>
+        </div>
+        <div class="input-form text">
+            <input type="tel" th:field="*{tel}" class="input" name="text" placeholder="Телефон" required>
+            <i class="fas fa-phone"></i>
+        </div>
+        <div>
+            <center><span th:if="${param.error}">Данный логин уже занят</span></center>
+            <br>
+        </div>
+        <div>
+            <center><a href="#" onclick="document.getElementById('registration').submit()" class="btnz">Зарегистрировать</a></center>
+        </div>
+
+        <br>
+        <div>
+            <center><a href="#" th:href="@{/}" class="btnb">Вернуться назад</a></center>
+        </div>
     </div>
 </form>
 
@@ -48,5 +70,64 @@
         <input class="button_success" th:value="Сохранить" type="submit"/>
     </div>
 </form>
+
+<!-- Изменение пользователя новая форма -->
+<!--<form id="edituser" action="edituser" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
+    <div class="edituserform">
+        <div class="title">
+            Изменение записи
+        </div>
+        <div class="input-form username">
+            <input type="text" th:field="*{username}" class="input" name="username" placeholder="Логин" required>
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input-form password">
+            <input type="password" th:field="*{password}" class="input" name="password" placeholder="Пароль" required>
+            <i class="fas fa-key"></i>
+        </div>
+        <div class="input-form text">
+            <input type="text" th:field="*{info}" class="input" name="text" placeholder="Информация" required>
+            <i class="fas fa-address-card"></i>
+        </div>
+        <div class="input-form text">
+            <input type="text" th:field="*{region}" class="input" name="text" placeholder="Адрес" required>
+            <i class="fas fa-map-marked"></i>
+        </div>
+        <div class="input-form text">
+            <input type="tel" th:field="*{tel}" class="input" name="text" placeholder="Телефон" required>
+            <i class="fas fa-phone"></i>
+        </div>
+        <div class="input-form text">
+            <span class="text">Роль</span>
+            <input type="hidden" th:field="*{role}">
+            <select name="role">
+                <option value="">Выберите роль</option>
+                <option th:each="role: ${roles}"
+                        th:value="${role}"
+                        th:text="${role}"></option>
+            </select>
+            <i class="fas fa-phone"></i>
+        </div>
+        <div class="input-form text">
+            <span>Активен:</span>
+            <input class="username" th:field="*{active}" type="checkbox">
+            <i class="fas fa-phone"></i>
+        </div>
+
+        <div>
+            <center><span th:if="${param.error}">Данный логин уже занят</span></center>
+            <br>
+        </div>
+        <div>
+            <center><a href="#" onclick="document.getElementById('edituser').submit()" class="btnz">Зарегистрировать</a></center>
+        </div>
+
+        <br>
+        <div>
+            <center><a href="#" th:href="@{/}" class="btnb">Вернуться назад</a></center>
+        </div>
+    </div>
+</form>-->
+
 </body>
 </html>
