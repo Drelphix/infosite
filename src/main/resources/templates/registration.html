@@ -29,7 +29,7 @@
             <i class="fas fa-phone"></i>
         </div>
         <div>
-            <center><span th:if="${param.error}">Данный логин уже занят</span></center>
+            <center><span th:if="${error}" th:text="${error}">Ошибочка</span></center>
             <br>
         </div>
         <div>

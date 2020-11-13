@@ -25,12 +25,11 @@ public class UserController {
     @GetMapping(value = "/registration")
     public String Registration(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("repeat", "");
         return "registration";
     }
 
     @PostMapping(value = "/registration")
-    public String Registration(Model model, @ModelAttribute User user, @ModelAttribute String repeat) {
+    public String Registration(Model model, @ModelAttribute User user) {
         try {
             User test = userRepository.findUserByUsername(user.getUsername());
             test.toString();
