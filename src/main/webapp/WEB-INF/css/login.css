@@ -67,13 +67,11 @@
      text-align: center;
      border-radius: 4px;
      box-shadow: 0px 2px 2px #000000;
-     /* cursor: pointer; */
      padding: 1rem 12rem;
      color: #eeedef;
      text-decoration: none;
      text-transform: uppercase;
      font-size: 25px;
-     /* cursor: pointer; */
 }
 
 .btnl {
@@ -83,13 +81,11 @@
      text-align: center;
      border-radius: 4px;
      box-shadow: 0px 2px 2px #000000;
-     /* cursor: pointer; */
      padding: 6px 12rem;
      color: #eeedef;
      text-decoration: none;
      text-transform: uppercase;
      font-size: 25px;
-     /* cursor: pointer; */
 }
 
 .btnr {
@@ -99,13 +95,11 @@
      text-align: center;
      border-radius: 4px;
      box-shadow: 0px 2px 2px #000000;
-     /* cursor: pointer; */
      padding: 6px 9.27rem;
      color: #eeedef;
      text-decoration: none;
      text-transform: uppercase;
      font-size: 25px;
-     /* cursor: pointer; */
 }
 
 .btnz {
@@ -115,13 +109,11 @@
      text-align: center;
      border-radius: 4px;
      box-shadow: 0px 2px 2px #000000;
-     /* cursor: pointer; */
      padding: 6px 7rem;
      color: #eeedef;
      text-decoration: none;
      text-transform: uppercase;
      font-size: 25px;
-     /* cursor: pointer; */
 }
 
 .btnb {
@@ -131,13 +123,11 @@
      text-align: center;
      border-radius: 4px;
      box-shadow: 0px 2px 2px #000000;
-     /* cursor: pointer; */
      padding: 6px 7.7rem;
      color: #eeedef;
      text-decoration: none;
      text-transform: uppercase;
      font-size: 25px;
-     /* cursor: pointer; */
 }
 
 .btno {
