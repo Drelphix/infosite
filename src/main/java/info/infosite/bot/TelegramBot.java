@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -37,6 +38,10 @@ public class TelegramBot extends TelegramLongPollingBot {
             "на проблемы в работе. Создан @Drelphix";
     private static final String CANCEL_MESSAGE = "Создание заявки отменено.";
     private static final String WAITING_MESSAGE = "Ожидаю команду...";
+
+    static {
+        ApiContextInitializer.init();
+    }
 
     @Autowired
     UserRepository userRepository;
