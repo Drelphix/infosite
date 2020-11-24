@@ -80,7 +80,7 @@
     </header>
 </div>
 <div th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
-    <div class="tables" style="margin-top:20px;" th:each="table,tabRow: ${tables}" th:if="${tables}">
+    <div class="tables" style="margin-top:4%;" th:each="table,tabRow: ${tables}" th:if="${tables}">
         <center>
             <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"
                    th:text="${table.name}"></a></h3>
@@ -118,7 +118,7 @@
             строку</a>
     </center>
 </div>
-    <div align="center" style="padding-top:5px" th:if="${submenu}">
+    <div align="center" style="padding-top:60px" th:if="${submenu}">
         <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
     </div>
 </div>
