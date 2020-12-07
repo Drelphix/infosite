@@ -1,6 +1,5 @@
 package info.infosite.controller;
 
-import info.infosite.entities.auth.Role;
 import info.infosite.entities.auth.RoleRepository;
 import info.infosite.entities.auth.User;
 import info.infosite.entities.auth.UserRepository;
@@ -11,12 +10,14 @@ import info.infosite.entities.views.ListLineView;
 import info.infosite.entities.views.TableView;
 import info.infosite.functions.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,6 +167,8 @@ public class EditController {
 
     @PostMapping(value = "/guide/edit")
     public String EditGuide(Model model, @ModelAttribute Guide guide) {
+        guide.setLastEditDate(LocalDate.now().toString());
+        guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         guideRepository.save(guide);
         return "redirect:/guides";
     }

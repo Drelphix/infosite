@@ -61,6 +61,11 @@
                 <th class="cell" colspan="3">
                     Список стоблцов:
                 </th>
+                <tr>
+                    <td class="cell">Название</td>
+                    <td class="cell">Скрыть столбец</td>
+                    <td class="cell">Действие</td>
+                </tr>
                 <tr th:each="col,itemStat: *{cols}">
                     <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="hidden">
                     <td class="cell"><input class="edit" required th:field="*{cols[__${itemStat.index}__].name}"
