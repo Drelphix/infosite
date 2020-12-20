@@ -4,17 +4,20 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-    completed("Выполнена"),
-    inwork("В работе"),
-    active("Активна");
+    completed("Выполнена","Выполненные заявки"),
+    inwork("В работе","Заявки в работе"),
+    active("Активна", "Активные заявки");
 
     private final String displayValue;
+    private final String reportValue;
 
-    Status(String displayValue) {
+    Status(String displayValue,String reportValue) {
         this.displayValue = displayValue;
+        this.reportValue = reportValue;
     }
 
     public String getDisplayValue() {
         return displayValue;
     }
-}
+    public String getReportValue() {return reportValue;}
+ }

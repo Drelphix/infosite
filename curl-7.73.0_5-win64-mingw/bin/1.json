@@ -1,56 +1,56 @@
 {
-  "name": "Sysadmin-pc",
-  "os": {
-    "caption": "Windows",
-    "version": "10",
-    "architecture": "x64"
-  },
-  "motherboard": "P8Z77-V",
-  "cpu": [
-    {
-      "name": "Intel"
-    },
-    {
-      "name": "AMD"
-    }
-  ],
-  "disks": [
-    {
-      "model": "Samsung",
-      "serialNumber": "DSDFAF",
-      "size": "465",
-      "status": "ok"
-    },
-    {
-      "model": "WD",
-      "serialNumber": "DSDFAFDSA",
-      "size": "250",
-      "status": "ok"
-    }
-  ],
-  "memory": [
-    {
-      "capacity": "8",
-      "speed": "1600",
-      "bankLabel": "BANK 2",
-      "location": "ChannelB-DIMM0"
-    },
-    {
-      "capacity": "8",
-      "speed": "1600",
-      "bankLabel": "BANK 1",
-      "location": "ChannelB-DIMM3"
-    }
-  ],
-  "network": [
-    {
-      "description": "Realtek PCIe GbE Family Controller #2",
-      "ipAddress": "{192.168.104.9, 192.168.103.9, 192.168.102.9, 192.168.101.9...}"
-    },
-    {
-      "description": "Hyper-V Virtual Ethernet Adapter #2",
-      "ipAddress": "null"
-    }
-  ]
+   "computer": "Fuck-you",
+   "os": {
+      "caption": "Linux",
+      "version": "10",
+      "architecture": "x32",
+      "lastBootTime": "1004210414"
+   },
+   "motherboard": "P8Z77-V",
+   "cpu": [
+      {
+         "name": "Intel"
+      },
+      {
+         "name": "AMD"
+      }
+   ],
+   "disks": [
+      {
+         "model": "Samsung",
+         "serialNumber": "DSDFAF",
+         "size": "465",
+         "status": "ok"
+      },
+      {
+         "model": "WD",
+         "serialNumber": "DSDFAFDSA",
+         "size": "250",
+         "status": "ok"
+      }
+   ],
+   "memory": [
+      {
+         "capacity": "8",
+         "speed": "1600",
+         "bankLabel": "BANK 2",
+         "location": "ChannelB-DIMM0"
+      },
+      {
+         "capacity": "8",
+         "speed": "1600",
+         "bankLabel": "BANK 1",
+         "location": "ChannelB-DIMM3"
+      }
+   ],
+   "networks": [
+      {
+         "description": "Realtek PCIe GbE Family Controller #2",
+         "ipAddress": "{192.168.104.9, 192.168.103.9, 192.168.102.9, 192.168.101.9...}"
+      },
+      {
+         "description": "Hyper-V Virtual Ethernet Adapter #2",
+         "ipAddress": null
+      }
+   ]
 }
-

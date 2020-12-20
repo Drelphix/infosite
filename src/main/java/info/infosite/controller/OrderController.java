@@ -79,9 +79,5 @@ public class OrderController {
         return "redirect:/order?show="+status;
     }
 
-    @GetMapping(value = "/report")
-    public String ShowReportPage(Model model) {
-        menuService.CheckMenu();
-        return "report";
-    }
+
 }

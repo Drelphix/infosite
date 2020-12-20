@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head"></head>
+<body>
+<div th:replace="main::menu"></div>
+<div style="margin-top:100px;">
+    <table th:each="pc:${pcs}">
+        <tr>
+            <td>Имя</td>
+            <td>Процессор</td>
+            <td>Материнская плата</td>
+            <td>Обьем памяти</td>
+        </tr>
+        <tr>
+            <td th:text="${pc.name}"></td>
+            <td th:text="${pc.getCpuInfo()}"></td>
+            <td th:text="${pc.motherboard}"></td>
+            <td th:text="${pc.getSummaryMemory()}"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><a th:href="@{/pc(show=${pc.name})}">Подробная информация</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

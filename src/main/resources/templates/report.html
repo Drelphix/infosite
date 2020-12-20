@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Отчеты</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="main::head">
 </head>
 <body>
 Ну тут типо отчёты, поиск по различным критериям и тд
+<div>
+    <span>Выберите статус: </span>
+    <select id="type" name="type">
+        <option value="">Выберите статус</option>
+        <option value="all">Все заявки</option>
+        <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
+                th:text="${status.reportValue}"
+                th:value="${status}"></option>
+    </select><br>
+
+    <select id="groups" name="groups">
+        <option value="">Выберите группу</option>
+        <option th:each="role: ${groups}"
+                th:text="${role.role}"
+                th:value="${role}"></option>
+    </select><br>
+
+    <select id="user" name="user">
+        <option value="">Выберите пользователя</option>
+        <option th:each="user: ${users}"
+                th:text="${user.username}"
+                th:value="${user}"></option>
+    </select><br>
+
+    <span>Начальная дата</span><input type="date"><br>
+
+    <span>Конечная дата</span><input type="date"><br>
+
+</div>
 </body>
 </html>

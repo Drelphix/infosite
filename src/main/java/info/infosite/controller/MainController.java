@@ -1,6 +1,7 @@
 package info.infosite.controller;
 
 import info.infosite.entities.auth.UserRepository;
+import info.infosite.entities.computer.ComputerRepository;
 import info.infosite.entities.gentable.MenuRepository;
 import info.infosite.entities.gentable.Tab;
 import info.infosite.entities.gentable.TableRepository;
@@ -42,7 +43,8 @@ public class MainController {
     public UserRepository userRepository;
     @Autowired
     public GuideRepository guideRepository;
-
+    @Autowired
+    ComputerRepository computerRepository;
     @Autowired
     MenuService menuService;
 
@@ -142,6 +144,18 @@ public class MainController {
             }
         }
         return "computer";
+    }
+    @GetMapping(value = "/pc")
+    public String ShowPcInfo(Model model,@RequestParam String show,HttpSession httpSession){
+        if(show.equals("all")){
+            model.addAttribute("pcs",computerRepository.findAll());
+        } else {
+            model.addAttribute("pc",computerRepository.findByName(show));
+        }
+        menuService.CheckMenu();
+        menuService.CheckMode(httpSession);
+        model = menuService.addMenu(model, httpSession);
+        return "compinfo";
     }
 
 
