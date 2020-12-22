@@ -1,7 +1,5 @@
 package info.infosite.entities.computer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +20,13 @@ public class Memory {
     private String speed;
 
     @Column
-    private String bankLabel;
+    private String serialNumber;
+
+    @Column
+    private String partNumber;
+
+    @Column
+    private String manufacturer;
 
     @Column
     private String location;
@@ -31,10 +35,12 @@ public class Memory {
     @JoinColumn(nullable = false)
     private Computer computer;
 
-    public boolean like(Memory memory){
-        if(this.capacity.equals(memory.capacity)&
-        this.speed.equals(memory.speed)&
-                this.bankLabel.equals(memory.bankLabel)&
-                this.location.equals(memory.location)) return true; else return false;
+    public boolean like(Memory memory) {
+        return this.capacity.equals(memory.capacity) &
+                this.speed.equals(memory.speed) &
+                this.serialNumber.equals(memory.serialNumber) &
+                this.location.equals(memory.location) &
+                this.manufacturer.equals(memory.manufacturer) &
+                this.partNumber.equals(memory.partNumber);
     }
 }

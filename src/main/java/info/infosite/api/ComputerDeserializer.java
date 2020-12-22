@@ -73,24 +73,32 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
         return computer;
     }
     private void setMemory(String value,String fieldName,List<Memory> memoryList) {
+        int last = memoryList.size() - 1;
         switch (fieldName){
-            case "capacity":{
+            case "capacity": {
                 memoryList.add(new Memory());
-                int last=memoryList.size()-1;
+                last = memoryList.size() - 1;
                 memoryList.get(last).setCapacity(value);
                 break;
             }
-            case "speed":{
-                memoryList.get(memoryList.size()-1).setSpeed(value);
+            case "speed": {
+                memoryList.get(last).setSpeed(value);
                 break;
             }
-            case "bankLabel":{
-                memoryList.get(memoryList.size()-1).setBankLabel(value);
+            case "serialNumber": {
+                memoryList.get(last).setSerialNumber(value);
                 break;
             }
-            case "location":{
-                memoryList.get(memoryList.size()-1).setLocation(value);
+            case "location": {
+                memoryList.get(last).setLocation(value);
                 break;
+            }
+            case "manufacturer": {
+                memoryList.get(last).setManufacturer(value);
+                break;
+            }
+            case "partNumber": {
+                memoryList.get(last).setPartNumber(value);
             }
         }
     }
@@ -115,44 +123,47 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
         }
     }
     private void setDisk(String value,String fieldName, List<Disk> disks){
+        int last = disks.size() - 1;
         switch (fieldName){
             case "model":{
                 disks.add(new Disk());
-                int last=disks.size()-1;
+                last = disks.size() - 1;
                 disks.get(last).setModel(value);
                 break;
             }
             case "serialNumber":{
-                disks.get(disks.size()-1).setSerialNumber(value);
+                disks.get(last).setSerialNumber(value);
                 break;
             }
             case "size":{
-                disks.get(disks.size()-1).setSize(value);
+                disks.get(last).setSize(value);
                 break;
             }
             case "status":{
-                disks.get(disks.size()-1).setStatus(value);
+                disks.get(last).setStatus(value);
                 break;
             }
         }
     }
     private void setCpu (String value,String fieldName,List<Cpu> cpu){
+        int last = cpu.size() - 1;
         if("name".equals(fieldName)){
             cpu.add(new Cpu());
-            int last=cpu.size()-1;
+            last = cpu.size() - 1;
             cpu.get(last).setName(value);
         }
     }
     private void setNetwork(String value,String fieldName,List<Network> networks){
+        int last = networks.size() - 1;
         switch (fieldName){
             case "description":{
                 networks.add(new Network());
-                int last=networks.size()-1;
+                last = networks.size() - 1;
                 networks.get(last).setDescription(value);
                 break;
             }
             case "ipAddress":{
-                networks.get(networks.size()-1).setIpAddress(value);
+                networks.get(last).setIpAddress(value);
                 break;
             }
         }

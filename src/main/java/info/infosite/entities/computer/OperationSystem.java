@@ -1,6 +1,5 @@
 package info.infosite.entities.computer;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,12 +25,10 @@ public class OperationSystem {
     private Computer computer;
 
     public boolean like(OperationSystem os){
-        if(this.architecture.equals(os.architecture)&
-            this.caption.equals(os.caption)&
-                this.version.equals(os.version)&
-                this.lastBootTime.equals(os.lastBootTime))
-            return true;
-        else return false;
+        return this.architecture.equals(os.architecture) &
+                this.caption.equals(os.caption) &
+                this.version.equals(os.version) &
+                this.lastBootTime.equals(os.lastBootTime);
     }
 
 }

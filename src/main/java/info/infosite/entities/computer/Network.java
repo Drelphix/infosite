@@ -1,6 +1,5 @@
 package info.infosite.entities.computer;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,8 +22,7 @@ public class Network {
     private Computer computer;
 
     public boolean like(Network network){
-        if(this.description.equals(network.description)&
-                this.ipAddress.equals(network.ipAddress)) return true;
-        else return false;
+        return this.description.equals(network.description) &
+                this.ipAddress.equals(network.ipAddress);
     }
 }

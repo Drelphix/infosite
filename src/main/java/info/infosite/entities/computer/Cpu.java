@@ -1,7 +1,5 @@
 package info.infosite.entities.computer;
 
-import info.infosite.entities.gentable.Tab;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +21,7 @@ public class Cpu {
     private Computer computer;
 
     public boolean like(Cpu cpu){
-        if(this.name.equals(cpu.getName())) return true; else return false;
+        return this.name.equals(cpu.getName());
     }
 
 

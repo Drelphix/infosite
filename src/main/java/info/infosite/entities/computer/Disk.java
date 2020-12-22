@@ -1,6 +1,5 @@
 package info.infosite.entities.computer;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,9 +27,9 @@ public class Disk {
     private Computer computer;
 
     public boolean like(Disk disk){
-        if(this.model.equals(disk.model)&
-           this.serialNumber.equals(disk.serialNumber)&
-                this.size.equals(disk.size)&
-                this.status.equals(disk.status)) return true; else return false;
+        return this.model.equals(disk.model) &
+                this.serialNumber.equals(disk.serialNumber) &
+                this.size.equals(disk.size) &
+                this.status.equals(disk.status);
     }
 }
