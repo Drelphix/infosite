@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Setter
 @Getter
@@ -25,4 +28,14 @@ public class Network {
         return this.description.equals(network.description) &
                 this.ipAddress.equals(network.ipAddress);
     }
+    public List<String> getIpAddresses(){
+    List<String> nothing = new ArrayList<>();
+    nothing.add("Ip-адреса отсутствуют");
+        try {
+            return Arrays.asList(ipAddress.split(","));
+        } catch (NullPointerException e){ return nothing;
+
+        }
+    }
+
 }

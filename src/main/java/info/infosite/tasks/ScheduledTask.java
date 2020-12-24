@@ -51,7 +51,7 @@ public class ScheduledTask {
         return entityManager.unwrap(Session.class);
     }
 
-    @Scheduled(cron = "0 0 23 * * ?")
+    //@Scheduled(cron = "0 0 23 * * ?")
     @Transactional
     public void ExcelCopy() throws IOException {
         String path;

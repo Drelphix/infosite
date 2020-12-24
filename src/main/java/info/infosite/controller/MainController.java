@@ -151,6 +151,7 @@ public class MainController {
             model.addAttribute("pcs",computerRepository.findAll());
         } else {
             model.addAttribute("pc",computerRepository.findByName(show));
+            model.addAttribute("pcs",computerRepository.findAll());
         }
         menuService.CheckMenu();
         menuService.CheckMode(httpSession);
