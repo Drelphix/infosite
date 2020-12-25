@@ -43,7 +43,7 @@
     </div>
 </form>
 
-<form action="#" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
+<!--<form action="#" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
     <div align="center" class="auth">
         <h3 style="padding-top:10%;">Изменение записи</h3>
         <input th:field="*{id}" type="hidden">
@@ -69,14 +69,16 @@
         <input class="username" th:field="*{active}" type="checkbox">
         <input class="button_success" th:value="Сохранить" type="submit"/>
     </div>
-</form>
+</form>-->
 
-<!-- Изменение пользователя новая форма -->
-<!--<form id="edituser" action="edituser" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
+Изменение пользователя новая форма
+<form action="edituser" class="center" id="edituser" method="post" th:action="@{/user/edit}" th:if="${edit}"
+      th:object="${user}">
     <div class="edituserform">
         <div class="title">
             Изменение записи
         </div>
+        <input th:field="*{id}" type="hidden">
         <div class="input-form username">
             <input type="text" th:field="*{username}" class="input" name="username" placeholder="Логин" required>
             <i class="fas fa-user"></i>
@@ -119,7 +121,8 @@
             <br>
         </div>
         <div>
-            <center><a href="#" onclick="document.getElementById('edituser').submit()" class="btnz">Зарегистрировать</a></center>
+            <center><a href="#" onclick="document.getElementById('edituser').submit()" class="btnz">Зарегистрировать</a>
+            </center>
         </div>
 
         <br>
@@ -127,7 +130,7 @@
             <center><a href="#" th:href="@{/}" class="btnb">Вернуться назад</a></center>
         </div>
     </div>
-</form>-->
+</form>
 
 </body>
 </html>
