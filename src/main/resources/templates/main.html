@@ -14,13 +14,11 @@
 <body>
 <div th:fragment="menu">
     <header>
-        <div>
             <div class="d-flex" style="height: 45px;">
                 <div class="logo" style="height: 40px;">
                     <a href="#" th:href="@{/}"><img alt="" src="/images/logo.svg" style="height:35px"
                                                     title=""/></a>
-                    <a class="link" href="#" th:href="@{/logout}"><span style="color:white"
-                                                                        th:text="'Welcome, '+${#authentication.name}"></span></a>
+                    <a class="link" href="#" th:href="@{/logout}"><span style="color:white" th:text="'Welcome, '+${#authentication.name}"></span></a>
                 </div>
                 <nav th:if="${menus}">
                     <ul class="topmenu" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
@@ -63,26 +61,21 @@
                                                                     title=""/></a>
                         </li>
                         <li th:if="${mode==false}">
-                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img
-                                    alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
                         </li>
                         <li th:if="${mode==true}">
-                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img
-                                    alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
                         </li>
                         <li>
-                            <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
-                                                                  title=""/></a>
+                            <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}" title=""/></a>
                         </li>
-
-
                     </ul>
                 </nav>
             </div>
-        </div>
     </header>
 </div>
-<div th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
+
+<div style="padding-left:10px" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
     <div class="tables" style="margin-top:4%;" th:each="table,tabRow: ${tables}" th:if="${tables}">
         <center>
             <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"

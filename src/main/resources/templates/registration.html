@@ -9,23 +9,23 @@
             Регистрация
         </div>
         <div class="input-form username">
-            <input type="text" th:field="*{username}" class="input" name="username" placeholder="Логин" required>
+            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин" required>
             <i class="fas fa-user"></i>
         </div>
         <div class="input-form password">
-            <input type="password" th:field="*{password}" class="input" name="password" placeholder="Пароль" required>
+            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password" placeholder="Пароль" required>
             <i class="fas fa-key"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{info}" class="input" name="text" placeholder="Информация" required>
+            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация" required>
             <i class="fas fa-address-card"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{region}" class="input" name="text" placeholder="Адрес" required>
+            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес" required>
             <i class="fas fa-map-marked"></i>
         </div>
         <div class="input-form text">
-            <input type="tel" th:field="*{tel}" class="input" name="text" placeholder="Телефон" required>
+            <input type="tel" th:field="*{tel}" maxlength="12" class="input" name="text" placeholder="Телефон" required>
             <i class="fas fa-phone"></i>
         </div>
         <div>
@@ -33,7 +33,9 @@
             <br>
         </div>
         <div>
-            <center><a href="#" onclick="document.getElementById('registration').submit()" class="btnz">Зарегистрировать</a></center>
+            <center>
+                <a href="#" onclick="document.getElementById('registration').submit()" class="btnz">Зарегистрировать</a>
+            </center>
         </div>
 
         <br>
@@ -43,35 +45,6 @@
     </div>
 </form>
 
-<!--<form action="#" class="center" method="post" th:action="@{/user/edit}" th:if="${edit}" th:object="${user}">
-    <div align="center" class="auth">
-        <h3 style="padding-top:10%;">Изменение записи</h3>
-        <input th:field="*{id}" type="hidden">
-        <span class="text">Логин:</span>
-        <input class="username" required th:field="*{username}" type="text"/>
-        <br><span class="text">Пароль</span>
-        <input class="password" th:field="*{password}" type="password"/>
-        <br><span class="text">Информация:</span>
-        <input class="text" required th:field="*{info}" type="text"/>
-        <br><span class="text">Адрес</span>
-        <input class="text" required th:field="*{region}" type="text"/>
-        <br><span class="text">Телефон</span>
-        <input class="text" required th:field="*{tel}" type="text"/>
-        <br><span class="text">Роль</span>
-        <input type="hidden" th:field="*{role}">
-        <select name="role">
-                <option value="">Выберите роль</option>
-                <option th:each="role: ${roles}"
-                        th:value="${role}"
-                        th:text="${role}"></option>
-        </select>
-        <br><span>Активен:</span>
-        <input class="username" th:field="*{active}" type="checkbox">
-        <input class="button_success" th:value="Сохранить" type="submit"/>
-    </div>
-</form>-->
-
-Изменение пользователя новая форма
 <form action="edituser" class="center" id="edituser" method="post" th:action="@{/user/edit}" th:if="${edit}"
       th:object="${user}">
     <div class="edituserform">
@@ -80,23 +53,23 @@
         </div>
         <input th:field="*{id}" type="hidden">
         <div class="input-form username">
-            <input type="text" th:field="*{username}" class="input" name="username" placeholder="Логин" required>
+            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин" required>
             <i class="fas fa-user"></i>
         </div>
         <div class="input-form password">
-            <input type="password" th:field="*{password}" class="input" name="password" placeholder="Пароль" required>
+            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password" placeholder="Пароль" required>
             <i class="fas fa-key"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{info}" class="input" name="text" placeholder="Информация" required>
+            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация" required>
             <i class="fas fa-address-card"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{region}" class="input" name="text" placeholder="Адрес" required>
+            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес" required>
             <i class="fas fa-map-marked"></i>
         </div>
         <div class="input-form text">
-            <input type="tel" th:field="*{tel}" class="input" name="text" placeholder="Телефон" required>
+            <input type="tel" th:field="*{tel}" maxlength="12" class="input" name="text" placeholder="Телефон" required>
             <i class="fas fa-phone"></i>
         </div>
         <div class="input-form text">
@@ -121,7 +94,8 @@
             <br>
         </div>
         <div>
-            <center><a href="#" onclick="document.getElementById('edituser').submit()" class="btnz">Зарегистрировать</a>
+            <center>
+                <a href="#" onclick="document.getElementById('edituser').submit()" class="btns">Сохранить</a>
             </center>
         </div>
 
