@@ -206,13 +206,12 @@ color:#000;
 }
 
 table.iksweb td,table.iksweb th {
-white-space:pre-wrap;
 line-height:13px;
 vertical-align:middle;
 /* Отрисовка границ
 border:2px solid #8ac858;
 */
-padding:10px 5px;
+padding:6px 6px;
 }
 
 table.iksweb tr:hover td {
@@ -231,6 +230,10 @@ background: #324960;
 table.iksweb tr:hover td {
 color:#fff;
 cursor:default;
+}
+
+table.iksweb a:hover {
+color:#fff;
 }
 
 .size {

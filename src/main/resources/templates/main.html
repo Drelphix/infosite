@@ -12,6 +12,7 @@
     <title>InfoSite</title>
 </head>
 <body>
+<div>
 <div th:fragment="menu">
     <header>
             <div class="d-flex" style="height: 45px;">
@@ -117,6 +118,7 @@
     <div align="center" style="padding-top:60px" th:if="${submenu}">
         <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
     </div>
+</div>
 </div>
 </body>
 
