@@ -8,45 +8,38 @@
 <div id="header" th:insert="main::menu"></div>
 <div style="padding: 40px 10px 10px 10px;">
     <br>
-<table>
-    <tr class="none">
-        <td style="vertical-align: -webkit-baseline-middle;">
-            <div class="widget">
-                <h3 class="widget-title">Список инструкций:</h3>
-                <ul class="widget-list">
-                    <li th:each="guide:${guides}">
-                        <table>
-                            <tr style="">
-                                <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a></td>
-                                <td><a style="color:red" th:href="@{/guide/edit(id=${guide.id})}" th:if="${mode==true}">Редактирование</a>
-                                </td>
-                            </tr>
-                        </table>
-                    </li>
-                    <li th:if="${mode==true}">
-                        <a th:href="@{/guide/new}">Добавить инструкцию</a>
-                    </li>
-                </ul>
-            </div>
-        </td>
-        <td th:if="${currentGuide}">
-            <h1 th:text="${currentGuide.title}"></h1>   <span>Created by <span
-                th:text="${currentGuide.username}"></span> at <span
-                th:text="${currentGuide.date}"></span></span>
-            <input th:field="${currentGuide.id}" type="hidden">
+    <table class="guide">
+        <tr class="none">
+            <td>
+                <div class="widget">
+        <tr class="widget-title">Список инструкций:</tr>
+        <tr class="widget-list" th:each="guide:${guides}">
+            <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.getTitle()}"></a></td>
+            <td><a style="color:red" th:href="@{/guide/edit(id=${guide.id})}" th:if="${mode==true}">Редактирование</a></td>
+        </tr>
+        <tr th:if="${mode==true}"><a th:href="@{/guide/new}">Добавить инструкцию</a></tr>
+</div>
+</td>
+<td th:if="${currentGuide}">
+    <h1 th:text="${currentGuide.title}"></h1>
+    <span>Created by
+            <span th:text="${currentGuide.username}"></span> at
+            <span th:text="${currentGuide.date}"></span>
+            </span>
+    <input th:field="${currentGuide.id}" type="hidden">
 
-            <span th:if="${currentGuide.lastEditDate}">Last edited by <span
-                    th:text="${currentGuide.lastEditUsername}"></span> at <span
-                    th:text="${currentGuide.lastEditDate}"></span></span>
-            <div th:utext="${currentGuide.text}"></div>
-        </td>
-        <div th:if="${currentGuide}">
-            <td style="vertical-align:top; margin-top:50px; width:100px" th:if="${mode==true}">
-                <a class="link"
-                   th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить
-                    инструкцию</a>
-            </td>
-        </div>
+    <span th:if="${currentGuide.lastEditDate}">Last edited by
+			<span th:text="${currentGuide.lastEditUsername}"></span> at
+			<span th:text="${currentGuide.lastEditDate}"></span>
+			</span>
+    <div th:utext="${currentGuide.text}"></div>
+</td>
+<div th:if="${currentGuide}">
+    <td th:if="${mode==true}">
+        <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить инструкцию</a>
+    </td>
+</div>
+</tr>
 </table>
 </div>
 </body>
