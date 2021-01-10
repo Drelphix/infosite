@@ -40,13 +40,13 @@ public class User {
     @Column
     String region;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Request.class, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Request.class, mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Request> requests;
 
     @Column
     private String userKey;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Chat.class)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Chat.class, cascade = CascadeType.REMOVE)
     @JoinColumn
     private List<Chat> chats;
 

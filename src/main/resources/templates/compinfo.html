@@ -3,144 +3,198 @@
 <body>
 <div th:replace="main::menu"></div>
 
-<div style="padding: 40px 10px 10px 10px;">
-    <br>
-    <center>
-    <table class="iksweb" th:if="${#httpServletRequest.getQueryString() == 'show=all'}">
-    <tr>
-        <th colspan="5">Тестовая область, возможны осадки в виде багов</th>
-    </tr>
-    <tr>
-        <th>Имя компьютера</th>
-        <th>Процессор</th>
-        <th>Материнская плата</th>
-        <th>Обьем памяти</th>
-        <th>Действия</th>
-    </tr>
-
-    <tr th:each="pc:${pcs}">
-        <td th:text="${pc.name}"></td>
-        <td th:text="${pc.getCpuInfo()}"></td>
-        <td th:text="${pc.motherboard}"></td>
-        <td th:text="${pc.getSummaryMemory()}"></td>
-        <td><a th:href="@{/pc(show=${pc.name})}">Подробная информация</a></td>
-    </tr>
-    </table>
-
-    <table class="compinfo" th:object="${pc}" th:if="${pc}">
+<div style="margin-top:100px;">
+    <a>Тестовая область, возможны осадки в виде багов</a>
+    <table>
         <tr>
-            <th>Имя компьютера:</th>
-            <td colspan="5" th:text="${pc.name}"></td>
-        </tr>
+            <td style="vertical-align: -webkit-baseline-middle;">
+                <table>
+                    <tr th:each="menu:${pcs}">
+                        <td><a th:href="@{/pc(show=${menu.name})}" th:text="${menu.name}"></a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table th:each="pc:${pcs}" th:if="${#httpServletRequest.getQueryString() == 'show=all'}">
+                    <tr>
+                        <td>Имя</td>
+                        <td>Процессор</td>
+                        <td>Материнская плата</td>
+                        <td>Обьем памяти</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${pc.name}"></td>
+                        <td th:text="${pc.getCpuInfo()}"></td>
+                        <td th:text="${pc.motherboard}"></td>
+                        <td th:text="${pc.getSummaryMemory()}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><a th:href="@{/pc(show=${pc.name})}">Подробная информация</a></td>
+                    </tr>
+                </table>
+                <table th:if="${pc}" th:object="${pc}">
+                    <tr>
+                        <td>
+                            Имя компьютера:
+                        </td>
+                        <td th:text="${pc.name}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Операционная система:
+                        </td>
 
-        <tr>
-            <th colspan="6">Операционная система:</th>
-        </tr>
+                    </tr>
+                    <tr>
+                        <td>
+                            Название
+                        </td>
+                        <td th:text="${pc.os.caption}">
 
-        <tr>
-            <th>OS</th>
-            <th>Версия</th>
-            <th colspan="2">Архитектура</th>
-            <th colspan="2">Время загрузки</th>
-        </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Версия
+                        </td>
+                        <td th:text="${pc.os.version}">
 
-        <tr>
-            <td th:text="${pc.os.caption}"></td>
-            <td th:text="${pc.os.version}"></td>
-            <td colspan="2" th:text="${pc.os.architecture}"></td>
-            <td colspan="2" th:text="${pc.os.lastBootTime}"></td>
-        </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Архитектура
+                        </td>
+                        <td th:text="${pc.os.architecture}">
 
-        <tr>
-            <th colspan="6">Материнская плата:</th>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Время загрузки
+                        </td>
+                        <td th:text="${pc.os.lastBootTime}">
 
-        </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Материнская плата:
+                        </td>
 
-        <tr>
-            <td>Наименование</td>
-            <td colspan="5" th:text="${pc.motherboard}"></td>
-        </tr>
+                    </tr>
+                    <tr>
+                        <td>
+                            Наименование
+                        </td>
+                        <td th:text="${pc.motherboard}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Процессоры:
+                        </td>
+                    </tr>
+                    <tr th:each="cpu,index:${pc.cpu}">
+                        <td th:text="'Процессор '+${index.index}">
+                        </td>
+                        <td th:text="${cpu.name}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Диски:
+                        </td>
+                    </tr>
+                    <div th:each="disk,index:${pc.disks}">
+                        <tr>
+                            <td colspan="2" th:text="'Диск №'+${index.index}"></td>
+                        </tr>
+                        <tr>
+                            <td>Модель</td>
+                            <td th:text="${disk.model}"></td>
+                        </tr>
+                        <tr>
+                            <td>Серийный номер</td>
+                            <td th:text="${disk.serialNumber}"></td>
+                        </tr>
+                        <tr>
+                            <td>Размер</td>
+                            <td th:text="${disk.size}+' Gb'"></td>
 
-        <tr>
-            <th colspan="6">Процессоры:</th>
-        </tr>
-
-        <tr th:each="cpu,index:${pc.cpu}">
-            <td th:text="'Процессор '+${index.index}"></td>
-            <td colspan="5" th:text="${cpu.name}"></td>
-        </tr>
-
-        <tr>
-            <th colspan="6">Диски:
+                        </tr>
+                        <tr>
+                            <td>Статус</td>
+                            <td th:text="${disk.status}"></td>
+                        </tr>
+                    </div>
+                    <div th:each="mem,index :${pc.memory}">
+                        <tr>
+                            <td colspan="2">
+                                Оперативная память
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" th:text="'Планка №'+${index.index}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Размер
+                            </td>
+                            <td th:text="${mem.capacity}+' Gb'"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Частота
+                            </td>
+                            <td th:text="${mem.speed}+' MHz'"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Серийный номер
+                            </td>
+                            <td th:text="${mem.serialNumber}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Слот
+                            </td>
+                            <td th:text="${mem.location}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Производитель
+                            </td>
+                            <td th:text="${mem.manufacturer}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Part Number
+                            </td>
+                            <td th:text="${mem.partNumber}"></td>
+                        </tr>
+                    </div>
+                    <div th:each="net,index:${pc.networks}">
+                        <tr>
+                            <td colspan="2">Информация о сетевых устройствах</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" th:text="'Сетевое устройство '+${index.index}"></td>
+                        </tr>
+                        <tr>
+                            <td>Название</td>
+                            <td th:text="${net.description}"></td>
+                        </tr>
+                        <tr>
+                            <td>ip адреса</td>
+                            <td><a th:each="ip:${net.getIpAddresses()}" th:text="${ip}"></a></td>
+                        </tr>
+                    </div>
+                </table>
             </td>
         </tr>
-
-        <tbody th:each="disk,index:${pc.disks}">
-        <tr>
-            <th colspan="6" th:text="'Диск №'+${index.index}"></th>
-        </tr>
-
-        <tr>
-            <th>Модель</th>
-            <th colspan="2">Серийный номер</th>
-            <th>Размер</th>
-            <th colspan="2">Статус</th>
-        </tr>
-
-        <tr>
-            <td th:text="${disk.model}"></td>
-            <td colspan="2" th:text="${disk.serialNumber}"></td>
-            <td th:text="${disk.size}+' Gb'"></td>
-            <td colspan="2" th:text="${disk.status}"></td>
-        </tr>
-        </tbody>
-
-        <tr>
-            <th colspan="6">Оперативная память:</th>
-        </tr>
-
-        <tbody th:each="mem,index :${pc.memory}">
-        <tr>
-            <th colspan="6" th:text="'Планка №'+${index.index}"></th>
-        </tr>
-
-        <tr>
-            <th>Размер</th>
-            <th>Частота</th>
-            <th>Серийный номер</th>
-            <th>Слот</th>
-            <th>Производитель</th>
-            <th>Part Number</th>
-        </tr>
-
-        <tr>
-            <td th:text="${mem.capacity}+' Gb'"></td>
-            <td th:text="${mem.speed}+' MHz'"></td>
-            <td th:text="${mem.serialNumber}"></td>
-            <td th:text="${mem.location}"></td>
-            <td th:text="${mem.manufacturer}"></td>
-            <td th:text="${mem.partNumber}"></td>
-        </tr>
-        </tbody>
-
-        <tr>
-            <th colspan="6">Информация о сетевых устройствах</th>
-        </tr>
-        <tbody th:each="net,index:${pc.networks}">
-        <tr>
-            <th colspan="6" th:text="'Сетевое устройство '+${index.index}"></td>
-        </tr>
-        <tr>
-            <td>Название</td>
-            <td colspan="5" th:text="${net.description}"></td>
-        </tr>
-        <tr>
-            <td>ip адреса</td>
-            <td colspan="5"><a th:each="ip:${net.getIpAddresses()}" th:text="${ip}"></a></td>
-        </tr>
-        </tbody>
     </table>
-    </center>
 </div>
 </body>
 </html>

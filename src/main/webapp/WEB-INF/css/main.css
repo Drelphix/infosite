@@ -162,7 +162,6 @@ align-items:center !important;
 header {
 background-color:#8ac858;
 position:fixed;
-overflow: hidden;
 left:0;
 top:0;
 width: 100%;

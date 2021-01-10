@@ -1,5 +1,6 @@
 package info.infosite.functions;
 
+import info.infosite.entities.auth.User;
 import info.infosite.entities.gentable.Col;
 import info.infosite.entities.gentable.Menu;
 import info.infosite.entities.gentable.SubMenu;
@@ -45,6 +46,13 @@ public class DeleteService {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
         session.delete(menu);
+        tx.commit();
+    }
+
+    public void DeleteUser(User user) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.remove(session.contains(user) ? user : session.merge(user));
         tx.commit();
     }
 }
