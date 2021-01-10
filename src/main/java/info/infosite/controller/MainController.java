@@ -5,9 +5,8 @@ import info.infosite.entities.computer.ComputerRepository;
 import info.infosite.entities.gentable.MenuRepository;
 import info.infosite.entities.gentable.Tab;
 import info.infosite.entities.gentable.TableRepository;
+import info.infosite.entities.guide.GuideMenuRepository;
 import info.infosite.entities.guide.GuideRepository;
-import info.infosite.entities.request.RequestRepository;
-import info.infosite.entities.request.Status;
 import info.infosite.entities.views.ExcelTableReportView;
 import info.infosite.entities.views.TableView;
 import info.infosite.entities.views.XmlMenuView;
@@ -18,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,8 @@ public class MainController {
     public GuideRepository guideRepository;
     @Autowired
     ComputerRepository computerRepository;
+    @Autowired
+    GuideMenuRepository guideMenuRepository;
     @Autowired
     MenuService menuService;
 
@@ -111,15 +115,24 @@ public class MainController {
     public String ShowGuides(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
         model = menuService.addMenu(model, httpSession);
-        model.addAttribute("guides", guideRepository.findAll());
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
+        return "guides";
+    }
+
+    @GetMapping(value = "/guideMenu")
+    public String ShowGuideByMenu(Model model, HttpSession httpSession, @RequestParam(name = "id") int id) {
+        menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
+        model.addAttribute("currentMenu", guideMenuRepository.getOne(id));
         return "guides";
     }
 
     @GetMapping(value = "/guide")
     public String ShowGuide(Model model, HttpSession httpSession, @RequestParam(name = "id") int id) {
         menuService.CheckMenu();
-        model.addAttribute("guides", guideRepository.findAll());
         model = menuService.addMenu(model, httpSession);
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
         model.addAttribute("currentGuide", guideRepository.getOne(id));
         return "guides";
     }

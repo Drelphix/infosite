@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.SQLDataException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,20 +134,30 @@ public class AddController {
 
     @PostMapping(value = "/guide/show")
     public String showTempGuide(Model model,@ModelAttribute Guide guide){
-        guide.setDate(LocalDate.now().toString());
-        guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentGuide",guide);
+        guide.setLastEditDate(LocalDate.now().toString());
+        guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentGuide", guide);
+        try {
+            if (guide.getId() == 0) throw new NullPointerException();
+            model.addAttribute("edit", true);
+        } catch (NullPointerException skip) {
+        }
         return "addguide";
     }
 
     @RequestMapping(value = "/guide/save", method = RequestMethod.POST)
     public String SaveNewGuide(Model model, @ModelAttribute Guide guide) {
-        guide.setDate(LocalDate.now().toString());
-        guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (guide.getTitle().equals("")) {
-            guide.setTitle("Вы забыли про название");
+        try {
+            if (guide.getDate().equals("") | guide.getUsername().equals("")) {
+                throw new NullPointerException();
+            }
+            guide.setLastEditDate(LocalDate.now().toString());
+            guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        } catch (NullPointerException e) {
+            guide.setDate(LocalDate.now().toString());
+            guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         }
-        guideRepository.save(guide);
+        guideRepository.saveAndFlush(guide);
         return "redirect:/guides";
     }
     @RequestMapping(value = "/role/new",method = RequestMethod.POST)
