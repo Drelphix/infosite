@@ -12,8 +12,8 @@
           th:unless="${edit}">
         <h1>Добавление инструкции</h1>
         <span>Введите заголовок инструкции</span>
-        <input th:field="*{title}" type="text">
-        <textarea class="code" th:field="*{text}">
+        <input th:field="*{title}" type="text" required>
+        <textarea class="code" th:field="*{text}" required>
             </textarea>
         <button th:formaction="@{/guide/save}" class="button_success">Сохранить</button>
         <button th:formaction="@{/guide/show}">Показать</button>
@@ -24,10 +24,10 @@
         <h1>Редактирование инструкции</h1>
         <span>Введите заголовок инструкции</span>
         <input th:field="*{id}" type="hidden">
-        <input th:field="*{title}" type="text">
+        <input th:field="*{title}" type="text" required>
         <input th:field="*{username}" type="hidden">
         <input th:field="*{date}" type="hidden">
-        <textarea class="code" th:field="*{text}"></textarea>
+        <textarea class="code" th:field="*{text}" required></textarea>
 
         <button th:formaction="@{/guide/edit}" class="button_success">Сохранить</button>
         <button th:formaction="@{/guide/show}">Показать</button>
