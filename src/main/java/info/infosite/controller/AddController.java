@@ -4,6 +4,8 @@ import info.infosite.entities.auth.Role;
 import info.infosite.entities.auth.RoleRepository;
 import info.infosite.entities.gentable.*;
 import info.infosite.entities.guide.Guide;
+import info.infosite.entities.guide.GuideMenu;
+import info.infosite.entities.guide.GuideMenuRepository;
 import info.infosite.entities.guide.GuideRepository;
 import info.infosite.entities.views.ListLineView;
 import info.infosite.entities.views.TableView;
@@ -33,6 +35,8 @@ public class AddController {
     private GuideRepository guideRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private GuideMenuRepository guideMenuRepository;
 
     @RequestMapping(value = "/submenu/new", method = RequestMethod.GET)
     public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
@@ -158,15 +162,36 @@ public class AddController {
             guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         }
         guideRepository.saveAndFlush(guide);
-        return "redirect:/guides";
+        return "redirect:/guide/show?id=" + guide.getId();
     }
-    @RequestMapping(value = "/role/new",method = RequestMethod.POST)
-    public String AddNewRole(Model model,@RequestParam String role){
+
+    @RequestMapping(value = "/role/new", method = RequestMethod.POST)
+    public String AddNewRole(Model model, @RequestParam String role) {
         if (roleRepository.findRoleByRole(role) == null) {
-            Role newRole = new Role();
-            newRole.setRole(role);
+            Role newRole = new Role(role);
             roleRepository.save(newRole);
         }
         return "redirect:/management";
+    }
+
+    @RequestMapping(value = "/guideMenu/new", method = RequestMethod.GET)
+    public String AddNewGuideMenu(Model model, HttpSession httpSession) {
+        model.addAttribute("newGuideMenu", new GuideMenu());
+        menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
+        return "guides";
+    }
+
+    @RequestMapping(value = "/guideMenu/save", method = RequestMethod.POST)
+    public String SaveNewGuideMenu(Model model, @ModelAttribute GuideMenu newGuideMenu) {
+        try {
+            GuideMenu guideMenu = new GuideMenu(newGuideMenu.getName());
+            guideMenuRepository.save(guideMenu);
+            return "redirect:/guides";
+        } catch (NullPointerException e) {
+            model.addAttribute("error", "Такое имя уже существует");
+        }
+        return "guides";
     }
 }

@@ -33,6 +33,23 @@
             </table>
         </td>
         <!--Полное отображение инструкции-->
+        <td th:if="${newGuideMenu}">
+            <form method="post" th:object="${newGuideMenu}">
+                <a th:text="${error}"></a>
+                <a>Название меню</a>
+                <input th:field="*{id}" type="hidden">
+                <input required th:field="*{name}" type="text">
+                <input th:field="*{guides}" type="hidden">
+                <button class="button_success" th:formaction="@{/guideMenu/save}" th:unless="${editGuideMenu}">
+                    Сохранить
+                </button>
+                <button class="button_success" th:formaction="@{/guideMenu/rename}" th:if="${editGuideMenu}">
+                    Переименовать
+                </button>
+                <a th:href="@{/guideMenu/delete(id=${newGuideMenu.id})}" th:if="${editGuideMenu}">Удалить пункт</a>
+            </form>
+        </td>
+
         <div th:if="${currentGuide}">
             <h1 th:text="${currentGuide.title}"></h1>
             <span>Created by
@@ -45,14 +62,16 @@
 			<span th:text="${currentGuide.lastEditUsername}"></span> at
 			<span th:text="${currentGuide.lastEditDate}"></span>
 			</span>
-    <div th:utext="${currentGuide.text}"></div>
+            <div th:utext="${currentGuide.text}"></div>
 
             <td th:if="${mode==true}">
         <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить инструкцию</a>
     </td>
 </div>
 </tr>
-</table>
+
+    </table>
+
 </div>
 </body>
 </html>

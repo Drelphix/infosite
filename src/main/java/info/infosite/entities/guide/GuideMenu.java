@@ -18,4 +18,11 @@ public class GuideMenu {
     private String name;
     @OneToMany(targetEntity = Guide.class, mappedBy = "menu")
     private List<Guide> guides;
+
+    public GuideMenu(String name) {
+        this.name = name;
+    }
+
+    public GuideMenu() {
+    }
 }

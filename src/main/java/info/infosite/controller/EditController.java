@@ -5,6 +5,8 @@ import info.infosite.entities.auth.User;
 import info.infosite.entities.auth.UserRepository;
 import info.infosite.entities.gentable.*;
 import info.infosite.entities.guide.Guide;
+import info.infosite.entities.guide.GuideMenu;
+import info.infosite.entities.guide.GuideMenuRepository;
 import info.infosite.entities.guide.GuideRepository;
 import info.infosite.entities.views.ListLineView;
 import info.infosite.entities.views.TableView;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ public class EditController {
     public GuideRepository guideRepository;
     @Autowired
     public RoleRepository roleRepository;
+    @Autowired
+    public GuideMenuRepository guideMenuRepository;
     @Autowired
     MenuService menuService;
     @Autowired
@@ -172,4 +177,28 @@ public class EditController {
         guideRepository.save(guide);
         return "redirect:/guides";
     }
+
+    @RequestMapping(value = "/guideMenu/edit", method = RequestMethod.GET)
+    public String EditGuideMenu(Model model, HttpSession httpSession, @RequestParam int id) {
+        model.addAttribute("newGuideMenu", guideMenuRepository.getOne(id));
+        menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
+        model.addAttribute("editGuideMenu", "");
+        return "guides";
+    }
+
+    @RequestMapping(value = "/guideMenu/rename", method = RequestMethod.POST)
+    public String SaveNewGuideMenu(Model model, @ModelAttribute GuideMenu newGuideMenu) {
+        try {
+            GuideMenu guideMenu = guideMenuRepository.getOne(newGuideMenu.getId());
+            guideMenu.setName(newGuideMenu.getName());
+            guideMenuRepository.save(guideMenu);
+            return "redirect:/guides";
+        } catch (NullPointerException e) {
+            model.addAttribute("error", "Произошла ошибка сохранения");
+        }
+        return "guides";
+    }
+
 }

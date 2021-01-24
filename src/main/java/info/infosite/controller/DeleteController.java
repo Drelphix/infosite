@@ -2,6 +2,7 @@ package info.infosite.controller;
 
 import info.infosite.entities.auth.UserRepository;
 import info.infosite.entities.gentable.*;
+import info.infosite.entities.guide.GuideMenuRepository;
 import info.infosite.entities.guide.GuideRepository;
 import info.infosite.entities.views.ListLineView;
 import info.infosite.entities.views.TableView;
@@ -34,6 +35,8 @@ public class DeleteController {
     DeleteService deleteService;
     @Autowired
     GuideRepository guideRepository;
+    @Autowired
+    GuideMenuRepository guideMenuRepository;
 
     @RequestMapping(value = "/column/delete", method = RequestMethod.GET)
     public String DeleteColumn(Model model, @RequestParam(name = "tab") int idTab, @RequestParam(name = "col") int idCol) {
@@ -92,6 +95,12 @@ public class DeleteController {
     @RequestMapping(value = "/guide/delete", method = RequestMethod.GET)
     public String DeleteGuide(Model model, @RequestParam int id) {
         guideRepository.deleteById(id);
+        return "redirect:/guides";
+    }
+
+    @RequestMapping(value = "/guideMenu/delete", method = RequestMethod.GET)
+    public String DeleteGuideMenu(Model model, @RequestParam int id) {
+        guideMenuRepository.delete(guideMenuRepository.getOne(id));
         return "redirect:/guides";
     }
 }
