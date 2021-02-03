@@ -188,3 +188,19 @@
   /* IE 10+ */
   color: #eeedef;
 }
+
+.selection {
+  background-color: #8ac858;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  box-shadow: inset 0 0 5px #1d1933;
+  appearance: button;
+  outline: none;
+  text-indent: 2.2em;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 15px 0 15px 55px;
+}

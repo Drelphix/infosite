@@ -9,8 +9,8 @@
     <link href="#" rel="stylesheet" th:href="@{/css/compinfo.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/fontawesome.min.css}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-    <meta charset="UTF-8">
-    <title>InfoSite</title>
+    <script th:src="@{/css/app.js}"></script>
+
 </head>
 <body>
 <div>
@@ -82,7 +82,8 @@
         <center>
             <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"
                    th:text="${table.name}"></a></h3>
-            <h3 th:if="${mode==false}" th:text="${table.name}"></h3>            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
+            <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
+            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
                 <tbody th:if="${not #lists.isEmpty(table.cols)}">
                 <tr class="line">
                     <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
@@ -99,8 +100,14 @@
                     </div>
                     <!--Отображение скрытого поля Не работает -->
                     <div th:case="true">
-                        <input disabled th:id="pass+${row.index}" th:value="${line.data}" type="password">
-                        <input onclick="getData(this.getAttribute('data1'))" th:data1="${line.data}" type="button">
+                        <input type="text" th:value="${line.data}" th:id="'myInput'+${row.index}" hidden>
+                        <div class="tooltip">
+                            <button class="copy" id="copy">
+                                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                                Copy text
+                            </button>
+                        </div>
+
                     </div>
                 </td>
 
