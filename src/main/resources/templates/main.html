@@ -9,8 +9,17 @@
     <link href="#" rel="stylesheet" th:href="@{/css/compinfo.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/fontawesome.min.css}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-    <script th:src="@{/css/app.js}"></script>
-
+    <script th:inline="javascript">
+            function copy(x){
+            navigator.clipboard.writeText(x)
+            .then(() => {
+                // Получилось!
+            })
+            .catch(err => {
+            console.log('Something went wrong', err);
+            });
+            }
+    </script>
 </head>
 <body>
 <div>
@@ -100,13 +109,8 @@
                     </div>
                     <!--Отображение скрытого поля Не работает -->
                     <div th:case="true">
-                        <input type="text" th:value="${line.data}" th:id="'myInput'+${row.index}" hidden>
-                        <div class="tooltip">
-                            <button class="copy" id="copy">
-                                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                                Copy text
-                            </button>
-                        </div>
+                        <input type="text"  th:id="'myInput'+${row.index}" hidden>
+                        <button th:id="${line.data}" style="width:100px; height:50px;" onclick="copy(this.id)" ></button>
 
                     </div>
                 </td>
