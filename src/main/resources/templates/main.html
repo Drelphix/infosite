@@ -13,7 +13,7 @@
             function copy(x){
             navigator.clipboard.writeText(x)
             .then(() => {
-                // Получилось!
+                alert('Данные успешно скопированы');
             })
             .catch(err => {
             console.log('Something went wrong', err);
