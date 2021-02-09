@@ -21,7 +21,7 @@
         <!--Список гайдов относящихся к меню в таблице-->
         <td th:if="${currentMenu}">
             <h1 th:text="${currentMenu.getName()}"></h1>
-            <table>
+            <table class="btnm">
                 <tr th:each="guide:${currentMenu.guides}">
                     <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.title}"></a></td>
                     <td th:text="${guide.shortDescription}"></td>

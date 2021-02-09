@@ -93,7 +93,7 @@
                             <h3 th:text="${table.name}"></h3>
                         </th>
                         <th th:if="${mode==true}" th:colspan="${#lists.size(table.cols)+2}">
-                            <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
+                            <h3><a class="link" style="color: " href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
                         </th>
                     </tr>
                 </tbody>

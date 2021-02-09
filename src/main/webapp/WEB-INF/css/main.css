@@ -46,8 +46,7 @@ nav a {
   padding:3px;
   font-weight:bold;
   font-family: "Poppins", sans-serif;
-   appearance:auto;
-   font-size:16px;
+  font-size:16px;
 }
 .topmenu > li > a:before {
   position: absolute;
@@ -96,7 +95,7 @@ nav a {
   font-size:large;
 }
 .submenu a:hover {
-background: #fff363;
+background: #8ac858;
 }
 
 .table-wrapper{
@@ -259,6 +258,18 @@ overflow-x:auto;
 }
 
 .btnh:hover{
-     background: #7ef27e;
+     background: #8ac858;
      color: #000000;
+}
+
+.confirm {
+     width: 100%;
+     background: #8ac858;
+     margin: 0 auto;
+     text-align: center;
+     border-radius: 4px;
+     padding: 1px 1rem;
+     color: #eeedef;
+     text-decoration: none;
+     text-transform: uppercase;
 }
