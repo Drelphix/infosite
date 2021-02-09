@@ -107,7 +107,6 @@
                                th:text="${line.data}"></a>
                             <span th:if="${mode==false}" th:text="${line.data}"></span>
                         </div>
-                    <!--Отображение скрытого поля Не работает -->
                         <div th:case="true">
                             <input type="text"  th:id="'myInput'+${row.index}" hidden>
                             <input type="button" th:id="${line.data}" class="btnh" onclick="copy(this.id)" value="Скопировать данные">
