@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,9 +38,30 @@ public class ReportController {
     }
     @PostMapping(value = "/report")
     public String LoadReportPage(Model model, @Valid String status,@Valid String user,@Valid String endDate, @Valid String startDate) {
-        List<Request> requests = requestRepository.getAllBetweenDates( LocalDateTime.parse(startDate+"T00:00:00.0"), LocalDateTime.parse(endDate+"T00:00:00.0"));
+        if(endDate.equals("")) endDate= LocalDate.now().toString();
+        if(status.equals("")) status="all";
+        List<Request> requests = new ArrayList<>();
+            if (status.equals("all") && user.equals("") && !startDate.equals(""))
+                requests = requestRepository.findAllBetweenDates(LocalDateTime.parse(startDate + "T00:00:00.0"), LocalDateTime.parse(endDate + "T00:00:00.0"));
+            else if (!status.equals("all") & user.equals("") & startDate.equals(""))
+                requests = requestRepository.findAllByStatus(Status.fromString(status));
+            else if (status.equals("all") & !user.equals("") & startDate.equals(""))
+                requests = requestRepository.findAllByUser(userRepository.findUserByUsername(user));
+            else if (status.equals("all") & user.equals("") & startDate.equals(""))
+                requests = requestRepository.findAll();
+            else if (!status.equals("all") & !user.equals("")  & startDate.equals(""))
+                requests = requestRepository.findAllByUserAndStatus(userRepository.findUserByUsername(user), Status.fromString(status));
+            else if(!status.equals("all") & user.equals(""))
+                requests = requestRepository.findAllByStatusBetweenDates
+                        (Status.fromString(status),LocalDateTime.parse(startDate + "T00:00:00.0"), LocalDateTime.parse(endDate + "T00:00:00.0") );
+            else requests = requestRepository.findAllByUserBetweenDates
+                        (userRepository.findUserByUsername(user), LocalDateTime.parse(startDate + "T00:00:00.0"), LocalDateTime.parse(endDate + "T00:00:00.0") );
+        menuService.CheckMenu();
         model.addAttribute("orders",requests);
-        return "requests";
+        model.addAttribute("users",userRepository.findAll());
+        model.addAttribute("startDate","");
+        model.addAttribute("endDate","");
+        return "report";
     }
 
 

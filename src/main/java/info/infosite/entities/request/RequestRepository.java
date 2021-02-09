@@ -12,6 +12,11 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findAllByStatus(Status status);
     List<Request> findAllByUser(User user);
     @Query(value = "from Request r where date BETWEEN :startDate AND :endDate")
-    public List<Request> getAllBetweenDates(@Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate);
+    List<Request> findAllBetweenDates(@Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate);
+    List<Request> findAllByUserAndStatus(User user, Status status);
+    @Query(value = "from Request r where user = :user AND date BETWEEN :startDate AND :endDate")
+    List<Request> findAllByUserBetweenDates(@Param("user") User user, @Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate);
+    @Query(value = "from Request r where status = :status AND date BETWEEN :startDate AND :endDate")
+    List<Request> findAllByStatusBetweenDates(@Param("status") Status status, @Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate);
 
 }

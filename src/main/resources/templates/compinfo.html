@@ -6,10 +6,8 @@
 <div style="padding: 40px 10px 10px 10px;">
     <br>
     <center>
-    <table class="iksweb" th:if="${#httpServletRequest.getQueryString() == 'show=all'}">
-    <tr>
-        <th colspan="5">Тестовая область, возможны осадки в виде багов</th>
-    </tr>
+    <table class="iksweb" th:unless="${pc}">
+
     <tr>
         <th>Имя компьютера</th>
         <th>Процессор</th>

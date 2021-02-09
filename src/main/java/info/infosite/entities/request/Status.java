@@ -20,4 +20,14 @@ public enum Status {
         return displayValue;
     }
     public String getReportValue() {return reportValue;}
+
+
+    public static Status fromString(String text) {
+        for (Status status : Status.values()) {
+            if (status.reportValue.equalsIgnoreCase(text)) {
+                return status;
+            }
+        }
+        return null;
+    }
  }
