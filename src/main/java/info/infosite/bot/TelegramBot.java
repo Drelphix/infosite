@@ -17,6 +17,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.transaction.TransactionalException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -201,7 +205,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (update.getMessage().getText().startsWith(IF_COMMAND)) return null;
         else {
             Request request = new Request(update.getMessage().getText(), getUserByChat(update.getMessage().getChatId()));
-            request.setDate(new Date().toString());
+            request.setDate(LocalDateTime.now());
             request.setStatus(Status.active);
             requestRepository.save(request);
             return request;

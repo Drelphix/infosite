@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "requests")
@@ -25,7 +27,7 @@ public class Request {
     private String requestMessage;
 
     @Column
-    private String date;
+    private LocalDateTime date;
 
     public Request() {
     }
