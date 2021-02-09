@@ -2,7 +2,7 @@
 <head th:insert="main::head">
 </head>
 <body>
-<a th:text="${test}"></a>
+<div th:replace="main::menu"></div>
 <div>
     <form th:action="@{/report}" method="post">
     <span>Выберите статус: </span>

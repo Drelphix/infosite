@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,18 +30,19 @@ public class ReportController {
     RequestRepository requestRepository;
 
     @GetMapping(value = "/report")
-    public String ShowReportPage(Model model) {
+    public String ShowReportPage(Model model, HttpSession httpSession) {
         menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("users",userRepository.findAll());
         model.addAttribute("startDate","");
         model.addAttribute("endDate","");
         return "report";
     }
     @PostMapping(value = "/report")
-    public String LoadReportPage(Model model, @Valid String status,@Valid String user,@Valid String endDate, @Valid String startDate) {
+    public String LoadReportPage(Model model, @Valid String status,@Valid String user,@Valid String endDate, @Valid String startDate,HttpSession httpSession) {
         if(endDate.equals("")) endDate= LocalDate.now().toString();
         if(status.equals("")) status="all";
-        List<Request> requests = new ArrayList<>();
+        List<Request> requests;
             if (status.equals("all") && user.equals("") && !startDate.equals(""))
                 requests = requestRepository.findAllBetweenDates(LocalDateTime.parse(startDate + "T00:00:00.0"), LocalDateTime.parse(endDate + "T00:00:00.0"));
             else if (!status.equals("all") & user.equals("") & startDate.equals(""))
@@ -57,6 +59,7 @@ public class ReportController {
             else requests = requestRepository.findAllByUserBetweenDates
                         (userRepository.findUserByUsername(user), LocalDateTime.parse(startDate + "T00:00:00.0"), LocalDateTime.parse(endDate + "T00:00:00.0") );
         menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
         model.addAttribute("orders",requests);
         model.addAttribute("users",userRepository.findAll());
         model.addAttribute("startDate","");
