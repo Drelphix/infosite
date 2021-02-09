@@ -5,7 +5,8 @@ font-family: "Poppins", sans-serif;
 a {
 text-decoration: none;
 vertical-align:middle;
-color:blue;
+color: #eeedef;
+cursor: pointer;
 }
 ul.topmenu > li >a {
 color:white}
@@ -188,7 +189,6 @@ border: none;
 max-width: 100%;
 white-space: nowrap;
 background-color: white;
-text-transform: uppercase;
 }
 
 table.iksweb th {

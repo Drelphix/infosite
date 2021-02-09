@@ -16,7 +16,7 @@
         <th>Действия</th>
     </tr>
 
-    <tr th:each="pc:${pcs}">
+    <tr class="btnm" th:each="pc:${pcs}">
         <td th:text="${pc.name}"></td>
         <td th:text="${pc.getCpuInfo()}"></td>
         <td th:text="${pc.motherboard}"></td>
@@ -73,7 +73,7 @@
             </td>
         </tr>
 
-        <tbody th:each="disk,index:${pc.disks}">
+        <tbody  th:each="disk,index:${pc.disks}">
         <tr>
             <th colspan="6" th:text="'Диск №'+${index.index}"></th>
         </tr>
