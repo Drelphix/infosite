@@ -103,7 +103,7 @@
                         <th colspan="2" th:if="${mode==true}"><span>Действия</span></th>
                     </tr>
                     <tr th:each="lineList, row: ${table.lines}">
-                        <td th:each="line:${lineList}" th:switch="${line.hidden}" th:text="${line.data}">
+                        <td th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
                         <div th:case="false">
                             <span th:if="${mode==false}" th:text="${line.data}"></span>
