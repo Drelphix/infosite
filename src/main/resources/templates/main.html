@@ -11,14 +11,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     <script th:inline="javascript">
             function copy(x){
-            navigator.clipboard.writeText(x)
-            .then(() => {
-                alert('Данные успешно скопированы');
-            })
-            .catch(err => {
-            console.log('Something went wrong', err);
-            });
+            navigator.clipboard.writeText(x);
+			el.value  =  'О, на меня нельзя больше нажать!';
             }
+
+
     </script>
 </head>
 <body>
@@ -86,47 +83,53 @@
     </header>
 </div>
 
-<div style="padding-left:10px" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
-    <div class="tables" style="margin-top:4%;" th:each="table,tabRow: ${tables}" th:if="${tables}">
+<div style="padding: 50px 10px 10px 10px;" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
+    <div th:each="table,tabRow: ${tables}" th:if="${tables}">
         <center>
-            <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}"
-                   th:text="${table.name}"></a></h3>
             <h3 th:if="${mode==false}" th:text="${table.name}"></h3>
-            <table align="center" border="1" class="info" th:if="${not #lists.isEmpty(table.cols)}">
+            <table align="center" border="1" class="iksweb" th:if="${not #lists.isEmpty(table.cols)}">
                 <tbody th:if="${not #lists.isEmpty(table.cols)}">
-                <tr class="line">
-                    <th class="cell" th:each="col: ${table.cols}"><span th:text="${col.name}"></span></th>
-                    <th th:if="${mode==true}"><span>Действие</span></th>
-                </tr>
-            <tr class="line" th:each="lineList, row: ${table.lines}">
-                <td class="cell" th:each="line:${lineList}" th:switch="${line.hidden}">
+                    <tr th:if="${not #lists.isEmpty(table.cols)}">
+                        <td th:if="${mode==true}" th:colspan="${#lists.size(table.cols)+1}">
+                            <h3><a class="link" href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th th:each="col: ${table.cols}" th:text="${col.name}"></th>
+                        <th colspan="2" th:if="${mode==true}"><span>Действия</span></th>
+                    </tr>
+                    <tr th:each="lineList, row: ${table.lines}">
+                        <td th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
-                    <div th:case="false">
-                        <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
-                           th:if="${mode==true}"
-                           th:text="${line.data}"></a>
-                        <span th:if="${mode==false}" th:text="${line.data}"></span>
-                    </div>
+                        <div th:case="false">
+                            <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                               th:if="${mode==true}"
+                               th:text="${line.data}"></a>
+                            <span th:if="${mode==false}" th:text="${line.data}"></span>
+                        </div>
                     <!--Отображение скрытого поля Не работает -->
-                    <div th:case="true">
-                        <input type="text"  th:id="'myInput'+${row.index}" hidden>
-                        <button th:id="${line.data}" style="width:100px; height:50px;" onclick="copy(this.id)" ></button>
+                        <div th:case="true">
+                            <input type="text"  th:id="'myInput'+${row.index}" hidden>
+                            <input type="button" th:id="${line.data}" class="btnh" onclick="copy(this.id)" value="Скопировать данные">
+                        </div>
+                        </td>
+                        <td class="delLine" th:if="${mode==true}">
 
-                    </div>
-                </td>
-
-                <td class="delLine" th:if="${mode==true}">
-                    <a class="link" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить строку</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </center>
-    <center th:if="${not #lists.isEmpty(table.cols)}">
-        <a align="center" class="link" href="#" th:href="@{/line/new(tab=${table.id})}" th:if="${mode==true}">Добавить
-            строку</a>
-    </center>
+                            <a class="link" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить строку</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${not #lists.isEmpty(table.cols)}">
+                        <td th:if="${mode==true}" th:colspan="${#lists.size(table.cols)+1}">
+                            <a align="center" class="link" href="#" th:href="@{/line/new(tab=${table.id})}" >Добавить строку</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        <br>
+    </div>
 </div>
+
     <div align="center" style="padding-top:60px" th:if="${submenu}">
         <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
     </div>
