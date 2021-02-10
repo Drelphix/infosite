@@ -1,189 +1,192 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
-*{
-  font-family: 'Open Sans', sans-serif;
+* {
+	font-family: 'Open Sans', sans-serif;
 }
 
-
-.loginform, .registrationform, .edituserform {
-    background: #e1ddf3;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    max-width: 500px;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    padding: 6px 10px 24px 10px;
-    box-shadow: 0px 0px 48px #1a1342;
-    border: 2px solid #a79f9f;
+.loginform,
+.registrationform,
+.edituserform {
+	background: #e1ddf3;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 500px;
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+	padding: 6px 10px 24px 10px;
+	box-shadow: 0px 0px 48px #1a1342;
+	border: 2px solid #a79f9f;
 }
 
-.loginform .title, .registrationform .title, .edituserform .title {
-    font-size: 29px;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
-    color: #47424a;
-    margin-bottom: 10px;
+.loginform .title,
+.registrationform .title,
+.edituserform .title {
+	font-size: 29px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	color: #47424a;
+	margin-bottom: 10px;
 }
 
-.input-form{
-  margin-bottom: 10px;
-  position: relative;
+.input-form {
+	margin-bottom: 10px;
+	position: relative;
 }
 
 .input-form .input {
-    width: 100%;
-    padding: 15px 0 15px 55px;
-    font-size: 18px;
-    border: transparent;
-    color: #f3efef;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background: #8ac858;
-    box-shadow: inset 0 0 5px #1d1933;
-    outline: none;
+	width: 100%;
+	padding: 15px 0 15px 55px;
+	font-size: 18px;
+	border: transparent;
+	color: #f3efef;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	background: #8ac858;
+	box-shadow: inset 0 0 5px #1d1933;
+	outline: none;
 }
 
-.input-form:before{
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 45px;
-  width: 2px;
-  height: 79%;
-  background: #000000;
+.input-form:before {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: 45px;
+	width: 2px;
+	height: 79%;
+	background: #000000;
 }
 
 .btnl {
-     width: 100%;
-     background: #8ac858;
-     margin: 0 auto;
-     text-align: center;
-     border-radius: 4px;
-     box-shadow: 0px 2px 2px #000000;
-     padding: 6px 12rem;
-     color: #eeedef;
-     text-decoration: none;
-     text-transform: uppercase;
-     font-size: 25px;
+	width: 100%;
+	background: #8ac858;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 2px 2px #000000;
+	padding: 6px 12rem;
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 25px;
 }
 
 .btnr {
-    width: 100%;
-     background: #8ac858;
-     margin: 0 auto;
-     text-align: center;
-     border-radius: 4px;
-     box-shadow: 0px 2px 2px #000000;
-     padding: 6px 9.27rem;
-     color: #eeedef;
-     text-decoration: none;
-     text-transform: uppercase;
-     font-size: 25px;
+	width: 100%;
+	background: #8ac858;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 2px 2px #000000;
+	padding: 6px 9.27rem;
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 25px;
 }
 
 .btnz {
-    width: 100%;
-     background: #8ac858;
-     margin: 0 auto;
-     text-align: center;
-     border-radius: 4px;
-     box-shadow: 0px 2px 2px #000000;
-     padding: 6px 7rem;
-     color: #eeedef;
-     text-decoration: none;
-     text-transform: uppercase;
-     font-size: 25px;
+	width: 100%;
+	background: #8ac858;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 2px 2px #000000;
+	padding: 6px 7rem;
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 25px;
 }
 
 .btns {
-    width: 100%;
-     background: #8ac858;
-     margin: 0 auto;
-     text-align: center;
-     border-radius: 4px;
-     box-shadow: 0px 2px 2px #000000;
-     padding: 6px 10.2rem;
-     color: #eeedef;
-     text-decoration: none;
-     text-transform: uppercase;
-     font-size: 25px;
+	width: 100%;
+	background: #8ac858;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 2px 2px #000000;
+	padding: 6px 10.2rem;
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 25px;
 }
 
 .btnb {
-    width: 100%;
-     background: #8ac858;
-     margin: 0 auto;
-     text-align: center;
-     border-radius: 4px;
-     box-shadow: 0px 2px 2px #000000;
-     padding: 6px 7.7rem;
-     color: #eeedef;
-     text-decoration: none;
-     text-transform: uppercase;
-     font-size: 25px;
+	width: 100%;
+	background: #8ac858;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 2px 2px #000000;
+	padding: 6px 7.7rem;
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 25px;
 }
 
 .btno {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 4px;
-    padding: 11px;
-    cursor: pointer;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 4px;
+	padding: 11px;
+	cursor: pointer;
 }
 
-.btno a{
-  color: #eeedef;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
+.btno a {
+	color: #eeedef;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
 }
 
-.btnm a{
-  color: #000000;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
+.btnm a {
+	color: #000000;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
 }
 
-.input-form .fas{
-  position: absolute;
-  top: 17px;
-  left: 14px;
-  font-size: 19px;
-  color: #fff;
+.input-form .fas {
+	position: absolute;
+	top: 17px;
+	left: 14px;
+	font-size: 19px;
+	color: #fff;
 }
-
 
 ::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: #eeedef;
+	/* Chrome/Opera/Safari */
+	color: #eeedef;
 }
+
 ::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #eeedef;
+	/* Firefox 19+ */
+	color: #eeedef;
 }
+
 :-ms-input-placeholder {
-  /* IE 10+ */
-  color: #eeedef;
+	/* IE 10+ */
+	color: #eeedef;
 }
 
 .selection {
-  background-color: #8ac858;
-  color: white;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  font-size: 18px;
-  box-shadow: inset 0 0 5px #1d1933;
-  appearance: button;
-  outline: none;
-  text-indent: 2.2em;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  padding: 15px 0 15px 10px;
+	background-color: #8ac858;
+	color: white;
+	padding: 12px;
+	width: 100%;
+	border: none;
+	font-size: 18px;
+	box-shadow: inset 0 0 5px #1d1933;
+	appearance: button;
+	outline: none;
+	text-indent: 2.2em;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	padding: 15px 0 15px 10px;
 }

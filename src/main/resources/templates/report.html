@@ -5,42 +5,43 @@
 <div th:replace="main::menu"></div>
 <div style="padding: 40px 10px 10px 10px;">
     <br>
-<div>
-    <form id="report" th:action="@{/report}" method="post">
-    <table class="iksweb" style="width:initial">
-        <tr>
-            <th>Выберите статус</th>
-            <th>Пользователь</th>
-            <th>Начальная дата</th>
-            <th>Конечная дата</th>
-            <th>Действие</th>
-        </tr>
-        <tr>
-            <td>
-                <select id="status" name="status">
-                <option value="">Выберите статус</option>
-                <option value="all">Все заявки</option>
-                <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
-                        th:text="${status.reportValue}"
-                        th:value="${status.reportValue}"></option>
-                </select>
-                </select>
-            </td>
-            <td>
-                <select id="user" name="user">
-                    <option value="">Выберите пользователя</option>
-                    <option th:each="user: ${users}"
-                            th:text="${user.username}"
-                            th:value="${user.username}"></option>
-                </select>
-            </td>
-            <td><input type="date" id="startDate" name="startDate"></td>
-            <td><input type="date" id="endDate" name="endDate"></td>
-            <td><a href="#" onclick="document.getElementById('report').submit()" class="confirm">Сформировать</a></td>
-        </tr>
-    </table>
-    </form>
-</div>
+    <div>
+        <form id="report" th:action="@{/report}" method="post">
+            <table class="iksweb" style="width:initial">
+                <tr>
+                    <th>Выберите статус</th>
+                    <th>Пользователь</th>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Действие</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="status" name="status">
+                            <option value="">Выберите статус</option>
+                            <option value="all">Все заявки</option>
+                            <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
+                                    th:text="${status.reportValue}"
+                                    th:value="${status.reportValue}"></option>
+                        </select>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="user" name="user">
+                            <option value="">Выберите пользователя</option>
+                            <option th:each="user: ${users}"
+                                    th:text="${user.username}"
+                                    th:value="${user.username}"></option>
+                        </select>
+                    </td>
+                    <td><input type="date" id="startDate" name="startDate"></td>
+                    <td><input type="date" id="endDate" name="endDate"></td>
+                    <td><a href="#" onclick="document.getElementById('report').submit()"
+                           class="confirm">Сформировать</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 <div th:insert="requests::requests"></div>
 </body>

@@ -15,17 +15,22 @@
             }
 
 
+
+
+
+
     </script>
 </head>
 <body>
 <div>
-<div th:fragment="menu">
-    <header>
+    <div th:fragment="menu">
+        <header>
             <div class="d-flex" style="height: 45px;">
                 <div class="logo" style="height: 40px;">
                     <a href="#" th:href="@{/}"><img alt="" src="/images/logo.svg" style="height:35px"
                                                     title=""/></a>
-                    <a class="link" href="#" th:href="@{/logout}"><span style="color:white" th:text="'Welcome, '+${#authentication.name}"></span></a>
+                    <a class="link" href="#" th:href="@{/logout}"><span style="color:white"
+                                                                        th:text="'Welcome, '+${#authentication.name}"></span></a>
                 </div>
                 <nav th:if="${menus}">
                     <ul class="topmenu" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
@@ -68,52 +73,61 @@
                                                                     title=""/></a>
                         </li>
                         <li th:if="${mode==false}">
-                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим редактирования" src="#" th:src="@{/images/gear.png}" title=""/></a>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим редактирования"
+                                                                               src="#" th:src="@{/images/gear.png}"
+                                                                               title=""/></a>
                         </li>
                         <li th:if="${mode==true}">
-                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим просмотра" src="#" th:src="@{/images/show.png}" title=""/></a>
+                            <a href="#" th:href="@{/mode(mode=${!mode})}"><img alt="Перейти в режим просмотра" src="#"
+                                                                               th:src="@{/images/show.png}"
+                                                                               title=""/></a>
                         </li>
                         <li>
-                            <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}" title=""/></a>
+                            <a href="#" th:href="@{/export}"><img alt="" src="#" th:src="@{/images/excel.png}"
+                                                                  title=""/></a>
                         </li>
                     </ul>
                 </nav>
             </div>
-    </header>
-</div>
+        </header>
+    </div>
 
-<div style="padding: 55px 10px 10px 10px;" th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
-    <div th:each="table,tabRow: ${tables}" th:if="${tables}">
-        <center>
-            <table align="center" border="1" class="iksweb">
-                <tbody>
+    <div style="padding: 55px 10px 10px 10px;"
+         th:if="${#strings.contains(#authentication.principal.authorities,'admin')}">
+        <div th:each="table,tabRow: ${tables}" th:if="${tables}">
+            <center>
+                <table align="center" border="1" class="iksweb">
+                    <tbody>
                     <tr>
                         <th th:if="${mode==false}" th:colspan="${#lists.size(table.cols)+1}">
                             <h3 th:text="${table.name}"></h3>
                         </th>
                         <th th:if="${mode==true}" th:colspan="${#lists.size(table.cols)+2}">
-                            <h3><a class="link" style="color: " href="#" th:href="@{/table/edit(tab=${table.id})}" th:if="${mode==true}" th:text="${table.name}"></a></h3>
+                            <h3><a class="link" style="color: " href="#" th:href="@{/table/edit(tab=${table.id})}"
+                                   th:if="${mode==true}" th:text="${table.name}"></a></h3>
                         </th>
                     </tr>
-                </tbody>
-                <tbody class="btnm" th:if="${not #lists.isEmpty(table.cols)}">
+                    </tbody>
+                    <tbody class="btnm" th:if="${not #lists.isEmpty(table.cols)}">
                     <tr th:if="${not #lists.isEmpty(table.cols)}">
                         <th th:each="col: ${table.cols}" th:text="${col.name}"></th>
                         <th colspan="2" th:if="${mode==true}"><span>Действия</span></th>
                     </tr>
                     <tr th:each="lineList, row: ${table.lines}">
                         <td th:each="line:${lineList}" th:switch="${line.hidden}">
-                    <!--Отображение обычного поля -->
-                        <div th:case="false">
-                            <span th:text="${line.data}"></span>
-                        </div>
-                        <div th:case="true">
-                            <input type="text"  th:id="'myInput'+${row.index}" hidden>
-                            <input type="button" th:id="${line.data}" class="btnh" onclick="copy(this.id)" value="Скопировать данные">
-                        </div>
+                            <!--Отображение обычного поля -->
+                            <div th:case="false">
+                                <span th:text="${line.data}"></span>
+                            </div>
+                            <div th:case="true">
+                                <input type="text" th:id="'myInput'+${row.index}" hidden>
+                                <input type="button" th:id="${line.data}" class="btnh" onclick="copy(this.id)"
+                                       value="Скопировать данные">
+                            </div>
                         </td>
                         <td th:if="${mode==true}">
-                            <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}" th:if="${mode==true}">Изменить</a>
+                            <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                               th:if="${mode==true}">Изменить</a>
                         </td>
                         <td th:if="${mode==true}">
                             <a class="link" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить</a>
@@ -121,15 +135,16 @@
                     </tr>
                     <tr th:if="${not #lists.isEmpty(table.cols)}">
                         <td th:if="${mode==true}" th:colspan="${#lists.size(table.cols)+2}">
-                            <a align="center" class="link" href="#" th:href="@{/line/new(tab=${table.id})}" >Добавить строку</a>
+                            <a align="center" class="link" href="#" th:href="@{/line/new(tab=${table.id})}">Добавить
+                                строку</a>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </center>
-        <br>
+                    </tbody>
+                </table>
+            </center>
+            <br>
+        </div>
     </div>
-</div>
 
     <div class="btnm" align="center" style="padding-top:10px" th:if="${submenu}">
         <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>

@@ -9,19 +9,23 @@
             Регистрация
         </div>
         <div class="input-form username">
-            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин" required>
+            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин"
+                   required>
             <i class="fas fa-user"></i>
         </div>
         <div class="input-form password">
-            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password" placeholder="Пароль" required>
+            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password"
+                   placeholder="Пароль" required>
             <i class="fas fa-key"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация" required>
+            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация"
+                   required>
             <i class="fas fa-address-card"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес" required>
+            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес"
+                   required>
             <i class="fas fa-map-marked"></i>
         </div>
         <div class="input-form text">
@@ -53,19 +57,23 @@
         </div>
         <input th:field="*{id}" type="hidden">
         <div class="input-form username">
-            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин" required>
+            <input type="text" th:field="*{username}" maxlength="12" class="input" name="username" placeholder="Логин"
+                   required>
             <i class="fas fa-user"></i>
         </div>
         <div class="input-form password">
-            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password" placeholder="Пароль" required>
+            <input type="password" th:field="*{password}" maxlength="36" class="input" name="password"
+                   placeholder="Пароль" required>
             <i class="fas fa-key"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация" required>
+            <input type="text" th:field="*{info}" maxlength="16" class="input" name="text" placeholder="Информация"
+                   required>
             <i class="fas fa-address-card"></i>
         </div>
         <div class="input-form text">
-            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес" required>
+            <input type="text" th:field="*{region}" maxlength="20" class="input" name="text" placeholder="Адрес"
+                   required>
             <i class="fas fa-map-marked"></i>
         </div>
         <div class="input-form text">
@@ -83,8 +91,8 @@
             <i class="fas fa-diagnoses"></i>
         </div>
 
-            <span>Активен:</span>
-            <input class="username" th:field="*{active}" type="checkbox">
+        <span>Активен:</span>
+        <input class="username" th:field="*{active}" type="checkbox">
 
         <div>
             <center><span th:if="${param.error}">Данный логин уже занят</span></center>

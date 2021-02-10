@@ -3,170 +3,172 @@
 <body>
 <div id="header" th:replace="main::menu"></div>
 
-<div class="btnm" style="padding: 50px 10px 10px 10px;">
-<center>
-    <form action="#" method="post" th:action="@{/menu/save}" th:if="${newmenu}" th:object="${newmenu}">
+<div class="btnm" style="padding: 40px 10px 10px 10px;">
+    <br>
+    <center>
         <table class="iksweb" style="width:initial">
-            <tr>
-                <td>
-                    <span>Название меню:</span>
-                </td>
-                <td class="cell"><input class="edit" required th:field="*{name}" type="text"></td>
-            </tr>
+            <form action="#" method="post" th:action="@{/menu/save}" th:if="${newmenu}" th:object="${newmenu}">
+                <tr>
+                    <th colspan="2">Добавить пункт меню</th>
+                </tr>
+                <tr>
+                    <td>Название меню:</td>
+                    <td><input maxlength="21" class="edit" required th:field="*{name}" type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input class="confirm" type="submit" value="Сохранить"></td>
+                </tr>
+            </form>
         </table>
-        <input class="button_success" type="submit" value="Сохранить">
-    </form>
-    <!--Редактирование строки-->
-    <form action="#" method="post" th:action="@{/line/edit}" th:if="${lines}" th:object="${lines}">
-        <table class="edit">
-            <tr>
-                <th class="cell" colspan="2"><span th:text="${tableName}"></span></th>
-            </tr>
-            <input th:field="*{idSubMenu}" type="hidden">
-            <input th:field="*{idTable}" type="hidden">
-            <tr th:each="line,itemStat: *{lines}">
-                <td class="cell">
-                    <span th:text="${cols.get(itemStat.index).name}"></span>
-                </td>
-                <td class="cell">
-                    <input th:field="*{lines[__${itemStat.index}__].idLine}" type="hidden">
-                    <input class="edit" required th:field="*{lines[__${itemStat.index}__].data}" type="text">
-                    <input th:field="*{lines[__${itemStat.index}__].col}" type="hidden">
-                </td>
-            </tr>
-        </table>
-        <input class="button_success" type="submit" value="Сохранить">
-    </form>
-    <!--Редактирование таблицы-->
-    <div th:if="${table}" th:object="${table}">
-        <form action="#" method="post" th:action="@{/table/edit}">
-            <table class="edit">
-                <tr>
-                    <th colspan="2">
-                        <span>Название таблицы</span>
-                    </th>
-                </tr>
-                <tr>
-                    <td class="cell">
-                        <input th:field="*{subMenu}" type="hidden">
-                        <input th:field="*{id}" type="hidden">
-                        <input class="edit" required th:field="*{name}" type="text"></td>
-                    <td class="delLine "><a class="link" href="#" th:href="@{/table/delete(id=*{id})}">Удалить
-                        таблицу</a></td>
 
-                </tr>
-            </table>
-            <br>
-            <table class="edit">
-                <th class="cell" colspan="3">
-                    Список стоблцов:
-                </th>
-                <tr>
-                    <td class="cell">Название</td>
-                    <td class="cell">Скрыть столбец</td>
-                    <td class="cell">Действие</td>
-                </tr>
-                <tr th:each="col,itemStat: *{cols}">
-                    <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="hidden">
-                    <td class="cell"><input class="edit" required th:field="*{cols[__${itemStat.index}__].name}"
-                                            type="text">
-                    </td>
-                    <td class="cell"><input th:field="*{cols[__${itemStat.index}__].hidden}" type="checkbox">
-                    </td>
-                    <input th:field="*{cols[__${itemStat.index}__].table}" type="hidden">
-                    <input th:field="*{cols[__${itemStat.index}__].lines}" type="hidden">
-                    <td class="delLine"><a class="link" href="#"
-                                           th:href="@{/column/delete(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="delLine" colspan="3"><a class="link" href="#" th:href="@{/column/new(tab=${table.id})}">Добавить
-                        столбец</a></td>
-                </tr>
-            </table>
-            <br>
-            <input class="button_success" type="submit" value="Сохранить">
-        </form>
-    </div>
-    <!--Редактирование меню-->
-    <div align="center" th:if="${menu}" th:object="${menu}">
-        <form action="#" method="post" th:action="@{/menu/edit}">
-            <input th:field="*{idMenu}" type="hidden">
-            <table class="edit">
-                <tr>
-                    <td class="cell" colspan="2">
-                        <span>Меню</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="cell">
-                        <input class="edit" th:field="*{name}" type="text">
-                    </td>
-                    <td class="delLine ">
-                        <a class="link" href="#" th:href="@{/menu/delete(id=*{idMenu})}">Удалить меню</a>
-                    </td>
-                </tr>
-            </table>
-            <br>
+        <!--Редактирование строки-->
 
-            <table class="edit">
+        <table class="iksweb" style="width:initial">
+            <form action="#" method="post" th:action="@{/line/edit}" th:if="${lines}" th:object="${lines}">
                 <tr>
-                    <td class="cell" colspan="2">
-                        <span>Список подменю:</span>
-                    </td>
+                    <th colspan="2" th:text="${tableName}"></th>
                 </tr>
-                <tr th:each="subMenu, itemStat:*{subMenuSet}">
-                    <input th:field="*{subMenuSet[__${itemStat.index}__].idSubMenu}" type="hidden">
-                    <td class="cell">
-                        <input class="edit" required th:field="*{subMenuSet[__${itemStat.index}__].name}"
+                <tr th:each="line,itemStat: *{lines}">
+                    <input th:field="*{idSubMenu}" type="hidden">
+                    <input th:field="*{idTable}" type="hidden">
+                    <td th:text="${cols.get(itemStat.index).name}"></td>
+                    <td>
+                        <input th:field="*{lines[__${itemStat.index}__].idLine}" type="hidden">
+                        <input maxlength="23" class="edit" required th:field="*{lines[__${itemStat.index}__].data}"
                                type="text">
-                    </td>
-                    <input th:field="*{subMenuSet[__${itemStat.index}__].menu}" type="hidden">
-                    <td class="cell">
-                        <a class="link" href="#"
-                           th:href="@{/delSub(id=*{subMenuSet[__${itemStat.index}__].idSubMenu})}">Удалить
-                            подменю</a>
+                        <input th:field="*{lines[__${itemStat.index}__].col}" type="hidden">
                     </td>
                 </tr>
                 <tr>
-                    <td class="cell" colspan="2">
-                        <a class="link" href="#" th:href="@{/submenu/new(id=${menu.idMenu})}">Добавить подменю</a>
-                    </td>
+                    <td colspan="2"><input class="confirm" type="submit" value="Сохранить"></td>
                 </tr>
-            </table>
-            <input class="button_success" type="submit" value="Сохранить">
-        </form>
-    </div>
-    <!--Добавление таблицы-->
-    <div align="center" th:if="${submenu}" th:object="${submenu}">
-        <form action="#" method="post" th:action="@{/table/new}">
-            <input th:field="*{menu}" type="hidden">
-            <input th:field="*{idSubMenu}" type="hidden">
-            <table class="edit">
-                <tbody>
-                <tr>
-                    <td class="cell"><span>Название подменю:</span></td>
-                    <td class="cell"><input class="edit" th:field="*{name}" type="text"></td>
-                </tr>
-                </tbody>
-            </table>
-            <br>
-            <table class="edit">
-                <tr>
-                    <td class="cell"><span>Список таблиц:</span></td>
-                </tr>
-                <tr th:each="table, itemStat:*{tables}">
-                    <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
-                    <td class="cell"><input class="edit" required th:field="*{tables[__${itemStat.index}__].name}"
-                                            type="text">
-                    </td>
-                    <input th:field="*{tables[__${itemStat.index}__].subMenu}" type="hidden">
-                </tr>
-            </table>
-            <input class="button_success" type="submit" value="Сохранить">
-        </form>
-    </div>
-</center>
+            </form>
+        </table>
+
+        <!--Редактирование таблицы-->
+        <div th:if="${table}" th:object="${table}">
+            <form action="#" method="post" th:action="@{/table/edit}">
+                <table class="iksweb" style="width:initial">
+                    <tr>
+                        <th colspan="2">
+                            <span>Название таблицы</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input th:field="*{subMenu}" type="hidden">
+                            <input th:field="*{id}" type="hidden">
+                            <input maxlength="21" class="edit" required th:field="*{name}" type="text"></td>
+                        <td class="delLine "><a class="link" href="#" th:href="@{/table/delete(id=*{id})}">Удалить
+                            таблицу</a></td>
+                    </tr>
+                </table>
+
+                <br>
+                <table class="iksweb" style="width:initial">
+                    <th colspan="3">Список стоблцов:</th>
+                    <tr>
+                        <th>Название</th>
+                        <th>Скрыть</th>
+                        <th>Действие</th>
+                    </tr>
+                    <tr th:each="col,itemStat: *{cols}">
+                        <input th:field="*{cols[__${itemStat.index}__].idColumn}" type="hidden">
+                        <td><input maxlength="23" class="edit" required th:field="*{cols[__${itemStat.index}__].name}"
+                                   type="text"></td>
+                        <td><input th:field="*{cols[__${itemStat.index}__].hidden}" type="checkbox"></td>
+                        <input th:field="*{cols[__${itemStat.index}__].table}" type="hidden">
+                        <input th:field="*{cols[__${itemStat.index}__].lines}" type="hidden">
+                        <td class="delLine"><a class="link" href="#"
+                                               th:href="@{/column/delete(tab=${table.id},col=*{cols[__${itemStat.index}__].idColumn})}">Удалить</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><a class="link" href="#" th:href="@{/column/new(tab=${table.id})}">Добавитьстолбец</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input class="confirm" type="submit" value="Сохранить"></td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+        <!--Редактирование меню-->
+        <div align="center" th:if="${menu}" th:object="${menu}">
+            <form action="#" method="post" th:action="@{/menu/edit}">
+                <input th:field="*{idMenu}" type="hidden">
+                <table class="iksweb" style="width:initial">
+                    <th colspan="2">Пункт меню</th>
+                    <tr>
+                        <td>
+                            <input class="edit" th:field="*{name}" type="text">
+                        </td>
+                        <td>
+                            <a class="link" href="#" th:href="@{/menu/delete(id=*{idMenu})}">Удалить меню</a>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+
+                <table class="iksweb" style="width:initial">
+                    <th colspan="2">Пункт подменю:</th>
+                    <tr th:each="subMenu, itemStat:*{subMenuSet}">
+                        <td>
+                            <input th:field="*{subMenuSet[__${itemStat.index}__].idSubMenu}" type="hidden">
+                            <input class="edit" required th:field="*{subMenuSet[__${itemStat.index}__].name}"
+                                   type="text">
+                        </td>
+                        <input th:field="*{subMenuSet[__${itemStat.index}__].menu}" type="hidden">
+                        <td>
+                            <input th:field="*{subMenuSet[__${itemStat.index}__].menu}" type="hidden">
+                            <a class="link" href="#"
+                               th:href="@{/delSub(id=*{subMenuSet[__${itemStat.index}__].idSubMenu})}">Удалить
+                                подменю</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a class="link" href="#" th:href="@{/submenu/new(id=${menu.idMenu})}">Добавить подменю</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input class="confirm" type="submit" value="Сохранить">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!--Добавление таблицы-->
+        <div align="center" th:if="${submenu}" th:object="${submenu}">
+            <form action="#" method="post" th:action="@{/table/new}">
+                <input th:field="*{menu}" type="hidden">
+                <input th:field="*{idSubMenu}" type="hidden">
+                <table class="iksweb" style="width:initial">
+                    <th>Название подменю:</th>
+                    <tr>
+                        <td class="cell"><input class="edit" th:field="*{name}" type="text"></td>
+                    </tr>
+                </table>
+                <br>
+                <table class="iksweb" style="width:initial">
+                    <th>Список таблиц:</th>
+                    <tr th:each="table, itemStat:*{tables}">
+                        <input th:field="*{tables[__${itemStat.index}__].idTable}" type="hidden">
+                        <td class="cell"><input class="edit" required th:field="*{tables[__${itemStat.index}__].name}"
+                                                type="text">
+                        </td>
+                        <input th:field="*{tables[__${itemStat.index}__].subMenu}" type="hidden">
+                    </tr>
+                    <tr>
+                        <td><input class="confirm" type="submit" value="Сохранить"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </center>
 </div>
 </body>
 </html>

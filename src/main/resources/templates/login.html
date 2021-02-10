@@ -2,33 +2,33 @@
 <head th:insert="main::head">
 </head>
 <body>
-    <form id="login" action="login" class="center" method="post">
+<form id="login" action="login" class="center" method="post">
 
-        <div class="loginform">
-            <div class="title">
-                Авторизация
-            </div>
-            <div class="input-form username">
-                <input type="text" class="input" maxlength="12"; name="username" placeholder="Логин">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="input-form password">
-                <input type="password" class="input" maxlength="36" name="password" placeholder="Пароль">
-                <i class="fas fa-key"></i>
-            </div>
-            <div>
+    <div class="loginform">
+        <div class="title">
+            Авторизация
+        </div>
+        <div class="input-form username">
+            <input type="text" class="input" maxlength="12" ; name="username" placeholder="Логин">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input-form password">
+            <input type="password" class="input" maxlength="36" name="password" placeholder="Пароль">
+            <i class="fas fa-key"></i>
+        </div>
+        <div>
             <center><span th:if="${param.error}">Неверно введен логин или пароль</span></center>
             <br>
         </div>
-            <div>
-                <center><a href="#" onclick="document.getElementById('login').submit()" class="btnl">Войти</a></center>
-            </div>
-
-            <br>
-            <div>
-                <center><a href="#" th:href="@{/registration}" class="btnr">Регистрация</a></center>
-            </div>
+        <div>
+            <center><a href="#" onclick="document.getElementById('login').submit()" class="btnl">Войти</a></center>
         </div>
-    </form>
+
+        <br>
+        <div>
+            <center><a href="#" th:href="@{/registration}" class="btnr">Регистрация</a></center>
+        </div>
+    </div>
+</form>
 </body>
 </html>

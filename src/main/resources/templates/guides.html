@@ -65,10 +65,10 @@
             <div th:utext="${currentGuide.text}"></div>
 
             <td th:if="${mode==true}">
-        <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить инструкцию</a>
-    </td>
-</div>
-</tr>
+                <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить инструкцию</a>
+            </td>
+        </div>
+        </tr>
 
     </table>
 

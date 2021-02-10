@@ -1,70 +1,71 @@
 table.compinfo {
-text-decoration:none;
-border-collapse:collapse;
-text-align:center;
-border-radius: 5px;
-font-size: 14px;
-font-weight: normal;
-border: none;
-max-width: 100%;
-white-space: nowrap;
-background-color: white;
-text-transform: uppercase;
+	text-decoration: none;
+	border-collapse: collapse;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	border: none;
+	max-width: 100%;
+	white-space: nowrap;
+	background-color: white;
+	text-transform: uppercase;
 }
 
 table.compinfo th {
-font-weight:400;
-font-size:14px;
-font-weight: bold;
-color:#fff;
-background-color:#559124;
+	font-weight: 400;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #559124;
 }
 
 table.compinfo td {
-font-size:14px;
-color:#000;
-word-wrap:break-word;
+	font-size: 14px;
+	color: #000;
+	word-wrap: break-word;
 }
 
-table.compinfo td,table.compinfo th {
-line-height:13px;
-vertical-align:middle;
-/* Отрисовка границ
+table.compinfo td,
+table.compinfo th {
+	line-height: 13px;
+	vertical-align: middle;
+	/* Отрисовка границ
 border:2px solid #8ac858;
 */
-padding:6px 6px;
+	padding: 6px 6px;
 }
 
 table.compinfo tr:hover td {
-background-color:#8ac858;
+	background-color: #8ac858;
 }
 
 table.compinfo tr:nth-child(even) {
-background: #F8F8F8;
+	background: #F8F8F8;
 }
 
 table.compinfo tr th:nth-child(even) {
-color: #ffffff;
-background: #324960;
+	color: #ffffff;
+	background: #324960;
 }
 
 table.compinfo tr:hover td {
-color:#fff;
-cursor:default;
+	color: #fff;
+	cursor: default;
 }
 
 table.compinfo a:hover {
-color:#fff;
+	color: #fff;
 }
 
 .size {
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .mobile-table {
-width:100%;
-max-width:100%;
-overflow-x:auto;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
 }
