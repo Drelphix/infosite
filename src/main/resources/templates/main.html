@@ -12,7 +12,6 @@
     <script th:inline="javascript">
             function copy(x){
             navigator.clipboard.writeText(x);
-			el.value  =  'О, на меня нельзя больше нажать!';
             }
 
 
@@ -106,7 +105,7 @@
                         <td th:each="line:${lineList}" th:switch="${line.hidden}">
                     <!--Отображение обычного поля -->
                         <div th:case="false">
-                            <span th:if="${mode==false}" th:text="${line.data}"></span>
+                            <span th:text="${line.data}"></span>
                         </div>
                         <div th:case="true">
                             <input type="text"  th:id="'myInput'+${row.index}" hidden>
@@ -132,7 +131,7 @@
     </div>
 </div>
 
-    <div align="center" style="padding-top:60px" th:if="${submenu}">
+    <div class="btnm" align="center" style="padding-top:10px" th:if="${submenu}">
         <a class="link" href="#" th:href="@{/table/new(id=${submenu})}" th:if="${mode==true}">Добавить таблицу</a>
     </div>
 </div>

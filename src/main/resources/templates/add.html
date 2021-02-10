@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="main::head">
-
-</head>
+<head th:insert="main::head"></head>
 <body>
 <div id="header" th:replace="main::menu"></div>
-<center class="tables">
+
+<div class="btnm" style="padding: 50px 10px 10px 10px;">
+<center>
     <form action="#" method="post" th:action="@{/menu/save}" th:if="${newmenu}" th:object="${newmenu}">
-        <table class="edit">
+        <table class="iksweb" style="width:initial">
             <tr>
-                <td class="cell">
+                <td>
                     <span>Название меню:</span>
                 </td>
                 <td class="cell"><input class="edit" required th:field="*{name}" type="text"></td>
@@ -167,5 +167,6 @@
         </form>
     </div>
 </center>
+</div>
 </body>
 </html>

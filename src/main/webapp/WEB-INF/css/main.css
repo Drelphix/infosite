@@ -1,252 +1,224 @@
 /*Выпадающее меню*/
-body {
-font-family: "Poppins", sans-serif;
+ body {
+     font-family: "Poppins", sans-serif;
 }
-a {
-text-decoration: none;
-vertical-align:middle;
-color: #eeedef;
-cursor: pointer;
+ a {
+     text-decoration: none;
+     vertical-align:middle;
+     color: #eeedef;
+     cursor: pointer;
 }
-ul.topmenu > li >a {
-color:white}
-
-ul.topmenu > li >a:hover {
-color:#073ed8;}
-
-body:before {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
+ ul.topmenu > li >a {
+     color:white
 }
-nav {
-   text-align:end;
+ ul.topmenu > li >a:hover {
+     color:#073ed8;
 }
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin-right:13px;
+ body:before {
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     height: 100%;
+     width: 100%;
 }
-
-nav a {
-  color: #222;
-  text-align:center;
+ nav {
+     text-align:end;
 }
-.topmenu > li {
-
-  display: inline-block;
-  position: relative;
-  vertical-align:middle;
+ nav ul {
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     margin-right:13px;
 }
-.topmenu > li > a {
-  position: relative;
-  padding:3px;
-  font-weight:bold;
-  font-family: "Poppins", sans-serif;
-  font-size:16px;
+ nav a {
+     color: #222;
+     text-align:center;
 }
-.topmenu > li > a:before {
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  top: 100%;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  transform: translate(-50%, 20px);
-  opacity: 0;
+ .topmenu > li {
+     display: inline-block;
+     position: relative;
+     vertical-align:middle;
 }
-.topmenu li:hover a:before {
-  transform: translate(-50%, 0);
-  color:#073ed8;
-  opacity: 1;
+ .topmenu > li > a {
+     position: relative;
+     padding:3px;
+     font-weight:bold;
+     font-family: "Poppins", sans-serif;
+     font-size:16px;
 }
-.submenu {
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  width: 150px;
-  padding: 15px 0 15px;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 0 30px rgba(0,0,0,.2);
-  box-sizing: border-box;
-  visibility: hidden;
-  opacity: 0;
-  transform: translate(-50%, 20px);
-  text-align-last:center;
+ .topmenu > li > a:before {
+     position: absolute;
+     z-index: 5;
+     left: 50%;
+     top: 100%;
+     width: 10px;
+     height: 10px;
+     background: white;
+     border-radius: 50%;
+     transform: translate(-50%, 20px);
+     opacity: 0;
 }
-
-.topmenu > li:hover .submenu {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-50%, 0);
+ .topmenu li:hover a:before {
+     transform: translate(-50%, 0);
+     color:#073ed8;
+     opacity: 1;
 }
-.submenu a {
-  padding-top:3px;
-  padding-bottom:3px;
-  font-family: "Poppins", sans-serif;
-  width:100%;
-  display:block;
-  font-size:large;
+ .submenu {
+     position: absolute;
+     left: 50%;
+     top: 100%;
+     width: 150px;
+     padding: 15px 0 15px;
+     background: white;
+     border-radius: 5px;
+     box-shadow: 0 0 30px rgba(0,0,0,.2);
+     box-sizing: border-box;
+     visibility: hidden;
+     opacity: 0;
+     transform: translate(-50%, 20px);
+     text-align-last:center;
 }
-.submenu a:hover {
-background: #8ac858;
+ .topmenu > li:hover .submenu {
+     visibility: visible;
+     opacity: 1;
+     transform: translate(-50%, 0);
 }
-
-.table-wrapper{
-    margin: 0px 10px 10px;
+ .submenu a {
+     padding-top:3px;
+     padding-bottom:3px;
+     font-family: "Poppins", sans-serif;
+     width:100%;
+     display:block;
+     font-size:large;
 }
-
-.fl-table {
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    background-color: white;
-    text-transform: uppercase;
+ .submenu a:hover {
+     background: #8ac858;
 }
-
-.fl-table td, .fl-table th {
-    text-align: center;
-    padding: 8px;
+ .table-wrapper{
+     margin: 0px 10px 10px;
 }
-
-.fl-table td {
-    /* Отрисовка границ
-    border-right: 1px solid #b573b5;
-    */
-    font-size: 13px;
+ .fl-table {
+     border-radius: 5px;
+     font-size: 14px;
+     font-weight: normal;
+     border: none;
+     border-collapse: collapse;
+     width: 100%;
+     max-width: 100%;
+     white-space: nowrap;
+     background-color: white;
+     text-transform: uppercase;
 }
-
-.fl-table tr:hover td {
-    background-color:#8ac858;
+ .fl-table td, .fl-table th {
+     text-align: center;
+     padding: 8px;
 }
-
-.fl-table thead th {
-    color: #ffffff;
-    background: #559124;
+ .fl-table td {
+    /* Отрисовка границ border-right: 1px solid #b573b5;
+     */
+     font-size: 13px;
 }
-
-.fl-table thead th:nth-child(even) {
-    color: #ffffff;
-    background: #324960;
+ .fl-table tr:hover td {
+     background-color:#8ac858;
 }
-
-.fl-table tr:nth-child(even) {
-    background: #F8F8F8;
+ .fl-table thead th {
+     color: #ffffff;
+     background: #559124;
 }
-
-
+ .fl-table thead th:nth-child(even) {
+     color: #ffffff;
+     background: #324960;
+}
+ .fl-table tr:nth-child(even) {
+     background: #F8F8F8;
+}
 /*Логотип*/
-div.logo{
-width:max-content;
-align:left;
-margin-left:13px;
+ div.logo{
+     width:max-content;
+     align:left;
+     margin-left:13px;
 }
-
-.d-flex {
-display:flex;
-justify-content:space-between !important;
-align-items:center !important;
- }
-
-header {
-background-color:#8ac858;
-position:fixed;
-left:0;
-top:0;
-width: 100%;
-box-shadow: inset 0 0 5px #1d1933;
+ .d-flex {
+     display:flex;
+     justify-content:space-between !important;
+     align-items:center !important;
 }
-
-.name{
-text-align-last:center;
-margin-bottom:0;}
-a.link:hover{
-text-align:center;
-color:red;}
-
+ header {
+     background-color:#8ac858;
+     position:fixed;
+     left:0;
+     top:0;
+     width: 100%;
+     box-shadow: inset 0 0 5px #1d1933;
+}
+ .name{
+     text-align-last:center;
+     margin-bottom:0;
+}
+ a.link:hover{
+     text-align:center;
+     color:red;
+}
 /*Управление пользователями*/
-table.iksweb {
-text-decoration:none;
-border-collapse:collapse;
-width:100%;
-text-align:center;
-border-radius: 5px;
-font-size: 14px;
-font-weight: normal;
-border: none;
-max-width: 100%;
-white-space: nowrap;
-background-color: white;
+ table.iksweb {
+     text-decoration:none;
+     border-collapse:collapse;
+     width:100%;
+     text-align:center;
+     border-radius: 5px;
+     font-size: 14px;
+     font-weight: normal;
+     border: none;
+     max-width: 100%;
+     white-space: nowrap;
+     background-color: white;
 }
-
-table.iksweb th {
-font-weight:400;
-font-size:14px;
-font-weight: bold;
-color:#fff;
-background-color:#559124;
+ table.iksweb th {
+     font-weight:400;
+     font-size:14px;
+     font-weight: bold;
+     color:#fff;
+     background-color:#559124;
 }
-
-table.iksweb td {
-font-size:14px;
-color:#000;
+ table.iksweb td {
+     font-size:14px;
+     color:#000;
 }
-
-table.iksweb td,table.iksweb th {
-line-height:13px;
-vertical-align:middle;
-/* Отрисовка границ
-border:2px solid #8ac858;
-*/
-padding:6px 6px;
+ table.iksweb td,table.iksweb th {
+     line-height:13px;
+     vertical-align:middle;
+    /* Отрисовка границ border:2px solid #8ac858;
+     */
+     padding:6px 6px;
 }
-
-table.iksweb tr:hover td {
-background-color:#8ac858;
+ table.iksweb tr:hover td {
+     background-color:#8ac858;
 }
-
-table.iksweb tr:nth-child(even) {
-background: #F8F8F8;
+ table.iksweb tr:nth-child(even) {
+     background: #F8F8F8;
 }
-
-table.iksweb tr th:nth-child(even) {
-color: #ffffff;
-background: #324960;
+ table.iksweb tr th:nth-child(even) {
+     color: #ffffff;
+     background: #324960;
 }
-
-table.iksweb tr:hover td {
-color:#fff;
-cursor:default;
+ table.iksweb tr:hover td {
+     color:#fff;
+     cursor:default;
 }
-
-table.iksweb a:hover {
-color:#fff;
+ table.iksweb a:hover {
+     color:#fff;
 }
-
-.size {
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+ .size {
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
-
-.mobile-table {
-width:100%;
-max-width:100%;
-overflow-x:auto;
+ .mobile-table {
+     width:100%;
+     max-width:100%;
+     overflow-x:auto;
 }
-
-.btnh{
+ .btnh{
      background-color: transparent;
      width: 100%;
      margin: 0 auto;
@@ -256,13 +228,11 @@ overflow-x:auto;
      border: 0;
      border-radius: 0;
 }
-
-.btnh:hover{
+ .btnh:hover{
      background: #8ac858;
      color: #000000;
 }
-
-.confirm {
+ .confirm {
      width: 100%;
      background: #8ac858;
      margin: 0 auto;
