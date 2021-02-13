@@ -61,6 +61,7 @@ public class MenuService {
         }
     }
     public Model addMenu(Model model, HttpSession httpSession) {
+        CheckMenu();
         model.addAttribute("menus", this.menus);
         model.addAttribute("xmls", this.xmlMenus);
         CheckMode(httpSession);

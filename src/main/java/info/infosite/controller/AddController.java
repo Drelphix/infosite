@@ -40,31 +40,28 @@ public class AddController {
     private GuideMenuRepository guideMenuRepository;
 
     @RequestMapping(value = "/submenu/new", method = RequestMethod.GET)
-    public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu) {
-        menuService.CheckMenu();
+    public String AddSubMenu(Model model, @RequestParam(name = "id") int idMenu,HttpSession httpSession) {
         Menu menu = menuRepository.getOne(idMenu);
         menu.AddSubMenu(new SubMenu(menu));
         menuService.menus = menuRepository.findAll();
-        model.addAttribute("menus", menuService.menus);
+        menuService.addMenu(model,httpSession);
         model.addAttribute("menu", menu);
         return "add";
     }
 
     @RequestMapping(value = "/column/new", method = RequestMethod.GET)
-    public String AddNewCol(Model model, @RequestParam(name = "tab") int idTab) {
-        menuService.CheckMenu();
+    public String AddNewCol(Model model, @RequestParam(name = "tab") int idTab,HttpSession httpSession) {
         Tab table = tableRepository.getOne(idTab);
         TableView tableView = new TableView(table);
         List<Col> cols = tableView.getCols();
         cols.add(new Col(table));
         model.addAttribute("table", tableView);
-        model.addAttribute("menus", menuService.menus);
+        menuService.addMenu(model,httpSession);
         return "add";
     }
 
     @RequestMapping(value = "/line/new", method = RequestMethod.GET)
-    public String AddNewLine(Model model, @RequestParam(name = "tab") int idTab) {
-        menuService.CheckMenu();
+    public String AddNewLine(Model model, @RequestParam(name = "tab") int idTab,HttpSession httpSession) {
         TableView tableView = new TableView(tableRepository.getOne(idTab));
         List<Line> lineList = new ArrayList<>();
         for (Col col : tableView.getCols()) {
@@ -76,51 +73,43 @@ public class AddController {
         model.addAttribute("tableName", tableView.getName());
         model.addAttribute("cols", tableView.getCols());
         model.addAttribute("lines", lines);
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        menuService.addMenu(model,httpSession);
         return "add";
     }
 
     @RequestMapping(value = "/table/new", method = RequestMethod.GET)
-    public String AddNewTable(Model model, @RequestParam(name = "id") int idSub) {
-        menuService.CheckMenu();
+    public String AddNewTable(Model model, @RequestParam(name = "id") int idSub, HttpSession httpSession) {
         SubMenu subMenu = subMenuRepository.getOne(idSub);
         subMenu.AddNewTable(new Tab(subMenu));
         model.addAttribute("submenu", subMenu);
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        menuService.addMenu(model,httpSession);
         return "add";
     }
 
     @RequestMapping(value = "/menu/new", method = RequestMethod.GET)
-    public String AddNewMenu(Model model) {
-        menuService.CheckMenu();
+    public String AddNewMenu(Model model,HttpSession httpSession) {
         model.addAttribute("newmenu", new Menu());
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        menuService.addMenu(model,httpSession);
         return "add";
     }
 
     @RequestMapping(value = "/menu/save", method = RequestMethod.POST)
-    public String AddNewMenu(Model model, @ModelAttribute Menu menu) {
+    public String AddNewMenu(Model model, @ModelAttribute Menu menu,HttpSession httpSession) {
         menuRepository.save(menu);
         menuService.menus = menuRepository.findAll();
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        menuService.addMenu(model,httpSession);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/table/new", method = RequestMethod.POST)
-    public String SaveNewTable(Model model, @ModelAttribute SubMenu subMenu) {
-        menuService.CheckMenu();
+    public String SaveNewTable(Model model,HttpSession httpSession, @ModelAttribute SubMenu subMenu) {
         for (Tab tab : subMenu.getTables()) {
             if (tab.getName() != "") {
                 tableRepository.save(tab);
             }
         }
         subMenuRepository.save(subMenu);
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        menuService.addMenu(model,httpSession);
         return "redirect:/show?id=" + subMenu.getIdSubMenu();
     }
 
@@ -129,11 +118,10 @@ public class AddController {
         Guide guide = new Guide();
         guide.setMenu(guideMenuRepository.getOne(mid));
         System.out.println(guide.getUsername());
-        menuService.CheckMenu();
+        menuService.addMenu(model,httpSession);
         model.addAttribute("currentGuide",guide);
         model.addAttribute("mode", httpSession.getAttribute("mode"));
-        model.addAttribute("menus", menuService.menus);
-        model.addAttribute("xmls", menuService.xmlMenus);
+        model.addAttribute("guideMenus",guideMenuRepository.findAll());
         model.addAttribute("guide", guide);
         return "addguide";
     }

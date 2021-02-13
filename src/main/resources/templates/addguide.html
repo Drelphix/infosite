@@ -10,9 +10,15 @@
 <center>
     <form method="post" style="width:50%;margin-top:40px;" th:object="${guide}"
           th:unless="${edit}">
-        <h1>Добавление инструкции</h1>
+        <h1>Добавление инструкции</h1><br>
+        <span>Выберите пункт меню</span><br>
+        <select name="menu"  th:field="*{menu.id}">
+            <option value="0">Выберите роль</option>
+            <option th:each="menu: ${guideMenus}"
+                    th:value="${menu.id}"
+                    th:text="${menu.name}"></option>
+        </select>
         <span>Введите заголовок инструкции</span><br>
-        <input type="hidden" th:field="*{menu.id}">
         <input th:field="*{title}" type="text" required>
         <span>Введите текст инструкции</span><br>
         <textarea class="code" th:field="*{text}" required>
