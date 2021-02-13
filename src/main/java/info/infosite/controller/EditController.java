@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("mode")
 public class EditController {
     @Autowired
     public ColRepository colRepository;
@@ -139,23 +140,25 @@ public class EditController {
     public String EditUser(Model model, @RequestParam int id) {
         User user = userRepository.getOne(id);
         model.addAttribute("user", user);
-        List<String> roles =new ArrayList<>();
-        model.addAttribute("roles",menuService.getRolesByRole(roles));
+        try{
+            user.getRole().getRole();
+        } catch (NullPointerException e){
+            user.setRole(roleRepository.findRoleByRole("user"));
+        }
+        model.addAttribute("roles",roleRepository.findAll());
         model.addAttribute("edit", true);
         return "registration";
     }
 
     @PostMapping(value = "/user/edit")
-    public String EditUser(Model model, @ModelAttribute User user,@Valid String role) {
+    public String EditUser(Model model, @ModelAttribute User user) {
+        System.out.println(user.getRole());
         User base = userRepository.findUserByUsername(user.getUsername());
         if (user.getPassword().equals("")) {
             user.setPassword(base.getPassword());
 
         } else user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(!role.equals("1,")){
-            user.setRole(roleRepository.findRoleByRole(role.substring(2)));
-            System.out.println(user.getRole());
-        }
+
         user.setChats(base.getChats());
         userRepository.save(user);
         return "redirect:/management";
@@ -164,6 +167,7 @@ public class EditController {
     @RequestMapping(value = "/guide/edit")
     public String EditGuide(Model model, @RequestParam int id) {
         Guide guide = guideRepository.getOne(id);
+        model.addAttribute("guideMenus",guideMenuRepository.findAll());
         model.addAttribute("currentGuide",guide);
         model.addAttribute("guide", guide);
         model.addAttribute("edit", true);

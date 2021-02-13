@@ -11,11 +11,15 @@
     <form method="post" style="width:50%;margin-top:40px;" th:object="${guide}"
           th:unless="${edit}">
         <h1>Добавление инструкции</h1>
-        <span>Введите заголовок инструкции</span>
+        <span>Введите заголовок инструкции</span><br>
+        <input type="hidden" th:field="*{menu.id}">
         <input th:field="*{title}" type="text" required>
+        <span>Введите текст инструкции</span><br>
         <textarea class="code" th:field="*{text}" required>
             </textarea>
-        <button th:formaction="@{/guide/save}" class="button_success">Сохранить</button>
+        <span>Введите краткое описание инструкции</span><br>
+        <input th:field="*{shortDescription}" type="text" required>
+        <button th:formaction="@{/guide/save}" formmethod="post" class="button_success">Сохранить</button>
         <button th:formaction="@{/guide/show}">Показать</button>
 
     </form>
@@ -23,9 +27,19 @@
           th:object="${guide}">
         <h1>Редактирование инструкции</h1>
         <span>Введите заголовок инструкции</span>
+        <span>Введите краткое описание инструкции</span><br>
+        <input th:field="*{shortDescription}" type="text" required>
         <input th:field="*{id}" type="hidden">
+        <span>Пункт меню</span>
+        <select name="menu"  th:field="*{menu.id}">
+            <option value="0">Выберите роль</option>
+            <option th:each="menu: ${guideMenus}"
+                    th:value="${menu.id}"
+                    th:text="${menu.name}"></option>
+        </select>
         <input th:field="*{title}" type="text" required>
         <input th:field="*{username}" type="hidden">
+        <input th:field="*{date}" type="hidden">
         <input th:field="*{date}" type="hidden">
         <textarea class="code" th:field="*{text}" required></textarea>
 

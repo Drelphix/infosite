@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("mode")
 public class AddController {
     @Autowired
     private MenuRepository menuRepository;
@@ -124,8 +125,9 @@ public class AddController {
     }
 
     @RequestMapping(value = "/guide/new", method = RequestMethod.GET)
-    public String AddNewGuide(Model model, HttpSession httpSession) {
+    public String AddNewGuide(Model model, HttpSession httpSession,@RequestParam int mid) {
         Guide guide = new Guide();
+        guide.setMenu(guideMenuRepository.getOne(mid));
         System.out.println(guide.getUsername());
         menuService.CheckMenu();
         model.addAttribute("currentGuide",guide);
@@ -143,9 +145,11 @@ public class AddController {
         model.addAttribute("currentGuide", guide);
         try {
             if (guide.getId() == 0) throw new NullPointerException();
+
             model.addAttribute("edit", true);
         } catch (NullPointerException skip) {
         }
+        model.addAttribute("guideMenus",guideMenuRepository.findAll());
         return "addguide";
     }
 
@@ -162,7 +166,7 @@ public class AddController {
             guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         }
         guideRepository.saveAndFlush(guide);
-        return "redirect:/guide/show?id=" + guide.getId();
+        return "redirect:/guide/?id=" + guide.getId();
     }
 
     @RequestMapping(value = "/role/new", method = RequestMethod.POST)

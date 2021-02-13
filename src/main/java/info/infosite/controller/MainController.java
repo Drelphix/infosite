@@ -90,9 +90,10 @@ public class MainController {
     }
 
     @GetMapping(value = "/mode")
-    public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request) {
+    public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request,HttpSession httpSession) {
         model.addAttribute("mode", mode);
-        return "redirect:" + request.getHeader("Referer");
+        System.out.println(request.getHeader("Referer"));
+        return "redirect:" + request.getHeader("Referer").split("&")[0];
     }
 
     @GetMapping(value = "/export")

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("mode")
 public class ReportController {
     @Autowired
     MenuService menuService;

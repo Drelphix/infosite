@@ -1,5 +1,6 @@
 package info.infosite.controller;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import info.infosite.entities.auth.UserRepository;
 import info.infosite.entities.gentable.*;
 import info.infosite.entities.guide.GuideMenuRepository;
@@ -14,8 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes("mode")
 public class DeleteController {
     @Autowired
     ColRepository colRepository;
@@ -99,8 +104,15 @@ public class DeleteController {
     }
 
     @RequestMapping(value = "/guideMenu/delete", method = RequestMethod.GET)
-    public String DeleteGuideMenu(Model model, @RequestParam int id) {
-        guideMenuRepository.delete(guideMenuRepository.getOne(id));
-        return "redirect:/guides";
+    public String DeleteGuideMenu(Model model, @RequestParam int id, HttpSession httpSession) {
+        try {
+            guideMenuRepository.delete(guideMenuRepository.getOne(id));
+        } catch (Exception e){
+            model.addAttribute("error",true);
+        }
+        model.addAttribute("guideMenu", guideMenuRepository.findAll());
+        menuService.CheckMenu();
+        model = menuService.addMenu(model, httpSession);
+        return "guides";
     }
 }
