@@ -36,12 +36,13 @@ public class TelegramBot extends TelegramLongPollingBot {
     private static final String NO_KEY_MESSAGE = "Извините, но этот код неверный. Обратитесь к системным администраторам";
     private static final String ERROR_MESSAGE = "Извините, но во время выполнения последней команды произошла ошибка.";
     private static final String REQUEST_MESSAGE = "Создана новая заявка ";
-    private static final String OK_REQUEST_MESSAGE = "Ваша заявка успешно оформлена";
+    private static final String OK_REQUEST_MESSAGE = "Ваша заявка успешно оформлена, номер заявки: ";
     private static final String UNKNOWN_USER_MESSAGE = "Извините, мы вас не знаем";
     private static final String HELP_MESSAGE = "Этот бот - часть хелпдеск системы, призванный к упрощению помощи пользователям и повышению реагирования" +
             "на проблемы в работе. Создан @Drelphix";
     private static final String CANCEL_MESSAGE = "Создание заявки отменено.";
     private static final String WAITING_MESSAGE = "Ожидаю команду...";
+
 
     static {
         ApiContextInitializer.init();
@@ -93,9 +94,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     userRequests.add(new UserRequest(update.getMessage().getChatId(), text));
                 } catch (NullPointerException e) {
                     sendMessage(chatId, UNKNOWN_USER_MESSAGE);
-                } finally {
-                    break;
-                }
+                }break;
             case "/help":
                 sendMessage(chatId, HELP_MESSAGE);
                 break;
@@ -117,7 +116,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                     "Расположение: " + user.getRegion() + " \n" +
                                     "Описание проблемы: \n" +
                                     request.getRequestMessage(), "admin");
-                            sendMessage(chatId, OK_REQUEST_MESSAGE);
+                            sendMessage(chatId, OK_REQUEST_MESSAGE+request.getId());
                         } catch (NullPointerException e) {
                             sendMessage(chatId, ERROR_MESSAGE);
                         }
@@ -175,20 +174,23 @@ public class TelegramBot extends TelegramLongPollingBot {
     private void CheckUserKey(Update update) {
         String text = update.getMessage().getText();
         Long chatId = update.getMessage().getChatId();
+        User user = null;
         int idUser = -1;
         for (UserRequest userRequest : userRequests) {
             try {
-                sendMessage(chatId, "Добро пожаловать, " + helloMessage(text));
-                chatIdRepository.save(new Chat(update.getMessage().getChatId(), getUserByCode(text)));
+                user = getUserByCode(text);
+                chatIdRepository.saveAndFlush(new Chat(update.getMessage().getChatId(), user));
+                sendMessage(chatId, "Добро пожаловать, " + user.getInfo());
                 return;
-            } catch (NullPointerException e) {
+            } catch (NullPointerException e){
                 if (userRequest.getChatId().equals(chatId)) {
                     idUser = userRequests.indexOf(userRequest);
+                    break;
                 }
             }
         }
         try {
-            UserRequest userRequest = userRequests.get(idUser);
+            UserRequest userRequest = userRequests.get(user.getId());
             userRequest.addMessage(text);
             userRequest.setUserKey(text);
             sendMessage(chatId, "Добро пожаловать " + helloMessage(update.getMessage().getChatId()));
@@ -216,15 +218,13 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String helloMessage(String key) {
         User user = userRepository.findUserByUserKey(key);
-        user.setUserKey("");
-        userRepository.save(user);
+        if(user == null) throw new NullPointerException();
         return user.getInfo();
     }
 
     private String helloMessage(Long chatId) {
         User user = userRepository.findUserByChat(chatId);
-        user.setUserKey("");
-        userRepository.save(user);
+        if(user == null) throw new NullPointerException();
         return user.getInfo();
     }
 

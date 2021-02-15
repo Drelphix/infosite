@@ -1,5 +1,6 @@
     package info.infosite.entities.auth;
 
+    import info.infosite.entities.request.Request;
     import org.springframework.data.jpa.repository.JpaRepository;
     import org.springframework.data.jpa.repository.Query;
     import org.springframework.data.repository.query.Param;
@@ -16,4 +17,5 @@
 
         @Query("select u from User u left join Role r on u.role=r where r.role=:role")
         List<User> findUsersByGroup(@Param("role") String role);
+
     }

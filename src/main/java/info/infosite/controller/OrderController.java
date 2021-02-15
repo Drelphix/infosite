@@ -1,5 +1,8 @@
 package info.infosite.controller;
 
+import info.infosite.bot.TelegramBot;
+import info.infosite.entities.auth.User;
+import info.infosite.entities.auth.UserRepository;
 import info.infosite.entities.request.Request;
 import info.infosite.entities.request.RequestRepository;
 import info.infosite.entities.request.Status;
@@ -19,6 +22,8 @@ public class OrderController {
     MenuService menuService;
     @Autowired
     public RequestRepository requestRepository;
+    @Autowired
+    public UserRepository userRepository;
 
 
     @GetMapping(value = "/order")
