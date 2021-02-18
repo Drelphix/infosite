@@ -9,8 +9,12 @@
 <div style="padding: 60px 10px 10px 170px;">
     <div class="sidenav">
         <table class="sideweb" style="background-color: initial; text-align: initial;">
-            <th th:if="${mode==false}">Выберите тему:</th>
-            <th th:if="${mode==true}"><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th>
+            <tr th:if="${mode==false}">
+            <th >Выберите тему:</th>
+            </tr>
+            <tr  th:if="${#lists.isEmpty(guideMenu)}">
+            <th th:if="${mode==false}"><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th></tr>
+            <tr th:if="${mode==true}"><th ><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th></tr>
             <tbody>
             <tr th:each="menu:${guideMenu}">
                 <td th:if="${mode==false}"><a th:href="@{/guideMenu(id=${menu.id})}" th:text="${menu.getName()}"></a></td>

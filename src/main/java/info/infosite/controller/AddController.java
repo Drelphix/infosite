@@ -128,8 +128,13 @@ public class AddController {
 
     @PostMapping(value = "/guide/show")
     public String showTempGuide(Model model,@ModelAttribute Guide guide){
-        guide.setLastEditDate(LocalDate.now().toString());
-        guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(!guide.getDate().equals("")) {
+            guide.setLastEditDate(LocalDate.now().toString());
+            guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        } else {
+            guide.setDate(LocalDate.now().toString());
+            guide.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        }
         model.addAttribute("currentGuide", guide);
         model.addAttribute("guide", guide);
         try {

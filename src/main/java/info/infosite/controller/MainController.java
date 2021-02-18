@@ -92,8 +92,7 @@ public class MainController {
     @GetMapping(value = "/mode")
     public String EditingMode(Model model, @RequestParam boolean mode, HttpServletRequest request,HttpSession httpSession) {
         model.addAttribute("mode", mode);
-        System.out.println(request.getHeader("Referer"));
-        return "redirect:" + request.getHeader("Referer").split("&")[0];
+        return "redirect:" + request.getHeader("Referer").split("mode",1)[0].split("&")[0];
     }
 
     @GetMapping(value = "/export")
