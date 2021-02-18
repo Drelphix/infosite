@@ -23,8 +23,8 @@
     <center>
         <span th:if="${error}">Невозможно удалить, посколько меню содержит инструкции</span>
         <!--Список гайдов относящихся к меню в таблице-->
-            <table class="iksweb">
-                <tbody th:if="${currentMenu}">
+            <table class="iksweb" th:if="${currentMenu}">
+                <tbody >
                 <!-- ↑Сюда прописать условие не отображать пока не выбрано ничего-->
                 <tr th:unless="${mode==true}">
                 <th colspan="6" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
