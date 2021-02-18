@@ -178,8 +178,9 @@ public class EditController {
     public String EditGuide(Model model, @ModelAttribute Guide guide) {
         guide.setLastEditDate(LocalDate.now().toString());
         guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        int idMenu = guide.getMenu().getId();
         guideRepository.save(guide);
-        return "redirect:/guides";
+        return "redirect:/guideMenu?id="+idMenu;
     }
 
     @RequestMapping(value = "/guideMenu/edit", method = RequestMethod.GET)
