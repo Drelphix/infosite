@@ -108,7 +108,7 @@ public class DeleteController {
         try {
             guideMenuRepository.delete(guideMenuRepository.getOne(id));
         } catch (Exception e){
-            model.addAttribute("error",true);
+            model.addAttribute("error","Невозможно удалить элемент меню, поскольку он не пустой");
         }
         model.addAttribute("guideMenu", guideMenuRepository.findAll());
         menuService.CheckMenu();

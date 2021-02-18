@@ -131,6 +131,7 @@ public class AddController {
         guide.setLastEditDate(LocalDate.now().toString());
         guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("currentGuide", guide);
+        model.addAttribute("guide", guide);
         try {
             if (guide.getId() == 0) throw new NullPointerException();
 

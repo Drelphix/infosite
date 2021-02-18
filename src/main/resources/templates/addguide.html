@@ -54,7 +54,6 @@
                     </select>
                     <input th:field="*{username}" type="hidden">
                     <input th:field="*{date}" type="hidden">
-                    <input th:field="*{date}" type="hidden">
                 </td>
             </tr>
             <tr>
@@ -63,12 +62,12 @@
             <tr class="">
                 <td><button th:formaction="@{/guide/edit}" class="confirm" style="padding: 1px 6.5rem;">Сохранить</button></td>
                 <td><button th:formaction="@{/guide/show}" class="confirm" style="padding: 1px 4rem;">Показать</button></td>
-                <td><button th:formaction="@{/}" class="confirm" style="padding: 1px 4rem;">Вернуться назад</button></td>
+                <td><button th:formaction="@{/}" formmethod="get" class="confirm" style="padding: 1px 4rem;">Вернуться назад</button></td>
             </tr>
         </table>
     </form>
     <br>
-    <h3 style="text-align-last: center;">Предосмотр</h3>
+    <h3 style="text-align-last: center;">Предпросмотр</h3>
     <table class="iksweb" style="width:41%;">
         <th colspan="2" th:text="${currentGuide.title}"></th>
         <tr>
