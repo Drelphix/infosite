@@ -39,3 +39,44 @@ td.guide {
 	height: 100%;
 	text-align: center;
 }
+
+table.sideweb {
+	text-decoration: none;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	border: none;
+	max-width: 100%;
+	white-space: nowrap;
+	background-color: white;
+}
+
+table.sideweb th {
+	font-weight: 400;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #559124;
+}
+
+table.sideweb td {
+	font-size: 14px;
+	color: #000;
+}
+
+table.sideweb td,
+table.sideweb th {
+	line-height: 13px;
+	vertical-align: middle;
+	/* Отрисовка границ border:2px solid #8ac858;
+     */
+	padding: 6px 6px;
+}
+
+table.sideweb tr:hover td {
+	background-color: #559124;
+	cursor: default;
+}
