@@ -99,8 +99,9 @@ public class DeleteController {
 
     @RequestMapping(value = "/guide/delete", method = RequestMethod.GET)
     public String DeleteGuide(Model model, @RequestParam int id) {
+        int idMenu = guideRepository.getOne(id).getMenu().getId();
         guideRepository.deleteById(id);
-        return "redirect:/guides";
+        return "redirect:/guideMenu?id="+idMenu;
     }
 
     @RequestMapping(value = "/guideMenu/delete", method = RequestMethod.GET)

@@ -8,79 +8,27 @@
 <body>
 <div id="header" th:insert="main::menu"></div>
 <div style="padding: 50px 10px 10px 10px;">
-    <table width="100%" th:unless="${edit}">
-        <tr>
-            <td width="50%">
     <form method="post" th:object="${guide}"
           th:unless="${edit}">
-        <h3 style="text-align-last: center;">Добавить меню</h3>
-        <table class="iksweb">
-            <tr>
-                <td style="text-align: initial;">Введите заголовок инструкции</td>
-                <input th:field="*{id}" type="hidden">
-                <td colspan="2"><input th:field="*{title}" type="text" style="width:100%;" required></td>
-            </tr>
-            <tr>
-                <td style="text-align: initial;">Введите краткое описание инструкции</td>
-                <td colspan="2"><input th:field="*{shortDescription}" type="text" style="width:100%;" required></td>
-            </tr>
-            <tr>
-                <td style="text-align: initial;">Пункт меню</td>
-                <td colspan="2">
-                    <select name="menu" th:field="*{menu.id}" style="width:100%;">
-                        <option value="0">Выберите роль</option>
-                        <option th:each="menu: ${guideMenus}"
-                                th:value="${menu.id}"
-                                th:text="${menu.name}"></option>
-                    </select>
-                    <input th:field="*{username}" type="hidden">
-                    <input th:field="*{date}" type="hidden">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3"><textarea th:field="*{text}" style="width: 100%; resize: none; height: 500px;" required></textarea></td>
-            </tr>
-            <tr class="">
-                <td><button th:formaction="@{/guide/edit}" class="confirm" style="padding: 1px 6.5rem;">Сохранить</button></td>
-                <td><button th:formaction="@{/guide/show}" class="confirm" style="padding: 1px 4rem;">Показать</button></td>
-                <td><button th:formaction="@{/}" formmethod="get" class="confirm" style="padding: 1px 4rem;">Вернуться назад</button></td>
-            </tr>
-        </table>
-    </form></td>
-            <td style="text-align:left; vertical-align: initial;"><h3 style="text-align-last: center;">Предпросмотр</h3>
-                <table class="iksweb">
-                    <th colspan="2" th:text="${currentGuide.title}"></th>
-                    <tr>
-                        <td style="text-align: initial;">Автор</td>
-                        <td th:text="${currentGuide.username}"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: initial;">Дата создания</td>
-                        <td th:text="${currentGuide.date}"></td>
-                        <input th:field="${currentGuide.id}" type="hidden">
-                    </tr>
-                    <tr>
-                        <td style="text-align: initial;">Краткое описание</td>
-                        <td th:text="${currentGuide.shortDescription}"></td>
-                    </tr>
-                    <th colspan="2">Описание</th>
-                    <tr>
-                        <td colspan="2" th:utext="${currentGuide.text}" style="line-height: initial; text-align: initial;"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: initial;">Последнее редактирование</td>
-                        <td th:text="${currentGuide.lastEditDate}"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: initial;">Пользователем</td>
-                        <td th:text="${currentGuide.lastEditUsername}"></td>
-                    </tr>
-                </table></td>
-        </tr>
-    </table>
-
+        <h1>Добавление инструкции</h1><br>
+        <span>Выберите пункт меню</span><br>
+        <select name="menu"  th:field="*{menu.id}">
+            <option value="0">Выберите роль</option>
+            <option th:each="menu: ${guideMenus}"
+                    th:value="${menu.id}"
+                    th:text="${menu.name}"></option>
+        </select>
+        <span>Введите заголовок инструкции</span><br>
+        <input th:field="*{title}" type="text" required>
+        <span>Введите текст инструкции</span><br>
+        <textarea class="code" th:field="*{text}" required>
+            </textarea>
+        <span>Введите краткое описание инструкции</span><br>
+        <input th:field="*{shortDescription}" type="text" required>
+        <button th:formaction="@{/guide/save}" formmethod="post" class="button_success">Сохранить</button>
+        <button th:formaction="@{/guide/show}">Показать</button>
     </form>
-    <table width="100%" th:if="${edit}">
+    <table width="100%">
         <tr>
             <td width="50%"><form method="post" th:if="${edit}"
                       th:object="${guide}">
