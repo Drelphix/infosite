@@ -103,8 +103,8 @@
     </center>
 
     <center>
-        <table th:if="${currentGuide}" class="iksweb" style="width:initial">
-            <th colspan="6" th:text="${currentGuide.title}" style="font-weight: bold"></th>
+        <table th:if="${currentGuide}" class="guidetable">
+            <th colspan="6" th:text="${currentGuide.title}" style="font-weight: bold; background-color: #559124; color: white; line-height: 13px; vertical-align: middle; padding: 6px 6px;"></th>
             <input th:field="${currentGuide.id}" type="hidden">
             <tr>
                 <th style="background-color: black; color: white">Дата:</th>
@@ -115,10 +115,10 @@
                 <td th:text="${currentGuide.username}"></td>
             </tr>
             <tr>
-                <th colspan="6" class="btmn" style="font-weight: bold">Описание:</th>
+                <th colspan="6" class="guideth">Описание:</th>
             </tr>
             <tr>
-                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial; background-color:initial; white-space:initial; color:black; line-height: inherit; pointer-events:none;"></td>
+                <td colspan="6" th:utext="${currentGuide.text}" class="guidetext"></td>
             </tr>
             <tr>
                 <th style="background-color: black; color: white">Дата редактирования:</th>

@@ -320,3 +320,39 @@ table.iksweb a:hover {
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
+.guidetable{
+width: 100%;
+border-collapse: collapse;
+text-align: center;
+border-radius: 5px;
+font-size: 14px;
+font-weight: normal;
+border: none;
+max-width: 100%;
+white-space: nowrap;
+background-color: white;
+}
+
+.guidetable th{
+font-weight: bold;
+background-color: #559124;
+color: white;
+line-height: 13px;
+vertical-align: middle;
+padding: 6px 6px;
+}
+
+.guidetable td{
+line-height: 13px;
+vertical-align: middle;
+padding: 6px 6px;
+}
+
+.guidetext{
+text-align: initial;
+background-color:initial;
+white-space:initial;
+color:black;
+line-height: inherit;
+}
