@@ -37,10 +37,10 @@
             <tbody>
             <!-- ↑Сюда прописать условие не отображать пока не выбрано ничего-->
             <tr th:unless="${mode==true}">
-                <th colspan="6" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
+                <th colspan="7" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
             </tr>
             <tr th:if="${mode==true}">
-                <th colspan="8" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
+                <th colspan="9" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
             </tr>
             </tbody>
             <tbody class="btnm">
@@ -51,20 +51,22 @@
                 <th>Пользователем</th>
                 <th>Дата редактирования</th>
                 <th>Пользователем</th>
-                <th colspan="2" th:if="${mode==true}">Действия</th>
+                <th th:unless="${mode==true}">Действия</th>
+                <th colspan="3" th:if="${mode==true}">Действия</th>
             </tr>
             <tr th:each="guide:${currentMenu.guides}">
-                <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.title}"></a></td>
+                <td style="text-align: initial;"><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.title}"></a></td>
                 <td th:text="${guide.shortDescription}"></td>
                 <td th:text="${guide.date}"></td>
                 <td th:text="${guide.username}"></td>
                 <td th:text="${guide.lastEditDate}"></td>
                 <td th:text="${guide.lastEditUsername}"></td>
-                <td th:if="${mode==true}"><a th:href="@{/guide/edit(id=${guide.id})}">Изменить</a></td>
-                <td th:if="${mode==true}"><a th:href="@{/guide/delete(id=${guide.id})}">Удалить</a></td>
+                <th style="background-color: #805340"><a th:href="@{/guide(id=${guide.id})}" style="color: white">Подробнее</a></th>
+                <th th:if="${mode==true}" style="background-color: #324960"><a th:href="@{/guide/edit(id=${guide.id})}" style="color: white">Изменить</a></th>
+                <th th:if="${mode==true}" style="background-color: #902a2a"><a th:href="@{/guide/delete(id=${guide.id})}" style="color: white">Удалить</a></th>
             </tr>
             <tr>
-                <th th:if="${mode==true}" colspan="8"><a href="#" th:href="@{/guide/new(mid=${currentMenu.id})}">Добавить
+                <th th:if="${mode==true}" colspan="9"><a href="#" th:href="@{/guide/new(mid=${currentMenu.id})}">Добавить
                     запись</a></th>
             </tr>
             </tbody>
@@ -102,29 +104,29 @@
 
     <center>
         <table th:if="${currentGuide}" class="iksweb" style="width:initial">
-            <th colspan="4" th:text="${currentGuide.title}" style="font-weight: bold"></th>
+            <th colspan="6" th:text="${currentGuide.title}" style="font-weight: bold"></th>
             <input th:field="${currentGuide.id}" type="hidden">
             <tr>
-                <th>Дата:</th>
+                <th style="background-color: black; color: white">Дата:</th>
                 <td th:text="${currentGuide.date}"></td>
-                <th>Категория:</th>
-                <!--<td th:text="${currentMenu.getName()}"></td>-->
-                <th>Автор:</th>
-                <!--<td th:text="${guide.username}"></td>-->
+                <th style="background-color: black; color: white">Категория:</th>
+                <td th:text="${currentGuide.menu.getName()}"></td>
+                <th style="background-color: black; color: white">Автор:</th>
+                <td th:text="${currentGuide.username}"></td>
             </tr>
             <tr>
-                <th colspan="4" style="font-weight: bold">Описание:</th>
+                <th colspan="6" style="font-weight: bold">Описание:</th>
             </tr>
             <tr>
-                <td colspan="4" th:utext="${currentGuide.text}"></td>
+                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial;"></td>
             </tr>
             <tr>
-                <th>Дата редактирования:</th>
-                <td th:if="${currentGuide.lastEditDate}"></td>
-                <th>Отредактировано:</th>
-                <td th:text="${currentGuide.lastEditUsername}"></td>
+                <th style="background-color: black; color: white">Дата редактирования:</th>
+                <td colspan="2" th:if="${currentGuide.lastEditDate}"></td>
+                <th style="background-color: black; color: white">Отредактировано:</th>
+                <td colspan="2" th:text="${currentGuide.lastEditUsername}"></td>
             </tr>
-            <th colspan="4" th:if="${mode==true}" style="background-color: black">
+            <th colspan="6" th:if="${mode==true}" style="background-color: red">
                 <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}" style="color: white">Удалить
                     инструкцию</a>
             </th>

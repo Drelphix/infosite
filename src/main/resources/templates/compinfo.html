@@ -21,10 +21,11 @@
                 <td th:text="${pc.getCpuInfo()}"></td>
                 <td th:text="${pc.motherboard}"></td>
                 <td th:text="${pc.getSummaryMemory()}"></td>
-                <td><a th:href="@{/pc(show=${pc.name})}">Подробная информация</a></td>
+                <th style="background-color: #805340"><a th:href="@{/pc(show=${pc.name})}" style="color: white">Подробная информация</a></th>
             </tr>
         </table>
-
+        <form method="post"
+              th:object="${pc}">
         <table class="compinfo" th:object="${pc}" th:if="${pc}">
             <tr>
                 <th>Имя компьютера:</th>
@@ -124,7 +125,7 @@
             <tr>
                 <th colspan="6">Информация о сетевых устройствах</th>
             </tr>
-            <tbody th:each="net,index:${pc.networks}">
+            <tbody th:each="net,index:${pc.networks}" class="btnm">
             <tr>
                 <th colspan="6" th:text="'Сетевое устройство '+${index.index}">
                 </td>
@@ -138,7 +139,11 @@
                 <td colspan="5"><a th:each="ip:${net.getIpAddresses()}" th:text="${ip}"></a></td>
             </tr>
             </tbody>
+            <td colspan="6"><button th:formaction="@{/pc}" formmethod="get" class="confirm"
+                        style="padding: 1px 4rem;">Вернуться назад
+            </button></td>
         </table>
+        </form>
 </div>
 </body>
 </html>

@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select id="status" name="status">
+                        <select id="status" name="status" class="confirm">
                             <option value="">Выберите статус</option>
                             <option value="all">Все заявки</option>
                             <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
@@ -27,16 +27,16 @@
                         </select>
                     </td>
                     <td>
-                        <select id="user" name="user">
+                        <select id="user" name="user" class="confirm">
                             <option value="">Выберите пользователя</option>
                             <option th:each="user: ${users}"
                                     th:text="${user.username}"
                                     th:value="${user.username}"></option>
                         </select>
                     </td>
-                    <td><input type="date" id="startDate" name="startDate"></td>
-                    <td><input type="date" id="endDate" name="endDate"></td>
-                    <td><a href="#" onclick="document.getElementById('report').submit()"
+                    <td><input type="date" id="startDate" name="startDate" class="confirm"></td>
+                    <td><input type="date" id="endDate" name="endDate" class="confirm"></td>
+                    <td style="background-color: initial"><a href="#" onclick="document.getElementById('report').submit()"
                            class="confirm">Сформировать</a></td>
                 </tr>
             </table>

@@ -27,9 +27,9 @@
             <td th:text="${user.role} ? ${user.role.role}:'Не выбрана роль'"></td>
             <td th:text="${user.active}?'Активен':'Неактивен'"></td>
             <td th:text="${user.userKey}"></td>
-            <td><a class="link" th:href="@{/user/generate(id=${user.id})}">Сгенерировать</a></td>
-            <td><a class="link" href="" th:href="@{/user/edit(id=${user.id})}">Изменить</a></td>
-            <td><a class="link" href="" th:href="@{/user/delete(id=${user.id})}">Удалить</a></td>
+            <th style="background-color: #805340"><a class="link" th:href="@{/user/generate(id=${user.id})}" style="color: white">Сгенерировать</a></th>
+            <th style="background-color: #324960"><a class="link" href="" th:href="@{/user/edit(id=${user.id})}" style="color: white">Изменить</a></th>
+            <th style="background-color: #902a2a"><a class="link" href="" th:href="@{/user/delete(id=${user.id})}" style="color: white">Удалить</a></th>
         </tr>
         <tr>
             <th colspan="10"><a class="link" href="#" th:href="@{/registration}">Добавить нового
