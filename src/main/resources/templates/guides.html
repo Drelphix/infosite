@@ -115,14 +115,14 @@
                 <td th:text="${currentGuide.username}"></td>
             </tr>
             <tr>
-                <th colspan="6" style="font-weight: bold">Описание:</th>
+                <th colspan="6" class="btmn" style="font-weight: bold">Описание:</th>
             </tr>
             <tr>
-                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial;"></td>
+                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial; background-color:initial; white-space:initial;color:black;line-height: inherit"></td>
             </tr>
             <tr>
                 <th style="background-color: black; color: white">Дата редактирования:</th>
-                <td colspan="2" th:if="${currentGuide.lastEditDate}"></td>
+                <td colspan="2" th:text="${currentGuide.lastEditDate}"></td>
                 <th style="background-color: black; color: white">Отредактировано:</th>
                 <td colspan="2" th:text="${currentGuide.lastEditUsername}"></td>
             </tr>

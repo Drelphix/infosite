@@ -10,11 +10,15 @@
     <link href="#" rel="stylesheet" th:href="@{/css/tables.css}"/>
     <link href="#" rel="stylesheet" th:href="@{/css/all.css}"/>
     <script th:inline="javascript">
-            function copy(x){
-            navigator.clipboard.writeText(x);
+               function copy(x){
+            navigator.clipboard.writeText(x)
+            .then(() => {
+                alert('Данные успешно скопированы');
+            })
+            .catch(err => {
+            console.log('Something went wrong', err);
+            });
             }
-
-
     </script>
 </head>
 <body>

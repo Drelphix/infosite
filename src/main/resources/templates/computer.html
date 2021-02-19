@@ -23,18 +23,11 @@
                                         <th>Свободное место</th>
                                     </tr>
                                     <tr th:each="disk : ${computer.disks}">
-                                        <div th:if="${disk.getFreeSpaceGb()}>=5">
                                             <td th:text="${disk.getLetter()}"></td>
                                             <td th:text="${disk.getName()}"></td>
                                             <td th:text="${disk.getTotalSize()}"></td>
-                                            <td th:text="${disk.getFreeSpace()}"></td>
-                                        </div>
-                                        <div th:if="${disk.getFreeSpaceGb()}<=5">
-                                            <td th:text="${disk.getLetter()}"></td>
-                                            <td th:text="${disk.getName()}"></td>
-                                            <td th:text="${disk.getTotalSize()}"></td>
-                                            <td th:text="${disk.getFreeSpace()}"></td>
-                                        </div>
+                                            <td th:if="${disk.getFreeSpaceGb()}>=5" th:text="${disk.getFreeSpace()}"></td>
+                                            <td th:if="${disk.getFreeSpaceGb()}<=5" style="background-color: #902a2a;color:white;" th:text="${disk.getFreeSpace()}"></th>
                                     </tr>
                                 </table>
                             </td>
@@ -50,7 +43,7 @@
                                     <tr th:each="backup : ${computer.backups}"
                                         th:if="${not #lists.isEmpty(computer.backups)}">
                                         <td style="text-align: initial;" th:text="${backup.getPath()}"></td>
-                                        <td colspan="3" th:unless="${not #lists.isEmpty(backup.files)}">
+                                        <td colspan="3" style="background-color: #902a2a;color:white;" th:unless="${not #lists.isEmpty(backup.files)}">
                                             Нет данных
                                         </td>
                                         <td style="text-align: initial;" th:text="${backup.files[0].name}"></td>
