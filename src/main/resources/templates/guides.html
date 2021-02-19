@@ -118,7 +118,7 @@
                 <th colspan="6" class="btmn" style="font-weight: bold">Описание:</th>
             </tr>
             <tr>
-                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial; background-color:initial; white-space:initial;color:black;line-height: inherit"></td>
+                <td colspan="6" th:utext="${currentGuide.text}" style="text-align: initial; background-color:initial; white-space:initial; color:black; line-height: inherit; pointer-events:none;"></td>
             </tr>
             <tr>
                 <th style="background-color: black; color: white">Дата редактирования:</th>
@@ -126,7 +126,9 @@
                 <th style="background-color: black; color: white">Отредактировано:</th>
                 <td colspan="2" th:text="${currentGuide.lastEditUsername}"></td>
             </tr>
-            <th colspan="6" th:if="${mode==true}" style="background-color: red">
+
+            <th colspan="3" th:if="${mode==true}" style="background-color: #324960"><a th:href="@{/guide/edit(id=${currentGuide.id})}" style="color: white">Изменить</a></th>
+            <th colspan="3" th:if="${mode==true}" style="background-color: red">
                 <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}" style="color: white">Удалить
                     инструкцию</a>
             </th>
