@@ -10,15 +10,21 @@
     <div class="sidenav">
         <table class="sideweb" style="background-color: initial; text-align: initial;">
             <tr th:if="${mode==false}">
-            <th >Выберите тему:</th>
+                <th>Выберите тему:</th>
             </tr>
-            <tr  th:if="${#lists.isEmpty(guideMenu)}">
-            <th th:if="${mode==false}"><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th></tr>
-            <tr th:if="${mode==true}"><th ><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th></tr>
+            <tr th:if="${#lists.isEmpty(guideMenu)}">
+                <th th:if="${mode==false}"><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a>
+                </th>
+            </tr>
+            <tr th:if="${mode==true}">
+                <th><a th:href="@{/guideMenu/new}" style="font-size: initial">Добавить тему</a></th>
+            </tr>
             <tbody>
             <tr th:each="menu:${guideMenu}">
-                <td th:if="${mode==false}"><a th:href="@{/guideMenu(id=${menu.id})}" th:text="${menu.getName()}"></a></td>
-                <td th:if="${mode==true}"><a th:href="@{/guideMenu/edit(id=${menu.id})}" th:text="${menu.getName()}"></a></td>
+                <td th:if="${mode==false}"><a th:href="@{/guideMenu(id=${menu.id})}" th:text="${menu.getName()}"></a>
+                </td>
+                <td th:if="${mode==true}"><a th:href="@{/guideMenu/edit(id=${menu.id})}"
+                                             th:text="${menu.getName()}"></a></td>
             </tr>
             </tbody>
         </table>
@@ -27,42 +33,42 @@
     <center>
         <span th:if="${error}">Невозможно удалить, посколько меню содержит инструкции</span>
         <!--Список гайдов относящихся к меню в таблице-->
-            <table class="iksweb" th:if="${currentMenu}">
-                <tbody >
-                <!-- ↑Сюда прописать условие не отображать пока не выбрано ничего-->
-                <tr th:unless="${mode==true}">
+        <table class="iksweb" th:if="${currentMenu}">
+            <tbody>
+            <!-- ↑Сюда прописать условие не отображать пока не выбрано ничего-->
+            <tr th:unless="${mode==true}">
                 <th colspan="6" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
-                </tr>
-                <tr th:if="${mode==true}">
-                    <th colspan="8" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
-                </tr>
-                </tbody>
-                <tbody class="btnm">
-                <tr>
-                    <th>Название</th>
-                    <th>Краткое описание</th>
-                    <th>Дата создания</th>
-                    <th>Пользователем</th>
-                    <th>Дата редактирования</th>
-                    <th>Пользователем</th>
-                    <th colspan="2" th:if="${mode==true}">Действия</th>
-                </tr>
-                <tr th:each="guide:${currentMenu.guides}">
-                    <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.title}"></a></td>
-                    <td th:text="${guide.shortDescription}"></td>
-                    <td th:text="${guide.date}"></td>
-                    <td th:text="${guide.username}"></td>
-                    <td th:text="${guide.lastEditDate}"></td>
-                    <td th:text="${guide.lastEditUsername}"></td>
-                    <td th:if="${mode==true}"><a th:href="@{/guide/edit(id=${guide.id})}">Изменить</a></td>
-                    <td th:if="${mode==true}"><a th:href="@{/guide/delete(id=${guide.id})}">Удалить</a></td>
-                </tr>
-                <tr>
-                    <th th:if="${mode==true}"colspan="8"><a href="#" th:href="@{/guide/new(mid=${currentMenu.id})}">Добавить запись</a></th>
-                </tr>
-                </tbody>
-            </table>
-
+            </tr>
+            <tr th:if="${mode==true}">
+                <th colspan="8" th:if="${currentMenu}" th:text="${currentMenu.getName()}"></th>
+            </tr>
+            </tbody>
+            <tbody class="btnm">
+            <tr>
+                <th>Название</th>
+                <th>Краткое описание</th>
+                <th>Дата создания</th>
+                <th>Пользователем</th>
+                <th>Дата редактирования</th>
+                <th>Пользователем</th>
+                <th colspan="2" th:if="${mode==true}">Действия</th>
+            </tr>
+            <tr th:each="guide:${currentMenu.guides}">
+                <td><a th:href="@{/guide(id=${guide.id})}" th:text="${guide.title}"></a></td>
+                <td th:text="${guide.shortDescription}"></td>
+                <td th:text="${guide.date}"></td>
+                <td th:text="${guide.username}"></td>
+                <td th:text="${guide.lastEditDate}"></td>
+                <td th:text="${guide.lastEditUsername}"></td>
+                <td th:if="${mode==true}"><a th:href="@{/guide/edit(id=${guide.id})}">Изменить</a></td>
+                <td th:if="${mode==true}"><a th:href="@{/guide/delete(id=${guide.id})}">Удалить</a></td>
+            </tr>
+            <tr>
+                <th th:if="${mode==true}" colspan="8"><a href="#" th:href="@{/guide/new(mid=${currentMenu.id})}">Добавить
+                    запись</a></th>
+            </tr>
+            </tbody>
+        </table>
 
 
         <table class="iksweb" style="width:initial" th:if="${newGuideMenu}">
@@ -81,36 +87,49 @@
                     <th th:text="${error}"></th>
                 </tr>
                 <tr>
-                    <td colspan="2" th:unless="${editGuideMenu}"><input class="confirm" type="submit" th:formaction="@{/guideMenu/save}" value="Сохранить"></td>
-                    <td th:if="${editGuideMenu}"><input class="confirm" type="submit" th:formaction="@{/guideMenu/rename}" value="Переименовать"></td>
-                    <td th:if="${editGuideMenu}"><input class="confirm" type="submit" formmethod="get" th:formaction="@{/guideMenu/delete(id=${newGuideMenu.id})}" value="Удалить пункт"></td>
+                    <td colspan="2" th:unless="${editGuideMenu}"><input class="confirm" type="submit"
+                                                                        th:formaction="@{/guideMenu/save}"
+                                                                        value="Сохранить"></td>
+                    <td th:if="${editGuideMenu}"><input class="confirm" type="submit"
+                                                        th:formaction="@{/guideMenu/rename}" value="Переименовать"></td>
+                    <td th:if="${editGuideMenu}"><input class="confirm" type="submit" formmethod="get"
+                                                        th:formaction="@{/guideMenu/delete(id=${newGuideMenu.id})}"
+                                                        value="Удалить пункт"></td>
                 </tr>
             </form>
         </table>
-        </center>
+    </center>
 
-        <div th:if="${currentGuide}">
-            <h1 th:text="${currentGuide.title}"></h1>
-            <span>Created by
-            <span th:text="${currentGuide.username}"></span> at
-            <span th:text="${currentGuide.date}"></span>
-            </span>
+    <center>
+        <table th:if="${currentGuide}" class="iksweb" style="width:initial">
+            <th colspan="4" th:text="${currentGuide.title}" style="font-weight: bold"></th>
             <input th:field="${currentGuide.id}" type="hidden">
-
-            <span th:if="${currentGuide.lastEditDate}">Last edited by
-			<span th:text="${currentGuide.lastEditUsername}"></span> at
-			<span th:text="${currentGuide.lastEditDate}"></span>
-			</span>
-            <div th:utext="${currentGuide.text}"></div>
-
-            <td th:if="${mode==true}">
-                <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}">Удалить инструкцию</a>
-            </td>
-        </div>
-        </tr>
-
-    </table>
-
+            <tr>
+                <th>Дата:</th>
+                <td th:text="${currentGuide.date}"></td>
+                <th>Категория:</th>
+                <!--<td th:text="${currentMenu.getName()}"></td>-->
+                <th>Автор:</th>
+                <!--<td th:text="${guide.username}"></td>-->
+            </tr>
+            <tr>
+                <th colspan="4" style="font-weight: bold">Описание:</th>
+            </tr>
+            <tr>
+                <td colspan="4" th:utext="${currentGuide.text}"></td>
+            </tr>
+            <tr>
+                <th>Дата редактирования:</th>
+                <td th:if="${currentGuide.lastEditDate}"></td>
+                <th>Отредактировано:</th>
+                <td th:text="${currentGuide.lastEditUsername}"></td>
+            </tr>
+            <th colspan="4" th:if="${mode==true}" style="background-color: black">
+                <a class="link" th:href="@{/guide/delete(id=${currentGuide.id})}" style="color: white">Удалить
+                    инструкцию</a>
+            </th>
+        </table>
+    </center>
 </div>
 </body>
 </html>
