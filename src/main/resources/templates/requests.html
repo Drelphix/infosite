@@ -63,13 +63,13 @@
                 <td th:field="${order.status}" th:text="${order.status.displayValue}"></td>
                 <td th:object="${status}">
                     <form th:action="@{/order/{id}(id = ${order.id})}" method="post">
-                        <select id="status" name="status" class="confirm" style="width: 40%">
-                            <option value="">Выберите статус</option>
+                        <select id="status" name="status" class="confirm">
+                            <option value="">Выберите</option>
                             <option th:each="status: ${T(info.infosite.entities.request.Status).values()}"
                                     th:text="${status.displayValue}"
                                     th:value="${status}"></option>
                         </select>
-                        <input type="submit" value="Изменить статус" class="confirm" style="width: 58%">
+                        <input type="submit" value="Изменить статус" class="confirm">
                     </form>
                 </td>
             </tr>

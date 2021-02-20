@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//@Component
+@Component
 @EnableAsync
 public class TelegramBot extends TelegramLongPollingBot {
     private static final String IF_COMMAND = "/";
