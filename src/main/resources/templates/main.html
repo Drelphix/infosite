@@ -126,13 +126,13 @@
                                        value="Скопировать данные">
                             </div>
                         </td>
-                        <td th:if="${mode==true}">
-                            <a class="link" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
+                        <th th:if="${mode==true}" style="background-color: #324960">
+                            <a class="link" style="color: white" href="#" th:href="@{/edit(tab=${table.id},line=${row.index})}"
                                th:if="${mode==true}">Изменить</a>
-                        </td>
-                        <td th:if="${mode==true}">
-                            <a class="link" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить</a>
-                        </td>
+                        </th>
+                        <th th:if="${mode==true}" style="background-color: #902a2a">
+                            <a class="link" style="color: white" href="#" th:href="@{/line/delete(tab=${table.id},line=${row.index})}">Удалить</a>
+                        </th>
                     </tr>
                     <tr th:if="${not #lists.isEmpty(table.cols)}">
                         <td th:colspan="${#lists.size(table.cols)+2}" th:if="${mode==true}">

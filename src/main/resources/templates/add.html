@@ -26,7 +26,7 @@
         <table class="iksweb" style="width:initial">
             <form action="#" method="post" th:action="@{/line/edit}" th:if="${lines}" th:object="${lines}">
                 <tr>
-                    <th colspan="2" th:text="${tableName}"></th>
+                    <th colspan="2">Добавить строку</th>
                 </tr>
                 <tr th:each="line,itemStat: *{lines}">
                     <input th:field="*{idSubMenu}" type="hidden">
