@@ -111,11 +111,11 @@ public class TelegramBot extends TelegramLongPollingBot {
                         try {
                             Request request = createNewRequest(update);
                             User user = request.getUser();
-                            sendMessageToGroup(REQUEST_MESSAGE + "\n" +
+                            /*sendMessageToGroup(REQUEST_MESSAGE + "\n" +
                                     "От: " + user.getInfo() + " \n" +
                                     "Расположение: " + user.getRegion() + " \n" +
                                     "Описание проблемы: \n" +
-                                    request.getRequestMessage(), "admin");
+                                    request.getRequestMessage(), "admin");*/
                             sendMessage(chatId, OK_REQUEST_MESSAGE+request.getId());
                         } catch (NullPointerException e) {
                             sendMessage(chatId, ERROR_MESSAGE);
@@ -159,15 +159,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String checkLastCommand(Update update) {
         Long chatId = update.getMessage().getChatId();
-        for (UserRequest userRequest : userRequests) {
-            if (userRequest.getChatId().equals(chatId)) {
-                for (int i = userRequest.chat.size() - 1; i >= 0; i--) {
-                    if (userRequest.chat.get(i).startsWith(IF_COMMAND)) {
-                        return userRequest.chat.get(i);
-                    }
+        for (int i =userRequests.size()-1;i>=0;i--) {
+            if (userRequests.get(i).getChatId().equals(chatId)&userRequests.get(i).chat.get(0).startsWith(IF_COMMAND)) {
+                return userRequests.get(i).chat.get(i);
                 }
             }
-        }
         return null;
     }
 

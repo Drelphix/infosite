@@ -26,8 +26,8 @@ public class Computer {
     @Column
     private String motherboard;
 
-    @OneToMany(targetEntity = Cpu.class,mappedBy = "computer",cascade = CascadeType.ALL)
-    private List<Cpu> cpu;
+    @OneToOne(targetEntity = Cpu.class,mappedBy = "computer",cascade = CascadeType.ALL)
+    private Cpu cpu;
 
     @OneToOne(targetEntity = OperationSystem.class,mappedBy = "computer",cascade = CascadeType.ALL)
     private OperationSystem os;
@@ -49,9 +49,7 @@ public class Computer {
            return false;
         }
             if (!this.os.like(computer.getOs())) return false;
-            for(int i=0;i<cpu.size();i++){
-                if(!this.cpu.get(i).like(computer.getCpu().get(i))) return true;
-            }
+            if(!this.cpu.like(computer.getCpu())) return false;
             for (int i = 0; i < memory.size(); i++) {
                 if(!this.memory.get(i).like(computer.getMemory().get(i))) return false;
             }
@@ -71,11 +69,5 @@ public class Computer {
         }
         return summaryMemory+" Gb";
     }
-    public String getCpuInfo(){
-        String cpuInfo="";
-        for (Cpu cpu:this.cpu){
-            cpuInfo+=cpu.getName()+"; ";
-        }
-        return cpuInfo;
-    }
+
 }

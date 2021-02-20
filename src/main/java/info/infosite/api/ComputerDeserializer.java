@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import info.infosite.entities.computer.*;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
     @Override
     public Computer deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
         Computer computer = new Computer();
-        List<Cpu> cpu = new ArrayList<>();
+        Cpu cpu = new Cpu();
         List<Memory> memory = new ArrayList<>();
         List<Disk> disks = new ArrayList<>();
         List<Network> networks = new ArrayList<>();
@@ -145,12 +146,9 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
             }
         }
     }
-    private void setCpu (String value,String fieldName,List<Cpu> cpu){
-        int last = cpu.size() - 1;
+    private void setCpu (String value,String fieldName,Cpu cpu){
         if("name".equals(fieldName)){
-            cpu.add(new Cpu());
-            last = cpu.size() - 1;
-            cpu.get(last).setName(value);
+            cpu.setName(value);
         }
     }
     private void setNetwork(String value,String fieldName,List<Network> networks){

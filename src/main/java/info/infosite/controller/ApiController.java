@@ -44,9 +44,7 @@ public class ApiController {
 
     private void saveComputer(Computer computer){
         computer.setDate(LocalDateTime.now());
-        for(Cpu cpu:computer.getCpu()){
-            cpu.setComputer(computer);
-        }
+
         for(Disk disk:computer.getDisks()){
             disk.setComputer(computer);
         }
@@ -56,6 +54,7 @@ public class ApiController {
         for(Network network:computer.getNetworks()){
             network.setComputer(computer);
         }
+        computer.getCpu().setComputer(computer);
         computer.getOs().setComputer(computer);
         computerRepository.save(computer);
     }
