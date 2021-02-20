@@ -66,9 +66,9 @@
                             <th>Дата</th>
                         <tr>
                         <tr th:each="file: ${backup.files}">
-                            <td th:text="${file.name}"></td>
+                            <td th:text="${file.name}" style="text-align: left;"></td>
                             <td th:text="${file.size}"></td>
-                            <td th:text="${file.lastDate}"></td>
+                            <td th:text="${file.lastDate}" style="text-align: right;"></td>
                         </tr>
                     </table>
                 </center>
