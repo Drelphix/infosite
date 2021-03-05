@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import info.infosite.entities.computer.*;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
     @Override
     public Computer deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
         Computer computer = new Computer();
-        Cpu cpu = new Cpu();
         List<Memory> memory = new ArrayList<>();
         List<Disk> disks = new ArrayList<>();
         List<Network> networks = new ArrayList<>();
@@ -33,40 +31,43 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
                 String fieldName = parser.getCurrentName();
                 parser.nextToken();
                 String value = parser.getValueAsString();
-                if("memory".equals(fieldName)
-                        ||"os".equals(fieldName)
-                        ||"disks".equals(fieldName)
-                        ||"cpu".equals(fieldName)
-                        ||"networks".equals(fieldName)){
+                if ("memory".equals(fieldName)
+                        || "os".equals(fieldName)
+                        || "disks".equals(fieldName)
+                        || "network".equals(fieldName)) {
                     objectFieldName = fieldName;
                 } else {
-                    if(fieldName.equals("computer")){
+                    if (fieldName.equals("name")) {
                         computer.setName(value);
-                    } else if(fieldName.equals("motherboard")){
+                    } else if (fieldName.equals("motherboard")) {
                         computer.setMotherboard(value);
+                    } else if (fieldName.equals("cpu")) {
+                        computer.setCpu(value);
                     }
-                   switch (objectFieldName){
-                       case "memory":{
-                            setMemory(value,fieldName,memory);break;
-                       }
-                       case "os":{
-                           setOS(value,fieldName,os);break;
-                       }
-                       case "disks":{
-                           setDisk(value,fieldName,disks);break;
-                       }
-                       case "cpu":{
-                            setCpu(value,fieldName,cpu);break;
-                       }
-                       case "networks":{
-                           setNetwork(value,fieldName,networks);break;
-                       }
-                       default: System.out.println("Unknown Element: "+ fieldName+" with value - "+value);
-                       }
+                    switch (objectFieldName) {
+                        case "memory": {
+                            setMemory(value, fieldName, memory);
+                            break;
+                        }
+                        case "os": {
+                            setOS(value, fieldName, os);
+                            break;
+                        }
+                        case "disks": {
+                            setDisk(value, fieldName, disks);
+                            break;
+                        }
+                        case "network": {
+                            setNetwork(value, fieldName, networks);
+                            break;
+                        }
+                        default:
+                            System.out.println("Unknown Element: " + fieldName + " with value - " + value);
+                    }
                    }
                 }
             }
-        computer.setCpu(cpu);
+
         computer.setMemory(memory);
         computer.setOs(os);
         computer.setDisks(disks);
@@ -146,22 +147,22 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
             }
         }
     }
-    private void setCpu (String value,String fieldName,Cpu cpu){
-        if("name".equals(fieldName)){
-            cpu.setName(value);
-        }
-    }
+
     private void setNetwork(String value,String fieldName,List<Network> networks){
         int last = networks.size() - 1;
         switch (fieldName){
-            case "description":{
+            case "description": {
                 networks.add(new Network());
                 last = networks.size() - 1;
                 networks.get(last).setDescription(value);
                 break;
             }
-            case "ipAddress":{
+            case "ipAddress": {
                 networks.get(last).setIpAddress(value);
+                break;
+            }
+            case "macAddress": {
+                networks.get(last).setMacAddress(value);
                 break;
             }
         }

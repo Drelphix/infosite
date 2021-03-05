@@ -1,6 +1,7 @@
 package info.infosite.functions;
 
 import info.infosite.entities.auth.User;
+import info.infosite.entities.computer.Computer;
 import info.infosite.entities.gentable.Col;
 import info.infosite.entities.gentable.Menu;
 import info.infosite.entities.gentable.SubMenu;
@@ -53,6 +54,13 @@ public class DeleteService {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
         session.remove(session.contains(user) ? user : session.merge(user));
+        tx.commit();
+    }
+
+    public void DeleteComputer(Computer computer) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(computer);
         tx.commit();
     }
 }

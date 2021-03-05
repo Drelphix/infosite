@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import info.infosite.api.ComputerDeserializer;
 import info.infosite.entities.computer.*;
+import info.infosite.functions.DeleteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,9 @@ import java.util.HashMap;
 public class ApiController {
     @Autowired
     ComputerRepository computerRepository;
+
     @Autowired
-    OSRepository osRepository;
+    DeleteService deleteService;
 
     @PostMapping(value = "/api", consumes = "application/json", produces = "application/json")
     public void getComputerInfo(@RequestBody HashMap<String, Object> jsonMap) throws IOException {
@@ -34,9 +36,8 @@ public class ApiController {
         Computer computer = objectMapper.readValue(json,Computer.class);
         try {
             Computer temp = computerRepository.findByName(computer.getName());
-            if(!computer.like(temp)){
-            computerRepository.deleteById(temp.getId());
-            saveComputer(computer);}
+            deleteService.DeleteComputer(computer);
+            saveComputer(computer);
         } catch (NullPointerException|IllegalArgumentException e){
             saveComputer(computer);
         }
@@ -48,14 +49,20 @@ public class ApiController {
         for(Disk disk:computer.getDisks()){
             disk.setComputer(computer);
         }
-        for(Memory memory:computer.getMemory()){
+        for (Memory memory : computer.getMemory()) {
             memory.setComputer(computer);
         }
-        for(Network network:computer.getNetworks()){
+        for (Network network : computer.getNetworks()) {
             network.setComputer(computer);
         }
-        computer.getCpu().setComputer(computer);
+
         computer.getOs().setComputer(computer);
-        computerRepository.save(computer);
+        System.out.println(computer.toString());
+        try {
+            computerRepository.delete(computerRepository.findByName(computer.getName()));
+            computerRepository.save(computer);
+        } catch (Exception e) {
+            computerRepository.save(computer);
+        }
     }
 }

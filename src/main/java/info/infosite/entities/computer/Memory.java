@@ -35,6 +35,11 @@ public class Memory {
     @JoinColumn(nullable = false)
     private Computer computer;
 
+    public void setCapacity(String capacity) {
+        capacity = String.valueOf(Math.round(Long.parseLong(capacity) / Math.pow(1024, 3)));
+        this.capacity = capacity;
+    }
+
     public boolean like(Memory memory) {
         return this.capacity.equals(memory.capacity) &
                 this.speed.equals(memory.speed) &

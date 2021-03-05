@@ -19,10 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @SessionAttributes("mode")
@@ -170,6 +167,7 @@ public class EditController {
         model.addAttribute("guideMenus",guideMenuRepository.findAll());
         model.addAttribute("currentGuide",guide);
         model.addAttribute("guide", guide);
+        model.addAttribute("guideMenus", guideMenuRepository.findAll());
         model.addAttribute("edit", true);
         return "addguide";
     }
@@ -180,7 +178,7 @@ public class EditController {
         guide.setLastEditUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         int idMenu = guide.getMenu().getId();
         guideRepository.save(guide);
-        return "redirect:/guideMenu?id="+idMenu;
+        return "redirect:/guideMenu?id=" + idMenu;
     }
 
     @RequestMapping(value = "/guideMenu/edit", method = RequestMethod.GET)

@@ -18,7 +18,7 @@ public class Disk {
     @Column
     private String serialNumber;
     @Column
-    private  String size;
+    private String size;
     @Column
     private String status;
 
@@ -26,7 +26,12 @@ public class Disk {
     @JoinColumn(nullable = false)
     private Computer computer;
 
-    public boolean like(Disk disk){
+    public void setSize(String size) {
+        size = String.valueOf(Math.round(Long.parseLong(size) / Math.pow(1024, 3)));
+        this.size = size;
+    }
+
+    public boolean like(Disk disk) {
         return this.model.equals(disk.model) &
                 this.serialNumber.equals(disk.serialNumber) &
                 this.size.equals(disk.size) &

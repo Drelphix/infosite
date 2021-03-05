@@ -18,7 +18,7 @@
 
             <tr class="btnm" th:each="pc:${pcs}">
                 <td th:text="${pc.name}"></td>
-                <td th:text="${pc.cpu.name}"></td>
+                <td th:text="${pc.cpu}"></td>
                 <td th:text="${pc.motherboard}"></td>
                 <td th:text="${pc.getSummaryMemory()}"></td>
                 <th style="background-color: #805340"><a th:href="@{/pc(show=${pc.name})}" style="color: white">Подробная информация</a></th>
@@ -64,9 +64,9 @@
                 <th colspan="6">Процессор:</th>
             </tr>
 
-            <tr th:each="cpu,index:${pc.cpu}">
+            <tr>
                 <td>Наименование</td>
-                <td colspan="5" th:text="${cpu.name}"></td>
+                <td colspan="5" th:text="${pc.cpu}"></td>
             </tr>
 
             <tr>

@@ -12,7 +12,9 @@ import java.util.List;
 @Getter
 @Entity
 public class Network {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column
     private String description;
@@ -20,15 +22,19 @@ public class Network {
     @Column
     private String ipAddress;
 
+    @Column
+    private String macAddress;
+
     @ManyToOne(targetEntity = Computer.class)
     @JoinColumn(nullable = false)
     private Computer computer;
 
-    public boolean like(Network network){
+    public boolean like(Network network) {
         return this.description.equals(network.description) &
                 this.ipAddress.equals(network.ipAddress);
     }
-    public List<String> getIpAddresses(){
+
+    public List<String> getIpAddresses() {
     List<String> nothing = new ArrayList<>();
     nothing.add("Ip-адреса отсутствуют");
         try {
