@@ -136,12 +136,18 @@
             </tr>
             <tr>
                 <td>ip адреса</td>
-                <td colspan="5"><a th:each="ip:${net.getIpAddresses()}" th:text="${ip}"></a></td>
+                <td colspan="5"><a style="display:block;" th:each="ip:${net.getIpAddresses()}" th:text="${ip}"></a></td>
+            </tr>
+            <tr>
+                <td>mac адреса</td>
+                <td colspan="5"><a th:text="${net.macAddress}"></a></td>
             </tr>
             </tbody>
-            <td colspan="6"><button th:formaction="@{/}"  formmethod="get" class="confirm"
+            <td colspan="6">
+                <button class="confirm" formmethod="get" th:action="@{/back}"
                         style="padding: 1px 4rem;">Вернуться назад
-            </button></td>
+                </button>
+            </td>
         </table>
         </form>
 </div>
