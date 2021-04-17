@@ -13,7 +13,7 @@
                 <center>
                     <table id="maintable" style="width:100%;">
                         <tr>
-                            <td style="vertical-align:top">
+                            <td style="vertical-align:top" width="23%">
                                 <table class="iksweb" id="infodisk" th:if="${not #lists.isEmpty(computer.disks)}">
                                     <th colspan="4">Информация о дисках</th>
                                     <tr>
@@ -23,32 +23,38 @@
                                         <th>Свободное место</th>
                                     </tr>
                                     <tr th:each="disk : ${computer.disks}">
-                                            <td th:text="${disk.getLetter()}"></td>
+                                        <td th:text="${disk.getLetter()}"></td>
                                             <td th:text="${disk.getName()}"></td>
                                             <td th:text="${disk.getTotalSize()}"></td>
-                                            <td th:if="${disk.getFreeSpaceGb()}>=5" th:text="${disk.getFreeSpace()}"></td>
+                                        <td th:if="${disk.getFreeSpaceGb()}>5" th:text="${disk.getFreeSpace()}"></td>
                                             <td th:if="${disk.getFreeSpaceGb()}<=5" style="background-color: #902a2a;color:white;" th:text="${disk.getFreeSpace()}"></th>
                                     </tr>
                                 </table>
                             </td>
-                            <td style="vertical-align:top">
+                            <td style="vertical-align:top" width="60%">
                                 <table class="iksweb" id="lastfile">
                                     <th colspan="4">Последние файлы</th>
                                     <tr>
-                                        <th>Путь файла</th>
-                                        <th>Имя файла</th>
-                                        <th>Размер</th>
-                                        <th>Дата</th>
+                                        <th style="width:33%">Путь файла</th>
+                                        <th style="width:45%">Имя файла</th>
+                                        <th style="width:7%">Размер</th>
+                                        <th style="width:15%">Дата</th>
                                     </tr>
                                     <tr th:each="backup : ${computer.backups}"
                                         th:if="${not #lists.isEmpty(computer.backups)}">
-                                        <td style="text-align: initial;" th:text="${backup.getPath()}"></td>
-                                        <td colspan="3" style="background-color: #902a2a;color:white;" th:unless="${not #lists.isEmpty(backup.files)}">
+                                        <td style="text-align: initial; color:#000000;"
+                                            th:text="${backup.getPath()}"></td>
+                                        <td colspan="3" style="background-color: #902a2a;color:white;"
+                                            th:unless="${not #lists.isEmpty(backup.files)}">
                                             Нет данных
                                         </td>
-                                        <td style="text-align: initial;" th:text="${backup.files[0].name}"></td>
-                                        <td th:text="${backup.files[0].size}"></td>
-                                        <td th:text="${backup.files[0].lastDate}"></td>
+                                        <div th:if="${not #lists.isEmpty(backup.files)}">
+                                            <td style="text-align: initial;"
+                                                th:text="${backup.files[#lists.size(backup.files)-1].name}"></td>
+                                            <td th:text="${backup.files[#lists.size(backup.files)-1].size}"></td>
+                                            <td th:text="${backup.files[#lists.size(backup.files)-1].lastDate}"></td>
+                                        </div>
+
                                     </tr>
                                     </tr>
                                 </table>
@@ -58,17 +64,17 @@
                     <br>
                     <h3 style="text-align-last: center;">Информация о файлах</h3>
 
-                    <table class="iksweb" style="width:60%;" id="infofile" th:each="backup : ${computer.backups}">
+                    <table class="iksweb" id="infofile" style="width:95%;" th:each="backup : ${computer.backups}">
                         <th align="center" colspan="3" th:text="${backup.getPath()}"></th>
                         <tr>
                             <th>Имя файла</th>
-                            <th>Размер</th>
-                            <th>Дата</th>
+                            <th style="width:10%">Размер</th>
+                            <th style="width:20%">Дата</th>
                         <tr>
                         <tr th:each="file: ${backup.files}">
                             <td th:text="${file.name}" style="text-align: left;"></td>
                             <td th:text="${file.size}"></td>
-                            <td th:text="${file.lastDate}" style="text-align: right;"></td>
+                            <td th:text="${file.lastDate}"></td>
                         </tr>
                     </table>
                 </center>

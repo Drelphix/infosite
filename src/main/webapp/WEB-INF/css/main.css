@@ -216,6 +216,7 @@ table.iksweb th {
 table.iksweb td {
 	font-size: 14px;
 	color: #000;
+	height:40px;
 }
 
 table.iksweb td,

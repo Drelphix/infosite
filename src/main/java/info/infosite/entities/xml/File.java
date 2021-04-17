@@ -10,4 +10,5 @@ public class File {
     private String lastDate;
     private boolean expired;
     private String size;
+
 }

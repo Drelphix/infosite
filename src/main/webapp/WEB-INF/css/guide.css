@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
+
 }
 
 .widget {
@@ -71,7 +72,7 @@ table.sideweb td,
 table.sideweb th {
 	line-height: 13px;
 	vertical-align: middle;
-	/* Отрисовка границ border:2px solid #8ac858;
+	/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ border:2px solid #8ac858;
      */
 	padding: 6px 6px;
 }

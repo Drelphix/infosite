@@ -100,6 +100,7 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
                 break;
             }
             case "partNumber": {
+                last = memoryList.size() - 1;
                 memoryList.get(last).setPartNumber(value);
             }
         }
