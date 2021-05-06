@@ -64,7 +64,7 @@
                     <br>
                     <h3 style="text-align-last: center;">Информация о файлах</h3>
 
-                    <table class="iksweb" id="infofile" style="width:95%;" th:each="backup : ${computer.backups}">
+                    <table class="iksweb" id="infofile" style="width:100%;" th:each="backup : ${computer.backups}">
                         <th align="center" colspan="3" th:text="${backup.getPath()}"></th>
                         <tr>
                             <th>Имя файла</th>
