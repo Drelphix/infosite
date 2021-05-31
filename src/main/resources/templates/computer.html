@@ -24,10 +24,13 @@
                                     </tr>
                                     <tr th:each="disk : ${computer.disks}">
                                         <td th:text="${disk.getLetter()}"></td>
-                                            <td th:text="${disk.getName()}"></td>
-                                            <td th:text="${disk.getTotalSize()}"></td>
+                                        <td th:text="${disk.getName()}"></td>
+                                        <td th:text="${disk.getTotalSize()}"></td>
                                         <td th:if="${disk.getFreeSpaceGb()}>5" th:text="${disk.getFreeSpace()}"></td>
-                                            <td th:if="${disk.getFreeSpaceGb()}<=5" style="background-color: #902a2a;color:white;" th:text="${disk.getFreeSpace()}"></th>
+                                        <td style="background-color: #902a2a;color:white;"
+                                            th:if="${disk.getFreeSpaceGb()}<=5"
+                                            th:text="${disk.getFreeSpace()}">
+                                        </th>
                                     </tr>
                                 </table>
                             </td>
@@ -44,7 +47,7 @@
                                         th:if="${not #lists.isEmpty(computer.backups)}">
                                         <td style="text-align: initial; color:#000000;"
                                             th:text="${backup.getPath()}"></td>
-                                        <td colspan="3" style="background-color: #902a2a;color:white;"
+                                        <td colspan="3" style="background: radial-gradient(#f57a55, #ff0000a6);"
                                             th:unless="${not #lists.isEmpty(backup.files)}">
                                             Нет данных
                                         </td>
@@ -52,7 +55,11 @@
                                             <td style="text-align: initial;"
                                                 th:text="${backup.files[#lists.size(backup.files)-1].name}"></td>
                                             <td th:text="${backup.files[#lists.size(backup.files)-1].size}"></td>
-                                            <td th:text="${backup.files[#lists.size(backup.files)-1].lastDate}"></td>
+                                            <td style="background: radial-gradient(#f57a55, #ff0000a6);"
+                                                th:if="${backup.files[#lists.size(backup.files)-1].expired==true}"
+                                                th:text="${backup.files[#lists.size(backup.files)-1].lastDate}"></td>
+                                            <td th:if="${backup.files[#lists.size(backup.files)-1].expired==false}"
+                                                th:text="${backup.files[#lists.size(backup.files)-1].lastDate}"></td>
                                         </div>
 
                                     </tr>
@@ -64,7 +71,7 @@
                     <br>
                     <h3 style="text-align-last: center;">Информация о файлах</h3>
 
-                    <table class="iksweb" id="infofile" style="width:95%;" th:each="backup : ${computer.backups}">
+                    <table class="iksweb" id="infofile" style="width:100%;" th:each="backup : ${computer.backups}">
                         <th align="center" colspan="3" th:text="${backup.getPath()}"></th>
                         <tr>
                             <th>Имя файла</th>
