@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import info.infosite.entities.computer.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,25 +19,27 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
     }
 
     @Override
-    public Computer deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
+    public Computer deserialize(JsonParser parser, DeserializationContext deserializer) {
         Computer computer = new Computer();
         List<Memory> memory = new ArrayList<>();
         List<Disk> disks = new ArrayList<>();
         List<Network> networks = new ArrayList<>();
         OperationSystem os = new OperationSystem();
         String objectFieldName = "";
-        while(!parser.isClosed()){
-            JsonToken jsonToken = parser.nextToken();
-            if(JsonToken.FIELD_NAME.equals(jsonToken)){
-                String fieldName = parser.getCurrentName();
-                parser.nextToken();
-                String value = parser.getValueAsString();
-                if ("memory".equals(fieldName)
-                        || "os".equals(fieldName)
-                        || "disks".equals(fieldName)
-                        || "network".equals(fieldName)) {
-                    objectFieldName = fieldName;
-                } else {
+        while (!parser.isClosed()) {
+            JsonToken jsonToken = null;
+            try {
+                jsonToken = parser.nextToken();
+                if (JsonToken.FIELD_NAME.equals(jsonToken)) {
+                    String fieldName = parser.getCurrentName();
+                    parser.nextToken();
+                    String value = parser.getValueAsString();
+                    if ("memory".equals(fieldName)
+                            || "os".equals(fieldName)
+                            || "disks".equals(fieldName)
+                            || "network".equals(fieldName)) {
+                        objectFieldName = fieldName;
+                    } else {
                     if (fieldName.equals("name")) {
                         computer.setName(value);
                     } else if (fieldName.equals("motherboard")) {
@@ -64,14 +67,18 @@ public class ComputerDeserializer extends StdDeserializer<Computer> {
                         default:
                             System.out.println("Unknown Element: " + fieldName + " with value - " + value);
                     }
-                   }
+                    }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             }
 
         computer.setMemory(memory);
         computer.setOs(os);
         computer.setDisks(disks);
         computer.setNetworks(networks);
+        computer.setDate(LocalDateTime.now());
         return computer;
     }
     private void setMemory(String value,String fieldName,List<Memory> memoryList) {

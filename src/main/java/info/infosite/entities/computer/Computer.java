@@ -35,7 +35,7 @@ public class Computer {
     @OneToMany(targetEntity = Disk.class, mappedBy = "computer", cascade = CascadeType.ALL)
     private List<Disk> disks;
 
-    @OneToMany(targetEntity = Network.class,mappedBy = "computer",cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Network.class, mappedBy = "computer", cascade = CascadeType.ALL)
     private List<Network> networks;
 
     @Column
@@ -43,10 +43,9 @@ public class Computer {
 
     public String getSummaryMemory() {
         long summaryMemory = 0;
-        for (Memory memory:this.memory){
+        for (Memory memory : this.memory) {
             summaryMemory += Long.parseLong(memory.getCapacity());
         }
-        return summaryMemory+" Gb";
+        return summaryMemory + " Gb";
     }
-
 }

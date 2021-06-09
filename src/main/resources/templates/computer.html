@@ -27,7 +27,7 @@
                                         <td th:text="${disk.getName()}"></td>
                                         <td th:text="${disk.getTotalSize()}"></td>
                                         <td th:if="${disk.getFreeSpaceGb()}>5" th:text="${disk.getFreeSpace()}"></td>
-                                        <td style="background-color: #902a2a;color:white;"
+                                        <td style="background: radial-gradient(#f57a55, #ff0000a6);"
                                             th:if="${disk.getFreeSpaceGb()}<=5"
                                             th:text="${disk.getFreeSpace()}">
                                         </th>

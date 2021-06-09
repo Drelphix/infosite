@@ -24,11 +24,8 @@ public class OperationSystem {
     @JoinColumn(nullable = false)
     private Computer computer;
 
-    public boolean like(OperationSystem os){
-        return this.architecture.equals(os.architecture) &
-                this.caption.equals(os.caption) &
-                this.version.equals(os.version) &
-                this.lastBootTime.equals(os.lastBootTime);
+    public String getShrinkCaption() {
+        String[] caption = this.caption.split(" ");
+        return this.caption.contains("Windows Server") ? caption[1] + " " + caption[2] + " " + caption[3] : caption[1] + " " + caption[2];
     }
-
 }

@@ -29,19 +29,26 @@ public class Network {
     @JoinColumn(nullable = false)
     private Computer computer;
 
-    public boolean like(Network network) {
-        return this.description.equals(network.description) &
-                this.ipAddress.equals(network.ipAddress);
-    }
 
     public List<String> getIpAddresses() {
-    List<String> nothing = new ArrayList<>();
-    nothing.add("Ip-адреса отсутствуют");
+        List<String> nothing = new ArrayList<>();
+        nothing.add("Ip-адреса отсутствуют");
         try {
             return Arrays.asList(ipAddress.split(","));
-        } catch (NullPointerException e){ return nothing;
+        } catch (NullPointerException e) {
+            return nothing;
 
         }
+    }
+
+    public String getIpFrom10Network() {
+        List<String> ips = getIpAddresses();
+        for (String ip : ips) {
+            if (ip.startsWith("192.168.10.")) {
+                return ip;
+            }
+        }
+        return ips.get(0);
     }
 
 }
