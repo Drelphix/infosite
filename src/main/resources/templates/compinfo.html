@@ -6,12 +6,19 @@
 
 <div style="padding: 40px 10px 10px 10px;">
     <br>
-    <center>
-        <p style="text-align:left;margin-bottom: 10px;" th:text="'Всего компьютеров: '+${#lists.size(pcs)}"
-           th:unless="${pc}"></p>
+    <div>
+        <span style="margin-bottom: 10px;" th:unless="${pc}">Отображено компьютеров: <span id="lines"></span><span
+                th:text="${#lists.size(pcs)}"></span></span>
+
         <input class="form-control" id="search-text" onkeyup="tableSearch()" placeholder="Введите поисковое значение"
+               style="width: 50%;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;color: #404a54;background-color: #fff;
+                      background-clip: padding-box;border: 1px solid #ced4da;border-radius: .25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                      margin-bottom: 1%;"
                type="text">
-        <table class="iksweb" style="text-align:left;" th:unless="${pc}">
+    </div>
+    <center>
+
+        <table class="iksweb" id="table-for-search" style="text-align:left;" th:unless="${pc}">
 
             <tr>
                 <th>№</th>
